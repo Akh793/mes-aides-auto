@@ -1,0 +1,456 @@
+/* =====================================================================
+   data.js — Base de règles « Aides à l'achat automobile » (France)
+   Vérification des sources : 07/09/2026 — v0.4 (textes en langage simple)
+   Convention : chaque règle porte status, sourceUrl, lastVerified.
+   status : 'active' | 'active_unverified' | 'suspended' | 'ended' | 'unknown'
+   Les montants de la prime d'État « Coup de pouce » (certificats d'économies
+   d'énergie) sont des FOURCHETTES : la loi fixe des coefficients, pas des euros ;
+   le montant réel dépend du fournisseur d'énergie partenaire du vendeur.
+   Territoires : ctx.epci (code SIREN de l'intercommunalité), ctx.dept, ctx.region
+   (codes INSEE), ctx.communeMere (commune de rattachement des arrondissements).
+   ===================================================================== */
+
+window.META = { version: '0.4.0', lastVerified: '2026-09-07' };
+
+/* Plafonds de revenu fiscal de référence par part 2026 — tranches 1 à 9 (10 = au-delà)
+   Source : service-public.fr F39188 (maj 01/09/2026) */
+window.DECILES_2026 = [1970, 7640, 11250, 14130, 16880, 19600, 22770, 27310, 35880];
+
+/* Codes des intercommunalités (SIREN) — @etalab/decoupage-administratif 6.0.0 */
+window.EPCI = {
+  MGP: '200054781', LYON: '200046977', STRASBOURG: '246700488', ROUEN: '200023414',
+  TOULOUSE: '243100518', AMP: '200054807', ANNECY: '200066793', CCPMB: '200034882',
+  BORDEAUX: '243300316', REIMS: '200067213', GRENOBLE: '200040715',
+  MONTPELLIER: '243400017', NICE: '200030195', ST_ETIENNE: '244200770', TOULON: '248300543',
+};
+window.REGION = { OCCITANIE: '76', IDF: '11' };
+
+/* Fourchettes de la prime d'État « Coup de pouce » voiture électrique neuve, en €.
+   niveau1 = voiture hors critère européen ; niveau2 = voiture ET batterie fabriquées en Europe.
+   Bornes = min / max des offres publiées (Hellio barème 31/07/2026, maj 24/08/2026 ; chargeguru 2026). */
+window.CEE_VP_RANGES = {
+  precaire:    { niveau1: [5082, 5700], niveau2: [6776, 7700] }, // tranches 1 à 3
+  modeste:     { niveau1: [4700, 5524], niveau2: [5900, 7365] }, // tranches 4 et 5
+  grosRouleur: { niveau1: [4700, 5524], niveau2: [7365, 7700] }, // tranches 6 à 8, au moins 12 000 km/an pour le travail
+  autre:       { niveau1: [3300, 3314], niveau2: [4419, 4700] }, // tranches 6 à 8 sinon, 9 et 10
+};
+
+/* ---------------------------------------------------------------------
+   Feuilles de route administratives (mode d'emploi)
+   --------------------------------------------------------------------- */
+window.ROADMAPS = {
+  dealer_cee: {
+    title: 'Chez le concessionnaire : la prime d’État « Coup de pouce »',
+    when: 'AVANT de signer le bon de commande',
+    steps: [
+      'Demandez au concessionnaire (ou au loueur) s’il travaille avec un fournisseur d’énergie partenaire de la prime « Coup de pouce voiture électrique », et quel montant il vous propose.',
+      'Faites la demande de prime avant de signer le bon de commande : une commande déjà signée n’y a plus droit.',
+      'La prime est déduite de la facture, ou versée après la livraison, selon le partenaire.',
+      'Gardez la voiture au moins 2 ans (ou signez une location d’au moins 24 mois).',
+    ],
+    docs: ['Pièce d’identité', 'Dernier avis d’imposition (revenu fiscal de référence et nombre de parts)', 'Devis ou bon de commande, ou contrat de location', 'Attestation sur l’honneur fournie par le partenaire', 'Si vous êtes gros rouleur : attestation de l’employeur ou justificatif d’au moins 12 000 km par an pour le travail'],
+    warnings: ['Si vous achetez à un particulier, il n’y a pas de prime d’État.', 'Cette prime ne se cumule pas avec le leasing social.'],
+  },
+  leasing_social: {
+    title: 'Le leasing social 2026 (chez un loueur référencé)',
+    when: 'Pendant la campagne, ouverte le 16 juillet 2026 (50 000 places)',
+    steps: [
+      'Vérifiez votre éligibilité et choisissez un modèle sur le site officiel du leasing social.',
+      'Contactez un loueur ou un concessionnaire référencé : l’aide de l’État est directement intégrée au contrat.',
+      'Signez un contrat de location longue durée d’au moins 3 ans, loyer de 200 € par mois maximum hors options, sans apport.',
+    ],
+    docs: ['Pièce d’identité et justificatif de domicile', 'Dernier avis d’imposition (revenu fiscal de référence de 16 880 € par part au maximum)', 'Attestation de l’employeur (trajet de plus de 10 km) ou déclaration sur l’honneur des kilomètres faits pour le travail (plus de 8 000 km par an)'],
+    warnings: ['Impossible si vous avez déjà profité du leasing social en 2024 ou 2025.', 'Ne se cumule pas avec la prime d’État « Coup de pouce ».', 'Dans la limite des places disponibles.'],
+  },
+  local_before: {
+    title: 'Auprès de votre collectivité : dossier à déposer AVANT l’achat',
+    when: 'Avant de signer quoi que ce soit',
+    steps: [
+      'Faites la simulation puis déposez votre demande sur le site de la collectivité (Métropole de Lyon : demarches.toodego.com ; Grand Annecy : dossier avant la commande).',
+      'Attendez l’accord de principe, puis achetez la voiture.',
+      'Faites détruire l’ancienne voiture dans un centre de destruction agréé (ou vendez-la, ou faites-la transformer, selon ce que prévoit le règlement) et envoyez les justificatifs.',
+    ],
+    docs: ['Justificatif de domicile (ou de travail dans la zone à faibles émissions)', 'Dernier avis d’imposition', 'Carte grise de l’ancienne voiture', 'Devis de la nouvelle voiture', 'Après l’achat : carte grise de la nouvelle voiture, certificat de destruction ou de vente de l’ancienne, facture, RIB'],
+    warnings: ['Une demande déposée après l’achat est refusée.'],
+  },
+  local_after: {
+    title: 'Auprès de votre collectivité : remboursement APRÈS l’achat',
+    when: 'Dans le délai fixé par le règlement (le plus souvent 6 mois après la facture)',
+    steps: [
+      'Achetez la voiture (chez un professionnel si le règlement l’impose : c’est le cas en Occitanie, à Rouen et à Marseille pour l’occasion ; peu importe pour le Grand Paris, Strasbourg et Toulouse).',
+      'Déposez le dossier en ligne sur le site de la collectivité (indiqué sur la carte de l’aide).',
+      'Vous recevez l’aide par virement après examen du dossier.',
+    ],
+    docs: ['Carte grise de la nouvelle voiture à votre nom', 'Facture, ou acte de vente si vous achetez à un particulier (formulaire officiel Cerfa 15776)', 'Justificatif de domicile et dernier avis d’imposition', 'Certificat de destruction ou de vente de l’ancienne voiture, quand c’est exigé', 'RIB'],
+    warnings: ['Respectez le délai de dépôt et la période prévue pour la mise à la casse (souvent de 3 mois avant à 6 mois après l’achat).', 'Vérifiez qu’il reste des aides disponibles (Occitanie : 5 000 aides entre juillet 2026 et juin 2027).'],
+  },
+};
+
+/* ---------------------------------------------------------------------
+   Helpers
+   --------------------------------------------------------------------- */
+const R = (status, reasons, min, max, notes) => ({ status, reasons: reasons || [], min: min ?? null, max: max ?? null, notes: notes || [] });
+const fmt = (n) => Math.round(n).toLocaleString('fr-FR') + ' €';
+const rfrTxt = (ctx) => `${fmt(ctx.rfrPerPart)} par part`;
+/* barème par tranche : [[plafondRevenu, montant], …] ; retourne le montant ou null */
+const tranche = (table, rfr) => { for (const [cap, amt] of table) if (rfr < cap) return amt; return null; };
+const CRITAIR_TXT = (n) => (n === 5 ? '5 ou non classée' : String(n));
+
+/* ---------------------------------------------------------------------
+   Règles. check(ctx) → { status, reasons, min, max, notes }
+   Options : exclusiveGroup, info (hors total), totalCapPct (plafond de
+   cumul de toutes les aides publiques en % du prix, appliqué à cette aide).
+   --------------------------------------------------------------------- */
+window.AIDS = [
+  /* ================= NATIONAL ================= */
+  {
+    id: 'cee_vp_neuf', scope: 'national', status: 'active',
+    label: 'Prime d’État « Coup de pouce » — voiture électrique neuve', short: 'prime d’État (neuf)',
+    exclusiveGroup: 'CEE', roadmap: 'dealer_cee',
+    sourceUrl: 'https://www.service-public.gouv.fr/particuliers/vosdroits/F39188', sourceLabel: 'service-public.fr (fiche F39188)', lastVerified: '2026-09-01',
+    check(ctx) {
+      const reasons = [], notes = [];
+      if (!ctx.isNew) reasons.push('Réservée aux voitures neuves (pour l’occasion, voir la prime d’État occasion)');
+      if (ctx.motor !== 'ev') reasons.push('Réservée aux voitures 100 % électriques');
+      if (!ctx.sellerPro) reasons.push('Il faut acheter chez un professionnel partenaire de la prime');
+      if (ctx.price > 47000) reasons.push(`Le prix (${fmt(ctx.price)}) dépasse le plafond de 47 000 €`);
+      if (ctx.financing === 'location' && ctx.leaseMonths < 24) reasons.push('En location, le contrat doit durer au moins 24 mois');
+      if (reasons.length) return R('ineligible', reasons);
+      let cat = 'autre';
+      if (ctx.decile <= 3) cat = 'precaire';
+      else if (ctx.decile <= 5) cat = 'modeste';
+      else if (ctx.decile <= 8 && ctx.proUse && ctx.kmYear >= 12000) cat = 'grosRouleur';
+      const rg = CEE_VP_RANGES[cat][ctx.euBattery ? 'niveau2' : 'niveau1'];
+      const catTxt = { precaire: 'revenus très modestes (tranches 1 à 3 sur 10)', modeste: 'revenus modestes (tranches 4 et 5 sur 10)', grosRouleur: 'gros rouleur, revenus intermédiaires (tranches 6 à 8 sur 10)', autre: 'autres ménages' }[cat];
+      notes.push(`Votre catégorie : ${catTxt} — vous êtes dans la tranche ${ctx.decile} sur 10.`);
+      notes.push('Cette prime est financée par les fournisseurs d’énergie et versée par l’intermédiaire de votre vendeur. Le montant exact dépend du fournisseur partenaire du concessionnaire : nous affichons la fourchette des offres publiées.');
+      notes.push('À condition que le modèle figure sur la liste officielle des voitures éligibles (score environnemental d’au moins 60 points, moins de 2,4 tonnes).');
+      if (cat === 'grosRouleur') notes.push('Volet « gros rouleurs » : il faut s’engager avant le 1er janvier 2027.');
+      if (!ctx.euBattery) notes.push('Environ 1 200 à 2 000 € de plus si la voiture ET sa batterie sont fabriquées en Europe.');
+      return R('eligible', [], rg[0], rg[1], notes);
+    },
+  },
+  {
+    id: 'cee_vo_occasion', scope: 'national', status: 'active_unverified',
+    label: 'Prime d’État « Coup de pouce » — voiture électrique d’occasion', short: 'prime d’État (occasion)',
+    exclusiveGroup: 'CEE', roadmap: 'dealer_cee',
+    sourceUrl: 'https://www.mes-allocs.fr/guides/aides-sociales/prime-cee-voiture-electrique-occasion/', sourceLabel: 'mes-allocs.fr (arrêté du 10/08/2026 cité — fiche officielle TRA-EQ-133 à recouper)', lastVerified: '2026-09-07',
+    check(ctx) {
+      const reasons = [];
+      if (ctx.isNew) reasons.push('Réservée aux voitures d’occasion');
+      if (ctx.motor !== 'ev') reasons.push('Réservée aux voitures 100 % électriques');
+      if (!ctx.sellerPro) reasons.push('Il faut acheter chez un professionnel habilité');
+      if (reasons.length) return R('ineligible', reasons);
+      return R('conditional', [], null, null, [
+        'Nouvelle prime depuis le 1er septembre 2026 — son montant n’est pas encore publié : il dépend du fournisseur d’énergie partenaire du vendeur.',
+        'Conditions : voiture immatriculée pour la première fois en France entre 2017 et 2023, batterie en bon état (au moins 80 % de sa capacité, ou au moins 200 km d’autonomie), à garder 3 ans.',
+      ]);
+    },
+  },
+  {
+    id: 'leasing_social_2026', scope: 'national', status: 'active',
+    label: 'Leasing social 2026 (voiture électrique en location longue durée)', short: 'leasing social',
+    exclusiveGroup: 'CEE', roadmap: 'leasing_social',
+    sourceUrl: 'https://www.avere-france.org/edition-2026-du-leasing-social-tout-ce-quil-faut-savoir/', sourceLabel: 'Avere-France et jechangemavoiture.gouv.fr', lastVerified: '2026-09-07',
+    check(ctx) {
+      const reasons = [], notes = [];
+      if (!ctx.isNew) reasons.push('Réservé aux voitures neuves');
+      if (ctx.motor !== 'ev') reasons.push('Réservé aux voitures 100 % électriques');
+      if (ctx.rfrPerPart > 16880) reasons.push(`Votre revenu fiscal (${rfrTxt(ctx)}) dépasse le plafond de 16 880 € par part`);
+      if (ctx.financing !== 'location') reasons.push('Il faut signer une location longue durée d’au moins 3 ans');
+      if (!ctx.proUse) reasons.push('Il faut utiliser sa voiture pour le travail : plus de 10 km entre le domicile et le travail, ou plus de 8 000 km par an');
+      else if (ctx.commuteKm <= 10 && ctx.kmYear <= 8000) reasons.push('Ni plus de 10 km de trajet domicile-travail, ni plus de 8 000 km par an pour le travail');
+      if (ctx.prevLeasing) reasons.push('Vous avez déjà profité du leasing social en 2024 ou 2025');
+      if (ctx.price > 47000) reasons.push(`Le prix (${fmt(ctx.price)}) dépasse le plafond de 47 000 €`);
+      if (reasons.length) return R('ineligible', reasons);
+      const base = 0.29 * ctx.price;
+      notes.push('L’État prend en charge 29 % du prix de la voiture. Plafond : 6 500 € selon l’Avere, 9 000 € selon le site officiel jechangemavoiture.gouv.fr — les deux sources se contredisent, à confirmer avec le loueur.');
+      notes.push('Loyer de 200 € par mois maximum hors options, au moins 15 000 km par an inclus, voiture de moins de 1,8 tonne, sans apport. 50 000 places.');
+      return R('eligible', [], Math.round(Math.min(base, 6500)), Math.round(Math.min(base, 9000)), notes);
+    },
+  },
+
+  /* ================= LOCAL — VÉRIFIÉ ================= */
+  {
+    id: 'mgp_roule_propre', scope: 'epci', territoryLabel: 'Métropole du Grand Paris', status: 'active_unverified',
+    label: 'Aide « Métropole roule propre » (Grand Paris)', short: 'aide du Grand Paris', roadmap: 'local_after',
+    sourceUrl: 'https://www.metropolegrandparis.fr/fr/metropole-roule-propre-0', sourceLabel: 'metropolegrandparis.fr (règlement 2025 — reconduction en 2026 non confirmée)', lastVerified: '2026-09-07',
+    platform: 'guichet en ligne « Métropole roule propre »',
+    territory: (ctx) => ctx.epci === EPCI.MGP,
+    check(ctx) {
+      const reasons = [], notes = [];
+      if (ctx.rfrPerPart > 24900) reasons.push(`Votre revenu fiscal (${rfrTxt(ctx)}) dépasse le plafond de 24 900 € par part`);
+      if (!ctx.scrap) reasons.push('Il faut faire détruire définitivement une ancienne voiture');
+      if (ctx.price > 40000) reasons.push(`Le prix (${fmt(ctx.price)}) dépasse le plafond de 40 000 €`);
+      if (reasons.length) return R('ineligible', reasons);
+      const amt = ctx.motor === 'ev' ? 6000 : 3000;
+      notes.push(ctx.motor === 'ev' ? 'Jusqu’à 6 000 € pour une électrique, neuve ou d’occasion. 1 000 € de plus si elle est assemblée dans un pays d’Europe à l’électricité peu carbonée.' : 'Autre motorisation : seulement hybride ou essence vignette Crit’Air 1, plafond de 3 000 €.');
+      notes.push('« Jusqu’à » : le montant dépend de vos revenus — à vérifier sur le guichet en ligne.');
+      return R('conditional', [], null, amt, notes);
+    },
+  },
+  {
+    id: 'lyon_metropole', scope: 'epci', territoryLabel: 'Métropole de Lyon', status: 'active',
+    label: 'Aide de la Métropole de Lyon (zone à faibles émissions)', short: 'aide de la Métropole de Lyon', roadmap: 'local_before',
+    sourceUrl: 'https://www.grandlyon.com/mes-services-au-quotidien/se-deplacer/les-aides-pour-lachat-dun-vehicule-moins-polluant', sourceLabel: 'grandlyon.com (page mise à jour le 20/02/2026)', lastVerified: '2026-09-07',
+    platform: 'demarches.toodego.com — AVANT l’achat',
+    territory: (ctx) => ctx.epci === EPCI.LYON,
+    check(ctx) {
+      const reasons = [], notes = [];
+      if (ctx.rfrPerPart >= 26200) reasons.push(`Votre revenu fiscal (${rfrTxt(ctx)}) atteint le plafond de 26 200 € par part`);
+      if (!ctx.scrap) reasons.push('Il faut se séparer d’une ancienne voiture vignette Crit’Air 2, 3 ou 4 (destruction, vente ou transformation)');
+      else if (![2, 3, 4].includes(ctx.critair)) reasons.push('L’ancienne voiture doit avoir une vignette Crit’Air 2, 3 ou 4');
+      if (reasons.length) return R('ineligible', reasons);
+      notes.push('De 500 à 3 000 € selon vos revenus et la voiture choisie (barème détaillé sur demarches.toodego.com).');
+      notes.push('Condition : habiter ou travailler dans la zone à faibles émissions. Nous l’approximons par votre commune : la zone ne couvre qu’une partie de certaines communes.');
+      notes.push('La demande doit être déposée AVANT l’achat.');
+      return R('conditional', [], 500, 3000, notes);
+    },
+  },
+  {
+    id: 'occitanie_ecocheque', scope: 'region', territoryLabel: 'Région Occitanie', status: 'active',
+    label: 'Éco-chèque mobilité de la Région Occitanie (électrique d’occasion)', short: 'éco-chèque Occitanie', roadmap: 'local_after',
+    sourceUrl: 'https://www.laregion.fr/Eco-cheque-mobilite-voiture-electrique-ou-hybride', sourceLabel: 'laregion.fr (page mise à jour le 23/07/2026)', lastVerified: '2026-09-07',
+    platform: 'site « Mes Aides en Ligne » de la Région, dans les 6 mois après l’achat',
+    territory: (ctx) => ctx.region === REGION.OCCITANIE,
+    check(ctx) {
+      const reasons = [], notes = [];
+      if (ctx.isNew) reasons.push('Réservé aux voitures d’occasion (immatriculées depuis au moins 12 mois)');
+      if (ctx.motor !== 'ev') reasons.push('Réservé aux voitures 100 % électriques');
+      if (!ctx.sellerPro) reasons.push('Il faut acheter chez un professionnel agréé situé en Occitanie');
+      if (ctx.price > 30000) reasons.push(`Le prix (${fmt(ctx.price)}) dépasse le plafond de 30 000 €`);
+      if (reasons.length) return R('ineligible', reasons);
+      const amt = Math.round(Math.min(0.30 * ctx.price, 1600));
+      notes.push('Réservé aux ménages qui ne paient pas d’impôt sur le revenu (à vérifier sur votre avis d’imposition).');
+      notes.push('30 % du prix, dans la limite de 1 600 €. Une seule fois par personne. 5 000 aides disponibles entre juillet 2026 et juin 2027.');
+      notes.push('Demande dans les 6 mois après l’achat, avec un contrôle technique favorable.');
+      return R('conditional', [], amt, amt, notes);
+    },
+  },
+  {
+    id: 'strasbourg', scope: 'epci', territoryLabel: 'Eurométropole de Strasbourg', status: 'active',
+    label: 'Aide à la conversion de l’Eurométropole de Strasbourg', short: 'aide de Strasbourg', roadmap: 'local_after', totalCapPct: 0.8,
+    sourceUrl: 'https://www.strasbourg.eu/aides-conversion', sourceLabel: 'strasbourg.eu — règlement en vigueur depuis le 01/01/2025', lastVerified: '2026-09-07',
+    platform: 'aides.strasbourg.eu, au plus tard 6 mois après l’achat',
+    territory: (ctx) => ctx.epci === EPCI.STRASBOURG,
+    check(ctx) {
+      const reasons = [], notes = [];
+      const amt = tranche([[7500, 4000], [16300, 3000], [26200, 2000]], ctx.rfrPerPart);
+      if (amt == null) reasons.push(`Votre revenu fiscal (${rfrTxt(ctx)}) atteint le plafond de 26 200 € par part`);
+      if (!ctx.scrap) reasons.push('Il faut vendre ou faire détruire une ancienne voiture (vignette Crit’Air 2 ou plus ancienne) que vous possédez depuis au moins 1 an');
+      else if (ctx.critair < 2) reasons.push('L’ancienne voiture doit avoir une vignette Crit’Air 2, 3, 4, 5 ou être non classée');
+      if (ctx.financing === 'location' && ctx.leaseMonths < 24) reasons.push('En location, le contrat doit durer au moins 2 ans');
+      if (reasons.length) return R('ineligible', reasons);
+      notes.push(`Jusqu’à ${fmt(amt)} pour vos revenus (voiture vignette Crit’Air 0 ou 1, neuve ou d’occasion, achetée à un professionnel ou à un particulier).`);
+      notes.push('L’ancienne voiture doit être cédée entre 3 mois avant et 6 mois après l’achat. Le total des aides publiques ne peut pas dépasser 80 % du prix.');
+      notes.push('Aucune date de fin publiée : la reconduction en 2026 n’est pas confirmée noir sur blanc.');
+      return R('eligible', [], amt, amt, notes);
+    },
+  },
+  {
+    id: 'rouen', scope: 'epci', territoryLabel: 'Métropole Rouen Normandie', status: 'active',
+    label: 'Aide à l’achat d’une voiture peu polluante (Métropole de Rouen)', short: 'aide de Rouen', roadmap: 'local_after', totalCapPct: 0.8,
+    sourceUrl: 'https://zfe.metropole-rouen-normandie.fr/sites/default/files/2025-10/B2025_0429_annexe.pdf', sourceLabel: 'règlement du 29/09/2025 — valable jusqu’au 30/06/2027 (facture avant le 31/12/2026)', lastVerified: '2026-09-07',
+    platform: 'demarches.metropole-rouen-normandie.fr, dans les 6 mois après la facture',
+    territory: (ctx) => ctx.epci === EPCI.ROUEN,
+    check(ctx) {
+      const reasons = [], notes = [];
+      const amt = tranche([[7100.01, 4000], [15400.01, 3000], [22000.01, 2000]], ctx.rfrPerPart);
+      if (amt == null) reasons.push(`Votre revenu fiscal (${rfrTxt(ctx)}) dépasse le plafond de 22 000 € par part`);
+      if (!ctx.scrap) reasons.push('Il faut faire détruire une ancienne voiture (diesel d’avant 2011 ou essence d’avant 2006)');
+      else if (ctx.critair < 3) reasons.push('L’ancienne voiture doit avoir une vignette Crit’Air 3 ou plus ancienne (diesel d’avant 2011, essence d’avant 2006)');
+      if (!ctx.sellerPro) reasons.push('Il faut acheter chez un professionnel');
+      const pmax = ctx.motor === 'ev' ? 60000 : 50000;
+      if (ctx.price >= pmax) reasons.push(`Le prix (${fmt(ctx.price)}) atteint le plafond de ${fmt(pmax)}`);
+      if (ctx.financing === 'location' && ctx.leaseMonths < 24) reasons.push('En location, le contrat doit durer au moins 2 ans');
+      if (reasons.length) return R('ineligible', reasons);
+      notes.push(`${fmt(amt)} pour vos revenus. 25 % de plus (5 000 € maximum) si vous habitez une commune de la zone à faibles émissions — non calculé ici, la liste de ces communes n’est pas embarquée.`);
+      notes.push('Voiture neuve (moins de 6 mois) ou d’occasion, vignette Crit’Air 0 ou 1. Le total des aides publiques ne peut pas dépasser 80 % du prix. Ne se cumule pas avec le leasing social.');
+      return R('eligible', [], amt, Math.min(Math.round(amt * 1.25), 5000), notes);
+    },
+  },
+  {
+    id: 'seine_maritime', scope: 'dept', territoryLabel: 'Département de la Seine-Maritime', status: 'active_unverified',
+    label: 'Subvention du Département de la Seine-Maritime (hors Métropole de Rouen)', short: 'aide du Département 76', roadmap: 'local_after', totalCapPct: 0.8,
+    sourceUrl: 'https://www.seinemaritime.fr/mon-cadre-de-vie/routes-bacs/subvention-zfe-m.html', sourceLabel: 'seinemaritime.fr — règlement du 20/03/2023, barème 2026 non consultable', lastVerified: '2026-09-07',
+    platform: 'seinemaritime.fr, dans les 6 mois après la facture',
+    territory: (ctx) => ctx.dept === '76' && ctx.epci !== EPCI.ROUEN,
+    check(ctx) {
+      const reasons = [], notes = [];
+      if (ctx.rfrPerPart > 21000) reasons.push(`Votre revenu fiscal (${rfrTxt(ctx)}) dépasse le plafond de 21 000 € par part`);
+      if (!ctx.scrap) reasons.push('Il faut faire détruire une ancienne voiture (diesel d’avant 2011 ou essence d’avant 2006)');
+      else if (ctx.critair < 3) reasons.push('L’ancienne voiture doit avoir une vignette Crit’Air 3 ou plus ancienne');
+      if (reasons.length) return R('ineligible', reasons);
+      notes.push('Réservée aux habitants de la Seine-Maritime hors Métropole de Rouen qui TRAVAILLENT dans la zone à faibles émissions de Rouen — nous ne pouvons pas le vérifier ici.');
+      notes.push('Montants à confirmer (sources non officielles) : 2 000, 3 000 ou 4 000 € selon vos revenus ; total des aides limité à 80 % du prix ; budget prévu « jusqu’en 2025 », maintien en 2026 à confirmer.');
+      return R('conditional', [], 2000, 4000, notes);
+    },
+  },
+  {
+    id: 'toulouse', scope: 'epci', territoryLabel: 'Toulouse Métropole', status: 'active',
+    label: 'Prime « véhicule + propre » de Toulouse Métropole', short: 'prime de Toulouse', roadmap: 'local_after',
+    sourceUrl: 'https://metropole.toulouse.fr/demarches/demander-la-prime-vehicule-propre', sourceLabel: 'metropole.toulouse.fr (démarche mise à jour le 16/09/2025, actualité du 08/06/2026)', lastVerified: '2026-09-07',
+    platform: 'demarches-tm.eservices.toulouse-metropole.fr, après l’achat (facture et certificat de destruction)',
+    territory: (ctx) => ctx.epci === EPCI.TOULOUSE,
+    check(ctx) {
+      const reasons = [], notes = [];
+      const table = ctx.isNew ? [[6300, 5000], [14089, 4500], [18800, 4000], [35052, 3000]] : [[6300, 3300], [14089, 3000], [18800, 2700], [35052, 2000]];
+      const amt = tranche(table, ctx.rfrPerPart);
+      if (amt == null) reasons.push(`Votre revenu fiscal (${rfrTxt(ctx)}) atteint le plafond de 35 052 € par part`);
+      if (!ctx.scrap) reasons.push('Il faut faire détruire une ancienne voiture vignette Crit’Air 3, 4, 5 ou non classée, possédée depuis au moins 1 an');
+      else if (ctx.critair < 3) reasons.push('L’ancienne voiture doit avoir une vignette Crit’Air 3, 4, 5 ou être non classée');
+      if (reasons.length) return R('ineligible', reasons);
+      notes.push(`${ctx.isNew ? 'Voiture neuve' : 'Voiture d’occasion'} : ${fmt(amt)} pour vos revenus (électrique, hybride, hydrogène ou gaz, vignette Crit’Air 0 ou 1). Achat à un particulier accepté, location acceptée.`);
+      notes.push('Destruction de l’ancienne voiture entre 3 mois avant et 6 mois après l’achat. Une seule voiture par personne. Se cumule avec les aides de l’État et l’éco-chèque de la Région Occitanie.');
+      return R('eligible', [], amt, amt, notes);
+    },
+  },
+  {
+    id: 'amp_marseille', scope: 'epci', territoryLabel: 'Aix-Marseille-Provence (zone à faibles émissions de Marseille)', status: 'active',
+    label: 'Aide de la Métropole Aix-Marseille-Provence — habitants de la zone à faibles émissions de Marseille', short: 'aide de Marseille', roadmap: 'local_after',
+    sourceUrl: 'https://ampmetropole.fr/wp-content/uploads/2024/11/96120_Annexe-1-2-particulier-1.pdf', sourceLabel: 'règlement de la Métropole (annexe particuliers) — aides ouvertes jusqu’au 31/10/2027', lastVerified: '2026-09-07',
+    platform: 'subvention.ampmetropole.fr, dans les 6 mois après l’achat',
+    territory: (ctx) => ctx.communeMere === '13055',
+    check(ctx) {
+      const reasons = [], notes = [];
+      const table = ctx.isNew ? [[7100.01, 5000], [15400.01, 3000], [24900.01, 1000]] : [[7100.01, 2500], [15400.01, 1500], [24900.01, 0]];
+      const amt = tranche(table, ctx.rfrPerPart);
+      if (amt == null) reasons.push(`Votre revenu fiscal (${rfrTxt(ctx)}) dépasse le plafond de 24 900 € par part`);
+      else if (amt === 0) reasons.push('Pour une occasion, l’aide est de 0 € entre 15 400 et 24 900 € par part');
+      if (ctx.motor !== 'ev') reasons.push('Réservée aux voitures électriques ou à hydrogène (pas les hybrides)');
+      if (!ctx.scrap) reasons.push('Il faut faire détruire une ancienne voiture vignette Crit’Air 4, 5 ou non classée');
+      else if (ctx.critair < 4) reasons.push('L’ancienne voiture doit avoir une vignette Crit’Air 4, 5 ou être non classée');
+      if (ctx.price > 47000) reasons.push(`Le prix (${fmt(ctx.price)}) dépasse le plafond de 47 000 €`);
+      if (!ctx.isNew && !ctx.sellerPro) reasons.push('Pour une occasion, il faut acheter chez un professionnel');
+      if (ctx.financing === 'location') reasons.push('La location (longue durée ou avec option d’achat) est exclue');
+      if (reasons.length) return R('ineligible', reasons);
+      notes.push(`${ctx.isNew ? 'Voiture neuve' : 'Voiture d’occasion'} : ${fmt(amt)} pour vos revenus. Il faut habiter dans la zone à faibles émissions de Marseille — nous l’approximons par la commune de Marseille, la zone ne couvre qu’une partie de la ville.`);
+      notes.push('Destruction de l’ancienne voiture entre 3 mois avant et 6 mois après l’achat ; garder la voiture 2 ans ; se cumule avec les aides de l’État. Barème du règlement d’octobre 2024 (aucune version plus récente trouvée).');
+      return R('conditional', [], amt, amt, notes);
+    },
+  },
+  {
+    id: 'grand_annecy', scope: 'epci', territoryLabel: 'Grand Annecy', status: 'active',
+    label: 'Aide au renouvellement de voiture du Grand Annecy', short: 'aide du Grand Annecy', roadmap: 'local_before', totalCapPct: 1.0,
+    sourceUrl: 'https://www.grandannecy.fr/zfem/aides-et-conseils-en-mobilite', sourceLabel: 'grandannecy.fr — règlement du 13/02/2025 (page mise à jour le 20/02/2025)', lastVerified: '2026-09-07',
+    platform: 'grandannecy.fr — dossier AVANT la commande',
+    territory: (ctx) => ctx.epci === EPCI.ANNECY,
+    check(ctx) {
+      const reasons = [], notes = [];
+      if (ctx.rfrPerPart >= 16300) reasons.push(`Votre revenu fiscal (${rfrTxt(ctx)}) atteint le plafond de 16 300 € par part`);
+      if (!ctx.scrap) reasons.push('Il faut faire détruire une ancienne voiture non classée (sans vignette Crit’Air possible)');
+      else if (ctx.critair < 5) reasons.push('L’ancienne voiture doit être non classée (trop ancienne pour une vignette Crit’Air)');
+      if (ctx.motor !== 'ev' && ctx.isNew) reasons.push('Pour une voiture neuve : électrique ou hydrogène uniquement (vignette Crit’Air 1 acceptée seulement en occasion)');
+      if (ctx.financing === 'location' && ctx.leaseMonths < 24) reasons.push('En location, le contrat doit durer au moins 24 mois');
+      if (reasons.length) return R('ineligible', reasons);
+      notes.push('3 000 € (voiture neuve ou d’occasion), à garder 2 ans. Le total des aides ne peut pas dépasser le prix de la voiture.');
+      notes.push('Le dossier doit être déposé AVANT la commande ou le contrat.');
+      return R('eligible', [], 3000, 3000, notes);
+    },
+  },
+  {
+    id: 'ccpmb', scope: 'epci', territoryLabel: 'Communauté de communes Pays du Mont-Blanc', status: 'active_unverified',
+    label: 'Fonds Air Véhicules du Pays du Mont-Blanc (particuliers)', short: 'aide du Pays du Mont-Blanc', roadmap: 'local_after',
+    sourceUrl: 'https://www.ccpmb.fr/', sourceLabel: 'ccpmb.fr — règlement de février 2026 (site inaccessible lors de la vérification, détails via sources secondaires)', lastVerified: '2026-09-07',
+    platform: 'ccpmb.fr, après l’achat (facture et carte grise)',
+    territory: (ctx) => ctx.epci === EPCI.CCPMB,
+    check(ctx) {
+      const reasons = [], notes = [];
+      if (ctx.rfrPerPart >= 31200) reasons.push(`Votre revenu fiscal (${rfrTxt(ctx)}) atteint le plafond de 31 200 € par part`);
+      if (ctx.motor !== 'ev') reasons.push('Les hybrides sont exclues (électrique, hydrogène ou gaz uniquement)');
+      if (ctx.financing === 'location') reasons.push('La location longue durée est exclue');
+      if (ctx.price > 45000) reasons.push(`Le prix (${fmt(ctx.price)}) dépasse le plafond de 45 000 €`);
+      if (reasons.length) return R('ineligible', reasons);
+      const base = Math.min(4000 + (ctx.scrap ? 500 : 0), 0.4 * ctx.price);
+      notes.push(`4 000 € ${ctx.scrap ? 'plus 500 € pour la mise à la casse' : '(500 € de plus si vous mettez une ancienne voiture à la casse)'}, dans la limite de 40 % du prix. Score environnemental d’au moins 60 points, voiture à garder 4 ans, une aide par foyer tous les 4 ans.`);
+      return R('conditional', [], Math.round(base), Math.round(base), notes);
+    },
+  },
+  {
+    id: 'bordeaux', scope: 'epci', territoryLabel: 'Bordeaux Métropole', status: 'active_unverified',
+    label: 'Aide de Bordeaux Métropole (zone à faibles émissions)', short: 'aide de Bordeaux', roadmap: 'local_after',
+    sourceUrl: 'https://sedeplacer.bordeaux-metropole.fr/en-voiture/zfe-ce-quil-faut-savoir', sourceLabel: 'sedeplacer.bordeaux-metropole.fr — barème non publié sur la page consultée', lastVerified: '2026-09-07',
+    platform: 'mesdemarches.bordeaux-metropole.fr (ouvert depuis le 1er janvier 2025)',
+    territory: (ctx) => ctx.epci === EPCI.BORDEAUX,
+    check(ctx) {
+      const reasons = [], notes = [];
+      if (!ctx.scrap) reasons.push('Il faut vendre ou faire détruire une ancienne voiture non classée');
+      else if (ctx.critair < 5) reasons.push('L’ancienne voiture doit être non classée (trop ancienne pour une vignette Crit’Air)');
+      if (ctx.motor !== 'ev' && ctx.isNew) reasons.push('Pour une voiture neuve : électrique uniquement (vignette Crit’Air 1 acceptée seulement en occasion)');
+      if (reasons.length) return R('ineligible', reasons);
+      notes.push('« Jusqu’à 6 000 € » selon vos revenus (presse, décembre 2024) — le barème et le plafond de revenus ne sont pas publiés sur la page officielle consultée.');
+      return R('conditional', [], null, 6000, notes);
+    },
+  },
+  {
+    id: 'grand_reims', scope: 'epci', territoryLabel: 'Grand Reims (zone à faibles émissions)', status: 'active_unverified',
+    label: 'Aide au changement de voiture du Grand Reims', short: 'aide de Reims', roadmap: 'local_after',
+    sourceUrl: 'https://www.grandreims.fr/', sourceLabel: 'grandreims.fr et reims.fr (pages inaccessibles lors de la vérification) — sources secondaires contradictoires, 2026', lastVerified: '2026-09-07',
+    platform: 'Grand Reims ou Ville de Reims (à confirmer)',
+    territory: (ctx) => ctx.epci === EPCI.REIMS,
+    check(ctx) {
+      const reasons = [], notes = [];
+      if (!ctx.scrap) reasons.push('Il faut faire détruire une ancienne voiture vignette Crit’Air 3, 4, 5 ou non classée');
+      else if (ctx.critair < 3) reasons.push('L’ancienne voiture doit avoir une vignette Crit’Air 3 ou plus ancienne');
+      if (reasons.length) return R('ineligible', reasons);
+      notes.push('Réservée aux habitants ou salariés de la zone à faibles émissions — nous l’approximons par le territoire du Grand Reims.');
+      notes.push('Montants à confirmer, les sources se contredisent : 2 000 à 3 000 € (revenus de moins de 13 489 € par part, limité à 40 % du prix) ou 2 000 à 6 000 €. Une seule voiture par foyer.');
+      return R('conditional', [], 2000, 6000, notes);
+    },
+  },
+  {
+    id: 'grenoble', scope: 'epci', territoryLabel: 'Grenoble-Alpes Métropole', status: 'suspended',
+    label: 'Aide au renouvellement de voiture de Grenoble-Alpes Métropole', short: 'aide de Grenoble', roadmap: 'local_after', totalCapPct: null,
+    sourceUrl: 'https://zfe.grenoblealpesmetropole.fr/684-aides-et-parcours.htm', sourceLabel: 'zfe.grenoblealpesmetropole.fr — « actuellement suspendu depuis le 26/09/2025 »', lastVerified: '2026-09-07',
+    platform: 'zfe.grenoblealpesmetropole.fr (entretien mobilité préalable)',
+    territory: (ctx) => ctx.epci === EPCI.GRENOBLE,
+    check(ctx) {
+      const amt = tranche([[16300, 3500], [26200, 2500]], ctx.rfrPerPart);
+      return R('ineligible', ['Aide SUSPENDUE depuis le 26 septembre 2025, sans date de reprise annoncée'], null, null, [
+        `Si elle reprend, le règlement de juin 2025 prévoyait pour vos revenus : ${amt ? fmt(amt) : '0 € (revenus de 26 200 € par part ou plus)'} ; destruction d’une ancienne voiture vignette Crit’Air 3 ou plus ancienne possédée depuis au moins 1 an ; poids limité ; neuve ou d’occasion ; location d’au moins 3 ans acceptée.`,
+      ]);
+    },
+  },
+
+  /* ================= INFO (hors total) ================= */
+  {
+    id: 'retrofit', scope: 'national', status: 'active', info: true,
+    label: 'Transformer sa voiture thermique en électrique (prime au rétrofit)', short: 'rétrofit',
+    sourceUrl: 'https://jechangemavoiture.gouv.fr/jcmv/aide-achat.html', sourceLabel: 'jechangemavoiture.gouv.fr', lastVerified: '2026-09-07',
+    check(ctx) {
+      if (ctx.rfrPerPart > 24900) return R('ineligible', ['Revenu fiscal de plus de 24 900 € par part']);
+      const extra = ctx.region === REGION.IDF ? ' En Île-de-France, la Région ajoute une prime « non-casse » jusqu’à 6 000 €.' : ctx.epci === EPCI.STRASBOURG ? ' À Strasbourg, l’Eurométropole ajoute 2 500 € sans condition de revenus.' : ctx.epci === EPCI.ROUEN ? ' À Rouen, la Métropole ajoute 2 000 € sans condition de revenus.' : '';
+      return R('conditional', [], null, 5000, ['Autre solution que l’achat : jusqu’à 5 000 € (80 % du coût de la transformation), demande dans les 6 mois après la facture.' + extra]);
+    },
+  },
+];
+
+/* Territoires vérifiés SANS aide à l'achat pour les particuliers (affichés pour information) */
+window.NO_AID_TERRITORIES = [
+  { match: (ctx) => ctx.epci === EPCI.MONTPELLIER, label: 'Montpellier Méditerranée Métropole', detail: 'La Métropole n’aide pas l’achat d’une voiture (seulement les vélos électriques). Il reste l’éco-chèque de la Région Occitanie.', sourceUrl: 'https://mes-aides.francetravail.fr/', sourceLabel: 'mes-aides.francetravail.fr (mis à jour le 10/07/2026)' },
+  { match: (ctx) => ctx.epci === EPCI.NICE, label: 'Métropole Nice Côte d’Azur', detail: 'L’aide pour les voitures électriques a été supprimée le 30 juin 2023 (page officielle retirée). La fiche du site jechangemavoiture.gouv.fr pour cette région est périmée.', sourceUrl: 'https://www.nicecotedazur.org/', sourceLabel: 'nicecotedazur.org — page introuvable ; presse de juillet 2023' },
+  { match: (ctx) => ctx.epci === EPCI.ST_ETIENNE, label: 'Saint-Étienne Métropole', detail: 'Aucune aide pour acheter une voiture. Le « Fonds air véhicule » pour les particuliers (1 000 €) concerne seulement la destruction ou la transformation d’un utilitaire léger.', sourceUrl: 'https://www.saint-etienne-metropole.fr/preserver-recycler/qualite-de-lair/aides-de-la-metropole', sourceLabel: 'saint-etienne-metropole.fr' },
+  { match: (ctx) => ctx.epci === EPCI.TOULON, label: 'Métropole Toulon-Provence-Méditerranée', detail: 'Aucune aide pour acheter une voiture (seulement vélos électriques, permis de conduire et tarifs réduits des transports).', sourceUrl: 'https://metropoletpm.fr/nos-missions/transports-mobilite/aider-les-usagers-financer-leur-mobilite', sourceLabel: 'metropoletpm.fr' },
+  { match: (ctx) => ctx.dept === '13' && ctx.communeMere !== '13055', label: 'Département des Bouches-du-Rhône', detail: 'L’aide départementale de 5 000 € est terminée (achats après le 31 janvier 2022 exclus). L’aide de la Métropole est réservée aux habitants de la zone à faibles émissions de Marseille.', sourceUrl: 'https://jechangemavoiture.gouv.fr/jcmv/simulateur/assets/media/aides-locales/provence-alpes-cote-d-azur.pdf', sourceLabel: 'fiche gouvernementale PACA (périmée) et departement13.fr' },
+  { match: (ctx) => ctx.region === '28', label: 'Région Normandie', detail: 'L’aide régionale de 2 000 € (fiche gouvernementale de 2019) n’existe plus sur le site de la Région.', sourceUrl: 'https://www.normandie.fr/aides-regionales', sourceLabel: 'normandie.fr' },
+  { match: (ctx) => ctx.region === REGION.IDF, label: 'Région Île-de-France', detail: 'L’aide régionale à l’achat a été supprimée le 2 mars 2025. Il reste la prime « non-casse » (transformation en électrique) jusqu’à 6 000 €.', sourceUrl: 'https://www.iledefrance.fr/toutes-les-faq/aides-vehicules-propres-faq', sourceLabel: 'iledefrance.fr (mis à jour le 25/03/2025)' },
+];
+
+/* Dispositifs nationaux éteints ou incertains — affichés pour information */
+window.ENDED = [
+  { label: 'Bonus écologique', detail: 'Supprimé le 1er juillet 2025, remplacé par la prime d’État « Coup de pouce ».', sourceUrl: 'https://jechangemavoiture.gouv.fr/jcmv/aide-achat.html' },
+  { label: 'Prime à la conversion', detail: 'Supprimée le 2 décembre 2024 (décret 2024-1084).', sourceUrl: 'https://www.quelles-aides.fr/transport-mobilite/aides-transport/prime-conversion/' },
+  { label: 'Surprime zone à faibles émissions (1 000 €)', detail: 'Supprimée le 2 décembre 2024 avec la prime à la conversion.', sourceUrl: 'https://www.metropolegrandparis.fr/fr/metropole-roule-propre-0' },
+  { label: 'Crédit d’impôt pour une borne de recharge (500 €)', detail: 'Terminé le 31 décembre 2025, non reconduit par la loi de finances 2026.', sourceUrl: 'https://izi-by-edf.fr/blog/fin-dispositif-credit-impot-borne-recharge' },
+  { label: 'Prêt à taux zéro mobilité', detail: 'Expérimentation prévue jusqu’au 31 décembre 2025 ; aucune prolongation trouvée ; quasiment aucune banque ne le proposait.', sourceUrl: 'https://izi-by-edf.fr/blog/le-pret-a-taux-zero-pour-les-zone-a-faibles-emissions-mobilite', unknown: true },
+  { label: 'Carte grise gratuite pour les électriques', detail: 'Plus automatique depuis 2025 : chaque région décide — non calculé ici.', sourceUrl: 'https://jechangemavoiture.gouv.fr/jcmv/aide-achat.html', unknown: true },
+];
+
+/* Provenance des données (bloc « D'où viennent ces données ? ») */
+window.SOURCES = [
+  { cat: 'Prime d’État « Coup de pouce » voiture électrique', what: 'Règles officielles de la prime (financée par les fournisseurs d’énergie via les certificats d’économies d’énergie) : tranches de revenus 2026 et coefficients selon la situation du ménage.', src: 'service-public.fr (fiche F39188, mise à jour le 01/09/2026), ecologie.gouv.fr, economie.gouv.fr', url: 'https://www.service-public.gouv.fr/particuliers/vosdroits/F39188', note: 'La loi fixe des coefficients, pas des euros. Les montants affichés sont ceux publiés par les fournisseurs partenaires (Hellio au 31/07/2026, chargeguru 2026), d’où une fourchette.' },
+  { cat: 'Leasing social 2026', what: 'Conditions pour en bénéficier, loyer maximum, part prise en charge par l’État (29 % du prix).', src: 'jechangemavoiture.gouv.fr et Avere-France', url: 'https://jechangemavoiture.gouv.fr/jcmv/aide-achat.html', note: 'Les deux sources ne donnent pas le même plafond (6 500 € ou 9 000 €).' },
+  { cat: 'Aides supprimées', what: 'Bonus écologique (1er juillet 2025), prime à la conversion et surprime zone à faibles émissions (décret 2024-1084 du 2 décembre 2024), crédit d’impôt borne de recharge (31 décembre 2025), aide de la Région Île-de-France (2 mars 2025).', src: 'Décrets et pages officielles', url: 'https://www.quelles-aides.fr/transport-mobilite/aides-transport/prime-conversion/', note: '' },
+  { cat: 'Aides locales', what: 'Règlements des métropoles, régions et départements : Grand Paris, Lyon, Occitanie, Strasbourg, Rouen, Seine-Maritime, Toulouse, Aix-Marseille, Grand Annecy, Pays du Mont-Blanc, Bordeaux, Reims, Grenoble (suspendue).', src: 'Sites et règlements des collectivités (lien sur chaque carte)', url: 'https://jechangemavoiture.gouv.fr/jcmv/aide-achat.html', note: 'Territoires vérifiés sans aide : Montpellier, Nice, Saint-Étienne, Toulon, Bouches-du-Rhône, Normandie, Île-de-France.' },
+  { cat: 'Communes et territoires', what: '35 493 couples code postal / commune, avec la commune de rattachement, l’intercommunalité, le département et la région.', src: 'Code officiel géographique de l’Institut national de la statistique (INSEE), via le jeu de données public Etalab « découpage administratif » version 6.0.0', url: 'https://www.insee.fr/fr/information/2560452', note: 'Les zones à faibles émissions ne couvrent parfois qu’une partie d’une commune (Lyon, Marseille, Reims) : nous les approximons par la commune entière.' },
+];

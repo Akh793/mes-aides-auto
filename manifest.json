@@ -1,0 +1,12 @@
+{
+  "name": "Mes Aides Auto",
+  "short_name": "Aides Auto",
+  "description": "Simulateur gratuit et instantané des aides à l’achat d’une voiture électrique ou peu polluante en France.",
+  "lang": "fr",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#2548FF",
+  "icons": [{ "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
