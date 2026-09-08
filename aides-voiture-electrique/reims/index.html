@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Consentement (Consent Mode v2) — doit précéder GTM. Aucun cookie de mesure tant que l'utilisateur n'a pas accepté (bandeau). -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
+  (function () {
+    var KEY = 'aides_auto_consent', TTL = 182 * 24 * 3600 * 1000, choice = null; // choix conservé 6 mois (recommandation CNIL)
+    try { var raw = localStorage.getItem(KEY); if (raw) { var o = JSON.parse(raw); if (o && o.v && Date.now() - o.t < TTL) choice = o.v; else localStorage.removeItem(KEY); } } catch (e) {}
+    function apply(v) {
+      gtag('consent', 'update', { analytics_storage: v === 'granted' ? 'granted' : 'denied' });
+      window.dataLayer.push({ event: v === 'granted' ? 'consent_granted' : 'consent_denied' });
+    }
+    window.MAA_consent = {
+      get: function () { return choice; },
+      set: function (v) { choice = v; try { localStorage.setItem(KEY, JSON.stringify({ v: v, t: Date.now() })); } catch (e) {} apply(v); },
+      reset: function () { choice = null; try { localStorage.removeItem(KEY); } catch (e) {} }
+    };
+    if (choice) apply(choice);
+  })();
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P2DNNBXT');</script>
+<!-- End Google Tag Manager -->
+<title>Aide voiture électrique Reims 2026 : 2 000 à 6 000 €</title>
+<meta name="description" content="Le Grand Reims aide au changement de véhicule dans sa zone à faibles émissions. Les sources publiques se contredisent : voici ce qui est établi.">
+<link rel="canonical" href="https://mes-aides-auto.fr/aides-voiture-electrique/reims/">
+<meta property="og:title" content="Quelles aides pour acheter une voiture électrique à Reims en 2026 ?">
+<meta property="og:description" content="Le Grand Reims aide au changement de véhicule dans sa zone à faibles émissions. Les sources publiques se contredisent : voici ce qui est établi.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://mes-aides-auto.fr/aides-voiture-electrique/reims/">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Mes Aides Auto">
+<meta property="og:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quelles aides pour acheter une voiture électrique à Reims en 2026 ?">
+<meta name="twitter:description" content="Le Grand Reims aide au changement de véhicule dans sa zone à faibles émissions. Les sources publiques se contredisent : voici ce qui est établi.">
+<meta name="twitter:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2548FF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/maa.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://mes-aides-auto.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Aides près de chez vous",
+          "item": "https://mes-aides-auto.fr/aides-voiture-electrique/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Reims",
+          "item": "https://mes-aides-auto.fr/aides-voiture-electrique/reims/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Quel est le montant de l’aide du Grand Reims ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Les sources publiques disponibles se contredisent : de 2 000 à 3 000 € selon l’une, jusqu’à 6 000 € selon l’autre. Les pages officielles étaient inaccessibles lors de notre vérification. Demandez le règlement en vigueur à la collectivité avant d’acheter."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Faut-il habiter la zone à faibles émissions de Reims ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "L’aide vise les habitants ou les salariés de la zone à faibles émissions. Comme le périmètre est infra-communal, nous l’approximons au territoire du Grand Reims et le signalons dans le résultat."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Combien de véhicules par foyer ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Une seule voiture par foyer, selon les sources consultées."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "headline": "Quelles aides pour acheter une voiture électrique à Reims en 2026 ?",
+      "name": "Quelles aides pour acheter une voiture électrique à Reims en 2026 ?",
+      "description": "Le Grand Reims aide au changement de véhicule dans sa zone à faibles émissions. Les sources publiques se contredisent : voici ce qui est établi.",
+      "inLanguage": "fr-FR",
+      "url": "https://mes-aides-auto.fr/aides-voiture-electrique/reims/",
+      "datePublished": "2026-09-08",
+      "dateModified": "2026-09-07",
+      "author": {
+        "@type": "Person",
+        "name": "David Rival",
+        "url": "https://mes-aides-auto.fr/qui-sommes-nous.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2DNNBXT"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">Mes Aides <em>Auto</em></a>
+    <nav class="site-nav" aria-label="Navigation principale"><a href="/">Simulateur</a><a href="/aides-voiture-electrique-2026/">Aides 2026</a><a href="/aides-voiture-electrique/" aria-current="page">Aides près de chez moi</a><a href="/notre-methodologie/">Méthodologie</a></nav>
+    <a class="btn" href="/">Calculer mes aides</a>
+  </div>
+</header>
+<nav class="crumb wrap" aria-label="Fil d’Ariane"><ol><li><a href="/">Accueil</a></li><li><a href="/aides-voiture-electrique/">Aides près de chez vous</a></li><li>Reims</li></ol></nav>
+<main class="wrap"><article class="prose">
+<div class="hero"><h1>Quelles aides pour acheter une voiture électrique à Reims en 2026 ?</h1></div>
+<p class="lede">Le Grand Reims verse une aide au changement de voiture liée à sa zone à faibles émissions. Les montants publiés par les sources secondaires se contredisent, et nous le disons plutôt que de trancher à leur place.</p>
+<div class="answer"><p><strong>Oui, une aide existe</strong> pour les habitants ou salariés de la zone à faibles émissions du Grand Reims, à condition de faire détruire une voiture <strong>Crit’Air 3, 4, 5 ou non classée</strong>. Les montants annoncés vont de <strong>2 000 à 6 000 €</strong> selon les sources — qui ne concordent pas. Une seule voiture par foyer.</p></div>
+<h2 id="montants">Pourquoi nous affichons une fourchette large</h2>
+<p>Les pages officielles du Grand Reims et de la Ville de Reims étaient <strong>inaccessibles lors de notre vérification</strong>. Les sources secondaires disponibles donnent deux versions incompatibles :</p>
+<ul>
+<li>2 000 à 3 000 € pour les ménages disposant de moins de 13 489 € de revenu fiscal par part, dans la limite de 40 % du prix ;</li>
+<li>2 000 à 6 000 € selon un autre barème.</li>
+</ul>
+<p class="note note-warn">Nous affichons donc l’aide comme « à confirmer », avec la fourchette complète. Avant tout achat, demandez le règlement d’attribution en vigueur au Grand Reims : c’est la seule source qui fasse foi.</p>
+<h3>Ce qui est établi</h3>
+<ul>
+<li>Aide réservée aux <strong>habitants ou salariés de la zone à faibles émissions</strong> — nous l’approximons au territoire du Grand Reims ;</li>
+<li>destruction d’une voiture <strong>Crit’Air 3 ou plus ancienne</strong> ;</li>
+<li>une seule voiture par foyer.</li>
+</ul>
+<h2 id="demarches">Où déposer le dossier</h2>
+<p>Le guichet dépend de la collectivité (Grand Reims ou Ville de Reims selon les sources) : à confirmer directement auprès de la collectivité, avec le règlement en vigueur.</p>
+<h2 id="cumul">Cumul</h2>
+<p>L’aide se cumule avec la prime d’État. Attention toutefois au plafond de 40 % du prix mentionné par l’une des sources : s’il est confirmé, il limite fortement l’aide sur les véhicules d’occasion bon marché.</p>
+<h2 id="national">Les aides nationales, accessibles partout</h2>
+<p>Quelle que soit votre commune, vous pouvez prétendre à une aide de l’État, qui <strong>s’ajoute</strong> à l’aide locale :</p>
+<ul>
+<li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a> pour une voiture électrique neuve : 3 300 à 7 700 € selon vos revenus, à demander <strong>avant</strong> le bon de commande ;</li>
+<li><a href="/leasing-social-2026/">leasing social</a> si votre revenu fiscal ne dépasse pas 16 880 € par part et que vous roulez pour travailler : jusqu’à 9 000 € ;</li>
+<li><a href="/aide-voiture-electrique-occasion/">prime occasion</a> depuis le 1<sup>er</sup> septembre 2026, pour une électrique immatriculée entre 2017 et 2023.</li>
+</ul>
+<p>Ces trois aides sont exclusives les unes des autres : <a href="/cumul-aides-voiture-electrique/">voir les règles de cumul</a>.</p>
+<h2 id="communes">Les 143 communes concernées par l’aide</h2>
+<details class="communes"><summary>Voir la liste complète des communes</summary>
+<p>Anthenay · Aougny · Arcis-le-Ponsart · Aubilly · Aubérive · Auménancourt · Baslieux-lès-Fismes · Bazancourt · Beaumont-sur-Vesle · Beine-Nauroy · Berméricourt · Berru · Bezannes · Billy-le-Grand · Bligny · Bouilly · Bouleuse · Boult-sur-Suippe · Bourgogne-Fresne · Bouvancourt · Branscourt · Breuil-sur-Vesle · Brimont · Brouillet · Bétheniville · Bétheny · Caurel · Cauroy-lès-Hermonville · Cernay-lès-Reims · Chambrecy · Chamery · Champfleury · Champigny · Chaumuzy · Chenay · Chigny-les-Roses · Châlons-sur-Vesle · Cormicy · Cormontreuil · Coulommes-la-Montagne · Courcelles-Sapicourt · Courcy · Courlandon · Courmas · Courtagnon · Courville · Crugny · Cuisles · Dontrien · Faverolles-et-Coëmy · Fismes · Germigny · Gueux · Hermonville · Heutrégiville · Hourges · Isles-sur-Suippe · Janvry · Jonchery-sur-Vesle · Jonquery · Jouy-lès-Reims · Lagery · Lavannes · Les Mesneux · Les Petites-Loges · Lhéry · Loivre · Ludes · Magneux · Mailly-Champagne · Marfaux · Merfy · Mont-sur-Courville · Montbré · Montigny-sur-Vesle · Muizon · Méry-Prémecy · Nogent-l'Abbesse · Olizy · Ormes · Pargny-lès-Reims · Poilly · Pomacle · Pontfaverger-Moronvilliers · Pouillon · Pourcy · Prosnes · Prouilly · Prunay · Puisieulx · Pévy · Reims · Rilly-la-Montagne · Romain · Romigny · Rosnay · Sacy · Saint-Brice-Courcelles · Saint-Euphraise-et-Clairizet · Saint-Gilles · Saint-Hilaire-le-Petit · Saint-Léonard · Saint-Martin-l'Heureux · Saint-Masmes · Saint-Souplet-sur-Py · Saint-Thierry · Saint-Étienne-sur-Suippe · Sarcy · Savigny-sur-Ardres · Selles · Sept-Saulx · Sermiers · Serzy-et-Prin · Sillery · Taissy · Thil · Thillois · Tinqueux · Tramery · Treslon · Trigny · Trois-Puits · Trépail · Unchair · Val-de-Vesle · Vandeuil · Vaudemange · Vaudesincourt · Ventelay · Verzenay · Verzy · Ville-Dommange · Ville-en-Selve · Ville-en-Tardenois · Villers-Allerand · Villers-aux-Nœuds · Villers-Franqueux · Villers-Marmery · Vrigny · Warmeriville · Witry-lès-Reims · Écueil · Époye</p></details>
+<p style="font-size:.9rem;color:#64748b">Source : code officiel géographique de l’INSEE (jeu de données Etalab « découpage administratif »). Le simulateur identifie automatiquement votre intercommunalité à partir de votre code postal.</p>
+<div class="cta"><p class="t">Vos aides à Reims, en quelques secondes</p><p>Le simulateur croise votre code postal, vos revenus et le prix du véhicule, applique les plafonds locaux et vous indique dans quel ordre faire les démarches.</p><a class="btn btn-lg" href="/">Calculer mes aides à Reims</a></div>
+<h2 id="faq">Questions fréquentes</h2><div class="faq"><details><summary>Quel est le montant de l’aide du Grand Reims ?</summary><p>Les sources publiques disponibles se contredisent : de 2 000 à 3 000 € selon l’une, jusqu’à 6 000 € selon l’autre. Les pages officielles étaient inaccessibles lors de notre vérification. Demandez le règlement en vigueur à la collectivité avant d’acheter.</p></details><details><summary>Faut-il habiter la zone à faibles émissions de Reims ?</summary><p>L’aide vise les habitants ou les salariés de la zone à faibles émissions. Comme le périmètre est infra-communal, nous l’approximons au territoire du Grand Reims et le signalons dans le résultat.</p></details><details><summary>Combien de véhicules par foyer ?</summary><p>Une seule voiture par foyer, selon les sources consultées.</p></details></div>
+<h2 id="sources">Sources officielles</h2><ul class="srcs"><li><a href="https://www.grandreims.fr/" target="_blank" rel="noopener">Grand Reims — grandreims.fr (page inaccessible lors de la vérification)</a></li><li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F39188" target="_blank" rel="noopener">Prime d’État — service-public.fr, fiche F39188</a></li></ul>
+<p class="verif">Dernière vérification des règles de cette page : <strong>7 septembre 2026</strong>. Nous republions cette page à chaque évolution réglementaire — voir <a href="/historique-aides-auto/">l’historique des changements</a> et <a href="/notre-methodologie/">notre méthodologie</a>.</p>
+<nav class="related" aria-label="À lire aussi"><h2>À lire aussi</h2><ul><li><a href="/aides-voiture-electrique/">Toutes les aides près de chez vous</a></li><li><a href="/aides-voiture-electrique-2026/">Les aides nationales 2026</a></li><li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li><li><a href="/cumul-aides-voiture-electrique/">Peut-on cumuler les aides ?</a></li></ul></nav>
+</article></main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Le simulateur</h4>
+        <ul>
+          <li><a href="/">Simulateur d’aides</a></li>
+          <li><a href="/aides-voiture-electrique-2026/">Toutes les aides 2026</a></li>
+          <li><a href="/cumul-aides-voiture-electrique/">Cumuler les aides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Les aides</h4>
+        <ul>
+          <li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li>
+          <li><a href="/leasing-social-2026/">Leasing social 2026</a></li>
+          <li><a href="/aide-voiture-electrique-occasion/">Voiture d’occasion</a></li>
+          <li><a href="/bonus-ecologique-2026/">Bonus écologique</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Près de chez vous</h4>
+        <ul>
+          <li><a href="/aides-voiture-electrique/">Toutes les aides locales</a></li>
+          <li><a href="/aides-voiture-electrique/paris/">Paris et Grand Paris</a></li>
+          <li><a href="/aides-voiture-electrique/lyon/">Lyon</a></li>
+          <li><a href="/aides-voiture-electrique/marseille/">Marseille</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Le site</h4>
+        <ul>
+          <li><a href="/qui-sommes-nous.html">Qui sommes-nous ?</a></li>
+          <li><a href="/notre-methodologie/">Notre méthodologie</a></li>
+          <li><a href="/sources/">Sources officielles</a></li>
+          <li><a href="/historique-aides-auto/">Historique des aides</a></li>
+          <li><a href="/mentions-legales.html">Mentions légales</a></li>
+          <li><a href="#" data-consent-open>Gérer les cookies</a></li>
+          <li><a href="mailto:contact@mes-aides-auto.fr?subject=Mes%20Aides%20Auto%20%E2%80%94%20contact">Nous écrire</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-legal">© 2026 Mes Aides Auto — Calculateur d’aides à la mobilité propre. Informations à caractère indicatif, sans valeur contractuelle : seule la décision de l’organisme qui verse l’aide fait foi.</p>
+  </div>
+</footer>
+<div id="consent-banner" hidden>
+  <div class="box">
+    <p style="flex:1">Ce site utilise <strong>Google Analytics</strong> pour mesurer son audience, uniquement si vous l’acceptez. Vos données financières (revenu, parts) ne sont jamais transmises. <a href="/mentions-legales.html#cookies">En savoir plus</a></p>
+    <div class="acts">
+      <button type="button" id="consent-accept">Accepter</button>
+      <button type="button" id="consent-refuse">Continuer sans accepter</button>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var b = document.getElementById('consent-banner'); if (!b || !window.MAA_consent) return;
+    function show() { b.hidden = false; } function hide() { b.hidden = true; }
+    if (!MAA_consent.get()) show();
+    document.getElementById('consent-accept').addEventListener('click', function () { MAA_consent.set('granted'); hide(); });
+    document.getElementById('consent-refuse').addEventListener('click', function () { MAA_consent.set('denied'); hide(); });
+    document.querySelectorAll('[data-consent-open]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); MAA_consent.reset(); show(); }); });
+  })();
+</script>
+</body>
+</html>

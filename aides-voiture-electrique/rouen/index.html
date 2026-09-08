@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Consentement (Consent Mode v2) — doit précéder GTM. Aucun cookie de mesure tant que l'utilisateur n'a pas accepté (bandeau). -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
+  (function () {
+    var KEY = 'aides_auto_consent', TTL = 182 * 24 * 3600 * 1000, choice = null; // choix conservé 6 mois (recommandation CNIL)
+    try { var raw = localStorage.getItem(KEY); if (raw) { var o = JSON.parse(raw); if (o && o.v && Date.now() - o.t < TTL) choice = o.v; else localStorage.removeItem(KEY); } } catch (e) {}
+    function apply(v) {
+      gtag('consent', 'update', { analytics_storage: v === 'granted' ? 'granted' : 'denied' });
+      window.dataLayer.push({ event: v === 'granted' ? 'consent_granted' : 'consent_denied' });
+    }
+    window.MAA_consent = {
+      get: function () { return choice; },
+      set: function (v) { choice = v; try { localStorage.setItem(KEY, JSON.stringify({ v: v, t: Date.now() })); } catch (e) {} apply(v); },
+      reset: function () { choice = null; try { localStorage.removeItem(KEY); } catch (e) {} }
+    };
+    if (choice) apply(choice);
+  })();
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P2DNNBXT');</script>
+<!-- End Google Tag Manager -->
+<title>Aide voiture électrique Rouen 2026 : 2 000 à 5 000 €</title>
+<meta name="description" content="La Métropole Rouen Normandie verse 2 000 à 4 000 € selon vos revenus, majorés de 25 % en zone à faibles émissions. Règlement valable jusqu’en 2027.">
+<link rel="canonical" href="https://mes-aides-auto.fr/aides-voiture-electrique/rouen/">
+<meta property="og:title" content="Quelles aides pour acheter une voiture électrique à Rouen en 2026 ?">
+<meta property="og:description" content="La Métropole Rouen Normandie verse 2 000 à 4 000 € selon vos revenus, majorés de 25 % en zone à faibles émissions. Règlement valable jusqu’en 2027.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://mes-aides-auto.fr/aides-voiture-electrique/rouen/">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Mes Aides Auto">
+<meta property="og:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quelles aides pour acheter une voiture électrique à Rouen en 2026 ?">
+<meta name="twitter:description" content="La Métropole Rouen Normandie verse 2 000 à 4 000 € selon vos revenus, majorés de 25 % en zone à faibles émissions. Règlement valable jusqu’en 2027.">
+<meta name="twitter:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2548FF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/maa.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://mes-aides-auto.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Aides près de chez vous",
+          "item": "https://mes-aides-auto.fr/aides-voiture-electrique/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Rouen",
+          "item": "https://mes-aides-auto.fr/aides-voiture-electrique/rouen/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Quelle est la majoration « zone à faibles émissions » à Rouen ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Les habitants des communes de la zone à faibles émissions bénéficient d’une majoration de 25 % de l’aide, dans la limite de 5 000 €. La liste de ces communes figure sur le site de la Métropole ; nous ne l’appliquons pas automatiquement, faute de liste officielle exploitable."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Puis-je cumuler l’aide de Rouen avec le leasing social ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non, le règlement de la Métropole exclut explicitement ce cumul. Vous pouvez en revanche cumuler l’aide métropolitaine avec la prime d’État « Coup de pouce » en cas d’achat."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Jusqu’à quand l’aide est-elle disponible ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le règlement du 29 septembre 2025 court jusqu’au 30 juin 2027, avec une condition importante : la facture du véhicule doit être établie avant le 31 décembre 2026."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quels véhicules faut-il mettre à la casse ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Une voiture diesel immatriculée avant 2011 ou essence avant 2006, c’est-à-dire une Crit’Air 3 ou plus ancienne. La destruction doit être réalisée dans un centre agréé."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "headline": "Quelles aides pour acheter une voiture électrique à Rouen en 2026 ?",
+      "name": "Quelles aides pour acheter une voiture électrique à Rouen en 2026 ?",
+      "description": "La Métropole Rouen Normandie verse 2 000 à 4 000 € selon vos revenus, majorés de 25 % en zone à faibles émissions. Règlement valable jusqu’en 2027.",
+      "inLanguage": "fr-FR",
+      "url": "https://mes-aides-auto.fr/aides-voiture-electrique/rouen/",
+      "datePublished": "2026-09-08",
+      "dateModified": "2026-09-07",
+      "author": {
+        "@type": "Person",
+        "name": "David Rival",
+        "url": "https://mes-aides-auto.fr/qui-sommes-nous.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2DNNBXT"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">Mes Aides <em>Auto</em></a>
+    <nav class="site-nav" aria-label="Navigation principale"><a href="/">Simulateur</a><a href="/aides-voiture-electrique-2026/">Aides 2026</a><a href="/aides-voiture-electrique/" aria-current="page">Aides près de chez moi</a><a href="/notre-methodologie/">Méthodologie</a></nav>
+    <a class="btn" href="/">Calculer mes aides</a>
+  </div>
+</header>
+<nav class="crumb wrap" aria-label="Fil d’Ariane"><ol><li><a href="/">Accueil</a></li><li><a href="/aides-voiture-electrique/">Aides près de chez vous</a></li><li>Rouen</li></ol></nav>
+<main class="wrap"><article class="prose">
+<div class="hero"><h1>Quelles aides pour acheter une voiture électrique à Rouen en 2026 ?</h1></div>
+<p class="lede">Rouen combine un barème par tranches de revenus et une majoration de 25 % pour les communes de sa zone à faibles émissions. Le dispositif court jusqu’au 30 juin 2027, avec une facture avant fin 2026.</p>
+<div class="answer"><p><strong>Oui, de 2 000 à 5 000 €.</strong> L’aide de la Métropole Rouen Normandie s’adresse aux ménages jusqu’à <strong>22 000 € de revenu fiscal par part</strong>, qui font <strong>détruire une voiture diesel d’avant 2011 ou essence d’avant 2006</strong> et achètent une voiture <strong>Crit’Air 0 ou 1 chez un professionnel</strong>. La majoration de 25 % s’applique dans les communes de la zone à faibles émissions.</p></div>
+<h2 id="montants">Le barème de la Métropole Rouen Normandie</h2>
+<div class="table-wrap"><table><thead><tr><th>Revenu fiscal par part</th><th>Montant</th><th>Avec la majoration zone à faibles émissions</th></tr></thead><tbody><tr><td>jusqu’à 7 100 €</td><td class="num">4 000 €</td><td class="num">jusqu’à 5 000 €</td></tr><tr><td>de 7 100 à 15 400 €</td><td class="num">3 000 €</td><td class="num">3 750 €</td></tr><tr><td>de 15 400 à 22 000 €</td><td class="num">2 000 €</td><td class="num">2 500 €</td></tr></tbody></table></div>
+<p class="note note-warn">La majoration de 25 % (plafonnée à 5 000 €) est réservée aux habitants des communes de la zone à faibles émissions. <strong>Nous ne la calculons pas automatiquement</strong> : la liste officielle de ces communes n’est pas embarquée dans le simulateur. Le montant affiché est donc une fourchette entre le montant de base et le montant majoré.</p>
+<h3>Les conditions à remplir</h3>
+<ul>
+<li>Faire détruire une voiture <strong>diesel d’avant 2011 ou essence d’avant 2006</strong> (Crit’Air 3 ou plus ancienne) ;</li>
+<li>acheter <strong>chez un professionnel</strong> — l’achat à un particulier est exclu ;</li>
+<li>voiture neuve (moins de 6 mois) ou d’occasion, <strong>Crit’Air 0 ou 1</strong> ;</li>
+<li>prix inférieur à 60 000 € pour une électrique, 50 000 € sinon ;</li>
+<li>en location, contrat d’au moins 24 mois ;</li>
+<li><strong>facture avant le 31 décembre 2026</strong>, dispositif ouvert jusqu’au 30 juin 2027.</li>
+</ul>
+<h2 id="demarches">Comment demander l’aide à Rouen</h2>
+<p>Dépôt sur demarches.metropole-rouen-normandie.fr, <strong>dans les 6 mois suivant la facture</strong>. Documents : facture, carte grise, certificat de destruction, avis d’imposition, justificatif de domicile, RIB.</p>
+<h2 id="cumul">Cumul : deux règles à connaître</h2>
+<ul>
+<li><strong>Plafond de 80 %</strong> : le total des aides publiques ne peut pas dépasser 80 % du prix de la voiture. Le simulateur écrête automatiquement.</li>
+<li><strong>Pas de cumul avec le leasing social</strong> : le règlement l’exclut explicitement. Il faut choisir entre l’aide métropolitaine (avec la prime d’État à l’achat) et le leasing social.</li>
+</ul>
+<p>La Métropole ajoute par ailleurs <strong>2 000 € sans condition de revenus</strong> pour la transformation d’un véhicule thermique en électrique.</p>
+<p>Vous habitez la Seine-Maritime mais pas la Métropole ? Voir <a href="/aides-voiture-electrique/seine-maritime/">l’aide du Département de la Seine-Maritime</a>.</p>
+<h2 id="exemple">Exemple de calcul avec écrêtement</h2>
+<p>Un ménage rouennais très modeste (6 000 € de revenu fiscal par part) fait détruire sa vieille diesel et achète une électrique d’occasion à <strong>10 000 €</strong>. L’aide métropolitaine est de 4 000 €, la prime d’État s’y ajoute — mais le plafond de 80 % limite le total des aides publiques à 8 000 €. L’aide métropolitaine est donc réduite pour respecter ce plafond, ce que le simulateur indique par la mention « montant réduit ».</p>
+<h2 id="national">Les aides nationales, accessibles partout</h2>
+<p>Quelle que soit votre commune, vous pouvez prétendre à une aide de l’État, qui <strong>s’ajoute</strong> à l’aide locale :</p>
+<ul>
+<li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a> pour une voiture électrique neuve : 3 300 à 7 700 € selon vos revenus, à demander <strong>avant</strong> le bon de commande ;</li>
+<li><a href="/leasing-social-2026/">leasing social</a> si votre revenu fiscal ne dépasse pas 16 880 € par part et que vous roulez pour travailler : jusqu’à 9 000 € ;</li>
+<li><a href="/aide-voiture-electrique-occasion/">prime occasion</a> depuis le 1<sup>er</sup> septembre 2026, pour une électrique immatriculée entre 2017 et 2023.</li>
+</ul>
+<p>Ces trois aides sont exclusives les unes des autres : <a href="/cumul-aides-voiture-electrique/">voir les règles de cumul</a>.</p>
+<h2 id="communes">Les 71 communes concernées par l’aide</h2>
+<details class="communes"><summary>Voir la liste complète des communes</summary>
+<p>Amfreville-la-Mi-Voie · Anneville-Ambourville · Bardouville · Belbeuf · Berville-sur-Seine · Bihorel · Bois-Guillaume · Bonsecours · Boos · Canteleu · Caudebec-lès-Elbeuf · Cléon · Darnétal · Duclair · Déville-lès-Rouen · Elbeuf · Fontaine-sous-Préaux · Franqueville-Saint-Pierre · Freneuse · Gouy · Grand-Couronne · Hautot-sur-Seine · Houppeville · Hénouville · Isneauville · Jumièges · La Bouille · La Londe · La Neuville-Chant-d'Oisel · Le Grand-Quevilly · Le Houlme · Le Mesnil-Esnard · Le Mesnil-sous-Jumièges · Le Petit-Quevilly · Le Trait · Les Authieux-sur-le-Port-Saint-Ouen · Malaunay · Maromme · Mont-Saint-Aignan · Montmain · Moulineaux · Notre-Dame-de-Bondeville · Oissel-sur-Seine · Orival · Petit-Couronne · Quevillon · Quévreville-la-Poterie · Roncherolles-sur-le-Vivier · Rouen · Sahurs · Saint-Aubin-Celloville · Saint-Aubin-lès-Elbeuf · Saint-Aubin-Épinay · Saint-Jacques-sur-Darnétal · Saint-Léger-du-Bourg-Denis · Saint-Martin-de-Boscherville · Saint-Martin-du-Vivier · Saint-Paër · Saint-Pierre-de-Manneville · Saint-Pierre-de-Varengeville · Saint-Pierre-lès-Elbeuf · Saint-Étienne-du-Rouvray · Sainte-Marguerite-sur-Duclair · Sotteville-lès-Rouen · Sotteville-sous-le-Val · Tourville-la-Rivière · Val-de-la-Haye · Yainville · Ymare · Yville-sur-Seine · Épinay-sur-Duclair</p></details>
+<p style="font-size:.9rem;color:#64748b">Source : code officiel géographique de l’INSEE (jeu de données Etalab « découpage administratif »). Le simulateur identifie automatiquement votre intercommunalité à partir de votre code postal.</p>
+<div class="cta"><p class="t">Vos aides à Rouen, en quelques secondes</p><p>Le simulateur croise votre code postal, vos revenus et le prix du véhicule, applique les plafonds locaux et vous indique dans quel ordre faire les démarches.</p><a class="btn btn-lg" href="/">Calculer mes aides à Rouen</a></div>
+<h2 id="faq">Questions fréquentes</h2><div class="faq"><details><summary>Quelle est la majoration « zone à faibles émissions » à Rouen ?</summary><p>Les habitants des communes de la zone à faibles émissions bénéficient d’une majoration de 25 % de l’aide, dans la limite de 5 000 €. La liste de ces communes figure sur le site de la Métropole ; nous ne l’appliquons pas automatiquement, faute de liste officielle exploitable.</p></details><details><summary>Puis-je cumuler l’aide de Rouen avec le leasing social ?</summary><p>Non, le règlement de la Métropole exclut explicitement ce cumul. Vous pouvez en revanche cumuler l’aide métropolitaine avec la prime d’État « Coup de pouce » en cas d’achat.</p></details><details><summary>Jusqu’à quand l’aide est-elle disponible ?</summary><p>Le règlement du 29 septembre 2025 court jusqu’au 30 juin 2027, avec une condition importante : la facture du véhicule doit être établie avant le 31 décembre 2026.</p></details><details><summary>Quels véhicules faut-il mettre à la casse ?</summary><p>Une voiture diesel immatriculée avant 2011 ou essence avant 2006, c’est-à-dire une Crit’Air 3 ou plus ancienne. La destruction doit être réalisée dans un centre agréé.</p></details></div>
+<h2 id="sources">Sources officielles</h2><ul class="srcs"><li><a href="https://zfe.metropole-rouen-normandie.fr/sites/default/files/2025-10/B2025_0429_annexe.pdf" target="_blank" rel="noopener">Règlement du 29/09/2025 — zfe.metropole-rouen-normandie.fr</a></li><li><a href="https://demarches.metropole-rouen-normandie.fr/" target="_blank" rel="noopener">Guichet de dépôt — demarches.metropole-rouen-normandie.fr</a></li><li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F39188" target="_blank" rel="noopener">Prime d’État — service-public.fr, fiche F39188</a></li></ul>
+<p class="verif">Dernière vérification des règles de cette page : <strong>7 septembre 2026</strong>. Nous republions cette page à chaque évolution réglementaire — voir <a href="/historique-aides-auto/">l’historique des changements</a> et <a href="/notre-methodologie/">notre méthodologie</a>.</p>
+<nav class="related" aria-label="À lire aussi"><h2>À lire aussi</h2><ul><li><a href="/aides-voiture-electrique/">Toutes les aides près de chez vous</a></li><li><a href="/aides-voiture-electrique-2026/">Les aides nationales 2026</a></li><li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li><li><a href="/cumul-aides-voiture-electrique/">Peut-on cumuler les aides ?</a></li></ul></nav>
+</article></main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Le simulateur</h4>
+        <ul>
+          <li><a href="/">Simulateur d’aides</a></li>
+          <li><a href="/aides-voiture-electrique-2026/">Toutes les aides 2026</a></li>
+          <li><a href="/cumul-aides-voiture-electrique/">Cumuler les aides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Les aides</h4>
+        <ul>
+          <li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li>
+          <li><a href="/leasing-social-2026/">Leasing social 2026</a></li>
+          <li><a href="/aide-voiture-electrique-occasion/">Voiture d’occasion</a></li>
+          <li><a href="/bonus-ecologique-2026/">Bonus écologique</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Près de chez vous</h4>
+        <ul>
+          <li><a href="/aides-voiture-electrique/">Toutes les aides locales</a></li>
+          <li><a href="/aides-voiture-electrique/paris/">Paris et Grand Paris</a></li>
+          <li><a href="/aides-voiture-electrique/lyon/">Lyon</a></li>
+          <li><a href="/aides-voiture-electrique/marseille/">Marseille</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Le site</h4>
+        <ul>
+          <li><a href="/qui-sommes-nous.html">Qui sommes-nous ?</a></li>
+          <li><a href="/notre-methodologie/">Notre méthodologie</a></li>
+          <li><a href="/sources/">Sources officielles</a></li>
+          <li><a href="/historique-aides-auto/">Historique des aides</a></li>
+          <li><a href="/mentions-legales.html">Mentions légales</a></li>
+          <li><a href="#" data-consent-open>Gérer les cookies</a></li>
+          <li><a href="mailto:contact@mes-aides-auto.fr?subject=Mes%20Aides%20Auto%20%E2%80%94%20contact">Nous écrire</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-legal">© 2026 Mes Aides Auto — Calculateur d’aides à la mobilité propre. Informations à caractère indicatif, sans valeur contractuelle : seule la décision de l’organisme qui verse l’aide fait foi.</p>
+  </div>
+</footer>
+<div id="consent-banner" hidden>
+  <div class="box">
+    <p style="flex:1">Ce site utilise <strong>Google Analytics</strong> pour mesurer son audience, uniquement si vous l’acceptez. Vos données financières (revenu, parts) ne sont jamais transmises. <a href="/mentions-legales.html#cookies">En savoir plus</a></p>
+    <div class="acts">
+      <button type="button" id="consent-accept">Accepter</button>
+      <button type="button" id="consent-refuse">Continuer sans accepter</button>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var b = document.getElementById('consent-banner'); if (!b || !window.MAA_consent) return;
+    function show() { b.hidden = false; } function hide() { b.hidden = true; }
+    if (!MAA_consent.get()) show();
+    document.getElementById('consent-accept').addEventListener('click', function () { MAA_consent.set('granted'); hide(); });
+    document.getElementById('consent-refuse').addEventListener('click', function () { MAA_consent.set('denied'); hide(); });
+    document.querySelectorAll('[data-consent-open]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); MAA_consent.reset(); show(); }); });
+  })();
+</script>
+</body>
+</html>

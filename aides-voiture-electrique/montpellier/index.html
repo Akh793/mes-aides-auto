@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Consentement (Consent Mode v2) — doit précéder GTM. Aucun cookie de mesure tant que l'utilisateur n'a pas accepté (bandeau). -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
+  (function () {
+    var KEY = 'aides_auto_consent', TTL = 182 * 24 * 3600 * 1000, choice = null; // choix conservé 6 mois (recommandation CNIL)
+    try { var raw = localStorage.getItem(KEY); if (raw) { var o = JSON.parse(raw); if (o && o.v && Date.now() - o.t < TTL) choice = o.v; else localStorage.removeItem(KEY); } } catch (e) {}
+    function apply(v) {
+      gtag('consent', 'update', { analytics_storage: v === 'granted' ? 'granted' : 'denied' });
+      window.dataLayer.push({ event: v === 'granted' ? 'consent_granted' : 'consent_denied' });
+    }
+    window.MAA_consent = {
+      get: function () { return choice; },
+      set: function (v) { choice = v; try { localStorage.setItem(KEY, JSON.stringify({ v: v, t: Date.now() })); } catch (e) {} apply(v); },
+      reset: function () { choice = null; try { localStorage.removeItem(KEY); } catch (e) {} }
+    };
+    if (choice) apply(choice);
+  })();
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P2DNNBXT');</script>
+<!-- End Google Tag Manager -->
+<title>Aide voiture électrique Montpellier : à quoi avez-vous droit</title>
+<meta name="description" content="La métropole n’aide pas l’achat d’une voiture, mais l’éco-chèque de la Région Occitanie reste accessible : jusqu’à 1 600 € en occasion électrique.">
+<link rel="canonical" href="https://mes-aides-auto.fr/aides-voiture-electrique/montpellier/">
+<meta property="og:title" content="Existe-t-il une aide voiture électrique à Montpellier en 2026 ?">
+<meta property="og:description" content="La métropole n’aide pas l’achat d’une voiture, mais l’éco-chèque de la Région Occitanie reste accessible : jusqu’à 1 600 € en occasion électrique.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://mes-aides-auto.fr/aides-voiture-electrique/montpellier/">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Mes Aides Auto">
+<meta property="og:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Existe-t-il une aide voiture électrique à Montpellier en 2026 ?">
+<meta name="twitter:description" content="La métropole n’aide pas l’achat d’une voiture, mais l’éco-chèque de la Région Occitanie reste accessible : jusqu’à 1 600 € en occasion électrique.">
+<meta name="twitter:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2548FF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/maa.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://mes-aides-auto.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Aides près de chez vous",
+          "item": "https://mes-aides-auto.fr/aides-voiture-electrique/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Montpellier",
+          "item": "https://mes-aides-auto.fr/aides-voiture-electrique/montpellier/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Montpellier Méditerranée Métropole aide-t-elle à acheter une voiture électrique ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non. La métropole finance les vélos à assistance électrique, mais pas l’achat d’une voiture par un particulier, d’après les informations vérifiées en septembre 2026."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quelle aide reste-t-il à un habitant de Montpellier ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "L’éco-chèque mobilité de la Région Occitanie, jusqu’à 1 600 € pour une voiture électrique d’occasion achetée par un ménage non imposable, ainsi que toutes les aides nationales."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "L’éco-chèque marche-t-il pour une voiture neuve ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non, il est réservé à l’occasion. Pour une neuve, il reste la prime d’État « Coup de pouce » ou le leasing social."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "headline": "Existe-t-il une aide voiture électrique à Montpellier en 2026 ?",
+      "name": "Existe-t-il une aide voiture électrique à Montpellier en 2026 ?",
+      "description": "La métropole n’aide pas l’achat d’une voiture, mais l’éco-chèque de la Région Occitanie reste accessible : jusqu’à 1 600 € en occasion électrique.",
+      "inLanguage": "fr-FR",
+      "url": "https://mes-aides-auto.fr/aides-voiture-electrique/montpellier/",
+      "datePublished": "2026-09-08",
+      "dateModified": "2026-09-07",
+      "author": {
+        "@type": "Person",
+        "name": "David Rival",
+        "url": "https://mes-aides-auto.fr/qui-sommes-nous.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2DNNBXT"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">Mes Aides <em>Auto</em></a>
+    <nav class="site-nav" aria-label="Navigation principale"><a href="/">Simulateur</a><a href="/aides-voiture-electrique-2026/">Aides 2026</a><a href="/aides-voiture-electrique/" aria-current="page">Aides près de chez moi</a><a href="/notre-methodologie/">Méthodologie</a></nav>
+    <a class="btn" href="/">Calculer mes aides</a>
+  </div>
+</header>
+<nav class="crumb wrap" aria-label="Fil d’Ariane"><ol><li><a href="/">Accueil</a></li><li><a href="/aides-voiture-electrique/">Aides près de chez vous</a></li><li>Montpellier</li></ol></nav>
+<main class="wrap"><article class="prose">
+<div class="hero"><h1>Existe-t-il une aide voiture électrique à Montpellier en 2026 ?</h1></div>
+<p class="lede">La métropole n’aide pas l’achat d’une voiture — mais la Région Occitanie, oui. C’est la distinction que la plupart des pages sur le sujet ne font pas.</p>
+<div class="answer"><p><strong>Pas d’aide de la métropole, mais une aide régionale.</strong> Montpellier Méditerranée Métropole ne subventionne pas l’achat d’une voiture pour les particuliers : son dispositif porte sur les vélos à assistance électrique. En revanche, l’<a href="/aides-voiture-electrique/occitanie/">éco-chèque mobilité de la Région Occitanie</a> est accessible aux Montpelliérains : <strong>30 % du prix, jusqu’à 1 600 €</strong>, pour une électrique d’occasion achetée par un ménage non imposable chez un professionnel agréé en Occitanie.</p></div>
+<h2 id="regional">L’éco-chèque régional en bref</h2>
+<ul>
+<li>Voiture <strong>100 % électrique d’occasion</strong>, immatriculée depuis au moins 12 mois, 30 000 € maximum ;</li>
+<li>ménage <strong>non imposable</strong> ;</li>
+<li>achat <strong>chez un professionnel agréé situé en Occitanie</strong> ;</li>
+<li>demande dans les 6 mois, 5 000 aides disponibles de juillet 2026 à juin 2027.</li>
+</ul>
+<p><a href="/aides-voiture-electrique/occitanie/">Toutes les conditions de l’éco-chèque mobilité →</a></p>
+<h2 id="national">Les aides nationales, accessibles partout</h2>
+<p>Quelle que soit votre commune, vous pouvez prétendre à une aide de l’État, qui <strong>s’ajoute</strong> à l’aide locale :</p>
+<ul>
+<li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a> pour une voiture électrique neuve : 3 300 à 7 700 € selon vos revenus, à demander <strong>avant</strong> le bon de commande ;</li>
+<li><a href="/leasing-social-2026/">leasing social</a> si votre revenu fiscal ne dépasse pas 16 880 € par part et que vous roulez pour travailler : jusqu’à 9 000 € ;</li>
+<li><a href="/aide-voiture-electrique-occasion/">prime occasion</a> depuis le 1<sup>er</sup> septembre 2026, pour une électrique immatriculée entre 2017 et 2023.</li>
+</ul>
+<p>Ces trois aides sont exclusives les unes des autres : <a href="/cumul-aides-voiture-electrique/">voir les règles de cumul</a>.</p>
+<h2 id="communes">Les 31 communes de cette intercommunalité</h2>
+<details class="communes"><summary>Voir la liste complète des communes</summary>
+<p>Baillargues · Beaulieu · Castelnau-le-Lez · Castries · Clapiers · Cournonsec · Cournonterral · Fabrègues · Grabels · Jacou · Juvignac · Lattes · Lavérune · Le Crès · Montaud · Montferrier-sur-Lez · Montpellier · Murviel-lès-Montpellier · Pignan · Prades-le-Lez · Pérols · Restinclières · Saint-Brès · Saint-Drézéry · Saint-Geniès-des-Mourgues · Saint-Georges-d'Orques · Saint-Jean-de-Védas · Saussan · Sussargues · Vendargues · Villeneuve-lès-Maguelone</p></details>
+<p style="font-size:.9rem;color:#64748b">Source : code officiel géographique de l’INSEE (jeu de données Etalab « découpage administratif »). Le simulateur identifie automatiquement votre intercommunalité à partir de votre code postal.</p>
+<div class="cta"><p class="t">Vos aides à Montpellier, en quelques secondes</p><p>Le simulateur croise votre code postal, vos revenus et le prix du véhicule, applique les plafonds locaux et vous indique dans quel ordre faire les démarches.</p><a class="btn btn-lg" href="/">Calculer mes aides à Montpellier</a></div>
+<h2 id="faq">Questions fréquentes</h2><div class="faq"><details><summary>Montpellier Méditerranée Métropole aide-t-elle à acheter une voiture électrique ?</summary><p>Non. La métropole finance les vélos à assistance électrique, mais pas l’achat d’une voiture par un particulier, d’après les informations vérifiées en septembre 2026.</p></details><details><summary>Quelle aide reste-t-il à un habitant de Montpellier ?</summary><p>L’éco-chèque mobilité de la Région Occitanie, jusqu’à 1 600 € pour une voiture électrique d’occasion achetée par un ménage non imposable, ainsi que toutes les aides nationales.</p></details><details><summary>L’éco-chèque marche-t-il pour une voiture neuve ?</summary><p>Non, il est réservé à l’occasion. Pour une neuve, il reste la prime d’État « Coup de pouce » ou le leasing social.</p></details></div>
+<h2 id="sources">Sources officielles</h2><ul class="srcs"><li><a href="https://mes-aides.francetravail.fr/" target="_blank" rel="noopener">Recensement des aides — mes-aides.francetravail.fr (mis à jour le 10/07/2026)</a></li><li><a href="https://www.laregion.fr/Eco-cheque-mobilite-voiture-electrique-ou-hybride" target="_blank" rel="noopener">Éco-chèque mobilité — laregion.fr</a></li></ul>
+<p class="verif">Dernière vérification des règles de cette page : <strong>7 septembre 2026</strong>. Nous republions cette page à chaque évolution réglementaire — voir <a href="/historique-aides-auto/">l’historique des changements</a> et <a href="/notre-methodologie/">notre méthodologie</a>.</p>
+<nav class="related" aria-label="À lire aussi"><h2>À lire aussi</h2><ul><li><a href="/aides-voiture-electrique/">Toutes les aides près de chez vous</a></li><li><a href="/aides-voiture-electrique-2026/">Les aides nationales 2026</a></li><li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li><li><a href="/cumul-aides-voiture-electrique/">Peut-on cumuler les aides ?</a></li></ul></nav>
+</article></main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Le simulateur</h4>
+        <ul>
+          <li><a href="/">Simulateur d’aides</a></li>
+          <li><a href="/aides-voiture-electrique-2026/">Toutes les aides 2026</a></li>
+          <li><a href="/cumul-aides-voiture-electrique/">Cumuler les aides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Les aides</h4>
+        <ul>
+          <li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li>
+          <li><a href="/leasing-social-2026/">Leasing social 2026</a></li>
+          <li><a href="/aide-voiture-electrique-occasion/">Voiture d’occasion</a></li>
+          <li><a href="/bonus-ecologique-2026/">Bonus écologique</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Près de chez vous</h4>
+        <ul>
+          <li><a href="/aides-voiture-electrique/">Toutes les aides locales</a></li>
+          <li><a href="/aides-voiture-electrique/paris/">Paris et Grand Paris</a></li>
+          <li><a href="/aides-voiture-electrique/lyon/">Lyon</a></li>
+          <li><a href="/aides-voiture-electrique/marseille/">Marseille</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Le site</h4>
+        <ul>
+          <li><a href="/qui-sommes-nous.html">Qui sommes-nous ?</a></li>
+          <li><a href="/notre-methodologie/">Notre méthodologie</a></li>
+          <li><a href="/sources/">Sources officielles</a></li>
+          <li><a href="/historique-aides-auto/">Historique des aides</a></li>
+          <li><a href="/mentions-legales.html">Mentions légales</a></li>
+          <li><a href="#" data-consent-open>Gérer les cookies</a></li>
+          <li><a href="mailto:contact@mes-aides-auto.fr?subject=Mes%20Aides%20Auto%20%E2%80%94%20contact">Nous écrire</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-legal">© 2026 Mes Aides Auto — Calculateur d’aides à la mobilité propre. Informations à caractère indicatif, sans valeur contractuelle : seule la décision de l’organisme qui verse l’aide fait foi.</p>
+  </div>
+</footer>
+<div id="consent-banner" hidden>
+  <div class="box">
+    <p style="flex:1">Ce site utilise <strong>Google Analytics</strong> pour mesurer son audience, uniquement si vous l’acceptez. Vos données financières (revenu, parts) ne sont jamais transmises. <a href="/mentions-legales.html#cookies">En savoir plus</a></p>
+    <div class="acts">
+      <button type="button" id="consent-accept">Accepter</button>
+      <button type="button" id="consent-refuse">Continuer sans accepter</button>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var b = document.getElementById('consent-banner'); if (!b || !window.MAA_consent) return;
+    function show() { b.hidden = false; } function hide() { b.hidden = true; }
+    if (!MAA_consent.get()) show();
+    document.getElementById('consent-accept').addEventListener('click', function () { MAA_consent.set('granted'); hide(); });
+    document.getElementById('consent-refuse').addEventListener('click', function () { MAA_consent.set('denied'); hide(); });
+    document.querySelectorAll('[data-consent-open]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); MAA_consent.reset(); show(); }); });
+  })();
+</script>
+</body>
+</html>

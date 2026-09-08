@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Consentement (Consent Mode v2) — doit précéder GTM. Aucun cookie de mesure tant que l'utilisateur n'a pas accepté (bandeau). -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
+  (function () {
+    var KEY = 'aides_auto_consent', TTL = 182 * 24 * 3600 * 1000, choice = null; // choix conservé 6 mois (recommandation CNIL)
+    try { var raw = localStorage.getItem(KEY); if (raw) { var o = JSON.parse(raw); if (o && o.v && Date.now() - o.t < TTL) choice = o.v; else localStorage.removeItem(KEY); } } catch (e) {}
+    function apply(v) {
+      gtag('consent', 'update', { analytics_storage: v === 'granted' ? 'granted' : 'denied' });
+      window.dataLayer.push({ event: v === 'granted' ? 'consent_granted' : 'consent_denied' });
+    }
+    window.MAA_consent = {
+      get: function () { return choice; },
+      set: function (v) { choice = v; try { localStorage.setItem(KEY, JSON.stringify({ v: v, t: Date.now() })); } catch (e) {} apply(v); },
+      reset: function () { choice = null; try { localStorage.removeItem(KEY); } catch (e) {} }
+    };
+    if (choice) apply(choice);
+  })();
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P2DNNBXT');</script>
+<!-- End Google Tag Manager -->
+<title>Aides voiture électrique 2026 : montants et conditions</title>
+<meta name="description" content="Prime d’État « Coup de pouce », leasing social, prime occasion et aides locales : montants, conditions de revenus et simulation personnalisée.">
+<link rel="canonical" href="https://mes-aides-auto.fr/aides-voiture-electrique-2026/">
+<meta property="og:title" content="Toutes les aides voiture électrique en 2026">
+<meta property="og:description" content="Prime d’État « Coup de pouce », leasing social, prime occasion et aides locales : montants, conditions de revenus et simulation personnalisée.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://mes-aides-auto.fr/aides-voiture-electrique-2026/">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Mes Aides Auto">
+<meta property="og:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Toutes les aides voiture électrique en 2026">
+<meta name="twitter:description" content="Prime d’État « Coup de pouce », leasing social, prime occasion et aides locales : montants, conditions de revenus et simulation personnalisée.">
+<meta name="twitter:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2548FF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/maa.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://mes-aides-auto.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Aides voiture électrique 2026",
+          "item": "https://mes-aides-auto.fr/aides-voiture-electrique-2026/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Quelle est l’aide la plus élevée pour une voiture électrique en 2026 ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pour un achat, la prime d’État « Coup de pouce » atteint 7 700 € pour un ménage aux revenus très modestes achetant une voiture et une batterie fabriquées en Europe. En location longue durée, le leasing social peut aller jusqu’à 9 000 € d’aide de l’État. Ces deux aides ne se cumulent pas entre elles, mais se cumulent avec l’aide de votre collectivité."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Faut-il mettre une ancienne voiture à la casse pour avoir une aide en 2026 ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pas pour les aides nationales : la prime à la conversion, qui l’exigeait, a été supprimée le 2 décembre 2024. En revanche, la plupart des aides locales (Lyon, Grand Paris, Toulouse, Strasbourg, Rouen, Marseille, Annecy, Bordeaux, Reims) imposent de faire détruire, vendre ou transformer une ancienne voiture."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Puis-je avoir une aide si j’achète à un particulier ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non pour la prime d’État, qui passe obligatoirement par un professionnel partenaire d’un fournisseur d’énergie. Certaines aides locales l’acceptent malgré tout : c’est le cas à Toulouse et à Strasbourg. Le simulateur le signale selon votre commune."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Les aides s’appliquent-elles aux voitures hybrides ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Les aides nationales sont réservées aux voitures 100 % électriques. Quelques aides locales acceptent une vignette Crit’Air 1, donc certaines hybrides ou essences récentes : Grand Paris (3 000 € maximum), Toulouse, Strasbourg et Rouen."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "À quelle fréquence ces montants changent-ils ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Les barèmes nationaux évoluent par arrêté, parfois en cours d’année : le bonus écologique a disparu au 1er juillet 2025, la prime occasion est apparue au 1er septembre 2026. Les règlements locaux sont révisés chaque année et peuvent être suspendus en cours d’exercice, comme à Grenoble depuis le 26 septembre 2025."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "headline": "Quelles aides pour acheter une voiture électrique en 2026 ?",
+      "name": "Quelles aides pour acheter une voiture électrique en 2026 ?",
+      "description": "Prime d’État « Coup de pouce », leasing social, prime occasion et aides locales : montants, conditions de revenus et simulation personnalisée.",
+      "inLanguage": "fr-FR",
+      "url": "https://mes-aides-auto.fr/aides-voiture-electrique-2026/",
+      "datePublished": "2026-09-08",
+      "dateModified": "2026-09-08",
+      "author": {
+        "@type": "Person",
+        "name": "David Rival",
+        "url": "https://mes-aides-auto.fr/qui-sommes-nous.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2DNNBXT"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">Mes Aides <em>Auto</em></a>
+    <nav class="site-nav" aria-label="Navigation principale"><a href="/">Simulateur</a><a href="/aides-voiture-electrique-2026/" aria-current="page">Aides 2026</a><a href="/aides-voiture-electrique/">Aides près de chez moi</a><a href="/notre-methodologie/">Méthodologie</a></nav>
+    <a class="btn" href="/">Calculer mes aides</a>
+  </div>
+</header>
+<nav class="crumb wrap" aria-label="Fil d’Ariane"><ol><li><a href="/">Accueil</a></li><li>Aides voiture électrique 2026</li></ol></nav>
+<main class="wrap"><article class="prose">
+<div class="hero"><h1>Quelles aides pour acheter une voiture électrique en 2026 ?</h1></div>
+<p class="lede">En 2026, quatre dispositifs nationaux subsistent — et une quinzaine d’aides locales s’y ajoutent selon votre commune. Voici ce qui existe réellement, pour qui, et à quelles conditions.</p>
+
+<div class="answer">
+<p><strong>La réponse courte.</strong> Pour une voiture électrique <strong>neuve</strong>, l’aide principale est la <a href="/prime-coup-de-pouce-voiture-electrique/">prime d’État « Coup de pouce »</a> : de l’ordre de <strong>3 300 € à 7 700 €</strong> selon vos revenus et l’origine européenne du véhicule. Si vous utilisez votre voiture pour aller travailler et que votre revenu fiscal ne dépasse pas 16 880 € par part, le <a href="/leasing-social-2026/">leasing social</a> peut être plus avantageux — mais les deux ne se cumulent pas. Pour une <strong>occasion</strong>, une <a href="/aide-voiture-electrique-occasion/">nouvelle prime</a> existe depuis le 1<sup>er</sup> septembre 2026. À cela s’ajoutent les <a href="/aides-voiture-electrique/">aides de votre collectivité</a>, qui, elles, se cumulent avec l’aide de l’État.</p>
+</div>
+
+<h2>Les quatre dispositifs nationaux en 2026</h2>
+<div class="table-wrap">
+<table>
+<caption class="sr-only">Aides nationales à l’achat d’une voiture électrique en 2026</caption>
+<thead><tr><th>Aide</th><th>Montant</th><th>Conditions principales</th><th>Véhicule</th></tr></thead>
+<tbody>
+<tr><td><a href="/prime-coup-de-pouce-voiture-electrique/">Prime d’État « Coup de pouce »</a></td><td class="num">3 300 – 7 700 €</td><td>Achat chez un professionnel partenaire, prix ≤ 47 000 €, demande <strong>avant</strong> le bon de commande, véhicule gardé 2 ans</td><td>Électrique neuve</td></tr>
+<tr><td><a href="/aide-voiture-electrique-occasion/">Prime d’État occasion</a></td><td class="num">≈ 300 – 500 € <span class="badge badge-warn">à confirmer</span></td><td>1<sup>re</sup> immatriculation 2017-2023, batterie en bon état, achat chez un professionnel, véhicule gardé 3 ans</td><td>Électrique d’occasion</td></tr>
+<tr><td><a href="/leasing-social-2026/">Leasing social 2026</a></td><td class="num">jusqu’à 9 000 €</td><td>Revenu fiscal ≤ 16 880 €/part, usage professionnel, location longue durée de 3 ans minimum, loyer ≤ 200 €/mois</td><td>Électrique neuve, en location</td></tr>
+<tr><td>Prime au rétrofit</td><td class="num">jusqu’à 5 000 €</td><td>Revenu fiscal ≤ 24 900 €/part, 80 % du coût de la transformation, demande sous 6 mois</td><td>Transformation d’une thermique</td></tr>
+</tbody>
+</table>
+</div>
+<p class="note note-warn"><strong>Un point à comprendre avant tout le reste.</strong> La prime « Coup de pouce » et le leasing social ne sont pas financés par le budget de l’État mais par les fournisseurs d’énergie, dans le cadre des certificats d’économies d’énergie. La réglementation fixe des <em>coefficients</em>, pas des euros : le montant réel dépend du fournisseur partenaire de votre vendeur. C’est pourquoi nous affichons des fourchettes et non un chiffre unique — et pourquoi il faut toujours demander son offre au concessionnaire avant de signer.</p>
+
+<h2>Combien selon vos revenus ?</h2>
+<p>Toutes les aides nationales se calculent sur le <strong>revenu fiscal de référence par part</strong> : vous prenez la ligne « revenu fiscal de référence » de votre dernier avis d’imposition et vous la divisez par votre nombre de parts. Ce résultat vous place dans une tranche de 1 à 10.</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Votre situation</th><th>Revenu fiscal par part</th><th>Prime « Coup de pouce » (voiture neuve)</th></tr></thead>
+<tbody>
+<tr><td>Revenus très modestes (tranches 1 à 3)</td><td>jusqu’à 11 250 €</td><td class="num">5 082 – 5 700 €<br><span style="font-weight:400;color:#64748b">6 776 – 7 700 € si véhicule et batterie européens</span></td></tr>
+<tr><td>Revenus modestes (tranches 4 et 5)</td><td>11 250 à 16 880 €</td><td class="num">4 700 – 5 524 €<br><span style="font-weight:400;color:#64748b">5 900 – 7 365 € si véhicule et batterie européens</span></td></tr>
+<tr><td>Revenus intermédiaires, gros rouleur (tranches 6 à 8, au moins 12 000 km/an pour le travail)</td><td>16 880 à 27 310 €</td><td class="num">4 700 – 5 524 €<br><span style="font-weight:400;color:#64748b">7 365 – 7 700 € si véhicule et batterie européens</span></td></tr>
+<tr><td>Autres ménages</td><td>au-delà</td><td class="num">3 300 – 3 314 €<br><span style="font-weight:400;color:#64748b">4 419 – 4 700 € si véhicule et batterie européens</span></td></tr>
+</tbody>
+</table>
+</div>
+<p>Les seuils 2026 de revenu fiscal par part sont : 1 970 € (tranche 1), 7 640 €, 11 250 €, 14 130 €, 16 880 €, 19 600 €, 22 770 €, 27 310 €, 35 880 € (tranche 9), puis au-delà pour la tranche 10.</p>
+
+<h2>Les aides de votre collectivité s’ajoutent</h2>
+<p>Treize collectivités versent encore une aide à l’achat aux particuliers : Grand Paris, Métropole de Lyon, Aix-Marseille-Provence, Toulouse, Strasbourg, Rouen, Bordeaux, Reims, Grand Annecy, Pays du Mont-Blanc, Seine-Maritime, Région Occitanie, et Grenoble (aide suspendue). Elles se cumulent avec la prime d’État, mais imposent souvent leurs propres conditions : mise à la casse d’une ancienne voiture, plafond de revenus, dossier à déposer avant ou après l’achat.</p>
+<div class="grid grid-3">
+<a class="tile" href="/aides-voiture-electrique/paris/"><b>Paris et Grand Paris</b><span>jusqu’à 6 000 €, 149 communes</span></a>
+<a class="tile" href="/aides-voiture-electrique/lyon/"><b>Lyon</b><span>500 à 3 000 €, dossier avant l’achat</span></a>
+<a class="tile" href="/aides-voiture-electrique/toulouse/"><b>Toulouse</b><span>jusqu’à 5 000 €, achat entre particuliers accepté</span></a>
+</div>
+<p><a href="/aides-voiture-electrique/">Voir toutes les aides locales, territoire par territoire →</a></p>
+
+<h2>Ce qui n’existe plus en 2026</h2>
+<ul>
+<li><strong>Le bonus écologique</strong> a été supprimé le 1<sup>er</sup> juillet 2025 et remplacé par la prime « Coup de pouce ». <a href="/bonus-ecologique-2026/">Ce qu’il faut savoir si vous cherchiez le bonus</a>.</li>
+<li><strong>La prime à la conversion</strong> et sa surprime « zone à faibles émissions » de 1 000 € ont disparu le 2 décembre 2024.</li>
+<li><strong>Le crédit d’impôt pour une borne de recharge</strong> s’est arrêté le 31 décembre 2025.</li>
+<li><strong>Le prêt à taux zéro mobilité</strong> était une expérimentation prévue jusqu’à fin 2025 ; aucune prolongation n’a été trouvée.</li>
+</ul>
+
+<h2>Peut-on tout cumuler ?</h2>
+<p>Non. La règle est simple à retenir : <strong>une seule aide d’État</strong> (prime neuf, prime occasion ou leasing social — jamais deux), à laquelle <strong>s’ajoutent les aides locales</strong>, chacune avec son plafond. Certaines collectivités limitent en plus le total de toutes les aides publiques à 80 % du prix de la voiture. <a href="/cumul-aides-voiture-electrique/">Le détail des cumuls possibles, aide par aide →</a></p>
+<div class="cta"><p class="t">Le montant dépend de vos revenus, de votre commune et de la voiture</p><p>Quatre informations suffisent : code postal, revenu fiscal de référence, nombre de parts, prix du véhicule. Aucun compte à créer, rien n’est enregistré.</p><a class="btn btn-lg" href="/">Calculer mes aides</a></div>
+<h2 id="faq">Questions fréquentes</h2><div class="faq"><details><summary>Quelle est l’aide la plus élevée pour une voiture électrique en 2026 ?</summary><p>Pour un achat, la prime d’État « Coup de pouce » atteint 7 700 € pour un ménage aux revenus très modestes achetant une voiture et une batterie fabriquées en Europe. En location longue durée, le leasing social peut aller jusqu’à 9 000 € d’aide de l’État. Ces deux aides ne se cumulent pas entre elles, mais se cumulent avec l’aide de votre collectivité.</p></details><details><summary>Faut-il mettre une ancienne voiture à la casse pour avoir une aide en 2026 ?</summary><p>Pas pour les aides nationales : la prime à la conversion, qui l’exigeait, a été supprimée le 2 décembre 2024. En revanche, la plupart des aides locales (Lyon, Grand Paris, Toulouse, Strasbourg, Rouen, Marseille, Annecy, Bordeaux, Reims) imposent de faire détruire, vendre ou transformer une ancienne voiture.</p></details><details><summary>Puis-je avoir une aide si j’achète à un particulier ?</summary><p>Non pour la prime d’État, qui passe obligatoirement par un professionnel partenaire d’un fournisseur d’énergie. Certaines aides locales l’acceptent malgré tout : c’est le cas à Toulouse et à Strasbourg. Le simulateur le signale selon votre commune.</p></details><details><summary>Les aides s’appliquent-elles aux voitures hybrides ?</summary><p>Les aides nationales sont réservées aux voitures 100 % électriques. Quelques aides locales acceptent une vignette Crit’Air 1, donc certaines hybrides ou essences récentes : Grand Paris (3 000 € maximum), Toulouse, Strasbourg et Rouen.</p></details><details><summary>À quelle fréquence ces montants changent-ils ?</summary><p>Les barèmes nationaux évoluent par arrêté, parfois en cours d’année : le bonus écologique a disparu au 1er juillet 2025, la prime occasion est apparue au 1er septembre 2026. Les règlements locaux sont révisés chaque année et peuvent être suspendus en cours d’exercice, comme à Grenoble depuis le 26 septembre 2025.</p></details></div>
+<h2 id="sources">Sources officielles</h2><ul class="srcs"><li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F39188" target="_blank" rel="noopener">Prime « Coup de pouce » — service-public.fr, fiche F39188</a></li><li><a href="https://jechangemavoiture.gouv.fr/jcmv/aide-achat.html" target="_blank" rel="noopener">Récapitulatif des aides nationales — jechangemavoiture.gouv.fr</a></li><li><a href="https://www.primealaconversion.gouv.fr/dboneco/accueil/leasingsocial2026.html" target="_blank" rel="noopener">Leasing social 2026 — primealaconversion.gouv.fr</a></li><li><a href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054666103" target="_blank" rel="noopener">Arrêté du 10 août 2026 créant la fiche TRA-EQ-133 (voiture électrique d’occasion) — Légifrance</a></li></ul>
+<p class="verif">Dernière vérification des règles de cette page : <strong>8 septembre 2026</strong>. Nous republions cette page à chaque évolution réglementaire — voir <a href="/historique-aides-auto/">l’historique des changements</a> et <a href="/notre-methodologie/">notre méthodologie</a>.</p>
+<nav class="related" aria-label="À lire aussi"><h2>À lire aussi</h2><ul><li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce » : conditions, montant et démarches</a></li><li><a href="/leasing-social-2026/">Leasing social 2026 : revenus et véhicules éligibles</a></li><li><a href="/aide-voiture-electrique-occasion/">Aides pour une voiture électrique d’occasion</a></li><li><a href="/cumul-aides-voiture-electrique/">Peut-on cumuler plusieurs aides ?</a></li><li><a href="/aides-voiture-electrique/">Les aides près de chez vous</a></li><li><a href="/bonus-ecologique-2026/">Le bonus écologique existe-t-il encore ?</a></li></ul></nav>
+</article></main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Le simulateur</h4>
+        <ul>
+          <li><a href="/">Simulateur d’aides</a></li>
+          <li><a href="/aides-voiture-electrique-2026/">Toutes les aides 2026</a></li>
+          <li><a href="/cumul-aides-voiture-electrique/">Cumuler les aides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Les aides</h4>
+        <ul>
+          <li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li>
+          <li><a href="/leasing-social-2026/">Leasing social 2026</a></li>
+          <li><a href="/aide-voiture-electrique-occasion/">Voiture d’occasion</a></li>
+          <li><a href="/bonus-ecologique-2026/">Bonus écologique</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Près de chez vous</h4>
+        <ul>
+          <li><a href="/aides-voiture-electrique/">Toutes les aides locales</a></li>
+          <li><a href="/aides-voiture-electrique/paris/">Paris et Grand Paris</a></li>
+          <li><a href="/aides-voiture-electrique/lyon/">Lyon</a></li>
+          <li><a href="/aides-voiture-electrique/marseille/">Marseille</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Le site</h4>
+        <ul>
+          <li><a href="/qui-sommes-nous.html">Qui sommes-nous ?</a></li>
+          <li><a href="/notre-methodologie/">Notre méthodologie</a></li>
+          <li><a href="/sources/">Sources officielles</a></li>
+          <li><a href="/historique-aides-auto/">Historique des aides</a></li>
+          <li><a href="/mentions-legales.html">Mentions légales</a></li>
+          <li><a href="#" data-consent-open>Gérer les cookies</a></li>
+          <li><a href="mailto:contact@mes-aides-auto.fr?subject=Mes%20Aides%20Auto%20%E2%80%94%20contact">Nous écrire</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-legal">© 2026 Mes Aides Auto — Calculateur d’aides à la mobilité propre. Informations à caractère indicatif, sans valeur contractuelle : seule la décision de l’organisme qui verse l’aide fait foi.</p>
+  </div>
+</footer>
+<div id="consent-banner" hidden>
+  <div class="box">
+    <p style="flex:1">Ce site utilise <strong>Google Analytics</strong> pour mesurer son audience, uniquement si vous l’acceptez. Vos données financières (revenu, parts) ne sont jamais transmises. <a href="/mentions-legales.html#cookies">En savoir plus</a></p>
+    <div class="acts">
+      <button type="button" id="consent-accept">Accepter</button>
+      <button type="button" id="consent-refuse">Continuer sans accepter</button>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var b = document.getElementById('consent-banner'); if (!b || !window.MAA_consent) return;
+    function show() { b.hidden = false; } function hide() { b.hidden = true; }
+    if (!MAA_consent.get()) show();
+    document.getElementById('consent-accept').addEventListener('click', function () { MAA_consent.set('granted'); hide(); });
+    document.getElementById('consent-refuse').addEventListener('click', function () { MAA_consent.set('denied'); hide(); });
+    document.querySelectorAll('[data-consent-open]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); MAA_consent.reset(); show(); }); });
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Consentement (Consent Mode v2) — doit précéder GTM. Aucun cookie de mesure tant que l'utilisateur n'a pas accepté (bandeau). -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
+  (function () {
+    var KEY = 'aides_auto_consent', TTL = 182 * 24 * 3600 * 1000, choice = null; // choix conservé 6 mois (recommandation CNIL)
+    try { var raw = localStorage.getItem(KEY); if (raw) { var o = JSON.parse(raw); if (o && o.v && Date.now() - o.t < TTL) choice = o.v; else localStorage.removeItem(KEY); } } catch (e) {}
+    function apply(v) {
+      gtag('consent', 'update', { analytics_storage: v === 'granted' ? 'granted' : 'denied' });
+      window.dataLayer.push({ event: v === 'granted' ? 'consent_granted' : 'consent_denied' });
+    }
+    window.MAA_consent = {
+      get: function () { return choice; },
+      set: function (v) { choice = v; try { localStorage.setItem(KEY, JSON.stringify({ v: v, t: Date.now() })); } catch (e) {} apply(v); },
+      reset: function () { choice = null; try { localStorage.removeItem(KEY); } catch (e) {} }
+    };
+    if (choice) apply(choice);
+  })();
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P2DNNBXT');</script>
+<!-- End Google Tag Manager -->
+<title>Cumul des aides voiture électrique : ce qui se cumule</title>
+<meta name="description" content="Prime d’État, leasing social, aides des métropoles et régions : le tableau complet des cumuls possibles, des exclusions et des plafonds à 80 %.">
+<link rel="canonical" href="https://mes-aides-auto.fr/cumul-aides-voiture-electrique/">
+<meta property="og:title" content="Peut-on cumuler les aides voiture électrique ?">
+<meta property="og:description" content="Prime d’État, leasing social, aides des métropoles et régions : le tableau complet des cumuls possibles, des exclusions et des plafonds à 80 %.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://mes-aides-auto.fr/cumul-aides-voiture-electrique/">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Mes Aides Auto">
+<meta property="og:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Peut-on cumuler les aides voiture électrique ?">
+<meta name="twitter:description" content="Prime d’État, leasing social, aides des métropoles et régions : le tableau complet des cumuls possibles, des exclusions et des plafonds à 80 %.">
+<meta name="twitter:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2548FF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/maa.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://mes-aides-auto.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Aides voiture électrique 2026",
+          "item": "https://mes-aides-auto.fr/aides-voiture-electrique-2026/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Cumul des aides",
+          "item": "https://mes-aides-auto.fr/cumul-aides-voiture-electrique/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Peut-on cumuler la prime d’État et l’aide de sa métropole ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui, dans la quasi-totalité des cas : les aides locales sont conçues pour s’ajouter aux aides nationales. Deux exceptions repérées : la Métropole de Rouen exclut le cumul avec le leasing social, et Aix-Marseille-Provence exclut la location longue durée."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Peut-on toucher deux aides nationales ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non. La prime « Coup de pouce » pour un véhicule neuf, la prime pour un véhicule d’occasion et le leasing social relèvent du même mécanisme de certificats d’économies d’énergie et sont exclusifs les uns des autres."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Que se passe-t-il si le total dépasse le plafond de 80 % ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "L’aide locale est réduite du dépassement. À Strasbourg, Rouen et en Seine-Maritime, le total des aides publiques ne peut pas dépasser 80 % du prix de la voiture ; la collectivité verse donc la différence entre ce plafond et les aides déjà obtenues."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Peut-on cumuler une aide de la région et une aide de la métropole ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui. Le cas le plus courant est l’Occitanie : l’éco-chèque mobilité régional se cumule explicitement avec la prime « véhicule + propre » de Toulouse Métropole, à condition de remplir les critères des deux règlements."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "headline": "Peut-on cumuler plusieurs aides pour acheter une voiture électrique ?",
+      "name": "Peut-on cumuler plusieurs aides pour acheter une voiture électrique ?",
+      "description": "Prime d’État, leasing social, aides des métropoles et régions : le tableau complet des cumuls possibles, des exclusions et des plafonds à 80 %.",
+      "inLanguage": "fr-FR",
+      "url": "https://mes-aides-auto.fr/cumul-aides-voiture-electrique/",
+      "datePublished": "2026-09-08",
+      "dateModified": "2026-09-08",
+      "author": {
+        "@type": "Person",
+        "name": "David Rival",
+        "url": "https://mes-aides-auto.fr/qui-sommes-nous.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2DNNBXT"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">Mes Aides <em>Auto</em></a>
+    <nav class="site-nav" aria-label="Navigation principale"><a href="/">Simulateur</a><a href="/aides-voiture-electrique-2026/">Aides 2026</a><a href="/aides-voiture-electrique/">Aides près de chez moi</a><a href="/notre-methodologie/">Méthodologie</a></nav>
+    <a class="btn" href="/">Calculer mes aides</a>
+  </div>
+</header>
+<nav class="crumb wrap" aria-label="Fil d’Ariane"><ol><li><a href="/">Accueil</a></li><li><a href="/aides-voiture-electrique-2026/">Aides voiture électrique 2026</a></li><li>Cumul des aides</li></ol></nav>
+<main class="wrap"><article class="prose">
+<div class="hero"><h1>Peut-on cumuler plusieurs aides pour acheter une voiture électrique ?</h1></div>
+<p class="lede">Une aide d’État, et une seule. Autant d’aides locales que votre territoire en propose. Et des plafonds qui rabotent le total. Voici la mécanique exacte.</p>
+
+<div class="answer">
+<p><strong>La règle en une phrase.</strong> Vous ne pouvez obtenir qu’<strong>une seule aide nationale</strong> — prime « Coup de pouce » neuf, prime occasion ou leasing social — mais elle <strong>se cumule avec les aides de votre région, de votre département et de votre métropole</strong>. Certaines collectivités plafonnent ensuite le total de toutes les aides publiques à un pourcentage du prix de la voiture.</p>
+</div>
+
+<h2>Le tableau des cumuls</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Aide A</th><th>Aide B</th><th>Cumul</th><th>Conditions</th></tr></thead>
+<tbody>
+<tr><td>Prime « Coup de pouce » neuf</td><td>Leasing social</td><td><span class="badge badge-stop">Impossible</span></td><td>Même enveloppe (certificats d’économies d’énergie) : il faut choisir</td></tr>
+<tr><td>Prime « Coup de pouce » neuf</td><td>Prime occasion</td><td><span class="badge badge-stop">Impossible</span></td><td>Exclusives par nature (neuf ou occasion)</td></tr>
+<tr><td>Prime d’État (quelle qu’elle soit)</td><td>Aide d’une métropole</td><td><span class="badge badge-ok">Oui</span></td><td>Sauf mention contraire du règlement local</td></tr>
+<tr><td>Prime d’État</td><td>Aide d’une région</td><td><span class="badge badge-ok">Oui</span></td><td>Occitanie : réservée aux ménages non imposables</td></tr>
+<tr><td>Aide d’une métropole</td><td>Aide d’une région</td><td><span class="badge badge-ok">Oui</span></td><td>Toulouse Métropole et éco-chèque Occitanie se cumulent explicitement</td></tr>
+<tr><td>Leasing social</td><td>Aide de la Métropole de Rouen</td><td><span class="badge badge-stop">Impossible</span></td><td>Exclusion écrite dans le règlement de la Métropole</td></tr>
+<tr><td>Leasing social</td><td>Aide d’Aix-Marseille-Provence</td><td><span class="badge badge-stop">Impossible</span></td><td>La location longue durée est exclue du règlement métropolitain</td></tr>
+<tr><td>Aide départementale (Seine-Maritime)</td><td>Aide de la Métropole de Rouen</td><td><span class="badge badge-stop">Impossible</span></td><td>L’aide départementale vise les habitants <em>hors</em> Métropole de Rouen</td></tr>
+<tr><td>Prime au rétrofit</td><td>Aides locales</td><td><span class="badge badge-ok">Oui</span></td><td>Île-de-France ajoute jusqu’à 6 000 €, Strasbourg 2 500 €, Rouen 2 000 €</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>Les plafonds qui rabotent le total</h2>
+<p>Trois collectivités appliquent un plafond global : <strong>le total de toutes les aides publiques ne peut pas dépasser un pourcentage du prix</strong> de la voiture. Si ce plafond est atteint, c’est l’aide locale qui est réduite, jamais l’aide d’État.</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Territoire</th><th>Plafond du total des aides</th></tr></thead>
+<tbody>
+<tr><td>Eurométropole de Strasbourg</td><td class="num">80 % du prix</td></tr>
+<tr><td>Métropole Rouen Normandie</td><td class="num">80 % du prix</td></tr>
+<tr><td>Département de la Seine-Maritime</td><td class="num">80 % du prix</td></tr>
+<tr><td>Grand Annecy</td><td class="num">100 % du prix</td></tr>
+<tr><td>Communauté de communes Pays du Mont-Blanc</td><td class="num">40 % du prix (sur sa propre aide)</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Exemple concret.</strong> Une voiture d’occasion à 10 000 € achetée par un ménage rouennais de la tranche la plus modeste : 4 000 € d’aide métropolitaine + la prime d’État. Le plafond de 80 % limite le total à 8 000 € : l’aide de la Métropole est écrêtée en conséquence. Le simulateur effectue ce calcul automatiquement et affiche la mention « montant réduit ».</p>
+
+<h2>Trois pièges de cumul à connaître</h2>
+<ul>
+<li><strong>L’ordre des démarches.</strong> À Lyon et au Grand Annecy, le dossier local doit être déposé <em>avant</em> l’achat ; la prime d’État aussi doit être demandée avant le bon de commande. Une seule signature prématurée fait tomber les deux.</li>
+<li><strong>Le vendeur.</strong> Acheter à un particulier supprime toute prime d’État et l’éco-chèque d’Occitanie, mais reste compatible avec Toulouse et Strasbourg.</li>
+<li><strong>Le nombre d’aides par foyer.</strong> Plusieurs règlements limitent l’aide à une voiture par personne ou par foyer, parfois sur plusieurs années (une aide tous les 4 ans au Pays du Mont-Blanc).</li>
+</ul>
+<div class="cta"><p class="t">Le calcul du cumul, fait pour vous</p><p>Le simulateur applique les exclusions, les plafonds locaux et l’écrêtement, puis affiche le total réellement atteignable — et non une addition théorique.</p><a class="btn btn-lg" href="/">Lancer le simulateur</a></div>
+<h2 id="faq">Questions fréquentes</h2><div class="faq"><details><summary>Peut-on cumuler la prime d’État et l’aide de sa métropole ?</summary><p>Oui, dans la quasi-totalité des cas : les aides locales sont conçues pour s’ajouter aux aides nationales. Deux exceptions repérées : la Métropole de Rouen exclut le cumul avec le leasing social, et Aix-Marseille-Provence exclut la location longue durée.</p></details><details><summary>Peut-on toucher deux aides nationales ?</summary><p>Non. La prime « Coup de pouce » pour un véhicule neuf, la prime pour un véhicule d’occasion et le leasing social relèvent du même mécanisme de certificats d’économies d’énergie et sont exclusifs les uns des autres.</p></details><details><summary>Que se passe-t-il si le total dépasse le plafond de 80 % ?</summary><p>L’aide locale est réduite du dépassement. À Strasbourg, Rouen et en Seine-Maritime, le total des aides publiques ne peut pas dépasser 80 % du prix de la voiture ; la collectivité verse donc la différence entre ce plafond et les aides déjà obtenues.</p></details><details><summary>Peut-on cumuler une aide de la région et une aide de la métropole ?</summary><p>Oui. Le cas le plus courant est l’Occitanie : l’éco-chèque mobilité régional se cumule explicitement avec la prime « véhicule + propre » de Toulouse Métropole, à condition de remplir les critères des deux règlements.</p></details></div>
+<h2 id="sources">Sources officielles</h2><ul class="srcs"><li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F39188" target="_blank" rel="noopener">Service-public.fr — prime « Coup de pouce », fiche F39188</a></li><li><a href="https://www.primealaconversion.gouv.fr/dboneco/accueil/leasingsocial2026.html" target="_blank" rel="noopener">Aide au leasing social 2026 — primealaconversion.gouv.fr</a></li><li><a href="https://www.strasbourg.eu/aides-conversion" target="_blank" rel="noopener">Règlement des aides — Eurométropole de Strasbourg</a></li><li><a href="https://zfe.metropole-rouen-normandie.fr/sites/default/files/2025-10/B2025_0429_annexe.pdf" target="_blank" rel="noopener">Règlement du 29/09/2025 — Métropole Rouen Normandie</a></li></ul>
+<p class="verif">Dernière vérification des règles de cette page : <strong>8 septembre 2026</strong>. Nous republions cette page à chaque évolution réglementaire — voir <a href="/historique-aides-auto/">l’historique des changements</a> et <a href="/notre-methodologie/">notre méthodologie</a>.</p>
+<nav class="related" aria-label="À lire aussi"><h2>À lire aussi</h2><ul><li><a href="/aides-voiture-electrique-2026/">Toutes les aides voiture électrique 2026</a></li><li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li><li><a href="/leasing-social-2026/">Leasing social 2026</a></li><li><a href="/aides-voiture-electrique/">Les aides de votre collectivité</a></li><li><a href="/notre-methodologie/">Notre méthodologie</a></li></ul></nav>
+</article></main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Le simulateur</h4>
+        <ul>
+          <li><a href="/">Simulateur d’aides</a></li>
+          <li><a href="/aides-voiture-electrique-2026/">Toutes les aides 2026</a></li>
+          <li><a href="/cumul-aides-voiture-electrique/">Cumuler les aides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Les aides</h4>
+        <ul>
+          <li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li>
+          <li><a href="/leasing-social-2026/">Leasing social 2026</a></li>
+          <li><a href="/aide-voiture-electrique-occasion/">Voiture d’occasion</a></li>
+          <li><a href="/bonus-ecologique-2026/">Bonus écologique</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Près de chez vous</h4>
+        <ul>
+          <li><a href="/aides-voiture-electrique/">Toutes les aides locales</a></li>
+          <li><a href="/aides-voiture-electrique/paris/">Paris et Grand Paris</a></li>
+          <li><a href="/aides-voiture-electrique/lyon/">Lyon</a></li>
+          <li><a href="/aides-voiture-electrique/marseille/">Marseille</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Le site</h4>
+        <ul>
+          <li><a href="/qui-sommes-nous.html">Qui sommes-nous ?</a></li>
+          <li><a href="/notre-methodologie/">Notre méthodologie</a></li>
+          <li><a href="/sources/">Sources officielles</a></li>
+          <li><a href="/historique-aides-auto/">Historique des aides</a></li>
+          <li><a href="/mentions-legales.html">Mentions légales</a></li>
+          <li><a href="#" data-consent-open>Gérer les cookies</a></li>
+          <li><a href="mailto:contact@mes-aides-auto.fr?subject=Mes%20Aides%20Auto%20%E2%80%94%20contact">Nous écrire</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-legal">© 2026 Mes Aides Auto — Calculateur d’aides à la mobilité propre. Informations à caractère indicatif, sans valeur contractuelle : seule la décision de l’organisme qui verse l’aide fait foi.</p>
+  </div>
+</footer>
+<div id="consent-banner" hidden>
+  <div class="box">
+    <p style="flex:1">Ce site utilise <strong>Google Analytics</strong> pour mesurer son audience, uniquement si vous l’acceptez. Vos données financières (revenu, parts) ne sont jamais transmises. <a href="/mentions-legales.html#cookies">En savoir plus</a></p>
+    <div class="acts">
+      <button type="button" id="consent-accept">Accepter</button>
+      <button type="button" id="consent-refuse">Continuer sans accepter</button>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var b = document.getElementById('consent-banner'); if (!b || !window.MAA_consent) return;
+    function show() { b.hidden = false; } function hide() { b.hidden = true; }
+    if (!MAA_consent.get()) show();
+    document.getElementById('consent-accept').addEventListener('click', function () { MAA_consent.set('granted'); hide(); });
+    document.getElementById('consent-refuse').addEventListener('click', function () { MAA_consent.set('denied'); hide(); });
+    document.querySelectorAll('[data-consent-open]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); MAA_consent.reset(); show(); }); });
+  })();
+</script>
+</body>
+</html>

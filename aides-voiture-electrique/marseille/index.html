@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Consentement (Consent Mode v2) — doit précéder GTM. Aucun cookie de mesure tant que l'utilisateur n'a pas accepté (bandeau). -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
+  (function () {
+    var KEY = 'aides_auto_consent', TTL = 182 * 24 * 3600 * 1000, choice = null; // choix conservé 6 mois (recommandation CNIL)
+    try { var raw = localStorage.getItem(KEY); if (raw) { var o = JSON.parse(raw); if (o && o.v && Date.now() - o.t < TTL) choice = o.v; else localStorage.removeItem(KEY); } } catch (e) {}
+    function apply(v) {
+      gtag('consent', 'update', { analytics_storage: v === 'granted' ? 'granted' : 'denied' });
+      window.dataLayer.push({ event: v === 'granted' ? 'consent_granted' : 'consent_denied' });
+    }
+    window.MAA_consent = {
+      get: function () { return choice; },
+      set: function (v) { choice = v; try { localStorage.setItem(KEY, JSON.stringify({ v: v, t: Date.now() })); } catch (e) {} apply(v); },
+      reset: function () { choice = null; try { localStorage.removeItem(KEY); } catch (e) {} }
+    };
+    if (choice) apply(choice);
+  })();
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P2DNNBXT');</script>
+<!-- End Google Tag Manager -->
+<title>Aide voiture électrique Marseille 2026 : jusqu’à 5 000 €</title>
+<meta name="description" content="Aix-Marseille-Provence verse jusqu’à 5 000 € en neuf et 2 500 € en occasion aux habitants de la zone à faibles émissions de Marseille.">
+<link rel="canonical" href="https://mes-aides-auto.fr/aides-voiture-electrique/marseille/">
+<meta property="og:title" content="Quelles aides pour acheter une voiture électrique à Marseille en 2026 ?">
+<meta property="og:description" content="Aix-Marseille-Provence verse jusqu’à 5 000 € en neuf et 2 500 € en occasion aux habitants de la zone à faibles émissions de Marseille.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://mes-aides-auto.fr/aides-voiture-electrique/marseille/">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Mes Aides Auto">
+<meta property="og:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quelles aides pour acheter une voiture électrique à Marseille en 2026 ?">
+<meta name="twitter:description" content="Aix-Marseille-Provence verse jusqu’à 5 000 € en neuf et 2 500 € en occasion aux habitants de la zone à faibles émissions de Marseille.">
+<meta name="twitter:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2548FF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/maa.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://mes-aides-auto.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Aides près de chez vous",
+          "item": "https://mes-aides-auto.fr/aides-voiture-electrique/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Marseille",
+          "item": "https://mes-aides-auto.fr/aides-voiture-electrique/marseille/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Qui peut bénéficier de l’aide d’Aix-Marseille-Provence ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Les habitants de la zone à faibles émissions de Marseille, avec un revenu fiscal de référence par part inférieur ou égal à 24 900 €, qui font détruire une voiture Crit’Air 4, 5 ou non classée et achètent une voiture électrique ou à hydrogène de moins de 47 000 €."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Habitant d’Aix-en-Provence, ai-je droit à une aide ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non, pas d’aide locale : l’aide métropolitaine est réservée aux résidents de la zone à faibles émissions de Marseille, et l’aide du Département des Bouches-du-Rhône est terminée depuis le 31 janvier 2022. Restent les aides nationales, que le simulateur calcule."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Puis-je avoir l’aide pour une hybride rechargeable ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non. Contrairement à d’autres métropoles, Aix-Marseille-Provence réserve son aide aux voitures électriques et à hydrogène. Les hybrides, même rechargeables, en sont exclues."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "L’aide fonctionne-t-elle avec une location longue durée ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non, la location longue durée et la location avec option d’achat sont explicitement exclues du règlement. Si vous visez le leasing social, vous ne pourrez pas y ajouter l’aide métropolitaine."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "headline": "Quelles aides pour acheter une voiture électrique à Marseille en 2026 ?",
+      "name": "Quelles aides pour acheter une voiture électrique à Marseille en 2026 ?",
+      "description": "Aix-Marseille-Provence verse jusqu’à 5 000 € en neuf et 2 500 € en occasion aux habitants de la zone à faibles émissions de Marseille.",
+      "inLanguage": "fr-FR",
+      "url": "https://mes-aides-auto.fr/aides-voiture-electrique/marseille/",
+      "datePublished": "2026-09-08",
+      "dateModified": "2026-09-07",
+      "author": {
+        "@type": "Person",
+        "name": "David Rival",
+        "url": "https://mes-aides-auto.fr/qui-sommes-nous.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2DNNBXT"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">Mes Aides <em>Auto</em></a>
+    <nav class="site-nav" aria-label="Navigation principale"><a href="/">Simulateur</a><a href="/aides-voiture-electrique-2026/">Aides 2026</a><a href="/aides-voiture-electrique/" aria-current="page">Aides près de chez moi</a><a href="/notre-methodologie/">Méthodologie</a></nav>
+    <a class="btn" href="/">Calculer mes aides</a>
+  </div>
+</header>
+<nav class="crumb wrap" aria-label="Fil d’Ariane"><ol><li><a href="/">Accueil</a></li><li><a href="/aides-voiture-electrique/">Aides près de chez vous</a></li><li>Marseille</li></ol></nav>
+<main class="wrap"><article class="prose">
+<div class="hero"><h1>Quelles aides pour acheter une voiture électrique à Marseille en 2026 ?</h1></div>
+<p class="lede">L’aide existe, elle est parmi les plus généreuses de France pour les revenus très modestes — mais elle est réservée aux habitants de la zone à faibles émissions de Marseille, et exclut la location.</p>
+<div class="answer"><p><strong>Oui, jusqu’à 5 000 € en neuf et 2 500 € en occasion.</strong> La Métropole Aix-Marseille-Provence réserve cette aide aux <strong>habitants de la zone à faibles émissions de Marseille</strong>. Il faut faire détruire une voiture <strong>Crit’Air 4, 5 ou non classée</strong>, acheter une <strong>électrique ou une voiture à hydrogène</strong> (les hybrides sont exclues) de moins de 47 000 €, et la garder deux ans. Le dispositif est ouvert jusqu’au <strong>31 octobre 2027</strong>.</p></div>
+<h2 id="montants">Le barème d’Aix-Marseille-Provence</h2>
+<div class="table-wrap"><table><thead><tr><th>Revenu fiscal par part</th><th>Voiture neuve</th><th>Voiture d’occasion</th></tr></thead><tbody><tr><td>jusqu’à 7 100 €</td><td class="num">5 000 €</td><td class="num">2 500 €</td></tr><tr><td>de 7 100 à 15 400 €</td><td class="num">3 000 €</td><td class="num">1 500 €</td></tr><tr><td>de 15 400 à 24 900 €</td><td class="num">1 000 €</td><td class="num">0 €</td></tr><tr><td>au-delà de 24 900 €</td><td class="num">—</td><td class="num">—</td></tr></tbody></table></div>
+<p>Ce barème est celui du règlement métropolitain d’octobre 2024, annexe « particuliers » ; aucune version plus récente n’a été trouvée à la date de vérification.</p>
+<h3>Les conditions à remplir</h3>
+<ul>
+<li><strong>Habiter dans la zone à faibles émissions de Marseille</strong> ;</li>
+<li>faire détruire une voiture <strong>Crit’Air 4, 5 ou non classée</strong>, entre 3 mois avant et 6 mois après l’achat ;</li>
+<li>acheter une voiture <strong>électrique ou à hydrogène</strong> — les hybrides ne sont pas éligibles, contrairement au Grand Paris ou à Toulouse ;</li>
+<li>prix inférieur ou égal à 47 000 € ;</li>
+<li>pour une occasion, <strong>achat chez un professionnel</strong> obligatoire ;</li>
+<li><strong>la location longue durée et la location avec option d’achat sont exclues</strong> — donc pas de cumul possible avec le leasing social ;</li>
+<li>conserver la voiture 2 ans.</li>
+</ul>
+<p class="note note-warn">La zone à faibles émissions ne couvre qu’une partie de Marseille. Le simulateur l’approxime à la commune entière : vérifiez votre adresse sur le site de la Métropole avant de déposer un dossier.</p>
+<h2 id="demarches">Comment demander l’aide à Marseille</h2>
+<p>Dépôt du dossier <strong>après l’achat</strong>, dans les 6 mois, sur subvention.ampmetropole.fr. Documents : carte grise du nouveau véhicule, facture, justificatif de domicile dans la zone, dernier avis d’imposition, certificat de destruction de l’ancienne voiture et RIB.</p>
+<h2 id="cumul">Cumul, et le cas des autres communes des Bouches-du-Rhône</h2>
+<p>L’aide se cumule avec la prime d’État. Elle est en revanche <strong>incompatible avec le leasing social</strong>, puisque la location est exclue du règlement.</p>
+<p class="note note-stop"><strong>Hors Marseille, il n’y a plus rien.</strong> L’aide du Département des Bouches-du-Rhône (5 000 €) est terminée : les achats postérieurs au 31 janvier 2022 en sont exclus. Un habitant d’Aix-en-Provence, de Martigues ou d’Aubagne ne peut donc compter que sur les aides nationales — la fiche gouvernementale régionale qui mentionne encore ces aides est périmée.</p>
+<h2 id="exemple">Exemple de calcul</h2>
+<p>Une personne seule habitant le 1<sup>er</sup> arrondissement de Marseille, 6 000 € de revenu fiscal de référence pour une part, fait détruire une Crit’Air 4 et achète une électrique neuve à 30 000 € : <strong>5 000 €</strong> d’aide métropolitaine, auxquels s’ajoute la prime d’État de la tranche « revenus très modestes » (5 082 à 5 700 €). Total possible : plus de 10 000 €, soit un tiers du prix.</p>
+<h2 id="national">Les aides nationales, accessibles partout</h2>
+<p>Quelle que soit votre commune, vous pouvez prétendre à une aide de l’État, qui <strong>s’ajoute</strong> à l’aide locale :</p>
+<ul>
+<li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a> pour une voiture électrique neuve : 3 300 à 7 700 € selon vos revenus, à demander <strong>avant</strong> le bon de commande ;</li>
+<li><a href="/leasing-social-2026/">leasing social</a> si votre revenu fiscal ne dépasse pas 16 880 € par part et que vous roulez pour travailler : jusqu’à 9 000 € ;</li>
+<li><a href="/aide-voiture-electrique-occasion/">prime occasion</a> depuis le 1<sup>er</sup> septembre 2026, pour une électrique immatriculée entre 2017 et 2023.</li>
+</ul>
+<p>Ces trois aides sont exclusives les unes des autres : <a href="/cumul-aides-voiture-electrique/">voir les règles de cumul</a>.</p>
+<h2 id="communes">Les communes couvertes</h2>
+<p>L’aide vise la <strong>zone à faibles émissions de Marseille</strong> : les 16 arrondissements de la commune de Marseille (codes postaux 13001 à 13016) en font partie, le périmètre exact restant infra-communal. Les 106 autres communes de la Métropole Aix-Marseille-Provence — Aix-en-Provence, Aubagne, Martigues, Vitrolles, Istres, Salon-de-Provence… — <strong>ne sont pas concernées</strong> par cette aide.</p>
+<div class="cta"><p class="t">Vos aides à Marseille, en quelques secondes</p><p>Le simulateur croise votre code postal, vos revenus et le prix du véhicule, applique les plafonds locaux et vous indique dans quel ordre faire les démarches.</p><a class="btn btn-lg" href="/">Calculer mes aides à Marseille</a></div>
+<h2 id="faq">Questions fréquentes</h2><div class="faq"><details><summary>Qui peut bénéficier de l’aide d’Aix-Marseille-Provence ?</summary><p>Les habitants de la zone à faibles émissions de Marseille, avec un revenu fiscal de référence par part inférieur ou égal à 24 900 €, qui font détruire une voiture Crit’Air 4, 5 ou non classée et achètent une voiture électrique ou à hydrogène de moins de 47 000 €.</p></details><details><summary>Habitant d’Aix-en-Provence, ai-je droit à une aide ?</summary><p>Non, pas d’aide locale : l’aide métropolitaine est réservée aux résidents de la zone à faibles émissions de Marseille, et l’aide du Département des Bouches-du-Rhône est terminée depuis le 31 janvier 2022. Restent les aides nationales, que le simulateur calcule.</p></details><details><summary>Puis-je avoir l’aide pour une hybride rechargeable ?</summary><p>Non. Contrairement à d’autres métropoles, Aix-Marseille-Provence réserve son aide aux voitures électriques et à hydrogène. Les hybrides, même rechargeables, en sont exclues.</p></details><details><summary>L’aide fonctionne-t-elle avec une location longue durée ?</summary><p>Non, la location longue durée et la location avec option d’achat sont explicitement exclues du règlement. Si vous visez le leasing social, vous ne pourrez pas y ajouter l’aide métropolitaine.</p></details></div>
+<h2 id="sources">Sources officielles</h2><ul class="srcs"><li><a href="https://ampmetropole.fr/wp-content/uploads/2024/11/96120_Annexe-1-2-particulier-1.pdf" target="_blank" rel="noopener">Règlement des aides aux particuliers — Métropole Aix-Marseille-Provence (annexe, aides ouvertes jusqu’au 31/10/2027)</a></li><li><a href="https://subvention.ampmetropole.fr/" target="_blank" rel="noopener">Guichet de dépôt — subvention.ampmetropole.fr</a></li><li><a href="https://jechangemavoiture.gouv.fr/jcmv/simulateur/assets/media/aides-locales/provence-alpes-cote-d-azur.pdf" target="_blank" rel="noopener">Fiche gouvernementale PACA (périmée pour le Département 13)</a></li></ul>
+<p class="verif">Dernière vérification des règles de cette page : <strong>7 septembre 2026</strong>. Nous republions cette page à chaque évolution réglementaire — voir <a href="/historique-aides-auto/">l’historique des changements</a> et <a href="/notre-methodologie/">notre méthodologie</a>.</p>
+<nav class="related" aria-label="À lire aussi"><h2>À lire aussi</h2><ul><li><a href="/aides-voiture-electrique/">Toutes les aides près de chez vous</a></li><li><a href="/aides-voiture-electrique-2026/">Les aides nationales 2026</a></li><li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li><li><a href="/cumul-aides-voiture-electrique/">Peut-on cumuler les aides ?</a></li></ul></nav>
+</article></main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Le simulateur</h4>
+        <ul>
+          <li><a href="/">Simulateur d’aides</a></li>
+          <li><a href="/aides-voiture-electrique-2026/">Toutes les aides 2026</a></li>
+          <li><a href="/cumul-aides-voiture-electrique/">Cumuler les aides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Les aides</h4>
+        <ul>
+          <li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li>
+          <li><a href="/leasing-social-2026/">Leasing social 2026</a></li>
+          <li><a href="/aide-voiture-electrique-occasion/">Voiture d’occasion</a></li>
+          <li><a href="/bonus-ecologique-2026/">Bonus écologique</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Près de chez vous</h4>
+        <ul>
+          <li><a href="/aides-voiture-electrique/">Toutes les aides locales</a></li>
+          <li><a href="/aides-voiture-electrique/paris/">Paris et Grand Paris</a></li>
+          <li><a href="/aides-voiture-electrique/lyon/">Lyon</a></li>
+          <li><a href="/aides-voiture-electrique/marseille/">Marseille</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Le site</h4>
+        <ul>
+          <li><a href="/qui-sommes-nous.html">Qui sommes-nous ?</a></li>
+          <li><a href="/notre-methodologie/">Notre méthodologie</a></li>
+          <li><a href="/sources/">Sources officielles</a></li>
+          <li><a href="/historique-aides-auto/">Historique des aides</a></li>
+          <li><a href="/mentions-legales.html">Mentions légales</a></li>
+          <li><a href="#" data-consent-open>Gérer les cookies</a></li>
+          <li><a href="mailto:contact@mes-aides-auto.fr?subject=Mes%20Aides%20Auto%20%E2%80%94%20contact">Nous écrire</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-legal">© 2026 Mes Aides Auto — Calculateur d’aides à la mobilité propre. Informations à caractère indicatif, sans valeur contractuelle : seule la décision de l’organisme qui verse l’aide fait foi.</p>
+  </div>
+</footer>
+<div id="consent-banner" hidden>
+  <div class="box">
+    <p style="flex:1">Ce site utilise <strong>Google Analytics</strong> pour mesurer son audience, uniquement si vous l’acceptez. Vos données financières (revenu, parts) ne sont jamais transmises. <a href="/mentions-legales.html#cookies">En savoir plus</a></p>
+    <div class="acts">
+      <button type="button" id="consent-accept">Accepter</button>
+      <button type="button" id="consent-refuse">Continuer sans accepter</button>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var b = document.getElementById('consent-banner'); if (!b || !window.MAA_consent) return;
+    function show() { b.hidden = false; } function hide() { b.hidden = true; }
+    if (!MAA_consent.get()) show();
+    document.getElementById('consent-accept').addEventListener('click', function () { MAA_consent.set('granted'); hide(); });
+    document.getElementById('consent-refuse').addEventListener('click', function () { MAA_consent.set('denied'); hide(); });
+    document.querySelectorAll('[data-consent-open]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); MAA_consent.reset(); show(); }); });
+  })();
+</script>
+</body>
+</html>

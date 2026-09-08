@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Consentement (Consent Mode v2) — doit précéder GTM. Aucun cookie de mesure tant que l'utilisateur n'a pas accepté (bandeau). -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
+  (function () {
+    var KEY = 'aides_auto_consent', TTL = 182 * 24 * 3600 * 1000, choice = null; // choix conservé 6 mois (recommandation CNIL)
+    try { var raw = localStorage.getItem(KEY); if (raw) { var o = JSON.parse(raw); if (o && o.v && Date.now() - o.t < TTL) choice = o.v; else localStorage.removeItem(KEY); } } catch (e) {}
+    function apply(v) {
+      gtag('consent', 'update', { analytics_storage: v === 'granted' ? 'granted' : 'denied' });
+      window.dataLayer.push({ event: v === 'granted' ? 'consent_granted' : 'consent_denied' });
+    }
+    window.MAA_consent = {
+      get: function () { return choice; },
+      set: function (v) { choice = v; try { localStorage.setItem(KEY, JSON.stringify({ v: v, t: Date.now() })); } catch (e) {} apply(v); },
+      reset: function () { choice = null; try { localStorage.removeItem(KEY); } catch (e) {} }
+    };
+    if (choice) apply(choice);
+  })();
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P2DNNBXT');</script>
+<!-- End Google Tag Manager -->
+<title>Aides voiture électrique par ville et région en France</title>
+<meta name="description" content="Les 13 collectivités qui aident encore à l’achat d’une voiture électrique : montants, conditions et démarches, territoire par territoire.">
+<link rel="canonical" href="https://mes-aides-auto.fr/aides-voiture-electrique/">
+<meta property="og:title" content="Les aides voiture électrique près de chez vous">
+<meta property="og:description" content="Les 13 collectivités qui aident encore à l’achat d’une voiture électrique : montants, conditions et démarches, territoire par territoire.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://mes-aides-auto.fr/aides-voiture-electrique/">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Mes Aides Auto">
+<meta property="og:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Les aides voiture électrique près de chez vous">
+<meta name="twitter:description" content="Les 13 collectivités qui aident encore à l’achat d’une voiture électrique : montants, conditions et démarches, territoire par territoire.">
+<meta name="twitter:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2548FF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/maa.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://mes-aides-auto.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Aides près de chez vous",
+          "item": "https://mes-aides-auto.fr/aides-voiture-electrique/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Quelles villes aident encore à acheter une voiture électrique en 2026 ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Treize collectivités : Grand Paris, Métropole de Lyon, Marseille (zone à faibles émissions), Toulouse, Strasbourg, Rouen, Bordeaux, Reims, Grand Annecy, Pays du Mont-Blanc, Seine-Maritime, Région Occitanie, et Grenoble dont l’aide est suspendue depuis septembre 2025."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Les aides locales se cumulent-elles avec la prime d’État ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui dans la quasi-totalité des cas. Deux exceptions : la Métropole de Rouen exclut le cumul avec le leasing social, et Aix-Marseille-Provence exclut la location longue durée. Certaines collectivités plafonnent en outre le total des aides publiques à 80 % du prix."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ma commune n’a pas de page dédiée, ai-je droit à quelque chose ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui, aux aides nationales, qui représentent l’essentiel du montant. Nous ne créons de page que pour les territoires disposant d’un dispositif propre ; pour toutes les autres communes, le simulateur donne la réponse à partir de votre code postal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Comment savoir si j’habite dans une zone à faibles émissions ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le périmètre est parfois infra-communal, notamment à Lyon, Marseille et Reims : une partie seulement de la commune est concernée. Le simulateur approxime à la commune entière et le signale ; vérifiez votre adresse exacte sur le site de votre collectivité avant de déposer un dossier."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "headline": "Les aides à l’achat d’une voiture électrique près de chez vous",
+      "name": "Les aides à l’achat d’une voiture électrique près de chez vous",
+      "description": "Les 13 collectivités qui aident encore à l’achat d’une voiture électrique : montants, conditions et démarches, territoire par territoire.",
+      "inLanguage": "fr-FR",
+      "url": "https://mes-aides-auto.fr/aides-voiture-electrique/",
+      "datePublished": "2026-09-08",
+      "dateModified": "2026-09-07",
+      "author": {
+        "@type": "Person",
+        "name": "David Rival",
+        "url": "https://mes-aides-auto.fr/qui-sommes-nous.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2DNNBXT"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">Mes Aides <em>Auto</em></a>
+    <nav class="site-nav" aria-label="Navigation principale"><a href="/">Simulateur</a><a href="/aides-voiture-electrique-2026/">Aides 2026</a><a href="/aides-voiture-electrique/" aria-current="page">Aides près de chez moi</a><a href="/notre-methodologie/">Méthodologie</a></nav>
+    <a class="btn" href="/">Calculer mes aides</a>
+  </div>
+</header>
+<nav class="crumb wrap" aria-label="Fil d’Ariane"><ol><li><a href="/">Accueil</a></li><li>Aides près de chez vous</li></ol></nav>
+<main class="wrap"><article class="prose">
+<div class="hero"><h1>Les aides à l’achat d’une voiture électrique près de chez vous</h1></div>
+<p class="lede">Métropoles, régions, départements : voici les treize territoires français qui versent encore une aide à l’achat, les sept qui n’en versent plus, et ce que cela change pour vous.</p>
+
+<div class="answer">
+<p><strong>Treize collectivités</strong> versent encore une aide à l’achat d’une voiture aux particuliers, et <strong>sept territoires</strong> que nous avons vérifiés n’en versent aucune. Ces aides <strong>s’ajoutent</strong> à celles de l’État. Partout ailleurs en France, seules les aides nationales s’appliquent — et le simulateur vous le dit explicitement plutôt que de vous laisser chercher.</p>
+</div>
+
+<h2 id="liste">Les territoires qui versent une aide</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>Territoire</th><th>Montant</th><th>Condition marquante</th><th>Statut</th></tr></thead>
+<tbody><tr><td><a href="/aides-voiture-electrique/paris/">Grand Paris</a></td><td class="num">jusqu’à 6 000 €</td><td>Mise au rebut obligatoire, revenu ≤ 24 900 €/part, prix &lt; 40 000 €</td><td><span class="badge badge-ok">en vigueur</span></td></tr><tr><td><a href="/aides-voiture-electrique/marseille/">Marseille (zone à faibles émissions)</a></td><td class="num">jusqu’à 5 000 €</td><td>Crit’Air 4+ à détruire, électrique ou hydrogène, location exclue</td><td><span class="badge badge-ok">en vigueur</span></td></tr><tr><td><a href="/aides-voiture-electrique/toulouse/">Toulouse Métropole</a></td><td class="num">2 000 à 5 000 €</td><td>Revenu ≤ 35 052 €/part, achat à un particulier accepté</td><td><span class="badge badge-ok">en vigueur</span></td></tr><tr><td><a href="/aides-voiture-electrique/lyon/">Métropole de Lyon</a></td><td class="num">500 à 3 000 €</td><td>Crit’Air 2/3/4 à céder, dossier avant l’achat</td><td><span class="badge badge-ok">en vigueur</span></td></tr><tr><td><a href="/aides-voiture-electrique/strasbourg/">Eurométropole de Strasbourg</a></td><td class="num">2 000 à 4 000 €</td><td>Cession suffisante, cumul plafonné à 80 % du prix</td><td><span class="badge badge-ok">en vigueur</span></td></tr><tr><td><a href="/aides-voiture-electrique/rouen/">Métropole Rouen Normandie</a></td><td class="num">2 000 à 5 000 €</td><td>+25 % en zone à faibles émissions, pas de cumul avec le leasing social</td><td><span class="badge badge-ok">en vigueur</span></td></tr><tr><td><a href="/aides-voiture-electrique/annecy/">Grand Annecy</a></td><td class="num">3 000 €</td><td>Véhicule non classé à détruire, dossier avant la commande</td><td><span class="badge badge-ok">en vigueur</span></td></tr><tr><td><a href="/aides-voiture-electrique/bordeaux/">Bordeaux Métropole</a></td><td class="num">jusqu’à 6 000 €</td><td>Barème non publié — à confirmer au guichet</td><td><span class="badge badge-warn">à confirmer</span></td></tr><tr><td><a href="/aides-voiture-electrique/reims/">Grand Reims</a></td><td class="num">2 000 à 6 000 €</td><td>Sources contradictoires — à confirmer</td><td><span class="badge badge-warn">à confirmer</span></td></tr><tr><td><a href="/aides-voiture-electrique/pays-du-mont-blanc/">Pays du Mont-Blanc</a></td><td class="num">4 000 à 4 500 €</td><td>Hybrides et location exclues, 40 % du prix maximum</td><td><span class="badge badge-warn">à confirmer</span></td></tr><tr><td><a href="/aides-voiture-electrique/occitanie/">Région Occitanie</a></td><td class="num">jusqu’à 1 600 €</td><td>Occasion électrique, ménage non imposable, professionnel agréé</td><td><span class="badge badge-ok">en vigueur</span></td></tr><tr><td><a href="/aides-voiture-electrique/seine-maritime/">Département Seine-Maritime</a></td><td class="num">2 000 à 4 000 €</td><td>Hors Métropole de Rouen, travail en zone à faibles émissions</td><td><span class="badge badge-warn">à confirmer</span></td></tr><tr><td><a href="/aides-voiture-electrique/grenoble/">Grenoble-Alpes Métropole</a></td><td class="num">suspendue</td><td>Dispositif suspendu depuis le 26 septembre 2025</td><td><span class="badge badge-stop">suspendue</span></td></tr></tbody></table></div>
+
+<h2 id="sans-aide">Les territoires vérifiés sans aide locale</h2>
+<p>Une réponse négative sourcée vaut mieux qu’une recherche sans fin. Ces quatre métropoles sont régulièrement citées comme versant une aide : ce n’est plus le cas.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Territoire</th><th>Situation</th></tr></thead>
+<tbody><tr><td><a href="/aides-voiture-electrique/nice/">Métropole Nice Côte d’Azur</a></td><td>Aide supprimée le 30 juin 2023</td></tr><tr><td><a href="/aides-voiture-electrique/montpellier/">Montpellier Méditerranée Métropole</a></td><td>Aucune aide voiture ; éco-chèque régional accessible</td></tr><tr><td><a href="/aides-voiture-electrique/saint-etienne/">Saint-Étienne Métropole</a></td><td>Fonds air véhicule réservé aux utilitaires légers</td></tr><tr><td><a href="/aides-voiture-electrique/toulon/">Métropole Toulon-Provence-Méditerranée</a></td><td>Aucune aide à l’achat d’une voiture</td></tr></tbody></table></div>
+<p>Trois autres collectivités ont été vérifiées sans aide à l’achat pour les particuliers : le <strong>Département des Bouches-du-Rhône</strong> (aide terminée depuis le 31 janvier 2022, hors zone à faibles émissions de Marseille), la <strong>Région Normandie</strong> et la <strong>Région Île-de-France</strong> (aide supprimée le 2 mars 2025, prime « non-casse » maintenue pour le rétrofit).</p>
+
+<h2 id="methode">Comment lire ces aides</h2>
+<p>Quatre paramètres décident presque toujours de votre éligibilité :</p>
+<ul>
+<li><strong>Le plafond de revenus</strong>, exprimé en revenu fiscal de référence par part : de 16 300 € au Grand Annecy à 35 052 € à Toulouse.</li>
+<li><strong>Le sort de l’ancienne voiture</strong> : destruction obligatoire (Grand Paris, Toulouse, Marseille, Rouen, Annecy), ou simple cession acceptée (Lyon, Strasbourg).</li>
+<li><strong>Le moment de la demande</strong> : avant l’achat à Lyon et au Grand Annecy, après ailleurs. C’est la première cause de refus.</li>
+<li><strong>Le statut du vendeur</strong> : professionnel exigé presque partout, particulier accepté à Toulouse et Strasbourg.</li>
+</ul>
+
+<h2 id="ailleurs">Et si ma commune n’est pas dans la liste ?</h2>
+<p>C’est le cas de la grande majorité des communes françaises. Vous conservez l’intégralité des aides nationales, qui représentent l’essentiel du montant : de 3 300 à 7 700 € pour une voiture neuve. Nous ne créons pas de page pour un territoire sans dispositif propre — cela n’apporterait rien. Le simulateur, lui, répond pour les 35 493 couples code postal / commune de France.</p>
+<div class="cta"><p class="t">Vos aides à votre commune, en quelques secondes</p><p>Le simulateur croise votre code postal, vos revenus et le prix du véhicule, applique les plafonds locaux et vous indique dans quel ordre faire les démarches.</p><a class="btn btn-lg" href="/">Calculer mes aides à votre commune</a></div>
+<h2 id="faq">Questions fréquentes</h2><div class="faq"><details><summary>Quelles villes aident encore à acheter une voiture électrique en 2026 ?</summary><p>Treize collectivités : Grand Paris, Métropole de Lyon, Marseille (zone à faibles émissions), Toulouse, Strasbourg, Rouen, Bordeaux, Reims, Grand Annecy, Pays du Mont-Blanc, Seine-Maritime, Région Occitanie, et Grenoble dont l’aide est suspendue depuis septembre 2025.</p></details><details><summary>Les aides locales se cumulent-elles avec la prime d’État ?</summary><p>Oui dans la quasi-totalité des cas. Deux exceptions : la Métropole de Rouen exclut le cumul avec le leasing social, et Aix-Marseille-Provence exclut la location longue durée. Certaines collectivités plafonnent en outre le total des aides publiques à 80 % du prix.</p></details><details><summary>Ma commune n’a pas de page dédiée, ai-je droit à quelque chose ?</summary><p>Oui, aux aides nationales, qui représentent l’essentiel du montant. Nous ne créons de page que pour les territoires disposant d’un dispositif propre ; pour toutes les autres communes, le simulateur donne la réponse à partir de votre code postal.</p></details><details><summary>Comment savoir si j’habite dans une zone à faibles émissions ?</summary><p>Le périmètre est parfois infra-communal, notamment à Lyon, Marseille et Reims : une partie seulement de la commune est concernée. Le simulateur approxime à la commune entière et le signale ; vérifiez votre adresse exacte sur le site de votre collectivité avant de déposer un dossier.</p></details></div>
+<h2 id="sources">Sources officielles</h2><ul class="srcs"><li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F39188" target="_blank" rel="noopener">Prime d’État — service-public.fr, fiche F39188</a></li><li><a href="https://jechangemavoiture.gouv.fr/jcmv/aide-achat.html" target="_blank" rel="noopener">Recensement des aides locales — jechangemavoiture.gouv.fr</a></li><li><a href="/sources/" target="_blank" rel="noopener">Nos sources, règlement par règlement</a></li></ul>
+<p class="verif">Dernière vérification des règles de cette page : <strong>7 septembre 2026</strong>. Nous republions cette page à chaque évolution réglementaire — voir <a href="/historique-aides-auto/">l’historique des changements</a> et <a href="/notre-methodologie/">notre méthodologie</a>.</p>
+<nav class="related" aria-label="À lire aussi"><h2>À lire aussi</h2><ul><li><a href="/aides-voiture-electrique-2026/">Toutes les aides nationales 2026</a></li><li><a href="/cumul-aides-voiture-electrique/">Peut-on cumuler plusieurs aides ?</a></li><li><a href="/aide-voiture-electrique-occasion/">Aides pour une voiture d’occasion</a></li><li><a href="/notre-methodologie/">Notre méthodologie</a></li></ul></nav>
+</article></main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Le simulateur</h4>
+        <ul>
+          <li><a href="/">Simulateur d’aides</a></li>
+          <li><a href="/aides-voiture-electrique-2026/">Toutes les aides 2026</a></li>
+          <li><a href="/cumul-aides-voiture-electrique/">Cumuler les aides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Les aides</h4>
+        <ul>
+          <li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li>
+          <li><a href="/leasing-social-2026/">Leasing social 2026</a></li>
+          <li><a href="/aide-voiture-electrique-occasion/">Voiture d’occasion</a></li>
+          <li><a href="/bonus-ecologique-2026/">Bonus écologique</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Près de chez vous</h4>
+        <ul>
+          <li><a href="/aides-voiture-electrique/">Toutes les aides locales</a></li>
+          <li><a href="/aides-voiture-electrique/paris/">Paris et Grand Paris</a></li>
+          <li><a href="/aides-voiture-electrique/lyon/">Lyon</a></li>
+          <li><a href="/aides-voiture-electrique/marseille/">Marseille</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Le site</h4>
+        <ul>
+          <li><a href="/qui-sommes-nous.html">Qui sommes-nous ?</a></li>
+          <li><a href="/notre-methodologie/">Notre méthodologie</a></li>
+          <li><a href="/sources/">Sources officielles</a></li>
+          <li><a href="/historique-aides-auto/">Historique des aides</a></li>
+          <li><a href="/mentions-legales.html">Mentions légales</a></li>
+          <li><a href="#" data-consent-open>Gérer les cookies</a></li>
+          <li><a href="mailto:contact@mes-aides-auto.fr?subject=Mes%20Aides%20Auto%20%E2%80%94%20contact">Nous écrire</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-legal">© 2026 Mes Aides Auto — Calculateur d’aides à la mobilité propre. Informations à caractère indicatif, sans valeur contractuelle : seule la décision de l’organisme qui verse l’aide fait foi.</p>
+  </div>
+</footer>
+<div id="consent-banner" hidden>
+  <div class="box">
+    <p style="flex:1">Ce site utilise <strong>Google Analytics</strong> pour mesurer son audience, uniquement si vous l’acceptez. Vos données financières (revenu, parts) ne sont jamais transmises. <a href="/mentions-legales.html#cookies">En savoir plus</a></p>
+    <div class="acts">
+      <button type="button" id="consent-accept">Accepter</button>
+      <button type="button" id="consent-refuse">Continuer sans accepter</button>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var b = document.getElementById('consent-banner'); if (!b || !window.MAA_consent) return;
+    function show() { b.hidden = false; } function hide() { b.hidden = true; }
+    if (!MAA_consent.get()) show();
+    document.getElementById('consent-accept').addEventListener('click', function () { MAA_consent.set('granted'); hide(); });
+    document.getElementById('consent-refuse').addEventListener('click', function () { MAA_consent.set('denied'); hide(); });
+    document.querySelectorAll('[data-consent-open]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); MAA_consent.reset(); show(); }); });
+  })();
+</script>
+</body>
+</html>

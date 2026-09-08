@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Consentement (Consent Mode v2) — doit précéder GTM. Aucun cookie de mesure tant que l'utilisateur n'a pas accepté (bandeau). -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
+  (function () {
+    var KEY = 'aides_auto_consent', TTL = 182 * 24 * 3600 * 1000, choice = null; // choix conservé 6 mois (recommandation CNIL)
+    try { var raw = localStorage.getItem(KEY); if (raw) { var o = JSON.parse(raw); if (o && o.v && Date.now() - o.t < TTL) choice = o.v; else localStorage.removeItem(KEY); } } catch (e) {}
+    function apply(v) {
+      gtag('consent', 'update', { analytics_storage: v === 'granted' ? 'granted' : 'denied' });
+      window.dataLayer.push({ event: v === 'granted' ? 'consent_granted' : 'consent_denied' });
+    }
+    window.MAA_consent = {
+      get: function () { return choice; },
+      set: function (v) { choice = v; try { localStorage.setItem(KEY, JSON.stringify({ v: v, t: Date.now() })); } catch (e) {} apply(v); },
+      reset: function () { choice = null; try { localStorage.removeItem(KEY); } catch (e) {} }
+    };
+    if (choice) apply(choice);
+  })();
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P2DNNBXT');</script>
+<!-- End Google Tag Manager -->
+<title>Sources officielles des aides à l’achat automobile</title>
+<meta name="description" content="Toutes les sources du simulateur : textes réglementaires, fiches service-public.fr, règlements des collectivités, avec la date de vérification.">
+<link rel="canonical" href="https://mes-aides-auto.fr/sources/">
+<meta property="og:title" content="Nos sources officielles">
+<meta property="og:description" content="Toutes les sources du simulateur : textes réglementaires, fiches service-public.fr, règlements des collectivités, avec la date de vérification.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://mes-aides-auto.fr/sources/">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Mes Aides Auto">
+<meta property="og:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nos sources officielles">
+<meta name="twitter:description" content="Toutes les sources du simulateur : textes réglementaires, fiches service-public.fr, règlements des collectivités, avec la date de vérification.">
+<meta name="twitter:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2548FF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/maa.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://mes-aides-auto.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Sources officielles",
+          "item": "https://mes-aides-auto.fr/sources/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Que signifie la mention « à confirmer » ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Elle indique que la règle est appliquée par le simulateur mais que la page officielle était inaccessible, non datée ou incomplète lors de la vérification. Le montant affiché repose alors sur des sources secondaires concordantes, et nous le signalons au lieu de le présenter comme certain."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "À quelle fréquence les sources sont-elles revérifiées ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Chaque règle porte sa date de vérification. Nous reprenons en priorité celles dont la date dépasse 90 jours, ainsi que toutes celles concernées par un changement réglementaire annoncé."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Puis-je réutiliser ces données ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Les règlements et textes cités sont des documents publics. Pour toute réutilisation de notre base consolidée ou toute demande de journaliste, écrivez à contact@mes-aides-auto.fr."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "headline": "Les sources de chaque règle du simulateur",
+      "name": "Les sources de chaque règle du simulateur",
+      "description": "Toutes les sources du simulateur : textes réglementaires, fiches service-public.fr, règlements des collectivités, avec la date de vérification.",
+      "inLanguage": "fr-FR",
+      "url": "https://mes-aides-auto.fr/sources/",
+      "datePublished": "2026-09-08",
+      "dateModified": "2026-09-08",
+      "author": {
+        "@type": "Person",
+        "name": "David Rival",
+        "url": "https://mes-aides-auto.fr/qui-sommes-nous.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2DNNBXT"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">Mes Aides <em>Auto</em></a>
+    <nav class="site-nav" aria-label="Navigation principale"><a href="/">Simulateur</a><a href="/aides-voiture-electrique-2026/">Aides 2026</a><a href="/aides-voiture-electrique/">Aides près de chez moi</a><a href="/notre-methodologie/">Méthodologie</a></nav>
+    <a class="btn" href="/">Calculer mes aides</a>
+  </div>
+</header>
+<nav class="crumb wrap" aria-label="Fil d’Ariane"><ol><li><a href="/">Accueil</a></li><li>Sources officielles</li></ol></nav>
+<main class="wrap"><article class="prose">
+<div class="hero"><h1>Les sources de chaque règle du simulateur</h1></div>
+<p class="lede">Un simulateur d’aides ne vaut que par ses sources. Voici les nôtres, dispositif par dispositif, avec la date de dernière vérification.</p>
+
+<div class="answer">
+<p>Chaque règle utilisée par le simulateur cite le texte ou la page officielle dont elle est issue, et la date à laquelle nous l’avons vérifiée. Ce tableau est produit automatiquement à partir de la base de règles du simulateur : il ne peut donc pas diverger de ce que l’outil calcule.</p>
+</div>
+
+<h2>Dispositifs nationaux</h2>
+<div class="table-wrap"><table><thead><tr><th>Dispositif</th><th>Statut</th><th>Source citée</th><th>Vérifié le</th></tr></thead><tbody><tr><td><strong>Prime d’État « Coup de pouce » — voiture électrique neuve</strong></td><td><span class="badge badge-ok">règle vérifiée</span></td><td><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F39188" target="_blank" rel="noopener">service-public.fr (fiche F39188)</a></td><td class="num">01/09/2026</td></tr><tr><td><strong>Prime d’État « Coup de pouce » — voiture électrique d’occasion</strong></td><td><span class="badge badge-warn">à confirmer</span></td><td><a href="https://www.mes-allocs.fr/guides/aides-sociales/prime-cee-voiture-electrique-occasion/" target="_blank" rel="noopener">mes-allocs.fr (arrêté du 10/08/2026 cité — fiche officielle TRA-EQ-133 à recouper)</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Leasing social 2026 (voiture électrique en location longue durée)</strong></td><td><span class="badge badge-ok">règle vérifiée</span></td><td><a href="https://www.avere-france.org/edition-2026-du-leasing-social-tout-ce-quil-faut-savoir/" target="_blank" rel="noopener">Avere-France et jechangemavoiture.gouv.fr</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Transformer sa voiture thermique en électrique (prime au rétrofit)</strong></td><td><span class="badge badge-ok">règle vérifiée</span></td><td><a href="https://jechangemavoiture.gouv.fr/jcmv/aide-achat.html" target="_blank" rel="noopener">jechangemavoiture.gouv.fr</a></td><td class="num">07/09/2026</td></tr></tbody></table></div>
+<h2>Aides des collectivités</h2>
+<p>Chaque règlement local est cité avec son lien direct. Lorsque la page officielle était inaccessible ou le barème non publié à la date de vérification, la règle porte la mention « à confirmer » et le simulateur l’affiche comme telle plutôt que d’avancer un montant.</p>
+<div class="table-wrap"><table><thead><tr><th>Dispositif</th><th>Statut</th><th>Source citée</th><th>Vérifié le</th></tr></thead><tbody><tr><td><strong>Aide « Métropole roule propre » (Grand Paris)</strong><br><span style="color:#64748b;font-weight:400">Métropole du Grand Paris</span></td><td><span class="badge badge-warn">à confirmer</span></td><td><a href="https://www.metropolegrandparis.fr/fr/metropole-roule-propre-0" target="_blank" rel="noopener">metropolegrandparis.fr (règlement 2025 — reconduction en 2026 non confirmée)</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Aide de la Métropole de Lyon (zone à faibles émissions)</strong><br><span style="color:#64748b;font-weight:400">Métropole de Lyon</span></td><td><span class="badge badge-ok">règle vérifiée</span></td><td><a href="https://www.grandlyon.com/mes-services-au-quotidien/se-deplacer/les-aides-pour-lachat-dun-vehicule-moins-polluant" target="_blank" rel="noopener">grandlyon.com (page mise à jour le 20/02/2026)</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Éco-chèque mobilité de la Région Occitanie (électrique d’occasion)</strong><br><span style="color:#64748b;font-weight:400">Région Occitanie</span></td><td><span class="badge badge-ok">règle vérifiée</span></td><td><a href="https://www.laregion.fr/Eco-cheque-mobilite-voiture-electrique-ou-hybride" target="_blank" rel="noopener">laregion.fr (page mise à jour le 23/07/2026)</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Aide à la conversion de l’Eurométropole de Strasbourg</strong><br><span style="color:#64748b;font-weight:400">Eurométropole de Strasbourg</span></td><td><span class="badge badge-ok">règle vérifiée</span></td><td><a href="https://www.strasbourg.eu/aides-conversion" target="_blank" rel="noopener">strasbourg.eu — règlement en vigueur depuis le 01/01/2025</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Aide à l’achat d’une voiture peu polluante (Métropole de Rouen)</strong><br><span style="color:#64748b;font-weight:400">Métropole Rouen Normandie</span></td><td><span class="badge badge-ok">règle vérifiée</span></td><td><a href="https://zfe.metropole-rouen-normandie.fr/sites/default/files/2025-10/B2025_0429_annexe.pdf" target="_blank" rel="noopener">règlement du 29/09/2025 — valable jusqu’au 30/06/2027 (facture avant le 31/12/2026)</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Subvention du Département de la Seine-Maritime (hors Métropole de Rouen)</strong><br><span style="color:#64748b;font-weight:400">Département de la Seine-Maritime</span></td><td><span class="badge badge-warn">à confirmer</span></td><td><a href="https://www.seinemaritime.fr/mon-cadre-de-vie/routes-bacs/subvention-zfe-m.html" target="_blank" rel="noopener">seinemaritime.fr — règlement du 20/03/2023, barème 2026 non consultable</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Prime « véhicule + propre » de Toulouse Métropole</strong><br><span style="color:#64748b;font-weight:400">Toulouse Métropole</span></td><td><span class="badge badge-ok">règle vérifiée</span></td><td><a href="https://metropole.toulouse.fr/demarches/demander-la-prime-vehicule-propre" target="_blank" rel="noopener">metropole.toulouse.fr (démarche mise à jour le 16/09/2025, actualité du 08/06/2026)</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Aide de la Métropole Aix-Marseille-Provence — habitants de la zone à faibles émissions de Marseille</strong><br><span style="color:#64748b;font-weight:400">Aix-Marseille-Provence (zone à faibles émissions de Marseille)</span></td><td><span class="badge badge-ok">règle vérifiée</span></td><td><a href="https://ampmetropole.fr/wp-content/uploads/2024/11/96120_Annexe-1-2-particulier-1.pdf" target="_blank" rel="noopener">règlement de la Métropole (annexe particuliers) — aides ouvertes jusqu’au 31/10/2027</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Aide au renouvellement de voiture du Grand Annecy</strong><br><span style="color:#64748b;font-weight:400">Grand Annecy</span></td><td><span class="badge badge-ok">règle vérifiée</span></td><td><a href="https://www.grandannecy.fr/zfem/aides-et-conseils-en-mobilite" target="_blank" rel="noopener">grandannecy.fr — règlement du 13/02/2025 (page mise à jour le 20/02/2025)</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Fonds Air Véhicules du Pays du Mont-Blanc (particuliers)</strong><br><span style="color:#64748b;font-weight:400">Communauté de communes Pays du Mont-Blanc</span></td><td><span class="badge badge-warn">à confirmer</span></td><td><a href="https://www.ccpmb.fr/" target="_blank" rel="noopener">ccpmb.fr — règlement de février 2026 (site inaccessible lors de la vérification, détails via sources secondaires)</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Aide de Bordeaux Métropole (zone à faibles émissions)</strong><br><span style="color:#64748b;font-weight:400">Bordeaux Métropole</span></td><td><span class="badge badge-warn">à confirmer</span></td><td><a href="https://sedeplacer.bordeaux-metropole.fr/en-voiture/zfe-ce-quil-faut-savoir" target="_blank" rel="noopener">sedeplacer.bordeaux-metropole.fr — barème non publié sur la page consultée</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Aide au changement de voiture du Grand Reims</strong><br><span style="color:#64748b;font-weight:400">Grand Reims (zone à faibles émissions)</span></td><td><span class="badge badge-warn">à confirmer</span></td><td><a href="https://www.grandreims.fr/" target="_blank" rel="noopener">grandreims.fr et reims.fr (pages inaccessibles lors de la vérification) — sources secondaires contradictoires, 2026</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Aide au renouvellement de voiture de Grenoble-Alpes Métropole</strong><br><span style="color:#64748b;font-weight:400">Grenoble-Alpes Métropole</span></td><td><span class="badge badge-stop">aide suspendue</span></td><td><a href="https://zfe.grenoblealpesmetropole.fr/684-aides-et-parcours.htm" target="_blank" rel="noopener">zfe.grenoblealpesmetropole.fr — « actuellement suspendu depuis le 26/09/2025 »</a></td><td class="num">07/09/2026</td></tr></tbody></table></div>
+<h2>Territoires vérifiés sans aide</h2>
+<p>Une réponse négative a autant de valeur qu’un montant, à condition d’être sourcée. Nous avons vérifié et documenté l’absence d’aide à l’achat pour les particuliers sur : Montpellier Méditerranée Métropole, Métropole Nice Côte d’Azur, Saint-Étienne Métropole, Métropole Toulon-Provence-Méditerranée, le Département des Bouches-du-Rhône (hors zone à faibles émissions de Marseille), la Région Normandie et la Région Île-de-France.</p>
+<p>Plusieurs fiches gouvernementales encore en ligne mentionnent des aides supprimées depuis (Nice en 2023, Normandie, Bouches-du-Rhône). Nous documentons ces écarts plutôt que de les recopier.</p>
+
+<h2>Données géographiques</h2>
+<p>Les 35 493 couples code postal / commune, avec commune de rattachement, intercommunalité, département et région, proviennent du <strong>code officiel géographique de l’INSEE</strong>, via le jeu de données public Etalab « découpage administratif » version 6.0.0. Toutes les règles territoriales s’appuient sur le code SIREN officiel de l’intercommunalité, et non sur des listes de communes saisies à la main.</p>
+<p class="note note-warn">Limite assumée : les zones à faibles émissions ne couvrent parfois qu’une partie d’une commune (Lyon, Marseille, Reims). Nous les approximons à la commune entière et l’indiquons sur chaque résultat concerné.</p>
+
+<h2 id="faq">Questions fréquentes</h2><div class="faq"><details><summary>Que signifie la mention « à confirmer » ?</summary><p>Elle indique que la règle est appliquée par le simulateur mais que la page officielle était inaccessible, non datée ou incomplète lors de la vérification. Le montant affiché repose alors sur des sources secondaires concordantes, et nous le signalons au lieu de le présenter comme certain.</p></details><details><summary>À quelle fréquence les sources sont-elles revérifiées ?</summary><p>Chaque règle porte sa date de vérification. Nous reprenons en priorité celles dont la date dépasse 90 jours, ainsi que toutes celles concernées par un changement réglementaire annoncé.</p></details><details><summary>Puis-je réutiliser ces données ?</summary><p>Les règlements et textes cités sont des documents publics. Pour toute réutilisation de notre base consolidée ou toute demande de journaliste, écrivez à contact@mes-aides-auto.fr.</p></details></div>
+<h2 id="sources">Sources officielles</h2><ul class="srcs"><li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F39188" target="_blank" rel="noopener">Service-public.fr</a></li><li><a href="https://jechangemavoiture.gouv.fr/jcmv/aide-achat.html" target="_blank" rel="noopener">jechangemavoiture.gouv.fr</a></li><li><a href="https://www.primealaconversion.gouv.fr/" target="_blank" rel="noopener">primealaconversion.gouv.fr</a></li><li><a href="https://www.legifrance.gouv.fr/" target="_blank" rel="noopener">Légifrance</a></li><li><a href="https://www.insee.fr/fr/information/2560452" target="_blank" rel="noopener">Code officiel géographique — INSEE</a></li></ul>
+<p class="verif">Dernière vérification des règles de cette page : <strong>8 septembre 2026</strong>. Nous republions cette page à chaque évolution réglementaire — voir <a href="/historique-aides-auto/">l’historique des changements</a> et <a href="/notre-methodologie/">notre méthodologie</a>.</p>
+<nav class="related" aria-label="À lire aussi"><h2>À lire aussi</h2><ul><li><a href="/notre-methodologie/">Notre méthodologie</a></li><li><a href="/historique-aides-auto/">Historique des changements</a></li><li><a href="/aides-voiture-electrique-2026/">Toutes les aides 2026</a></li></ul></nav>
+</article></main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Le simulateur</h4>
+        <ul>
+          <li><a href="/">Simulateur d’aides</a></li>
+          <li><a href="/aides-voiture-electrique-2026/">Toutes les aides 2026</a></li>
+          <li><a href="/cumul-aides-voiture-electrique/">Cumuler les aides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Les aides</h4>
+        <ul>
+          <li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li>
+          <li><a href="/leasing-social-2026/">Leasing social 2026</a></li>
+          <li><a href="/aide-voiture-electrique-occasion/">Voiture d’occasion</a></li>
+          <li><a href="/bonus-ecologique-2026/">Bonus écologique</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Près de chez vous</h4>
+        <ul>
+          <li><a href="/aides-voiture-electrique/">Toutes les aides locales</a></li>
+          <li><a href="/aides-voiture-electrique/paris/">Paris et Grand Paris</a></li>
+          <li><a href="/aides-voiture-electrique/lyon/">Lyon</a></li>
+          <li><a href="/aides-voiture-electrique/marseille/">Marseille</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Le site</h4>
+        <ul>
+          <li><a href="/qui-sommes-nous.html">Qui sommes-nous ?</a></li>
+          <li><a href="/notre-methodologie/">Notre méthodologie</a></li>
+          <li><a href="/sources/">Sources officielles</a></li>
+          <li><a href="/historique-aides-auto/">Historique des aides</a></li>
+          <li><a href="/mentions-legales.html">Mentions légales</a></li>
+          <li><a href="#" data-consent-open>Gérer les cookies</a></li>
+          <li><a href="mailto:contact@mes-aides-auto.fr?subject=Mes%20Aides%20Auto%20%E2%80%94%20contact">Nous écrire</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-legal">© 2026 Mes Aides Auto — Calculateur d’aides à la mobilité propre. Informations à caractère indicatif, sans valeur contractuelle : seule la décision de l’organisme qui verse l’aide fait foi.</p>
+  </div>
+</footer>
+<div id="consent-banner" hidden>
+  <div class="box">
+    <p style="flex:1">Ce site utilise <strong>Google Analytics</strong> pour mesurer son audience, uniquement si vous l’acceptez. Vos données financières (revenu, parts) ne sont jamais transmises. <a href="/mentions-legales.html#cookies">En savoir plus</a></p>
+    <div class="acts">
+      <button type="button" id="consent-accept">Accepter</button>
+      <button type="button" id="consent-refuse">Continuer sans accepter</button>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var b = document.getElementById('consent-banner'); if (!b || !window.MAA_consent) return;
+    function show() { b.hidden = false; } function hide() { b.hidden = true; }
+    if (!MAA_consent.get()) show();
+    document.getElementById('consent-accept').addEventListener('click', function () { MAA_consent.set('granted'); hide(); });
+    document.getElementById('consent-refuse').addEventListener('click', function () { MAA_consent.set('denied'); hide(); });
+    document.querySelectorAll('[data-consent-open]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); MAA_consent.reset(); show(); }); });
+  })();
+</script>
+</body>
+</html>

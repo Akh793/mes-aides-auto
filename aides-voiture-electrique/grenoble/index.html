@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Consentement (Consent Mode v2) — doit précéder GTM. Aucun cookie de mesure tant que l'utilisateur n'a pas accepté (bandeau). -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
+  (function () {
+    var KEY = 'aides_auto_consent', TTL = 182 * 24 * 3600 * 1000, choice = null; // choix conservé 6 mois (recommandation CNIL)
+    try { var raw = localStorage.getItem(KEY); if (raw) { var o = JSON.parse(raw); if (o && o.v && Date.now() - o.t < TTL) choice = o.v; else localStorage.removeItem(KEY); } } catch (e) {}
+    function apply(v) {
+      gtag('consent', 'update', { analytics_storage: v === 'granted' ? 'granted' : 'denied' });
+      window.dataLayer.push({ event: v === 'granted' ? 'consent_granted' : 'consent_denied' });
+    }
+    window.MAA_consent = {
+      get: function () { return choice; },
+      set: function (v) { choice = v; try { localStorage.setItem(KEY, JSON.stringify({ v: v, t: Date.now() })); } catch (e) {} apply(v); },
+      reset: function () { choice = null; try { localStorage.removeItem(KEY); } catch (e) {} }
+    };
+    if (choice) apply(choice);
+  })();
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P2DNNBXT');</script>
+<!-- End Google Tag Manager -->
+<title>Aide voiture électrique Grenoble : dispositif suspendu</title>
+<meta name="description" content="L’aide de Grenoble-Alpes Métropole est suspendue depuis le 26 septembre 2025. Ce qui reste possible et le barème applicable en cas de reprise.">
+<link rel="canonical" href="https://mes-aides-auto.fr/aides-voiture-electrique/grenoble/">
+<meta property="og:title" content="Aide voiture électrique à Grenoble : où en est-on en 2026 ?">
+<meta property="og:description" content="L’aide de Grenoble-Alpes Métropole est suspendue depuis le 26 septembre 2025. Ce qui reste possible et le barème applicable en cas de reprise.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://mes-aides-auto.fr/aides-voiture-electrique/grenoble/">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Mes Aides Auto">
+<meta property="og:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Aide voiture électrique à Grenoble : où en est-on en 2026 ?">
+<meta name="twitter:description" content="L’aide de Grenoble-Alpes Métropole est suspendue depuis le 26 septembre 2025. Ce qui reste possible et le barème applicable en cas de reprise.">
+<meta name="twitter:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2548FF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/maa.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://mes-aides-auto.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Aides près de chez vous",
+          "item": "https://mes-aides-auto.fr/aides-voiture-electrique/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Grenoble",
+          "item": "https://mes-aides-auto.fr/aides-voiture-electrique/grenoble/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "L’aide de Grenoble-Alpes Métropole va-t-elle reprendre ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Aucune date de reprise n’a été annoncée sur la page officielle de la Métropole à la date de vérification de cette page. Nous mettrons cette page à jour dès qu’une décision sera publiée ; elle est également consignée dans notre historique des changements."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Puis-je déposer un dossier malgré la suspension ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non. La suspension signifie que le guichet ne traite plus de nouvelles demandes. Seules les aides nationales restent mobilisables pour un achat aujourd’hui."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quelles aides restent disponibles à Grenoble en 2026 ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La prime d’État « Coup de pouce » pour une voiture électrique neuve (3 300 à 7 700 € selon vos revenus), le leasing social si vous roulez pour travailler avec un revenu fiscal inférieur à 16 880 € par part, la prime pour une électrique d’occasion depuis septembre 2026, et la prime au rétrofit."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "headline": "Aide voiture électrique à Grenoble : où en est-on en 2026 ?",
+      "name": "Aide voiture électrique à Grenoble : où en est-on en 2026 ?",
+      "description": "L’aide de Grenoble-Alpes Métropole est suspendue depuis le 26 septembre 2025. Ce qui reste possible et le barème applicable en cas de reprise.",
+      "inLanguage": "fr-FR",
+      "url": "https://mes-aides-auto.fr/aides-voiture-electrique/grenoble/",
+      "datePublished": "2026-09-08",
+      "dateModified": "2026-09-07",
+      "author": {
+        "@type": "Person",
+        "name": "David Rival",
+        "url": "https://mes-aides-auto.fr/qui-sommes-nous.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2DNNBXT"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">Mes Aides <em>Auto</em></a>
+    <nav class="site-nav" aria-label="Navigation principale"><a href="/">Simulateur</a><a href="/aides-voiture-electrique-2026/">Aides 2026</a><a href="/aides-voiture-electrique/" aria-current="page">Aides près de chez moi</a><a href="/notre-methodologie/">Méthodologie</a></nav>
+    <a class="btn" href="/">Calculer mes aides</a>
+  </div>
+</header>
+<nav class="crumb wrap" aria-label="Fil d’Ariane"><ol><li><a href="/">Accueil</a></li><li><a href="/aides-voiture-electrique/">Aides près de chez vous</a></li><li>Grenoble</li></ol></nav>
+<main class="wrap"><article class="prose">
+<div class="hero"><h1>Aide voiture électrique à Grenoble : où en est-on en 2026 ?</h1></div>
+<p class="lede">C’est l’information que personne n’affiche clairement : l’aide de Grenoble-Alpes Métropole est suspendue depuis le 26 septembre 2025. Voici ce qu’il vous reste, et ce qui reprendrait si le dispositif rouvrait.</p>
+<div class="answer"><p><strong>Non, pas actuellement.</strong> L’aide au renouvellement de véhicule de Grenoble-Alpes Métropole est <strong>suspendue depuis le 26 septembre 2025</strong>, sans date de reprise annoncée. Les habitants de la métropole grenobloise ne peuvent donc compter, à ce jour, que sur les <a href="/aides-voiture-electrique-2026/">aides nationales</a> — qui restent substantielles.</p></div>
+<h2 id="montants">Le barème qui s’appliquerait en cas de reprise</h2>
+<p>Le règlement de juin 2025, toujours publié, prévoyait :</p>
+<div class="table-wrap"><table><thead><tr><th>Revenu fiscal par part</th><th>Montant</th></tr></thead><tbody><tr><td>moins de 16 300 €</td><td class="num">3 500 €</td></tr><tr><td>de 16 300 à 26 200 €</td><td class="num">2 500 €</td></tr><tr><td>26 200 € et au-delà</td><td class="num">aucune aide</td></tr></tbody></table></div>
+<p>Avec les conditions suivantes : destruction d’une voiture Crit’Air 3 ou plus ancienne possédée depuis au moins un an, limite de poids du véhicule acheté, neuf ou occasion acceptés, location d’au moins 3 ans acceptée, entretien mobilité préalable.</p>
+<p class="note note-stop">Le simulateur affiche cette aide comme <strong>suspendue</strong> et ne l’ajoute jamais au total. Nous préférons le dire clairement : construire un budget d’achat sur une aide suspendue est le meilleur moyen de se retrouver à découvert.</p>
+<h2 id="demarches">Que faire aujourd’hui à Grenoble</h2>
+<ul>
+<li>Surveiller la page « aides et parcours » de la zone à faibles émissions de la Métropole, qui annoncera une éventuelle reprise ;</li>
+<li>mobiliser les aides nationales, qui ne dépendent pas de la collectivité : <a href="/prime-coup-de-pouce-voiture-electrique/">prime « Coup de pouce »</a> ou <a href="/leasing-social-2026/">leasing social</a> ;</li>
+<li>si vous envisagez de transformer votre voiture thermique en électrique, la prime nationale au rétrofit reste accessible jusqu’à 5 000 €.</li>
+</ul>
+<h2 id="national">Les aides nationales, accessibles partout</h2>
+<p>Quelle que soit votre commune, vous pouvez prétendre à une aide de l’État, qui <strong>s’ajoute</strong> à l’aide locale :</p>
+<ul>
+<li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a> pour une voiture électrique neuve : 3 300 à 7 700 € selon vos revenus, à demander <strong>avant</strong> le bon de commande ;</li>
+<li><a href="/leasing-social-2026/">leasing social</a> si votre revenu fiscal ne dépasse pas 16 880 € par part et que vous roulez pour travailler : jusqu’à 9 000 € ;</li>
+<li><a href="/aide-voiture-electrique-occasion/">prime occasion</a> depuis le 1<sup>er</sup> septembre 2026, pour une électrique immatriculée entre 2017 et 2023.</li>
+</ul>
+<p>Ces trois aides sont exclusives les unes des autres : <a href="/cumul-aides-voiture-electrique/">voir les règles de cumul</a>.</p>
+<h2 id="communes">Les 49 communes concernées par l’aide</h2>
+<details class="communes"><summary>Voir la liste complète des communes</summary>
+<p>Bresson · Brié-et-Angonnes · Champ-sur-Drac · Champagnier · Claix · Corenc · Domène · Eybens · Fontaine · Fontanil-Cornillon · Gières · Grenoble · Herbeys · Jarrie · La Tronche · Le Gua · Le Pont-de-Claix · Le Sappey-en-Chartreuse · Meylan · Miribel-Lanchâtre · Mont-Saint-Martin · Montchaboud · Murianette · Notre-Dame-de-Commiers · Notre-Dame-de-Mésage · Noyarey · Poisat · Proveysieux · Quaix-en-Chartreuse · Saint-Barthélemy-de-Séchilienne · Saint-Georges-de-Commiers · Saint-Martin-d'Hères · Saint-Martin-le-Vinoux · Saint-Paul-de-Varces · Saint-Pierre-de-Mésage · Saint-Égrève · Sarcenas · Sassenage · Seyssinet-Pariset · Seyssins · Séchilienne · Varces-Allières-et-Risset · Vaulnaveys-le-Bas · Vaulnaveys-le-Haut · Venon · Veurey-Voroize · Vif · Vizille · Échirolles</p></details>
+<p style="font-size:.9rem;color:#64748b">Source : code officiel géographique de l’INSEE (jeu de données Etalab « découpage administratif »). Le simulateur identifie automatiquement votre intercommunalité à partir de votre code postal.</p>
+<div class="cta"><p class="t">Vos aides à Grenoble, en quelques secondes</p><p>Le simulateur croise votre code postal, vos revenus et le prix du véhicule, applique les plafonds locaux et vous indique dans quel ordre faire les démarches.</p><a class="btn btn-lg" href="/">Calculer mes aides à Grenoble</a></div>
+<h2 id="faq">Questions fréquentes</h2><div class="faq"><details><summary>L’aide de Grenoble-Alpes Métropole va-t-elle reprendre ?</summary><p>Aucune date de reprise n’a été annoncée sur la page officielle de la Métropole à la date de vérification de cette page. Nous mettrons cette page à jour dès qu’une décision sera publiée ; elle est également consignée dans notre historique des changements.</p></details><details><summary>Puis-je déposer un dossier malgré la suspension ?</summary><p>Non. La suspension signifie que le guichet ne traite plus de nouvelles demandes. Seules les aides nationales restent mobilisables pour un achat aujourd’hui.</p></details><details><summary>Quelles aides restent disponibles à Grenoble en 2026 ?</summary><p>La prime d’État « Coup de pouce » pour une voiture électrique neuve (3 300 à 7 700 € selon vos revenus), le leasing social si vous roulez pour travailler avec un revenu fiscal inférieur à 16 880 € par part, la prime pour une électrique d’occasion depuis septembre 2026, et la prime au rétrofit.</p></details></div>
+<h2 id="sources">Sources officielles</h2><ul class="srcs"><li><a href="https://zfe.grenoblealpesmetropole.fr/684-aides-et-parcours.htm" target="_blank" rel="noopener">Aides et parcours — zfe.grenoblealpesmetropole.fr (« actuellement suspendu depuis le 26/09/2025 »)</a></li><li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F39188" target="_blank" rel="noopener">Prime d’État — service-public.fr, fiche F39188</a></li></ul>
+<p class="verif">Dernière vérification des règles de cette page : <strong>7 septembre 2026</strong>. Nous republions cette page à chaque évolution réglementaire — voir <a href="/historique-aides-auto/">l’historique des changements</a> et <a href="/notre-methodologie/">notre méthodologie</a>.</p>
+<nav class="related" aria-label="À lire aussi"><h2>À lire aussi</h2><ul><li><a href="/aides-voiture-electrique/">Toutes les aides près de chez vous</a></li><li><a href="/aides-voiture-electrique-2026/">Les aides nationales 2026</a></li><li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li><li><a href="/cumul-aides-voiture-electrique/">Peut-on cumuler les aides ?</a></li></ul></nav>
+</article></main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Le simulateur</h4>
+        <ul>
+          <li><a href="/">Simulateur d’aides</a></li>
+          <li><a href="/aides-voiture-electrique-2026/">Toutes les aides 2026</a></li>
+          <li><a href="/cumul-aides-voiture-electrique/">Cumuler les aides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Les aides</h4>
+        <ul>
+          <li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li>
+          <li><a href="/leasing-social-2026/">Leasing social 2026</a></li>
+          <li><a href="/aide-voiture-electrique-occasion/">Voiture d’occasion</a></li>
+          <li><a href="/bonus-ecologique-2026/">Bonus écologique</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Près de chez vous</h4>
+        <ul>
+          <li><a href="/aides-voiture-electrique/">Toutes les aides locales</a></li>
+          <li><a href="/aides-voiture-electrique/paris/">Paris et Grand Paris</a></li>
+          <li><a href="/aides-voiture-electrique/lyon/">Lyon</a></li>
+          <li><a href="/aides-voiture-electrique/marseille/">Marseille</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Le site</h4>
+        <ul>
+          <li><a href="/qui-sommes-nous.html">Qui sommes-nous ?</a></li>
+          <li><a href="/notre-methodologie/">Notre méthodologie</a></li>
+          <li><a href="/sources/">Sources officielles</a></li>
+          <li><a href="/historique-aides-auto/">Historique des aides</a></li>
+          <li><a href="/mentions-legales.html">Mentions légales</a></li>
+          <li><a href="#" data-consent-open>Gérer les cookies</a></li>
+          <li><a href="mailto:contact@mes-aides-auto.fr?subject=Mes%20Aides%20Auto%20%E2%80%94%20contact">Nous écrire</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-legal">© 2026 Mes Aides Auto — Calculateur d’aides à la mobilité propre. Informations à caractère indicatif, sans valeur contractuelle : seule la décision de l’organisme qui verse l’aide fait foi.</p>
+  </div>
+</footer>
+<div id="consent-banner" hidden>
+  <div class="box">
+    <p style="flex:1">Ce site utilise <strong>Google Analytics</strong> pour mesurer son audience, uniquement si vous l’acceptez. Vos données financières (revenu, parts) ne sont jamais transmises. <a href="/mentions-legales.html#cookies">En savoir plus</a></p>
+    <div class="acts">
+      <button type="button" id="consent-accept">Accepter</button>
+      <button type="button" id="consent-refuse">Continuer sans accepter</button>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var b = document.getElementById('consent-banner'); if (!b || !window.MAA_consent) return;
+    function show() { b.hidden = false; } function hide() { b.hidden = true; }
+    if (!MAA_consent.get()) show();
+    document.getElementById('consent-accept').addEventListener('click', function () { MAA_consent.set('granted'); hide(); });
+    document.getElementById('consent-refuse').addEventListener('click', function () { MAA_consent.set('denied'); hide(); });
+    document.querySelectorAll('[data-consent-open]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); MAA_consent.reset(); show(); }); });
+  })();
+</script>
+</body>
+</html>

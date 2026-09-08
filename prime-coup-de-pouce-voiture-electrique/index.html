@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Consentement (Consent Mode v2) — doit précéder GTM. Aucun cookie de mesure tant que l'utilisateur n'a pas accepté (bandeau). -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
+  (function () {
+    var KEY = 'aides_auto_consent', TTL = 182 * 24 * 3600 * 1000, choice = null; // choix conservé 6 mois (recommandation CNIL)
+    try { var raw = localStorage.getItem(KEY); if (raw) { var o = JSON.parse(raw); if (o && o.v && Date.now() - o.t < TTL) choice = o.v; else localStorage.removeItem(KEY); } } catch (e) {}
+    function apply(v) {
+      gtag('consent', 'update', { analytics_storage: v === 'granted' ? 'granted' : 'denied' });
+      window.dataLayer.push({ event: v === 'granted' ? 'consent_granted' : 'consent_denied' });
+    }
+    window.MAA_consent = {
+      get: function () { return choice; },
+      set: function (v) { choice = v; try { localStorage.setItem(KEY, JSON.stringify({ v: v, t: Date.now() })); } catch (e) {} apply(v); },
+      reset: function () { choice = null; try { localStorage.removeItem(KEY); } catch (e) {} }
+    };
+    if (choice) apply(choice);
+  })();
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P2DNNBXT');</script>
+<!-- End Google Tag Manager -->
+<title>Prime « Coup de pouce » voiture électrique 2026 : montants</title>
+<meta name="description" content="L’aide qui remplace le bonus écologique : 3 300 à 7 700 € selon vos revenus, conditions, véhicules éligibles et démarche avant le bon de commande.">
+<link rel="canonical" href="https://mes-aides-auto.fr/prime-coup-de-pouce-voiture-electrique/">
+<meta property="og:title" content="Prime « Coup de pouce » voiture électrique 2026">
+<meta property="og:description" content="L’aide qui remplace le bonus écologique : 3 300 à 7 700 € selon vos revenus, conditions, véhicules éligibles et démarche avant le bon de commande.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://mes-aides-auto.fr/prime-coup-de-pouce-voiture-electrique/">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Mes Aides Auto">
+<meta property="og:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Prime « Coup de pouce » voiture électrique 2026">
+<meta name="twitter:description" content="L’aide qui remplace le bonus écologique : 3 300 à 7 700 € selon vos revenus, conditions, véhicules éligibles et démarche avant le bon de commande.">
+<meta name="twitter:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2548FF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/maa.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://mes-aides-auto.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Aides voiture électrique 2026",
+          "item": "https://mes-aides-auto.fr/aides-voiture-electrique-2026/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Prime « Coup de pouce »",
+          "item": "https://mes-aides-auto.fr/prime-coup-de-pouce-voiture-electrique/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "La prime « Coup de pouce » remplace-t-elle le bonus écologique ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui. Le bonus écologique a été supprimé le 1er juillet 2025 et la prime « Coup de pouce véhicules particuliers électriques », financée par les certificats d’économies d’énergie, l’a remplacé. La différence majeure est que le montant n’est plus fixé par un barème public unique mais dépend du fournisseur d’énergie partenaire du vendeur."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Pourquoi le montant annoncé varie-t-il d’un concessionnaire à l’autre ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Parce que la réglementation fixe des coefficients de bonification en kWh cumac, pas des euros. Chaque fournisseur d’énergie obligé convertit ces coefficients en une offre commerciale, en fonction du cours des certificats d’économies d’énergie. Il est donc normal, et parfaitement légal, que deux vendeurs proposent des montants différents."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Peut-on avoir la prime pour une location avec option d’achat ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui, à condition que le contrat de location dure au moins 24 mois. Attention à ne pas confondre avec le leasing social, qui est un dispositif distinct, réservé aux revenus modestes et qui impose une location de 3 ans minimum."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Que se passe-t-il si je revends la voiture avant deux ans ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "L’engagement de conservation de deux ans fait partie des conditions de la prime. Une revente anticipée peut entraîner une demande de remboursement par l’organisme qui a versé l’aide. Les modalités figurent dans l’attestation sur l’honneur que vous signez."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Un véhicule de démonstration est-il éligible ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Un véhicule de démonstration peut être éligible s’il est acquis entre 3 et 12 mois après sa première immatriculation. Vérifiez ce point précis avec le vendeur, car il conditionne le classement du véhicule en neuf ou en occasion, et donc l’aide applicable."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "headline": "Prime « Coup de pouce » voiture électrique : conditions, montant et démarches",
+      "name": "Prime « Coup de pouce » voiture électrique : conditions, montant et démarches",
+      "description": "L’aide qui remplace le bonus écologique : 3 300 à 7 700 € selon vos revenus, conditions, véhicules éligibles et démarche avant le bon de commande.",
+      "inLanguage": "fr-FR",
+      "url": "https://mes-aides-auto.fr/prime-coup-de-pouce-voiture-electrique/",
+      "datePublished": "2026-09-08",
+      "dateModified": "2026-09-08",
+      "author": {
+        "@type": "Person",
+        "name": "David Rival",
+        "url": "https://mes-aides-auto.fr/qui-sommes-nous.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2DNNBXT"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">Mes Aides <em>Auto</em></a>
+    <nav class="site-nav" aria-label="Navigation principale"><a href="/">Simulateur</a><a href="/aides-voiture-electrique-2026/">Aides 2026</a><a href="/aides-voiture-electrique/">Aides près de chez moi</a><a href="/notre-methodologie/">Méthodologie</a></nav>
+    <a class="btn" href="/">Calculer mes aides</a>
+  </div>
+</header>
+<nav class="crumb wrap" aria-label="Fil d’Ariane"><ol><li><a href="/">Accueil</a></li><li><a href="/aides-voiture-electrique-2026/">Aides voiture électrique 2026</a></li><li>Prime « Coup de pouce »</li></ol></nav>
+<main class="wrap"><article class="prose">
+<div class="hero"><h1>Prime « Coup de pouce » voiture électrique : conditions, montant et démarches</h1></div>
+<p class="lede">C’est l’aide qui a remplacé le bonus écologique le 1ᵉʳ juillet 2025. Elle n’est pas versée par l’État mais par les fournisseurs d’énergie, et cela change tout à la façon de la demander.</p>
+
+<div class="answer">
+<p><strong>L’essentiel.</strong> La prime « Coup de pouce véhicules particuliers électriques » finance l’achat ou la location longue durée d’une <strong>voiture électrique neuve de 47 000 € au maximum</strong>. Son montant va d’environ <strong>3 300 € à 7 700 €</strong> selon votre revenu fiscal par part et selon que la voiture et sa batterie sont fabriquées en Europe. Point capital : <strong>la demande doit être faite avant la signature du bon de commande</strong>. Une commande déjà signée n’y donne plus droit.</p>
+</div>
+
+<h2>Qu’est-ce que cette prime, exactement ?</h2>
+<p>Elle ne relève pas d’un budget public mais du dispositif des <strong>certificats d’économies d’énergie</strong> : la loi oblige les fournisseurs d’énergie à financer des actions qui réduisent la consommation, et l’achat d’une voiture électrique en fait partie. Concrètement, un fournisseur partenaire de votre concessionnaire verse la prime, le plus souvent en déduction directe sur la facture.</p>
+<p>La conséquence pratique est déroutante : <strong>la réglementation ne fixe pas un montant en euros</strong>, mais des coefficients. Le montant réel dépend de l’offre commerciale du fournisseur partenaire de votre vendeur, et deux concessionnaires voisins peuvent proposer des montants différents pour la même voiture et le même acheteur. D’où la règle à retenir : demandez son offre chiffrée au vendeur, par écrit, avant de vous engager.</p>
+
+<h2>Quel montant selon vos revenus ?</h2>
+<p>Le calcul se fait sur votre <strong>revenu fiscal de référence divisé par votre nombre de parts</strong>, tel qu’il figure sur votre dernier avis d’imposition. Les fourchettes ci-dessous correspondent aux offres publiées par les fournisseurs partenaires (barème Hellio du 31 juillet 2026, mis à jour le 24 août 2026, et chargeguru 2026).</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Catégorie</th><th>Revenu fiscal par part</th><th>Voiture hors critère européen</th><th>Voiture <em>et</em> batterie européennes</th></tr></thead>
+<tbody>
+<tr><td>Revenus très modestes (tranches 1 à 3)</td><td>&lt; 11 250 €</td><td class="num">5 082 – 5 700 €</td><td class="num">6 776 – 7 700 €</td></tr>
+<tr><td>Revenus modestes (tranches 4 et 5)</td><td>&lt; 16 880 €</td><td class="num">4 700 – 5 524 €</td><td class="num">5 900 – 7 365 €</td></tr>
+<tr><td>Gros rouleur (tranches 6 à 8)</td><td>&lt; 27 310 €</td><td class="num">4 700 – 5 524 €</td><td class="num">7 365 – 7 700 €</td></tr>
+<tr><td>Autres ménages</td><td>au-delà</td><td class="num">3 300 – 3 314 €</td><td class="num">4 419 – 4 700 €</td></tr>
+</tbody>
+</table>
+</div>
+<p>Le volet « gros rouleurs » vise les ménages aux revenus intermédiaires qui parcourent <strong>au moins 12 000 km par an à titre professionnel</strong> avec leur voiture personnelle. Il faut s’engager avant le 1<sup>er</sup> janvier 2027 et pouvoir le justifier (attestation de l’employeur ou justificatif de kilométrage).</p>
+
+<h2>Qui peut en bénéficier ?</h2>
+<ul>
+<li>Vous êtes un <strong>particulier</strong>, quelle que soit votre tranche de revenus — le montant varie, mais personne n’en est exclu par ses revenus.</li>
+<li>Vous achetez ou louez une <strong>voiture particulière 100 % électrique neuve</strong>. Les hybrides, même rechargeables, sont exclues.</li>
+<li>Le <strong>prix ne dépasse pas 47 000 €</strong>, batterie comprise.</li>
+<li>Le modèle figure sur la <strong>liste officielle des véhicules éligibles</strong> : score environnemental d’au moins 60 points (calculé par l’ADEME sur l’ensemble du cycle de vie) et masse inférieure à 2,4 tonnes.</li>
+<li>Vous achetez <strong>chez un professionnel partenaire</strong> d’un fournisseur d’énergie. Un achat entre particuliers n’ouvre aucun droit.</li>
+<li>Vous vous engagez à <strong>garder la voiture au moins 2 ans</strong>, ou à signer une location d’au moins 24 mois.</li>
+</ul>
+
+<h2>Comment la demander, étape par étape</h2>
+<ol>
+<li>Avant toute chose, demandez au concessionnaire ou au loueur <strong>avec quel fournisseur d’énergie il travaille</strong> et quel montant il vous propose.</li>
+<li>Faites établir la demande de prime <strong>avant de signer le bon de commande</strong>. C’est l’erreur la plus fréquente et elle est irrattrapable.</li>
+<li>Signez le bon de commande une fois la prime validée : elle est déduite de la facture, ou versée après la livraison selon le partenaire.</li>
+<li>Conservez la voiture au moins deux ans.</li>
+</ol>
+<h3>Les documents à préparer</h3>
+<ul>
+<li>Pièce d’identité ;</li>
+<li>dernier avis d’imposition (revenu fiscal de référence et nombre de parts) ;</li>
+<li>devis ou bon de commande, ou contrat de location ;</li>
+<li>attestation sur l’honneur fournie par le partenaire ;</li>
+<li>si vous êtes gros rouleur : attestation de l’employeur ou justificatif d’au moins 12 000 km par an pour le travail.</li>
+</ul>
+
+<h2>Cumuls : ce qui est possible et ce qui ne l’est pas</h2>
+<p class="note note-stop"><strong>Non cumulable</strong> avec le <a href="/leasing-social-2026/">leasing social</a> ni avec la <a href="/aide-voiture-electrique-occasion/">prime occasion</a> : ces trois aides relèvent de la même enveloppe et vous ne pouvez en obtenir qu’une seule.</p>
+<p class="note note-ok"><strong>Cumulable</strong> avec les aides de votre région, de votre département ou de votre métropole. Un ménage modeste lyonnais peut ainsi additionner la prime d’État et l’aide de la Métropole de Lyon. <a href="/cumul-aides-voiture-electrique/">Voir le tableau complet des cumuls</a>.</p>
+<div class="cta"><p class="t">Quel montant dans votre cas ?</p><p>Le simulateur applique votre tranche de revenus, votre commune et les règles de cumul, et vous dit dans quel ordre faire les démarches.</p><a class="btn btn-lg" href="/">Lancer le simulateur</a></div>
+<h2 id="faq">Questions fréquentes</h2><div class="faq"><details><summary>La prime « Coup de pouce » remplace-t-elle le bonus écologique ?</summary><p>Oui. Le bonus écologique a été supprimé le 1er juillet 2025 et la prime « Coup de pouce véhicules particuliers électriques », financée par les certificats d’économies d’énergie, l’a remplacé. La différence majeure est que le montant n’est plus fixé par un barème public unique mais dépend du fournisseur d’énergie partenaire du vendeur.</p></details><details><summary>Pourquoi le montant annoncé varie-t-il d’un concessionnaire à l’autre ?</summary><p>Parce que la réglementation fixe des coefficients de bonification en kWh cumac, pas des euros. Chaque fournisseur d’énergie obligé convertit ces coefficients en une offre commerciale, en fonction du cours des certificats d’économies d’énergie. Il est donc normal, et parfaitement légal, que deux vendeurs proposent des montants différents.</p></details><details><summary>Peut-on avoir la prime pour une location avec option d’achat ?</summary><p>Oui, à condition que le contrat de location dure au moins 24 mois. Attention à ne pas confondre avec le leasing social, qui est un dispositif distinct, réservé aux revenus modestes et qui impose une location de 3 ans minimum.</p></details><details><summary>Que se passe-t-il si je revends la voiture avant deux ans ?</summary><p>L’engagement de conservation de deux ans fait partie des conditions de la prime. Une revente anticipée peut entraîner une demande de remboursement par l’organisme qui a versé l’aide. Les modalités figurent dans l’attestation sur l’honneur que vous signez.</p></details><details><summary>Un véhicule de démonstration est-il éligible ?</summary><p>Un véhicule de démonstration peut être éligible s’il est acquis entre 3 et 12 mois après sa première immatriculation. Vérifiez ce point précis avec le vendeur, car il conditionne le classement du véhicule en neuf ou en occasion, et donc l’aide applicable.</p></details></div>
+<h2 id="sources">Sources officielles</h2><ul class="srcs"><li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F39188" target="_blank" rel="noopener">Service-public.fr — fiche F39188, mise à jour du 1er septembre 2026</a></li><li><a href="https://jechangemavoiture.gouv.fr/jcmv/aide-achat.html" target="_blank" rel="noopener">jechangemavoiture.gouv.fr — aides à l’achat</a></li><li><a href="https://www.ademe.fr/" target="_blank" rel="noopener">ADEME — score environnemental des véhicules</a></li></ul>
+<p class="verif">Dernière vérification des règles de cette page : <strong>8 septembre 2026</strong>. Nous republions cette page à chaque évolution réglementaire — voir <a href="/historique-aides-auto/">l’historique des changements</a> et <a href="/notre-methodologie/">notre méthodologie</a>.</p>
+<nav class="related" aria-label="À lire aussi"><h2>À lire aussi</h2><ul><li><a href="/aides-voiture-electrique-2026/">Toutes les aides voiture électrique 2026</a></li><li><a href="/bonus-ecologique-2026/">Le bonus écologique existe-t-il encore ?</a></li><li><a href="/leasing-social-2026/">Leasing social 2026</a></li><li><a href="/cumul-aides-voiture-electrique/">Peut-on cumuler plusieurs aides ?</a></li><li><a href="/aides-voiture-electrique/">Les aides de votre collectivité</a></li><li><a href="/notre-methodologie/">Notre méthodologie</a></li></ul></nav>
+</article></main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Le simulateur</h4>
+        <ul>
+          <li><a href="/">Simulateur d’aides</a></li>
+          <li><a href="/aides-voiture-electrique-2026/">Toutes les aides 2026</a></li>
+          <li><a href="/cumul-aides-voiture-electrique/">Cumuler les aides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Les aides</h4>
+        <ul>
+          <li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li>
+          <li><a href="/leasing-social-2026/">Leasing social 2026</a></li>
+          <li><a href="/aide-voiture-electrique-occasion/">Voiture d’occasion</a></li>
+          <li><a href="/bonus-ecologique-2026/">Bonus écologique</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Près de chez vous</h4>
+        <ul>
+          <li><a href="/aides-voiture-electrique/">Toutes les aides locales</a></li>
+          <li><a href="/aides-voiture-electrique/paris/">Paris et Grand Paris</a></li>
+          <li><a href="/aides-voiture-electrique/lyon/">Lyon</a></li>
+          <li><a href="/aides-voiture-electrique/marseille/">Marseille</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Le site</h4>
+        <ul>
+          <li><a href="/qui-sommes-nous.html">Qui sommes-nous ?</a></li>
+          <li><a href="/notre-methodologie/">Notre méthodologie</a></li>
+          <li><a href="/sources/">Sources officielles</a></li>
+          <li><a href="/historique-aides-auto/">Historique des aides</a></li>
+          <li><a href="/mentions-legales.html">Mentions légales</a></li>
+          <li><a href="#" data-consent-open>Gérer les cookies</a></li>
+          <li><a href="mailto:contact@mes-aides-auto.fr?subject=Mes%20Aides%20Auto%20%E2%80%94%20contact">Nous écrire</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-legal">© 2026 Mes Aides Auto — Calculateur d’aides à la mobilité propre. Informations à caractère indicatif, sans valeur contractuelle : seule la décision de l’organisme qui verse l’aide fait foi.</p>
+  </div>
+</footer>
+<div id="consent-banner" hidden>
+  <div class="box">
+    <p style="flex:1">Ce site utilise <strong>Google Analytics</strong> pour mesurer son audience, uniquement si vous l’acceptez. Vos données financières (revenu, parts) ne sont jamais transmises. <a href="/mentions-legales.html#cookies">En savoir plus</a></p>
+    <div class="acts">
+      <button type="button" id="consent-accept">Accepter</button>
+      <button type="button" id="consent-refuse">Continuer sans accepter</button>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var b = document.getElementById('consent-banner'); if (!b || !window.MAA_consent) return;
+    function show() { b.hidden = false; } function hide() { b.hidden = true; }
+    if (!MAA_consent.get()) show();
+    document.getElementById('consent-accept').addEventListener('click', function () { MAA_consent.set('granted'); hide(); });
+    document.getElementById('consent-refuse').addEventListener('click', function () { MAA_consent.set('denied'); hide(); });
+    document.querySelectorAll('[data-consent-open]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); MAA_consent.reset(); show(); }); });
+  })();
+</script>
+</body>
+</html>

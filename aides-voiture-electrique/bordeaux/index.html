@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Consentement (Consent Mode v2) — doit précéder GTM. Aucun cookie de mesure tant que l'utilisateur n'a pas accepté (bandeau). -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
+  (function () {
+    var KEY = 'aides_auto_consent', TTL = 182 * 24 * 3600 * 1000, choice = null; // choix conservé 6 mois (recommandation CNIL)
+    try { var raw = localStorage.getItem(KEY); if (raw) { var o = JSON.parse(raw); if (o && o.v && Date.now() - o.t < TTL) choice = o.v; else localStorage.removeItem(KEY); } } catch (e) {}
+    function apply(v) {
+      gtag('consent', 'update', { analytics_storage: v === 'granted' ? 'granted' : 'denied' });
+      window.dataLayer.push({ event: v === 'granted' ? 'consent_granted' : 'consent_denied' });
+    }
+    window.MAA_consent = {
+      get: function () { return choice; },
+      set: function (v) { choice = v; try { localStorage.setItem(KEY, JSON.stringify({ v: v, t: Date.now() })); } catch (e) {} apply(v); },
+      reset: function () { choice = null; try { localStorage.removeItem(KEY); } catch (e) {} }
+    };
+    if (choice) apply(choice);
+  })();
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P2DNNBXT');</script>
+<!-- End Google Tag Manager -->
+<title>Aide voiture électrique Bordeaux 2026 : jusqu’à 6 000 €</title>
+<meta name="description" content="Bordeaux Métropole annonce jusqu’à 6 000 € pour remplacer un véhicule non classé. Ce qui est vérifié, et ce qui reste à confirmer au guichet.">
+<link rel="canonical" href="https://mes-aides-auto.fr/aides-voiture-electrique/bordeaux/">
+<meta property="og:title" content="Quelles aides pour acheter une voiture électrique à Bordeaux en 2026 ?">
+<meta property="og:description" content="Bordeaux Métropole annonce jusqu’à 6 000 € pour remplacer un véhicule non classé. Ce qui est vérifié, et ce qui reste à confirmer au guichet.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://mes-aides-auto.fr/aides-voiture-electrique/bordeaux/">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Mes Aides Auto">
+<meta property="og:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quelles aides pour acheter une voiture électrique à Bordeaux en 2026 ?">
+<meta name="twitter:description" content="Bordeaux Métropole annonce jusqu’à 6 000 € pour remplacer un véhicule non classé. Ce qui est vérifié, et ce qui reste à confirmer au guichet.">
+<meta name="twitter:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2548FF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/maa.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://mes-aides-auto.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Aides près de chez vous",
+          "item": "https://mes-aides-auto.fr/aides-voiture-electrique/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Bordeaux",
+          "item": "https://mes-aides-auto.fr/aides-voiture-electrique/bordeaux/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Quel est le montant exact de l’aide de Bordeaux Métropole ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le montant maximal annoncé est de 6 000 €, mais il provient d’articles de presse de décembre 2024 : le barème détaillé selon les revenus n’est pas publié sur la page officielle que nous avons consultée. Demandez le règlement au guichet métropolitain avant d’acheter."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quel véhicule faut-il mettre au rebut ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Un véhicule non classé, c’est-à-dire trop ancien pour recevoir une vignette Crit’Air. La cession comme la destruction sont acceptées."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Une hybride est-elle éligible à Bordeaux ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pour un véhicule neuf, l’aide est réservée à l’électrique. Une Crit’Air 1, donc certaines hybrides ou essences récentes, n’est acceptée que pour un achat d’occasion."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "headline": "Quelles aides pour acheter une voiture électrique à Bordeaux en 2026 ?",
+      "name": "Quelles aides pour acheter une voiture électrique à Bordeaux en 2026 ?",
+      "description": "Bordeaux Métropole annonce jusqu’à 6 000 € pour remplacer un véhicule non classé. Ce qui est vérifié, et ce qui reste à confirmer au guichet.",
+      "inLanguage": "fr-FR",
+      "url": "https://mes-aides-auto.fr/aides-voiture-electrique/bordeaux/",
+      "datePublished": "2026-09-08",
+      "dateModified": "2026-09-07",
+      "author": {
+        "@type": "Person",
+        "name": "David Rival",
+        "url": "https://mes-aides-auto.fr/qui-sommes-nous.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2DNNBXT"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">Mes Aides <em>Auto</em></a>
+    <nav class="site-nav" aria-label="Navigation principale"><a href="/">Simulateur</a><a href="/aides-voiture-electrique-2026/">Aides 2026</a><a href="/aides-voiture-electrique/" aria-current="page">Aides près de chez moi</a><a href="/notre-methodologie/">Méthodologie</a></nav>
+    <a class="btn" href="/">Calculer mes aides</a>
+  </div>
+</header>
+<nav class="crumb wrap" aria-label="Fil d’Ariane"><ol><li><a href="/">Accueil</a></li><li><a href="/aides-voiture-electrique/">Aides près de chez vous</a></li><li>Bordeaux</li></ol></nav>
+<main class="wrap"><article class="prose">
+<div class="hero"><h1>Quelles aides pour acheter une voiture électrique à Bordeaux en 2026 ?</h1></div>
+<p class="lede">Bordeaux Métropole a ouvert son guichet en janvier 2025 et annonce « jusqu’à 6 000 € ». Nous n’avons pas trouvé le barème détaillé sur la page officielle : voici exactement ce qui est établi, et ce qui ne l’est pas.</p>
+<div class="answer"><p><strong>Oui, une aide existe, annoncée « jusqu’à 6 000 € ».</strong> Elle suppose de <strong>vendre ou faire détruire une voiture non classée</strong> (trop ancienne pour une vignette Crit’Air) et d’acheter une électrique — une Crit’Air 1 n’est acceptée qu’en occasion. <strong>Le barème par tranches de revenus et le plafond de revenus ne sont pas publiés</strong> sur la page officielle consultée : le montant réel doit être vérifié sur le guichet.</p></div>
+<h2 id="montants">Ce qui est établi, et ce qui ne l’est pas</h2>
+<div class="table-wrap"><table><thead><tr><th>Élément</th><th>Statut</th></tr></thead><tbody><tr><td>Existence de l’aide et guichet ouvert depuis le 1<sup>er</sup> janvier 2025</td><td><span class="badge badge-ok">vérifié</span></td></tr><tr><td>Mise au rebut ou cession d’un véhicule non classé exigée</td><td><span class="badge badge-ok">vérifié</span></td></tr><tr><td>Crit’Air 1 acceptée uniquement pour une occasion</td><td><span class="badge badge-ok">vérifié</span></td></tr><tr><td>Montant « jusqu’à 6 000 € »</td><td><span class="badge badge-warn">presse de décembre 2024, non confirmé par la page officielle</span></td></tr><tr><td>Barème par tranches de revenus, plafond de revenus</td><td><span class="badge badge-stop">non publié sur la page consultée</span></td></tr></tbody></table></div>
+<p class="note note-warn">Nous préférons afficher cette incertitude plutôt qu’un montant inventé. Le simulateur classe cette aide comme « à confirmer » et n’en additionne que la borne haute au total, en le signalant.</p>
+<h2 id="demarches">Comment demander l’aide à Bordeaux</h2>
+<p>Le dépôt se fait sur mesdemarches.bordeaux-metropole.fr, guichet ouvert depuis le 1<sup>er</sup> janvier 2025, après l’achat. Demandez le règlement complet et le barème avant d’acheter : c’est la seule façon d’obtenir un montant fiable aujourd’hui.</p>
+<h2 id="cumul">Cumul</h2>
+<p>Comme les autres aides locales, elle se cumule avec la prime d’État. Aucun plafond global de cumul n’a été identifié dans les documents consultés.</p>
+<h2 id="national">Les aides nationales, accessibles partout</h2>
+<p>Quelle que soit votre commune, vous pouvez prétendre à une aide de l’État, qui <strong>s’ajoute</strong> à l’aide locale :</p>
+<ul>
+<li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a> pour une voiture électrique neuve : 3 300 à 7 700 € selon vos revenus, à demander <strong>avant</strong> le bon de commande ;</li>
+<li><a href="/leasing-social-2026/">leasing social</a> si votre revenu fiscal ne dépasse pas 16 880 € par part et que vous roulez pour travailler : jusqu’à 9 000 € ;</li>
+<li><a href="/aide-voiture-electrique-occasion/">prime occasion</a> depuis le 1<sup>er</sup> septembre 2026, pour une électrique immatriculée entre 2017 et 2023.</li>
+</ul>
+<p>Ces trois aides sont exclusives les unes des autres : <a href="/cumul-aides-voiture-electrique/">voir les règles de cumul</a>.</p>
+<h2 id="communes">Les 28 communes concernées par l’aide</h2>
+<details class="communes"><summary>Voir la liste complète des communes</summary>
+<p>Ambarès-et-Lagrave · Ambès · Artigues-près-Bordeaux · Bassens · Blanquefort · Bordeaux · Bouliac · Bruges · Bègles · Carbon-Blanc · Cenon · Eysines · Floirac · Gradignan · Le Bouscat · Le Haillan · Le Taillan-Médoc · Lormont · Martignas-sur-Jalle · Mérignac · Parempuyre · Pessac · Saint-Aubin-de-Médoc · Saint-Louis-de-Montferrand · Saint-Médard-en-Jalles · Saint-Vincent-de-Paul · Talence · Villenave-d'Ornon</p></details>
+<p style="font-size:.9rem;color:#64748b">Source : code officiel géographique de l’INSEE (jeu de données Etalab « découpage administratif »). Le simulateur identifie automatiquement votre intercommunalité à partir de votre code postal.</p>
+<div class="cta"><p class="t">Vos aides à Bordeaux, en quelques secondes</p><p>Le simulateur croise votre code postal, vos revenus et le prix du véhicule, applique les plafonds locaux et vous indique dans quel ordre faire les démarches.</p><a class="btn btn-lg" href="/">Calculer mes aides à Bordeaux</a></div>
+<h2 id="faq">Questions fréquentes</h2><div class="faq"><details><summary>Quel est le montant exact de l’aide de Bordeaux Métropole ?</summary><p>Le montant maximal annoncé est de 6 000 €, mais il provient d’articles de presse de décembre 2024 : le barème détaillé selon les revenus n’est pas publié sur la page officielle que nous avons consultée. Demandez le règlement au guichet métropolitain avant d’acheter.</p></details><details><summary>Quel véhicule faut-il mettre au rebut ?</summary><p>Un véhicule non classé, c’est-à-dire trop ancien pour recevoir une vignette Crit’Air. La cession comme la destruction sont acceptées.</p></details><details><summary>Une hybride est-elle éligible à Bordeaux ?</summary><p>Pour un véhicule neuf, l’aide est réservée à l’électrique. Une Crit’Air 1, donc certaines hybrides ou essences récentes, n’est acceptée que pour un achat d’occasion.</p></details></div>
+<h2 id="sources">Sources officielles</h2><ul class="srcs"><li><a href="https://sedeplacer.bordeaux-metropole.fr/en-voiture/zfe-ce-quil-faut-savoir" target="_blank" rel="noopener">Zone à faibles émissions — sedeplacer.bordeaux-metropole.fr</a></li><li><a href="https://mesdemarches.bordeaux-metropole.fr/" target="_blank" rel="noopener">Guichet de dépôt — mesdemarches.bordeaux-metropole.fr</a></li><li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F39188" target="_blank" rel="noopener">Prime d’État — service-public.fr, fiche F39188</a></li></ul>
+<p class="verif">Dernière vérification des règles de cette page : <strong>7 septembre 2026</strong>. Nous republions cette page à chaque évolution réglementaire — voir <a href="/historique-aides-auto/">l’historique des changements</a> et <a href="/notre-methodologie/">notre méthodologie</a>.</p>
+<nav class="related" aria-label="À lire aussi"><h2>À lire aussi</h2><ul><li><a href="/aides-voiture-electrique/">Toutes les aides près de chez vous</a></li><li><a href="/aides-voiture-electrique-2026/">Les aides nationales 2026</a></li><li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li><li><a href="/cumul-aides-voiture-electrique/">Peut-on cumuler les aides ?</a></li></ul></nav>
+</article></main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Le simulateur</h4>
+        <ul>
+          <li><a href="/">Simulateur d’aides</a></li>
+          <li><a href="/aides-voiture-electrique-2026/">Toutes les aides 2026</a></li>
+          <li><a href="/cumul-aides-voiture-electrique/">Cumuler les aides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Les aides</h4>
+        <ul>
+          <li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li>
+          <li><a href="/leasing-social-2026/">Leasing social 2026</a></li>
+          <li><a href="/aide-voiture-electrique-occasion/">Voiture d’occasion</a></li>
+          <li><a href="/bonus-ecologique-2026/">Bonus écologique</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Près de chez vous</h4>
+        <ul>
+          <li><a href="/aides-voiture-electrique/">Toutes les aides locales</a></li>
+          <li><a href="/aides-voiture-electrique/paris/">Paris et Grand Paris</a></li>
+          <li><a href="/aides-voiture-electrique/lyon/">Lyon</a></li>
+          <li><a href="/aides-voiture-electrique/marseille/">Marseille</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Le site</h4>
+        <ul>
+          <li><a href="/qui-sommes-nous.html">Qui sommes-nous ?</a></li>
+          <li><a href="/notre-methodologie/">Notre méthodologie</a></li>
+          <li><a href="/sources/">Sources officielles</a></li>
+          <li><a href="/historique-aides-auto/">Historique des aides</a></li>
+          <li><a href="/mentions-legales.html">Mentions légales</a></li>
+          <li><a href="#" data-consent-open>Gérer les cookies</a></li>
+          <li><a href="mailto:contact@mes-aides-auto.fr?subject=Mes%20Aides%20Auto%20%E2%80%94%20contact">Nous écrire</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-legal">© 2026 Mes Aides Auto — Calculateur d’aides à la mobilité propre. Informations à caractère indicatif, sans valeur contractuelle : seule la décision de l’organisme qui verse l’aide fait foi.</p>
+  </div>
+</footer>
+<div id="consent-banner" hidden>
+  <div class="box">
+    <p style="flex:1">Ce site utilise <strong>Google Analytics</strong> pour mesurer son audience, uniquement si vous l’acceptez. Vos données financières (revenu, parts) ne sont jamais transmises. <a href="/mentions-legales.html#cookies">En savoir plus</a></p>
+    <div class="acts">
+      <button type="button" id="consent-accept">Accepter</button>
+      <button type="button" id="consent-refuse">Continuer sans accepter</button>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var b = document.getElementById('consent-banner'); if (!b || !window.MAA_consent) return;
+    function show() { b.hidden = false; } function hide() { b.hidden = true; }
+    if (!MAA_consent.get()) show();
+    document.getElementById('consent-accept').addEventListener('click', function () { MAA_consent.set('granted'); hide(); });
+    document.getElementById('consent-refuse').addEventListener('click', function () { MAA_consent.set('denied'); hide(); });
+    document.querySelectorAll('[data-consent-open]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); MAA_consent.reset(); show(); }); });
+  })();
+</script>
+</body>
+</html>

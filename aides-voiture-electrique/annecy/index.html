@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Consentement (Consent Mode v2) — doit précéder GTM. Aucun cookie de mesure tant que l'utilisateur n'a pas accepté (bandeau). -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
+  (function () {
+    var KEY = 'aides_auto_consent', TTL = 182 * 24 * 3600 * 1000, choice = null; // choix conservé 6 mois (recommandation CNIL)
+    try { var raw = localStorage.getItem(KEY); if (raw) { var o = JSON.parse(raw); if (o && o.v && Date.now() - o.t < TTL) choice = o.v; else localStorage.removeItem(KEY); } } catch (e) {}
+    function apply(v) {
+      gtag('consent', 'update', { analytics_storage: v === 'granted' ? 'granted' : 'denied' });
+      window.dataLayer.push({ event: v === 'granted' ? 'consent_granted' : 'consent_denied' });
+    }
+    window.MAA_consent = {
+      get: function () { return choice; },
+      set: function (v) { choice = v; try { localStorage.setItem(KEY, JSON.stringify({ v: v, t: Date.now() })); } catch (e) {} apply(v); },
+      reset: function () { choice = null; try { localStorage.removeItem(KEY); } catch (e) {} }
+    };
+    if (choice) apply(choice);
+  })();
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P2DNNBXT');</script>
+<!-- End Google Tag Manager -->
+<title>Aide voiture électrique Annecy 2026 : 3 000 € du Grand Annecy</title>
+<meta name="description" content="Le Grand Annecy verse 3 000 € pour remplacer une voiture non classée par une électrique. Dossier à déposer avant la commande, revenu ≤ 16 300 €/part.">
+<link rel="canonical" href="https://mes-aides-auto.fr/aides-voiture-electrique/annecy/">
+<meta property="og:title" content="Quelles aides pour acheter une voiture électrique à Annecy en 2026 ?">
+<meta property="og:description" content="Le Grand Annecy verse 3 000 € pour remplacer une voiture non classée par une électrique. Dossier à déposer avant la commande, revenu ≤ 16 300 €/part.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://mes-aides-auto.fr/aides-voiture-electrique/annecy/">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Mes Aides Auto">
+<meta property="og:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quelles aides pour acheter une voiture électrique à Annecy en 2026 ?">
+<meta name="twitter:description" content="Le Grand Annecy verse 3 000 € pour remplacer une voiture non classée par une électrique. Dossier à déposer avant la commande, revenu ≤ 16 300 €/part.">
+<meta name="twitter:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2548FF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/maa.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://mes-aides-auto.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Aides près de chez vous",
+          "item": "https://mes-aides-auto.fr/aides-voiture-electrique/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Annecy",
+          "item": "https://mes-aides-auto.fr/aides-voiture-electrique/annecy/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Quel véhicule faut-il détruire pour l’aide du Grand Annecy ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Un véhicule non classé, c’est-à-dire trop ancien pour recevoir une vignette Crit’Air. Une Crit’Air 3, 4 ou 5 ne suffit pas, contrairement à d’autres métropoles."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Peut-on déposer le dossier après l’achat ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non. Le règlement impose un dépôt avant la commande ou la signature du contrat de location. Une demande postérieure est refusée."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "L’aide fonctionne-t-elle pour une voiture d’occasion ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui, et c’est même le seul cas où une Crit’Air 1 est acceptée. Pour une voiture neuve, seules l’électrique et l’hydrogène ouvrent droit à l’aide."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "headline": "Quelles aides pour acheter une voiture électrique à Annecy en 2026 ?",
+      "name": "Quelles aides pour acheter une voiture électrique à Annecy en 2026 ?",
+      "description": "Le Grand Annecy verse 3 000 € pour remplacer une voiture non classée par une électrique. Dossier à déposer avant la commande, revenu ≤ 16 300 €/part.",
+      "inLanguage": "fr-FR",
+      "url": "https://mes-aides-auto.fr/aides-voiture-electrique/annecy/",
+      "datePublished": "2026-09-08",
+      "dateModified": "2026-09-07",
+      "author": {
+        "@type": "Person",
+        "name": "David Rival",
+        "url": "https://mes-aides-auto.fr/qui-sommes-nous.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2DNNBXT"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">Mes Aides <em>Auto</em></a>
+    <nav class="site-nav" aria-label="Navigation principale"><a href="/">Simulateur</a><a href="/aides-voiture-electrique-2026/">Aides 2026</a><a href="/aides-voiture-electrique/" aria-current="page">Aides près de chez moi</a><a href="/notre-methodologie/">Méthodologie</a></nav>
+    <a class="btn" href="/">Calculer mes aides</a>
+  </div>
+</header>
+<nav class="crumb wrap" aria-label="Fil d’Ariane"><ol><li><a href="/">Accueil</a></li><li><a href="/aides-voiture-electrique/">Aides près de chez vous</a></li><li>Annecy</li></ol></nav>
+<main class="wrap"><article class="prose">
+<div class="hero"><h1>Quelles aides pour acheter une voiture électrique à Annecy en 2026 ?</h1></div>
+<p class="lede">Le Grand Annecy verse un forfait de 3 000 €, simple à comprendre — mais avec deux conditions strictes : un véhicule non classé à détruire, et un dossier déposé avant la commande.</p>
+<div class="answer"><p><strong>Oui, 3 000 €.</strong> L’aide au renouvellement de voiture du Grand Annecy est un forfait, pour une voiture neuve comme d’occasion. Conditions : revenu fiscal <strong>inférieur à 16 300 € par part</strong>, destruction d’une voiture <strong>non classée</strong> (trop ancienne pour une vignette Crit’Air), et <strong>dossier déposé avant la commande</strong>.</p></div>
+<h2 id="montants">Les conditions du Grand Annecy</h2>
+<ul>
+<li><strong>3 000 €</strong>, forfaitaires, neuf ou occasion ;</li>
+<li>revenu fiscal de référence <strong>inférieur à 16 300 € par part</strong> ;</li>
+<li>faire détruire une voiture <strong>non classée</strong> — la condition la plus stricte de tous les règlements que nous avons vérifiés : une Crit’Air 3 ou 4 ne suffit pas ;</li>
+<li>pour une voiture neuve : <strong>électrique ou hydrogène uniquement</strong>. Une Crit’Air 1 n’est acceptée qu’en occasion ;</li>
+<li>en location, contrat d’au moins 24 mois ;</li>
+<li>conserver la voiture 2 ans ;</li>
+<li>le total des aides ne peut pas dépasser le prix de la voiture.</li>
+</ul>
+<h2 id="demarches">Comment demander l’aide à Annecy</h2>
+<p class="note note-stop"><strong>Le dossier doit être déposé avant la commande ou la signature du contrat.</strong> C’est, avec Lyon, l’un des deux territoires où une demande postérieure à l’achat est refusée sans recours.</p>
+<ol>
+<li>Déposez la demande sur grandannecy.fr ;</li>
+<li>attendez l’accord ;</li>
+<li>commandez la voiture ;</li>
+<li>faites détruire l’ancienne et transmettez la facture, la carte grise et le certificat de destruction.</li>
+</ol>
+<h2 id="cumul">Cumul</h2>
+<p>L’aide se cumule avec la prime d’État, dans la limite du prix total de la voiture. Sur un véhicule d’occasion à petit prix, ce plafond peut réduire le montant versé : le simulateur applique l’écrêtement.</p>
+<p>Vous habitez la vallée de l’Arve plutôt que le bassin annécien ? Voir <a href="/aides-voiture-electrique/pays-du-mont-blanc/">l’aide du Pays du Mont-Blanc</a>.</p>
+<h2 id="exemple">Exemple de calcul</h2>
+<p>Une personne seule à Annecy, 10 000 € de revenu fiscal pour une part, fait détruire une voiture non classée et achète une électrique d’occasion à 14 000 € : <strong>3 000 €</strong> du Grand Annecy, auxquels s’ajoute la prime d’État occasion. Le plafond « total ≤ prix du véhicule » n’est pas atteint.</p>
+<h2 id="national">Les aides nationales, accessibles partout</h2>
+<p>Quelle que soit votre commune, vous pouvez prétendre à une aide de l’État, qui <strong>s’ajoute</strong> à l’aide locale :</p>
+<ul>
+<li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a> pour une voiture électrique neuve : 3 300 à 7 700 € selon vos revenus, à demander <strong>avant</strong> le bon de commande ;</li>
+<li><a href="/leasing-social-2026/">leasing social</a> si votre revenu fiscal ne dépasse pas 16 880 € par part et que vous roulez pour travailler : jusqu’à 9 000 € ;</li>
+<li><a href="/aide-voiture-electrique-occasion/">prime occasion</a> depuis le 1<sup>er</sup> septembre 2026, pour une électrique immatriculée entre 2017 et 2023.</li>
+</ul>
+<p>Ces trois aides sont exclusives les unes des autres : <a href="/cumul-aides-voiture-electrique/">voir les règles de cumul</a>.</p>
+<h2 id="communes">Les 34 communes concernées par l’aide</h2>
+<details class="communes"><summary>Voir la liste complète des communes</summary>
+<p>Alby-sur-Chéran · Allèves · Annecy · Argonay · Bluffy · Chainaz-les-Frasses · Chapeiry · Charvonnex · Chavanod · Cusy · Duingt · Entrevernes · Epagny Metz-Tessy · Fillière · Groisy · Gruffy · Héry-sur-Alby · La Chapelle-Saint-Maurice · Leschaux · Menthon-Saint-Bernard · Montagny-les-Lanches · Mûres · Nâves-Parmelan · Poisy · Quintal · Saint-Eustache · Saint-Félix · Saint-Jorioz · Saint-Sylvestre · Sevrier · Talloires-Montmin · Veyrier-du-Lac · Villaz · Viuz-la-Chiésaz</p></details>
+<p style="font-size:.9rem;color:#64748b">Source : code officiel géographique de l’INSEE (jeu de données Etalab « découpage administratif »). Le simulateur identifie automatiquement votre intercommunalité à partir de votre code postal.</p>
+<div class="cta"><p class="t">Vos aides à Annecy, en quelques secondes</p><p>Le simulateur croise votre code postal, vos revenus et le prix du véhicule, applique les plafonds locaux et vous indique dans quel ordre faire les démarches.</p><a class="btn btn-lg" href="/">Calculer mes aides à Annecy</a></div>
+<h2 id="faq">Questions fréquentes</h2><div class="faq"><details><summary>Quel véhicule faut-il détruire pour l’aide du Grand Annecy ?</summary><p>Un véhicule non classé, c’est-à-dire trop ancien pour recevoir une vignette Crit’Air. Une Crit’Air 3, 4 ou 5 ne suffit pas, contrairement à d’autres métropoles.</p></details><details><summary>Peut-on déposer le dossier après l’achat ?</summary><p>Non. Le règlement impose un dépôt avant la commande ou la signature du contrat de location. Une demande postérieure est refusée.</p></details><details><summary>L’aide fonctionne-t-elle pour une voiture d’occasion ?</summary><p>Oui, et c’est même le seul cas où une Crit’Air 1 est acceptée. Pour une voiture neuve, seules l’électrique et l’hydrogène ouvrent droit à l’aide.</p></details></div>
+<h2 id="sources">Sources officielles</h2><ul class="srcs"><li><a href="https://www.grandannecy.fr/zfem/aides-et-conseils-en-mobilite" target="_blank" rel="noopener">Aides et conseils en mobilité — grandannecy.fr (règlement du 13/02/2025)</a></li><li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F39188" target="_blank" rel="noopener">Prime d’État — service-public.fr, fiche F39188</a></li></ul>
+<p class="verif">Dernière vérification des règles de cette page : <strong>7 septembre 2026</strong>. Nous republions cette page à chaque évolution réglementaire — voir <a href="/historique-aides-auto/">l’historique des changements</a> et <a href="/notre-methodologie/">notre méthodologie</a>.</p>
+<nav class="related" aria-label="À lire aussi"><h2>À lire aussi</h2><ul><li><a href="/aides-voiture-electrique/">Toutes les aides près de chez vous</a></li><li><a href="/aides-voiture-electrique-2026/">Les aides nationales 2026</a></li><li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li><li><a href="/cumul-aides-voiture-electrique/">Peut-on cumuler les aides ?</a></li></ul></nav>
+</article></main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Le simulateur</h4>
+        <ul>
+          <li><a href="/">Simulateur d’aides</a></li>
+          <li><a href="/aides-voiture-electrique-2026/">Toutes les aides 2026</a></li>
+          <li><a href="/cumul-aides-voiture-electrique/">Cumuler les aides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Les aides</h4>
+        <ul>
+          <li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li>
+          <li><a href="/leasing-social-2026/">Leasing social 2026</a></li>
+          <li><a href="/aide-voiture-electrique-occasion/">Voiture d’occasion</a></li>
+          <li><a href="/bonus-ecologique-2026/">Bonus écologique</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Près de chez vous</h4>
+        <ul>
+          <li><a href="/aides-voiture-electrique/">Toutes les aides locales</a></li>
+          <li><a href="/aides-voiture-electrique/paris/">Paris et Grand Paris</a></li>
+          <li><a href="/aides-voiture-electrique/lyon/">Lyon</a></li>
+          <li><a href="/aides-voiture-electrique/marseille/">Marseille</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Le site</h4>
+        <ul>
+          <li><a href="/qui-sommes-nous.html">Qui sommes-nous ?</a></li>
+          <li><a href="/notre-methodologie/">Notre méthodologie</a></li>
+          <li><a href="/sources/">Sources officielles</a></li>
+          <li><a href="/historique-aides-auto/">Historique des aides</a></li>
+          <li><a href="/mentions-legales.html">Mentions légales</a></li>
+          <li><a href="#" data-consent-open>Gérer les cookies</a></li>
+          <li><a href="mailto:contact@mes-aides-auto.fr?subject=Mes%20Aides%20Auto%20%E2%80%94%20contact">Nous écrire</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-legal">© 2026 Mes Aides Auto — Calculateur d’aides à la mobilité propre. Informations à caractère indicatif, sans valeur contractuelle : seule la décision de l’organisme qui verse l’aide fait foi.</p>
+  </div>
+</footer>
+<div id="consent-banner" hidden>
+  <div class="box">
+    <p style="flex:1">Ce site utilise <strong>Google Analytics</strong> pour mesurer son audience, uniquement si vous l’acceptez. Vos données financières (revenu, parts) ne sont jamais transmises. <a href="/mentions-legales.html#cookies">En savoir plus</a></p>
+    <div class="acts">
+      <button type="button" id="consent-accept">Accepter</button>
+      <button type="button" id="consent-refuse">Continuer sans accepter</button>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var b = document.getElementById('consent-banner'); if (!b || !window.MAA_consent) return;
+    function show() { b.hidden = false; } function hide() { b.hidden = true; }
+    if (!MAA_consent.get()) show();
+    document.getElementById('consent-accept').addEventListener('click', function () { MAA_consent.set('granted'); hide(); });
+    document.getElementById('consent-refuse').addEventListener('click', function () { MAA_consent.set('denied'); hide(); });
+    document.querySelectorAll('[data-consent-open]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); MAA_consent.reset(); show(); }); });
+  })();
+</script>
+</body>
+</html>

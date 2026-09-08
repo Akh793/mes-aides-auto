@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Consentement (Consent Mode v2) — doit précéder GTM. Aucun cookie de mesure tant que l'utilisateur n'a pas accepté (bandeau). -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
+  (function () {
+    var KEY = 'aides_auto_consent', TTL = 182 * 24 * 3600 * 1000, choice = null; // choix conservé 6 mois (recommandation CNIL)
+    try { var raw = localStorage.getItem(KEY); if (raw) { var o = JSON.parse(raw); if (o && o.v && Date.now() - o.t < TTL) choice = o.v; else localStorage.removeItem(KEY); } } catch (e) {}
+    function apply(v) {
+      gtag('consent', 'update', { analytics_storage: v === 'granted' ? 'granted' : 'denied' });
+      window.dataLayer.push({ event: v === 'granted' ? 'consent_granted' : 'consent_denied' });
+    }
+    window.MAA_consent = {
+      get: function () { return choice; },
+      set: function (v) { choice = v; try { localStorage.setItem(KEY, JSON.stringify({ v: v, t: Date.now() })); } catch (e) {} apply(v); },
+      reset: function () { choice = null; try { localStorage.removeItem(KEY); } catch (e) {} }
+    };
+    if (choice) apply(choice);
+  })();
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P2DNNBXT');</script>
+<!-- End Google Tag Manager -->
+<title>Historique des aides à l’achat automobile (2024-2026)</title>
+<meta name="description" content="Journal daté des évolutions : fin du bonus écologique et de la prime à la conversion, création de la prime « Coup de pouce », prime occasion 2026.">
+<link rel="canonical" href="https://mes-aides-auto.fr/historique-aides-auto/">
+<meta property="og:title" content="Historique des aides automobiles">
+<meta property="og:description" content="Journal daté des évolutions : fin du bonus écologique et de la prime à la conversion, création de la prime « Coup de pouce », prime occasion 2026.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://mes-aides-auto.fr/historique-aides-auto/">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Mes Aides Auto">
+<meta property="og:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Historique des aides automobiles">
+<meta name="twitter:description" content="Journal daté des évolutions : fin du bonus écologique et de la prime à la conversion, création de la prime « Coup de pouce », prime occasion 2026.">
+<meta name="twitter:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2548FF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/maa.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://mes-aides-auto.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Historique des aides",
+          "item": "https://mes-aides-auto.fr/historique-aides-auto/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Où voir la date de mise à jour d’une règle précise ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sur chaque carte de résultat du simulateur : la date de dernière vérification et le lien vers la source y figurent. La page Sources en donne la liste complète."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Une aide supprimée peut-elle revenir ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui, cela s’est déjà produit pour des dispositifs locaux. C’est le cas notamment des aides suspendues, comme celle de Grenoble-Alpes Métropole depuis le 26 septembre 2025 : le règlement existe toujours, seul le versement est interrompu."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "headline": "Historique des changements sur les aides à l’achat automobile",
+      "name": "Historique des changements sur les aides à l’achat automobile",
+      "description": "Journal daté des évolutions : fin du bonus écologique et de la prime à la conversion, création de la prime « Coup de pouce », prime occasion 2026.",
+      "inLanguage": "fr-FR",
+      "url": "https://mes-aides-auto.fr/historique-aides-auto/",
+      "datePublished": "2026-09-08",
+      "dateModified": "2026-09-08",
+      "author": {
+        "@type": "Person",
+        "name": "David Rival",
+        "url": "https://mes-aides-auto.fr/qui-sommes-nous.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2DNNBXT"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">Mes Aides <em>Auto</em></a>
+    <nav class="site-nav" aria-label="Navigation principale"><a href="/">Simulateur</a><a href="/aides-voiture-electrique-2026/">Aides 2026</a><a href="/aides-voiture-electrique/">Aides près de chez moi</a><a href="/notre-methodologie/">Méthodologie</a></nav>
+    <a class="btn" href="/">Calculer mes aides</a>
+  </div>
+</header>
+<nav class="crumb wrap" aria-label="Fil d’Ariane"><ol><li><a href="/">Accueil</a></li><li>Historique des aides</li></ol></nav>
+<main class="wrap"><article class="prose">
+<div class="hero"><h1>Historique des changements sur les aides à l’achat automobile</h1></div>
+<p class="lede">Les aides changent vite, et les contenus périmés circulent longtemps. Ce journal daté recense les évolutions que nous avons vérifiées, du plus récent au plus ancien.</p>
+
+<h2>2026</h2>
+<div class="card card-soft">
+<h3>1<sup>er</sup> septembre 2026 — création de la prime pour les voitures électriques d’occasion</h3>
+<p>L’arrêté du 10 août 2026 crée la fiche standardisée TRA-EQ-133 « Achat ou location d’une voiture particulière électrique d’occasion ». Premières conditions : immatriculation initiale entre 2017 et 2023, batterie ayant conservé plus de 80 % de sa capacité, achat chez un professionnel, conservation trois ans. <a href="/aide-voiture-electrique-occasion/">Détail de la prime occasion</a></p>
+</div>
+<div class="card card-soft">
+<h3>16 juillet 2026 — ouverture du leasing social 2026</h3>
+<p>50 000 places. Aide de l’État de 29 % du prix, plafonnée à 6 500 €, portée à 9 000 € pour un véhicule et une batterie fabriqués dans l’Espace économique européen, avec une surprime de 500 € pour un moteur produit en Europe. <a href="/leasing-social-2026/">Conditions du leasing social</a></p>
+</div>
+<div class="card card-soft">
+<h3>1<sup>er</sup> juillet 2026 — nouvelle campagne de l’éco-chèque mobilité en Occitanie</h3>
+<p>5 000 aides disponibles entre juillet 2026 et juin 2027 pour l’achat d’une voiture électrique d’occasion par un ménage non imposable : 30 % du prix, dans la limite de 1 600 €. <a href="/aides-voiture-electrique/occitanie/">Éco-chèque Occitanie</a></p>
+</div>
+
+<h2>2025</h2>
+<div class="card card-soft">
+<h3>26 septembre 2025 — suspension de l’aide de Grenoble-Alpes Métropole</h3>
+<p>Le dispositif est suspendu sans date de reprise annoncée. Le simulateur l’affiche comme suspendu et l’exclut du total, en rappelant le barème qui s’appliquerait en cas de reprise. <a href="/aides-voiture-electrique/grenoble/">Situation à Grenoble</a></p>
+</div>
+<div class="card card-soft">
+<h3>1<sup>er</sup> juillet 2025 — suppression du bonus écologique</h3>
+<p>Le bonus écologique disparaît et la prime « Coup de pouce véhicules particuliers électriques », financée par les certificats d’économies d’énergie, prend le relais. Changement majeur : le montant n’est plus fixé par un barème public unique. <a href="/bonus-ecologique-2026/">Ce qui remplace le bonus</a></p>
+</div>
+<div class="card card-soft">
+<h3>2 mars 2025 — fin de l’aide à l’achat de la Région Île-de-France</h3>
+<p>L’aide régionale aux particuliers est supprimée. Subsiste la prime « non-casse » pour la transformation d’un véhicule thermique en électrique, jusqu’à 6 000 €.</p>
+</div>
+<div class="card card-soft">
+<h3>1<sup>er</sup> janvier 2025 — nouveaux règlements locaux</h3>
+<p>Entrée en vigueur du règlement de l’Eurométropole de Strasbourg et ouverture du guichet de Bordeaux Métropole.</p>
+</div>
+<div class="card card-soft">
+<h3>31 décembre 2025 — fin du crédit d’impôt pour borne de recharge</h3>
+<p>Le crédit d’impôt de 500 € n’est pas reconduit par la loi de finances 2026. L’expérimentation du prêt à taux zéro mobilité arrive également à échéance, sans prolongation trouvée.</p>
+</div>
+
+<h2>2024</h2>
+<div class="card card-soft">
+<h3>2 décembre 2024 — suppression de la prime à la conversion et de la surprime ZFE</h3>
+<p>Le décret 2024-1084 met fin à la prime à la conversion et à sa surprime « zone à faibles émissions » de 1 000 €. Mettre une ancienne voiture à la casse ne donne plus droit à aucune aide nationale — mais reste exigé par la plupart des règlements locaux.</p>
+</div>
+
+<h2>Comment nous tenons ce journal</h2>
+<p>Chaque entrée correspond à un changement vérifié sur sa source officielle, avec mise à jour simultanée du moteur de calcul et des pages concernées. Les pages relatives à des dispositifs supprimés sont conservées : elles répondent à une question réelle. Voir <a href="/notre-methodologie/">notre méthodologie</a> et <a href="/sources/">nos sources</a>.</p>
+<div class="cta"><p class="t">Vos aides, à jour</p><p>Le simulateur applique les règles en vigueur aujourd’hui, chacune datée et sourcée.</p><a class="btn btn-lg" href="/">Lancer le simulateur</a></div>
+<h2 id="faq">Questions fréquentes</h2><div class="faq"><details><summary>Où voir la date de mise à jour d’une règle précise ?</summary><p>Sur chaque carte de résultat du simulateur : la date de dernière vérification et le lien vers la source y figurent. La page Sources en donne la liste complète.</p></details><details><summary>Une aide supprimée peut-elle revenir ?</summary><p>Oui, cela s’est déjà produit pour des dispositifs locaux. C’est le cas notamment des aides suspendues, comme celle de Grenoble-Alpes Métropole depuis le 26 septembre 2025 : le règlement existe toujours, seul le versement est interrompu.</p></details></div>
+<h2 id="sources">Sources officielles</h2><ul class="srcs"><li><a href="https://jechangemavoiture.gouv.fr/jcmv/aide-achat.html" target="_blank" rel="noopener">jechangemavoiture.gouv.fr</a></li><li><a href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054666103" target="_blank" rel="noopener">Arrêté du 10 août 2026 (TRA-EQ-133) — Légifrance</a></li><li><a href="https://www.primealaconversion.gouv.fr/dboneco/accueil/leasingsocial2026.html" target="_blank" rel="noopener">Aide au leasing social 2026 — primealaconversion.gouv.fr</a></li><li><a href="https://zfe.grenoblealpesmetropole.fr/684-aides-et-parcours.htm" target="_blank" rel="noopener">Zone à faibles émissions — Grenoble-Alpes Métropole</a></li></ul>
+<p class="verif">Dernière vérification des règles de cette page : <strong>8 septembre 2026</strong>. Nous republions cette page à chaque évolution réglementaire — voir <a href="/historique-aides-auto/">l’historique des changements</a> et <a href="/notre-methodologie/">notre méthodologie</a>.</p>
+<nav class="related" aria-label="À lire aussi"><h2>À lire aussi</h2><ul><li><a href="/aides-voiture-electrique-2026/">Toutes les aides 2026</a></li><li><a href="/bonus-ecologique-2026/">Le bonus écologique existe-t-il encore ?</a></li><li><a href="/notre-methodologie/">Notre méthodologie</a></li><li><a href="/sources/">Nos sources</a></li></ul></nav>
+</article></main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Le simulateur</h4>
+        <ul>
+          <li><a href="/">Simulateur d’aides</a></li>
+          <li><a href="/aides-voiture-electrique-2026/">Toutes les aides 2026</a></li>
+          <li><a href="/cumul-aides-voiture-electrique/">Cumuler les aides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Les aides</h4>
+        <ul>
+          <li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li>
+          <li><a href="/leasing-social-2026/">Leasing social 2026</a></li>
+          <li><a href="/aide-voiture-electrique-occasion/">Voiture d’occasion</a></li>
+          <li><a href="/bonus-ecologique-2026/">Bonus écologique</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Près de chez vous</h4>
+        <ul>
+          <li><a href="/aides-voiture-electrique/">Toutes les aides locales</a></li>
+          <li><a href="/aides-voiture-electrique/paris/">Paris et Grand Paris</a></li>
+          <li><a href="/aides-voiture-electrique/lyon/">Lyon</a></li>
+          <li><a href="/aides-voiture-electrique/marseille/">Marseille</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Le site</h4>
+        <ul>
+          <li><a href="/qui-sommes-nous.html">Qui sommes-nous ?</a></li>
+          <li><a href="/notre-methodologie/">Notre méthodologie</a></li>
+          <li><a href="/sources/">Sources officielles</a></li>
+          <li><a href="/historique-aides-auto/">Historique des aides</a></li>
+          <li><a href="/mentions-legales.html">Mentions légales</a></li>
+          <li><a href="#" data-consent-open>Gérer les cookies</a></li>
+          <li><a href="mailto:contact@mes-aides-auto.fr?subject=Mes%20Aides%20Auto%20%E2%80%94%20contact">Nous écrire</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-legal">© 2026 Mes Aides Auto — Calculateur d’aides à la mobilité propre. Informations à caractère indicatif, sans valeur contractuelle : seule la décision de l’organisme qui verse l’aide fait foi.</p>
+  </div>
+</footer>
+<div id="consent-banner" hidden>
+  <div class="box">
+    <p style="flex:1">Ce site utilise <strong>Google Analytics</strong> pour mesurer son audience, uniquement si vous l’acceptez. Vos données financières (revenu, parts) ne sont jamais transmises. <a href="/mentions-legales.html#cookies">En savoir plus</a></p>
+    <div class="acts">
+      <button type="button" id="consent-accept">Accepter</button>
+      <button type="button" id="consent-refuse">Continuer sans accepter</button>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var b = document.getElementById('consent-banner'); if (!b || !window.MAA_consent) return;
+    function show() { b.hidden = false; } function hide() { b.hidden = true; }
+    if (!MAA_consent.get()) show();
+    document.getElementById('consent-accept').addEventListener('click', function () { MAA_consent.set('granted'); hide(); });
+    document.getElementById('consent-refuse').addEventListener('click', function () { MAA_consent.set('denied'); hide(); });
+    document.querySelectorAll('[data-consent-open]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); MAA_consent.reset(); show(); }); });
+  })();
+</script>
+</body>
+</html>

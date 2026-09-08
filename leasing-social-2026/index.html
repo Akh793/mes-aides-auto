@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Consentement (Consent Mode v2) — doit précéder GTM. Aucun cookie de mesure tant que l'utilisateur n'a pas accepté (bandeau). -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
+  (function () {
+    var KEY = 'aides_auto_consent', TTL = 182 * 24 * 3600 * 1000, choice = null; // choix conservé 6 mois (recommandation CNIL)
+    try { var raw = localStorage.getItem(KEY); if (raw) { var o = JSON.parse(raw); if (o && o.v && Date.now() - o.t < TTL) choice = o.v; else localStorage.removeItem(KEY); } } catch (e) {}
+    function apply(v) {
+      gtag('consent', 'update', { analytics_storage: v === 'granted' ? 'granted' : 'denied' });
+      window.dataLayer.push({ event: v === 'granted' ? 'consent_granted' : 'consent_denied' });
+    }
+    window.MAA_consent = {
+      get: function () { return choice; },
+      set: function (v) { choice = v; try { localStorage.setItem(KEY, JSON.stringify({ v: v, t: Date.now() })); } catch (e) {} apply(v); },
+      reset: function () { choice = null; try { localStorage.removeItem(KEY); } catch (e) {} }
+    };
+    if (choice) apply(choice);
+  })();
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P2DNNBXT');</script>
+<!-- End Google Tag Manager -->
+<title>Leasing social 2026 : conditions, revenus et montants</title>
+<meta name="description" content="Revenu fiscal ≤ 16 880 €/part, usage professionnel, loyer ≤ 200 €/mois : l’État prend en charge 29 % du prix, jusqu’à 6 500 € (9 000 € si européen).">
+<link rel="canonical" href="https://mes-aides-auto.fr/leasing-social-2026/">
+<meta property="og:title" content="Leasing social 2026 : conditions et montants">
+<meta property="og:description" content="Revenu fiscal ≤ 16 880 €/part, usage professionnel, loyer ≤ 200 €/mois : l’État prend en charge 29 % du prix, jusqu’à 6 500 € (9 000 € si européen).">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://mes-aides-auto.fr/leasing-social-2026/">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Mes Aides Auto">
+<meta property="og:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Leasing social 2026 : conditions et montants">
+<meta name="twitter:description" content="Revenu fiscal ≤ 16 880 €/part, usage professionnel, loyer ≤ 200 €/mois : l’État prend en charge 29 % du prix, jusqu’à 6 500 € (9 000 € si européen).">
+<meta name="twitter:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2548FF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/maa.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://mes-aides-auto.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Aides voiture électrique 2026",
+          "item": "https://mes-aides-auto.fr/aides-voiture-electrique-2026/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Leasing social 2026",
+          "item": "https://mes-aides-auto.fr/leasing-social-2026/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Quel revenu maximum pour le leasing social 2026 ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le revenu fiscal de référence par part ne doit pas dépasser 16 880 €, d’après l’avis d’imposition N-2. Pour un couple avec deux enfants (3 parts), cela correspond à un revenu fiscal de référence d’environ 50 640 €."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Peut-on bénéficier du leasing social sans être salarié ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le dispositif vise les actifs. Un travailleur indépendant qui utilise son véhicule personnel pour son activité et parcourt plus de 8 000 km par an à ce titre peut donc y prétendre, en le justifiant par une déclaration sur l’honneur. En revanche, une personne sans activité professionnelle n’y est pas éligible."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Le leasing social est-il cumulable avec l’aide de ma métropole ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui dans la plupart des cas : les aides locales se cumulent avec les aides nationales. Deux exceptions repérées dans les règlements : la Métropole de Rouen exclut explicitement le cumul avec le leasing social, et la Métropole Aix-Marseille-Provence exclut toute location longue durée."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Que se passe-t-il si les 50 000 places sont épuisées ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La campagne se ferme. Il reste alors la prime « Coup de pouce » pour un achat ou une location classique d’au moins 24 mois, ainsi que les aides de votre collectivité. Le simulateur les calcule dans tous les cas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Le loyer de 200 € comprend-il l’assurance et l’entretien ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non. Le plafond de 200 € par mois porte sur le loyer du véhicule hors services annexes. L’assurance, l’entretien ou une éventuelle extension de kilométrage sont facturés en plus par le loueur."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "headline": "Leasing social 2026 : conditions, revenus et véhicules éligibles",
+      "name": "Leasing social 2026 : conditions, revenus et véhicules éligibles",
+      "description": "Revenu fiscal ≤ 16 880 €/part, usage professionnel, loyer ≤ 200 €/mois : l’État prend en charge 29 % du prix, jusqu’à 6 500 € (9 000 € si européen).",
+      "inLanguage": "fr-FR",
+      "url": "https://mes-aides-auto.fr/leasing-social-2026/",
+      "datePublished": "2026-09-08",
+      "dateModified": "2026-09-08",
+      "author": {
+        "@type": "Person",
+        "name": "David Rival",
+        "url": "https://mes-aides-auto.fr/qui-sommes-nous.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2DNNBXT"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">Mes Aides <em>Auto</em></a>
+    <nav class="site-nav" aria-label="Navigation principale"><a href="/">Simulateur</a><a href="/aides-voiture-electrique-2026/">Aides 2026</a><a href="/aides-voiture-electrique/">Aides près de chez moi</a><a href="/notre-methodologie/">Méthodologie</a></nav>
+    <a class="btn" href="/">Calculer mes aides</a>
+  </div>
+</header>
+<nav class="crumb wrap" aria-label="Fil d’Ariane"><ol><li><a href="/">Accueil</a></li><li><a href="/aides-voiture-electrique-2026/">Aides voiture électrique 2026</a></li><li>Leasing social 2026</li></ol></nav>
+<main class="wrap"><article class="prose">
+<div class="hero"><h1>Leasing social 2026 : conditions, revenus et véhicules éligibles</h1></div>
+<p class="lede">Louer une voiture électrique neuve pour 200 € par mois au maximum, sans apport : c’est la promesse du leasing social, réservé aux actifs modestes qui roulent pour travailler. Campagne ouverte depuis le 16 juillet 2026, 50 000 places.</p>
+
+<div class="answer">
+<p><strong>L’essentiel.</strong> L’État prend en charge <strong>29 % du prix de la voiture, dans la limite de 6 500 €</strong>. Ce plafond est porté à <strong>9 000 € lorsque le véhicule et sa batterie sont fabriqués dans l’Espace économique européen</strong>, et une surprime de 500 € s’ajoute si le moteur électrique est produit en Europe. Conditions d’accès : revenu fiscal de référence de <strong>16 880 € par part au maximum</strong> et usage professionnel du véhicule.</p>
+</div>
+<p class="note note-ok"><strong>Correction d’une confusion fréquente.</strong> De nombreux sites présentent « 6 500 € » et « 9 000 € » comme deux chiffres contradictoires. Ce n’en sont pas : 6 500 € est le plafond de droit commun, 9 000 € le plafond majoré pour un véhicule et une batterie fabriqués dans l’Espace économique européen. Source : le téléservice officiel primealaconversion.gouv.fr.</p>
+
+<h2>Qui peut en bénéficier ?</h2>
+<ul>
+<li><strong>Revenu fiscal de référence par part inférieur ou égal à 16 880 €</strong> (avis d’imposition N-2), soit les cinq premières tranches de revenus sur dix.</li>
+<li><strong>Être actif</strong> et utiliser sa voiture pour travailler : plus de 10 km entre le domicile et le travail, <em>ou</em> plus de 8 000 km par an à titre professionnel.</li>
+<li><strong>Ne pas avoir déjà bénéficié</strong> du leasing social en 2024 ou en 2025.</li>
+<li>Résider en France métropolitaine, dans les départements et régions d’outre-mer ou à Saint-Pierre-et-Miquelon.</li>
+</ul>
+
+<h2>Les conditions du contrat</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Critère</th><th>Règle 2026</th></tr></thead>
+<tbody>
+<tr><td>Durée</td><td>Location longue durée de <strong>36 mois minimum</strong></td></tr>
+<tr><td>Loyer</td><td><strong>200 € par mois maximum</strong>, hors services et options</td></tr>
+<tr><td>Apport</td><td>Aucun apport exigé</td></tr>
+<tr><td>Kilométrage inclus</td><td>Au moins <strong>15 000 km par an</strong></td></tr>
+<tr><td>Véhicule</td><td>Voiture particulière <strong>neuve, 100 % électrique</strong>, figurant sur la liste officielle</td></tr>
+<tr><td>Prix et masse</td><td>Prix ≤ 47 000 €, masse inférieure à 1,8 tonne — un seuil <strong>plus strict</strong> que celui de la prime « Coup de pouce » (2,4 t)</td></tr>
+<tr><td>Enveloppe</td><td><strong>50 000 places</strong>, campagne ouverte le 16 juillet 2026</td></tr>
+</tbody>
+</table>
+</div>
+<p class="note note-warn">Le nombre de places restantes n’est pas publié en temps réel. Une éligibilité théorique ne garantit donc pas l’obtention du contrat : les dossiers sont traités dans l’ordre d’arrivée, jusqu’à épuisement de l’enveloppe.</p>
+
+<h2>Leasing social ou prime « Coup de pouce » : lequel choisir ?</h2>
+<p>Les deux dispositifs sont <strong>exclusifs l’un de l’autre</strong>. La comparaison dépend surtout de votre projet :</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th></th><th>Leasing social</th><th>Prime « Coup de pouce »</th></tr></thead>
+<tbody>
+<tr><td>Vous devenez propriétaire</td><td>Non (location)</td><td>Oui (ou location au choix)</td></tr>
+<tr><td>Plafond de revenus</td><td>16 880 € par part</td><td>Aucun (le montant baisse avec les revenus élevés)</td></tr>
+<tr><td>Usage professionnel exigé</td><td>Oui</td><td>Seulement pour le volet gros rouleurs</td></tr>
+<tr><td>Aide maximale</td><td>9 000 € (+ 500 € moteur européen)</td><td>7 700 €</td></tr>
+<tr><td>Engagement</td><td>36 mois</td><td>24 mois</td></tr>
+</tbody>
+</table>
+</div>
+<p>Le simulateur affiche systématiquement le leasing social comme <em>alternative</em> lorsque vous y êtes éligible, même si vous avez indiqué vouloir acheter : c’est souvent l’option la plus avantageuse pour un ménage modeste qui roule beaucoup.</p>
+
+<h2>Comment faire la demande</h2>
+<ol>
+<li>Vérifiez votre éligibilité et choisissez un modèle sur le site officiel du leasing social.</li>
+<li>Contactez un loueur ou un concessionnaire référencé : l’aide de l’État est directement intégrée au contrat, vous n’avancez rien.</li>
+<li>Signez le contrat de location longue durée de trois ans minimum.</li>
+</ol>
+<h3>Les documents à préparer</h3>
+<ul>
+<li>Pièce d’identité et justificatif de domicile ;</li>
+<li>dernier avis d’imposition (revenu fiscal de référence de 16 880 € par part au maximum) ;</li>
+<li>attestation de l’employeur (trajet de plus de 10 km) ou déclaration sur l’honneur des kilomètres parcourus pour le travail (plus de 8 000 km par an).</li>
+</ul>
+<div class="cta"><p class="t">Êtes-vous éligible au leasing social ?</p><p>Le simulateur vérifie vos revenus par part, votre usage professionnel et compare automatiquement le leasing social avec la prime d’État.</p><a class="btn btn-lg" href="/">Lancer le simulateur</a></div>
+<h2 id="faq">Questions fréquentes</h2><div class="faq"><details><summary>Quel revenu maximum pour le leasing social 2026 ?</summary><p>Le revenu fiscal de référence par part ne doit pas dépasser 16 880 €, d’après l’avis d’imposition N-2. Pour un couple avec deux enfants (3 parts), cela correspond à un revenu fiscal de référence d’environ 50 640 €.</p></details><details><summary>Peut-on bénéficier du leasing social sans être salarié ?</summary><p>Le dispositif vise les actifs. Un travailleur indépendant qui utilise son véhicule personnel pour son activité et parcourt plus de 8 000 km par an à ce titre peut donc y prétendre, en le justifiant par une déclaration sur l’honneur. En revanche, une personne sans activité professionnelle n’y est pas éligible.</p></details><details><summary>Le leasing social est-il cumulable avec l’aide de ma métropole ?</summary><p>Oui dans la plupart des cas : les aides locales se cumulent avec les aides nationales. Deux exceptions repérées dans les règlements : la Métropole de Rouen exclut explicitement le cumul avec le leasing social, et la Métropole Aix-Marseille-Provence exclut toute location longue durée.</p></details><details><summary>Que se passe-t-il si les 50 000 places sont épuisées ?</summary><p>La campagne se ferme. Il reste alors la prime « Coup de pouce » pour un achat ou une location classique d’au moins 24 mois, ainsi que les aides de votre collectivité. Le simulateur les calcule dans tous les cas.</p></details><details><summary>Le loyer de 200 € comprend-il l’assurance et l’entretien ?</summary><p>Non. Le plafond de 200 € par mois porte sur le loyer du véhicule hors services annexes. L’assurance, l’entretien ou une éventuelle extension de kilométrage sont facturés en plus par le loueur.</p></details></div>
+<h2 id="sources">Sources officielles</h2><ul class="srcs"><li><a href="https://www.primealaconversion.gouv.fr/dboneco/accueil/leasingsocial2026.html" target="_blank" rel="noopener">Aide au leasing social 2026 — primealaconversion.gouv.fr (téléservice officiel)</a></li><li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F39280" target="_blank" rel="noopener">Leasing social — service-public.fr, fiche F39280</a></li><li><a href="https://www.ecologie.gouv.fr/" target="_blank" rel="noopener">Liste des véhicules éligibles — ecologie.gouv.fr</a></li><li><a href="https://jechangemavoiture.gouv.fr/jcmv/aide-achat.html" target="_blank" rel="noopener">jechangemavoiture.gouv.fr</a></li></ul>
+<p class="verif">Dernière vérification des règles de cette page : <strong>8 septembre 2026</strong>. Nous republions cette page à chaque évolution réglementaire — voir <a href="/historique-aides-auto/">l’historique des changements</a> et <a href="/notre-methodologie/">notre méthodologie</a>.</p>
+<nav class="related" aria-label="À lire aussi"><h2>À lire aussi</h2><ul><li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce » voiture électrique</a></li><li><a href="/aides-voiture-electrique-2026/">Toutes les aides voiture électrique 2026</a></li><li><a href="/cumul-aides-voiture-electrique/">Peut-on cumuler plusieurs aides ?</a></li><li><a href="/aides-voiture-electrique/">Les aides près de chez vous</a></li></ul></nav>
+</article></main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Le simulateur</h4>
+        <ul>
+          <li><a href="/">Simulateur d’aides</a></li>
+          <li><a href="/aides-voiture-electrique-2026/">Toutes les aides 2026</a></li>
+          <li><a href="/cumul-aides-voiture-electrique/">Cumuler les aides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Les aides</h4>
+        <ul>
+          <li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li>
+          <li><a href="/leasing-social-2026/">Leasing social 2026</a></li>
+          <li><a href="/aide-voiture-electrique-occasion/">Voiture d’occasion</a></li>
+          <li><a href="/bonus-ecologique-2026/">Bonus écologique</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Près de chez vous</h4>
+        <ul>
+          <li><a href="/aides-voiture-electrique/">Toutes les aides locales</a></li>
+          <li><a href="/aides-voiture-electrique/paris/">Paris et Grand Paris</a></li>
+          <li><a href="/aides-voiture-electrique/lyon/">Lyon</a></li>
+          <li><a href="/aides-voiture-electrique/marseille/">Marseille</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Le site</h4>
+        <ul>
+          <li><a href="/qui-sommes-nous.html">Qui sommes-nous ?</a></li>
+          <li><a href="/notre-methodologie/">Notre méthodologie</a></li>
+          <li><a href="/sources/">Sources officielles</a></li>
+          <li><a href="/historique-aides-auto/">Historique des aides</a></li>
+          <li><a href="/mentions-legales.html">Mentions légales</a></li>
+          <li><a href="#" data-consent-open>Gérer les cookies</a></li>
+          <li><a href="mailto:contact@mes-aides-auto.fr?subject=Mes%20Aides%20Auto%20%E2%80%94%20contact">Nous écrire</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-legal">© 2026 Mes Aides Auto — Calculateur d’aides à la mobilité propre. Informations à caractère indicatif, sans valeur contractuelle : seule la décision de l’organisme qui verse l’aide fait foi.</p>
+  </div>
+</footer>
+<div id="consent-banner" hidden>
+  <div class="box">
+    <p style="flex:1">Ce site utilise <strong>Google Analytics</strong> pour mesurer son audience, uniquement si vous l’acceptez. Vos données financières (revenu, parts) ne sont jamais transmises. <a href="/mentions-legales.html#cookies">En savoir plus</a></p>
+    <div class="acts">
+      <button type="button" id="consent-accept">Accepter</button>
+      <button type="button" id="consent-refuse">Continuer sans accepter</button>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var b = document.getElementById('consent-banner'); if (!b || !window.MAA_consent) return;
+    function show() { b.hidden = false; } function hide() { b.hidden = true; }
+    if (!MAA_consent.get()) show();
+    document.getElementById('consent-accept').addEventListener('click', function () { MAA_consent.set('granted'); hide(); });
+    document.getElementById('consent-refuse').addEventListener('click', function () { MAA_consent.set('denied'); hide(); });
+    document.querySelectorAll('[data-consent-open]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); MAA_consent.reset(); show(); }); });
+  })();
+</script>
+</body>
+</html>

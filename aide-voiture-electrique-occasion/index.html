@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Consentement (Consent Mode v2) — doit précéder GTM. Aucun cookie de mesure tant que l'utilisateur n'a pas accepté (bandeau). -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
+  (function () {
+    var KEY = 'aides_auto_consent', TTL = 182 * 24 * 3600 * 1000, choice = null; // choix conservé 6 mois (recommandation CNIL)
+    try { var raw = localStorage.getItem(KEY); if (raw) { var o = JSON.parse(raw); if (o && o.v && Date.now() - o.t < TTL) choice = o.v; else localStorage.removeItem(KEY); } } catch (e) {}
+    function apply(v) {
+      gtag('consent', 'update', { analytics_storage: v === 'granted' ? 'granted' : 'denied' });
+      window.dataLayer.push({ event: v === 'granted' ? 'consent_granted' : 'consent_denied' });
+    }
+    window.MAA_consent = {
+      get: function () { return choice; },
+      set: function (v) { choice = v; try { localStorage.setItem(KEY, JSON.stringify({ v: v, t: Date.now() })); } catch (e) {} apply(v); },
+      reset: function () { choice = null; try { localStorage.removeItem(KEY); } catch (e) {} }
+    };
+    if (choice) apply(choice);
+  })();
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P2DNNBXT');</script>
+<!-- End Google Tag Manager -->
+<title>Aide voiture électrique d’occasion 2026 : la nouvelle prime</title>
+<meta name="description" content="Depuis le 1er septembre 2026, une prime d’État existe pour l’occasion électrique : conditions, véhicules concernés et aides locales cumulables.">
+<link rel="canonical" href="https://mes-aides-auto.fr/aide-voiture-electrique-occasion/">
+<meta property="og:title" content="Aides pour une voiture électrique d’occasion en 2026">
+<meta property="og:description" content="Depuis le 1er septembre 2026, une prime d’État existe pour l’occasion électrique : conditions, véhicules concernés et aides locales cumulables.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://mes-aides-auto.fr/aide-voiture-electrique-occasion/">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Mes Aides Auto">
+<meta property="og:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Aides pour une voiture électrique d’occasion en 2026">
+<meta name="twitter:description" content="Depuis le 1er septembre 2026, une prime d’État existe pour l’occasion électrique : conditions, véhicules concernés et aides locales cumulables.">
+<meta name="twitter:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2548FF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/maa.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://mes-aides-auto.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Aides voiture électrique 2026",
+          "item": "https://mes-aides-auto.fr/aides-voiture-electrique-2026/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Voiture électrique d’occasion",
+          "item": "https://mes-aides-auto.fr/aide-voiture-electrique-occasion/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Y a-t-il une prime pour une voiture électrique d’occasion en 2026 ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui. L’arrêté du 10 août 2026 a créé la fiche standardisée TRA-EQ-133 « Achat ou location d’une voiture particulière électrique d’occasion », entrée en vigueur le 1er septembre 2026. Son montant dépend du fournisseur d’énergie partenaire du vendeur ; les premiers barèmes publiés se situent autour de 300 à 500 €."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quelles voitures d’occasion sont éligibles ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Les voitures particulières 100 % électriques immatriculées pour la première fois entre le 1er janvier 2017 et le 31 décembre 2023, dont la batterie a conservé plus de 80 % de sa capacité ou offre au moins 200 km d’autonomie, achetées chez un professionnel habilité et conservées 36 mois."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Puis-je cumuler la prime occasion avec la prime du neuf ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non. Prime neuf, prime occasion et leasing social relèvent de la même enveloppe et sont exclusifs les uns des autres. En revanche, la prime occasion se cumule avec les aides de votre collectivité."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "L’aide est-elle plus élevée pour une occasion ou pour une neuve ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pour l’aide nationale, le neuf reste nettement plus avantageux. Sur l’occasion, ce sont les aides locales qui font la différence : jusqu’à 6 000 € dans le Grand Paris ou 3 300 € à Toulouse, contre quelques centaines d’euros pour la prime d’État."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Comment prouver l’état de la batterie ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Par un certificat d’état de santé de la batterie établi lors de la vente. Les professionnels du véhicule électrique d’occasion le fournissent de plus en plus souvent ; exigez-le, car il conditionne à la fois l’aide et la valeur réelle du véhicule."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "headline": "Quelles aides pour acheter une voiture électrique d’occasion ?",
+      "name": "Quelles aides pour acheter une voiture électrique d’occasion ?",
+      "description": "Depuis le 1er septembre 2026, une prime d’État existe pour l’occasion électrique : conditions, véhicules concernés et aides locales cumulables.",
+      "inLanguage": "fr-FR",
+      "url": "https://mes-aides-auto.fr/aide-voiture-electrique-occasion/",
+      "datePublished": "2026-09-08",
+      "dateModified": "2026-09-08",
+      "author": {
+        "@type": "Person",
+        "name": "David Rival",
+        "url": "https://mes-aides-auto.fr/qui-sommes-nous.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2DNNBXT"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">Mes Aides <em>Auto</em></a>
+    <nav class="site-nav" aria-label="Navigation principale"><a href="/">Simulateur</a><a href="/aides-voiture-electrique-2026/">Aides 2026</a><a href="/aides-voiture-electrique/">Aides près de chez moi</a><a href="/notre-methodologie/">Méthodologie</a></nav>
+    <a class="btn" href="/">Calculer mes aides</a>
+  </div>
+</header>
+<nav class="crumb wrap" aria-label="Fil d’Ariane"><ol><li><a href="/">Accueil</a></li><li><a href="/aides-voiture-electrique-2026/">Aides voiture électrique 2026</a></li><li>Voiture électrique d’occasion</li></ol></nav>
+<main class="wrap"><article class="prose">
+<div class="hero"><h1>Quelles aides pour acheter une voiture électrique d’occasion ?</h1></div>
+<p class="lede">L’occasion électrique était le grand angle mort des aides publiques. Un arrêté du 10 août 2026 a créé une prime dédiée, en vigueur depuis le 1ᵉʳ septembre 2026.</p>
+
+<div class="answer">
+<p><strong>Oui, il existe désormais une aide.</strong> L’arrêté du 10 août 2026 a créé la fiche « Achat ou location d’une voiture particulière électrique d’occasion » (TRA-EQ-133), applicable depuis le <strong>1<sup>er</sup> septembre 2026</strong>. Elle vise les voitures <strong>immatriculées pour la première fois entre 2017 et 2023</strong>, dont la <strong>batterie a conservé plus de 80 % de sa capacité</strong>, achetées <strong>chez un professionnel</strong> et gardées <strong>trois ans</strong>. Les aides locales, elles, existaient déjà et restent souvent plus élevées.</p>
+</div>
+<p class="note note-warn"><strong>Sur le montant, nous préférons dire ce que nous savons.</strong> Comme pour le neuf, la réglementation raisonne en coefficients et non en euros : le montant dépend du fournisseur d’énergie partenaire du vendeur. Les premiers barèmes publiés par un opérateur partenaire (Hellio, mis à jour le 24 août 2026) situent l’aide autour de <strong>300 à 500 €</strong> pour les ménages précaires et modestes ⚠️ — un ordre de grandeur bien inférieur à la prime du neuf, à confirmer offre en main. Nous mettrons cette page à jour dès que des barèmes plus larges seront publiés.</p>
+
+<h2>Les conditions de la prime d’État occasion</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Critère</th><th>Règle</th></tr></thead>
+<tbody>
+<tr><td>Véhicule</td><td>Voiture particulière <strong>100 % électrique</strong> d’occasion</td></tr>
+<tr><td>Première immatriculation</td><td>Entre le <strong>1<sup>er</sup> janvier 2017 et le 31 décembre 2023</strong> (pour éviter une double valorisation des certificats d’économies d’énergie)</td></tr>
+<tr><td>État de la batterie</td><td>Capacité restante <strong>supérieure à 80 %</strong>, ou autonomie résiduelle d’au moins 200 km</td></tr>
+<tr><td>Vendeur</td><td><strong>Professionnel habilité</strong> — un achat entre particuliers n’ouvre aucun droit</td></tr>
+<tr><td>Conservation</td><td><strong>36 mois</strong></td></tr>
+<tr><td>Bonification</td><td>Prix ≤ 25 000 € TTC et masse &lt; 1 800 kg ⚠️ <em>(conditions du projet d’arrêté soumis à consultation publique)</em></td></tr>
+<tr><td>Entrée en vigueur</td><td>1<sup>er</sup> septembre 2026</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>Les aides locales sont souvent plus intéressantes</h2>
+<p>Sur l’occasion, ce sont les collectivités qui portent l’essentiel de l’effort. Quelques exemples tirés des règlements en vigueur :</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Territoire</th><th>Aide pour une occasion électrique</th><th>Condition marquante</th></tr></thead>
+<tbody>
+<tr><td><a href="/aides-voiture-electrique/occitanie/">Région Occitanie</a></td><td class="num">30 % du prix, jusqu’à 1 600 €</td><td>Ménage non imposable, achat chez un professionnel agréé en Occitanie</td></tr>
+<tr><td><a href="/aides-voiture-electrique/toulouse/">Toulouse Métropole</a></td><td class="num">2 000 à 3 300 €</td><td>Mise à la casse d’une Crit’Air 3 ou plus ancienne ; achat à un particulier accepté</td></tr>
+<tr><td><a href="/aides-voiture-electrique/paris/">Grand Paris</a></td><td class="num">jusqu’à 6 000 €</td><td>Mise au rebut obligatoire, prix ≤ 40 000 €</td></tr>
+<tr><td><a href="/aides-voiture-electrique/marseille/">Marseille (zone à faibles émissions)</a></td><td class="num">1 500 à 2 500 €</td><td>Mise à la casse d’une Crit’Air 4 ou plus ancienne, achat chez un professionnel</td></tr>
+<tr><td><a href="/aides-voiture-electrique/strasbourg/">Strasbourg</a></td><td class="num">2 000 à 4 000 €</td><td>Neuf ou occasion, achat à un particulier accepté</td></tr>
+</tbody>
+</table>
+</div>
+<p>Un ménage non imposable de Toulouse achetant une électrique d’occasion à 15 000 € peut ainsi additionner l’éco-chèque régional et la prime métropolitaine — le simulateur applique automatiquement les règles de cumul et les plafonds.</p>
+
+<h2>Acheter à un particulier : ce que vous perdez</h2>
+<p>C’est le point le plus mal compris de l’occasion électrique. Un achat entre particuliers vous prive de <strong>toute prime d’État</strong> et de l’éco-chèque d’Occitanie, qui exige un professionnel agréé. Restent quelques aides locales qui l’acceptent explicitement — Toulouse et Strasbourg notamment — à condition de déposer le dossier vous-même, avec l’acte de vente (formulaire Cerfa 15776), la carte grise et, le cas échéant, le certificat de destruction de l’ancienne voiture.</p>
+
+<h2>Les vérifications à faire avant d’acheter</h2>
+<ul>
+<li><strong>L’état de santé de la batterie</strong> : demandez un certificat de contrôle. C’est la condition qui décide de l’aide, et le principal risque financier d’une occasion électrique.</li>
+<li><strong>La date de première immatriculation</strong> : hors de la fenêtre 2017-2023, pas de prime d’État.</li>
+<li><strong>Le statut du vendeur</strong> : professionnel habilité, ou particulier.</li>
+<li><strong>Le règlement de votre collectivité</strong> : certaines exigent le dépôt du dossier avant l’achat (Lyon, Grand Annecy).</li>
+</ul>
+<div class="cta"><p class="t">Quelles aides pour votre occasion ?</p><p>Indiquez votre code postal, vos revenus et le prix : le simulateur distingue le neuf de l’occasion et le vendeur professionnel du particulier.</p><a class="btn btn-lg" href="/">Lancer le simulateur</a></div>
+<h2 id="faq">Questions fréquentes</h2><div class="faq"><details><summary>Y a-t-il une prime pour une voiture électrique d’occasion en 2026 ?</summary><p>Oui. L’arrêté du 10 août 2026 a créé la fiche standardisée TRA-EQ-133 « Achat ou location d’une voiture particulière électrique d’occasion », entrée en vigueur le 1er septembre 2026. Son montant dépend du fournisseur d’énergie partenaire du vendeur ; les premiers barèmes publiés se situent autour de 300 à 500 €.</p></details><details><summary>Quelles voitures d’occasion sont éligibles ?</summary><p>Les voitures particulières 100 % électriques immatriculées pour la première fois entre le 1er janvier 2017 et le 31 décembre 2023, dont la batterie a conservé plus de 80 % de sa capacité ou offre au moins 200 km d’autonomie, achetées chez un professionnel habilité et conservées 36 mois.</p></details><details><summary>Puis-je cumuler la prime occasion avec la prime du neuf ?</summary><p>Non. Prime neuf, prime occasion et leasing social relèvent de la même enveloppe et sont exclusifs les uns des autres. En revanche, la prime occasion se cumule avec les aides de votre collectivité.</p></details><details><summary>L’aide est-elle plus élevée pour une occasion ou pour une neuve ?</summary><p>Pour l’aide nationale, le neuf reste nettement plus avantageux. Sur l’occasion, ce sont les aides locales qui font la différence : jusqu’à 6 000 € dans le Grand Paris ou 3 300 € à Toulouse, contre quelques centaines d’euros pour la prime d’État.</p></details><details><summary>Comment prouver l’état de la batterie ?</summary><p>Par un certificat d’état de santé de la batterie établi lors de la vente. Les professionnels du véhicule électrique d’occasion le fournissent de plus en plus souvent ; exigez-le, car il conditionne à la fois l’aide et la valeur réelle du véhicule.</p></details></div>
+<h2 id="sources">Sources officielles</h2><ul class="srcs"><li><a href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054666103" target="_blank" rel="noopener">Arrêté du 10 août 2026 créant la fiche TRA-EQ-133 — Légifrance</a></li><li><a href="https://www.consultations-publiques.developpement-durable.gouv.fr/projet-d-arrete-creant-la-fiche-d-operation-a3394.html?lang=fr" target="_blank" rel="noopener">Projet d’arrêté TRA-EQ-133 — consultation publique, ministère de la Transition écologique</a></li><li><a href="https://www.laregion.fr/Eco-cheque-mobilite-voiture-electrique-ou-hybride" target="_blank" rel="noopener">Éco-chèque mobilité — Région Occitanie</a></li><li><a href="https://www.hellio.com/actualites/conseils/prime-cee-voiture-electrique-occasion" target="_blank" rel="noopener">Barèmes publiés par un opérateur partenaire (Hellio, 24/08/2026) ⚠️ source commerciale</a></li></ul>
+<p class="verif">Dernière vérification des règles de cette page : <strong>8 septembre 2026</strong>. Nous republions cette page à chaque évolution réglementaire — voir <a href="/historique-aides-auto/">l’historique des changements</a> et <a href="/notre-methodologie/">notre méthodologie</a>.</p>
+<nav class="related" aria-label="À lire aussi"><h2>À lire aussi</h2><ul><li><a href="/aides-voiture-electrique-2026/">Toutes les aides voiture électrique 2026</a></li><li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce » (voiture neuve)</a></li><li><a href="/cumul-aides-voiture-electrique/">Peut-on cumuler plusieurs aides ?</a></li><li><a href="/aides-voiture-electrique/occitanie/">Éco-chèque de la Région Occitanie</a></li></ul></nav>
+</article></main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Le simulateur</h4>
+        <ul>
+          <li><a href="/">Simulateur d’aides</a></li>
+          <li><a href="/aides-voiture-electrique-2026/">Toutes les aides 2026</a></li>
+          <li><a href="/cumul-aides-voiture-electrique/">Cumuler les aides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Les aides</h4>
+        <ul>
+          <li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li>
+          <li><a href="/leasing-social-2026/">Leasing social 2026</a></li>
+          <li><a href="/aide-voiture-electrique-occasion/">Voiture d’occasion</a></li>
+          <li><a href="/bonus-ecologique-2026/">Bonus écologique</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Près de chez vous</h4>
+        <ul>
+          <li><a href="/aides-voiture-electrique/">Toutes les aides locales</a></li>
+          <li><a href="/aides-voiture-electrique/paris/">Paris et Grand Paris</a></li>
+          <li><a href="/aides-voiture-electrique/lyon/">Lyon</a></li>
+          <li><a href="/aides-voiture-electrique/marseille/">Marseille</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Le site</h4>
+        <ul>
+          <li><a href="/qui-sommes-nous.html">Qui sommes-nous ?</a></li>
+          <li><a href="/notre-methodologie/">Notre méthodologie</a></li>
+          <li><a href="/sources/">Sources officielles</a></li>
+          <li><a href="/historique-aides-auto/">Historique des aides</a></li>
+          <li><a href="/mentions-legales.html">Mentions légales</a></li>
+          <li><a href="#" data-consent-open>Gérer les cookies</a></li>
+          <li><a href="mailto:contact@mes-aides-auto.fr?subject=Mes%20Aides%20Auto%20%E2%80%94%20contact">Nous écrire</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-legal">© 2026 Mes Aides Auto — Calculateur d’aides à la mobilité propre. Informations à caractère indicatif, sans valeur contractuelle : seule la décision de l’organisme qui verse l’aide fait foi.</p>
+  </div>
+</footer>
+<div id="consent-banner" hidden>
+  <div class="box">
+    <p style="flex:1">Ce site utilise <strong>Google Analytics</strong> pour mesurer son audience, uniquement si vous l’acceptez. Vos données financières (revenu, parts) ne sont jamais transmises. <a href="/mentions-legales.html#cookies">En savoir plus</a></p>
+    <div class="acts">
+      <button type="button" id="consent-accept">Accepter</button>
+      <button type="button" id="consent-refuse">Continuer sans accepter</button>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var b = document.getElementById('consent-banner'); if (!b || !window.MAA_consent) return;
+    function show() { b.hidden = false; } function hide() { b.hidden = true; }
+    if (!MAA_consent.get()) show();
+    document.getElementById('consent-accept').addEventListener('click', function () { MAA_consent.set('granted'); hide(); });
+    document.getElementById('consent-refuse').addEventListener('click', function () { MAA_consent.set('denied'); hide(); });
+    document.querySelectorAll('[data-consent-open]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); MAA_consent.reset(); show(); }); });
+  })();
+</script>
+</body>
+</html>

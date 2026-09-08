@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Consentement (Consent Mode v2) — doit précéder GTM. Aucun cookie de mesure tant que l'utilisateur n'a pas accepté (bandeau). -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
+  (function () {
+    var KEY = 'aides_auto_consent', TTL = 182 * 24 * 3600 * 1000, choice = null; // choix conservé 6 mois (recommandation CNIL)
+    try { var raw = localStorage.getItem(KEY); if (raw) { var o = JSON.parse(raw); if (o && o.v && Date.now() - o.t < TTL) choice = o.v; else localStorage.removeItem(KEY); } } catch (e) {}
+    function apply(v) {
+      gtag('consent', 'update', { analytics_storage: v === 'granted' ? 'granted' : 'denied' });
+      window.dataLayer.push({ event: v === 'granted' ? 'consent_granted' : 'consent_denied' });
+    }
+    window.MAA_consent = {
+      get: function () { return choice; },
+      set: function (v) { choice = v; try { localStorage.setItem(KEY, JSON.stringify({ v: v, t: Date.now() })); } catch (e) {} apply(v); },
+      reset: function () { choice = null; try { localStorage.removeItem(KEY); } catch (e) {} }
+    };
+    if (choice) apply(choice);
+  })();
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P2DNNBXT');</script>
+<!-- End Google Tag Manager -->
+<title>Aide voiture électrique Paris 2026 : jusqu’à 6 000 €</title>
+<meta name="description" content="L’aide « Métropole roule propre » atteint 6 000 € dans les 149 communes du Grand Paris, sous condition de revenus et de mise au rebut.">
+<link rel="canonical" href="https://mes-aides-auto.fr/aides-voiture-electrique/paris/">
+<meta property="og:title" content="Quelles aides pour acheter une voiture électrique à Paris en 2026 ?">
+<meta property="og:description" content="L’aide « Métropole roule propre » atteint 6 000 € dans les 149 communes du Grand Paris, sous condition de revenus et de mise au rebut.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://mes-aides-auto.fr/aides-voiture-electrique/paris/">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Mes Aides Auto">
+<meta property="og:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quelles aides pour acheter une voiture électrique à Paris en 2026 ?">
+<meta name="twitter:description" content="L’aide « Métropole roule propre » atteint 6 000 € dans les 149 communes du Grand Paris, sous condition de revenus et de mise au rebut.">
+<meta name="twitter:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2548FF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/maa.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://mes-aides-auto.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Aides près de chez vous",
+          "item": "https://mes-aides-auto.fr/aides-voiture-electrique/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Paris",
+          "item": "https://mes-aides-auto.fr/aides-voiture-electrique/paris/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Existe-t-il une aide de la Ville de Paris pour acheter une voiture électrique ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La Ville de Paris ne verse pas d’aide propre à l’achat d’une voiture pour les particuliers : c’est la Métropole du Grand Paris qui porte le dispositif, avec son aide « Métropole roule propre » pouvant atteindre 6 000 €."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ma commune fait-elle partie du Grand Paris ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La Métropole du Grand Paris regroupe 149 communes : Paris et une grande partie des Hauts-de-Seine, de la Seine-Saint-Denis et du Val-de-Marne, ainsi que quelques communes de l’Essonne et du Val-d’Oise. La liste complète figure sur cette page, et le simulateur le vérifie automatiquement à partir de votre code postal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "La Région Île-de-France aide-t-elle encore à l’achat d’une voiture électrique ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non, son aide à l’achat pour les particuliers a été supprimée le 2 mars 2025. Elle finance en revanche toujours la transformation d’un véhicule thermique en électrique, avec une prime « non-casse » pouvant atteindre 6 000 €."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Faut-il obligatoirement mettre une voiture à la casse ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui pour l’aide du Grand Paris : la destruction définitive d’une ancienne voiture, attestée par un centre de véhicules hors d’usage agréé, est une condition du règlement. Les aides nationales, elles, ne l’exigent plus depuis la fin de la prime à la conversion."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "headline": "Quelles aides pour acheter une voiture électrique à Paris en 2026 ?",
+      "name": "Quelles aides pour acheter une voiture électrique à Paris en 2026 ?",
+      "description": "L’aide « Métropole roule propre » atteint 6 000 € dans les 149 communes du Grand Paris, sous condition de revenus et de mise au rebut.",
+      "inLanguage": "fr-FR",
+      "url": "https://mes-aides-auto.fr/aides-voiture-electrique/paris/",
+      "datePublished": "2026-09-08",
+      "dateModified": "2026-09-07",
+      "author": {
+        "@type": "Person",
+        "name": "David Rival",
+        "url": "https://mes-aides-auto.fr/qui-sommes-nous.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      },
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Mes Aides Auto",
+        "url": "https://mes-aides-auto.fr/"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2DNNBXT"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">Mes Aides <em>Auto</em></a>
+    <nav class="site-nav" aria-label="Navigation principale"><a href="/">Simulateur</a><a href="/aides-voiture-electrique-2026/">Aides 2026</a><a href="/aides-voiture-electrique/" aria-current="page">Aides près de chez moi</a><a href="/notre-methodologie/">Méthodologie</a></nav>
+    <a class="btn" href="/">Calculer mes aides</a>
+  </div>
+</header>
+<nav class="crumb wrap" aria-label="Fil d’Ariane"><ol><li><a href="/">Accueil</a></li><li><a href="/aides-voiture-electrique/">Aides près de chez vous</a></li><li>Paris</li></ol></nav>
+<main class="wrap"><article class="prose">
+<div class="hero"><h1>Quelles aides pour acheter une voiture électrique à Paris en 2026 ?</h1></div>
+<p class="lede">Paris relève de la Métropole du Grand Paris, qui verse l’aide locale la plus élevée de France : jusqu’à 6 000 €. La Région Île-de-France, elle, n’aide plus l’achat depuis mars 2025.</p>
+<div class="answer"><p><strong>Oui, jusqu’à 6 000 €.</strong> L’aide « Métropole roule propre » du Grand Paris s’adresse aux habitants des <strong>149 communes</strong> de la métropole, dont Paris. Conditions : revenu fiscal de référence de <strong>24 900 € par part au maximum</strong>, <strong>mise au rebut définitive d’une ancienne voiture</strong>, et prix du véhicule inférieur à <strong>40 000 €</strong>. Elle se cumule avec la prime d’État.</p></div>
+<h2 id="montants">Les montants de l’aide « Métropole roule propre »</h2>
+<div class="table-wrap"><table><thead><tr><th>Véhicule acheté</th><th>Montant maximal</th><th>Précision</th></tr></thead><tbody><tr><td>Voiture <strong>100 % électrique</strong>, neuve ou d’occasion</td><td class="num">jusqu’à 6 000 €</td><td>+ 1 000 € si elle est assemblée dans un pays d’Europe à l’électricité peu carbonée</td></tr><tr><td>Hybride ou essence <strong>vignette Crit’Air 1</strong></td><td class="num">jusqu’à 3 000 €</td><td>Les autres motorisations sont exclues</td></tr></tbody></table></div>
+<p class="note note-warn">« Jusqu’à » : le montant exact dépend de votre niveau de revenus, selon un barème que la Métropole détaille sur son guichet en ligne. Nous affichons donc un plafond, pas un montant garanti. Par ailleurs, le règlement consulté est celui de 2025 : <strong>sa reconduction en 2026 n’est pas confirmée noir sur blanc</strong> sur la page officielle. Vérifiez l’ouverture du guichet avant de vous engager.</p>
+<h3>Les conditions à remplir</h3>
+<ul>
+<li>Résider dans l’une des 149 communes de la Métropole du Grand Paris ;</li>
+<li>revenu fiscal de référence <strong>inférieur ou égal à 24 900 € par part</strong> ;</li>
+<li><strong>faire détruire définitivement une ancienne voiture</strong> — la vente ne suffit pas, contrairement à Lyon ou Strasbourg ;</li>
+<li>prix d’achat <strong>inférieur à 40 000 €</strong>, un plafond plus bas que celui de la prime d’État (47 000 €) : c’est souvent lui qui bloque un dossier ;</li>
+<li>neuf ou occasion, les deux sont acceptés.</li>
+</ul>
+<h2 id="demarches">Comment demander l’aide du Grand Paris</h2>
+<p>La demande se fait <strong>après l’achat</strong>, sur le guichet en ligne « Métropole roule propre ». Prévoyez : carte grise du nouveau véhicule à votre nom, facture, justificatif de domicile, dernier avis d’imposition, certificat de destruction de l’ancienne voiture délivré par un centre agréé, et un RIB.</p>
+<p class="note note-ok"><strong>Ordre à respecter :</strong> la prime d’État, elle, se demande <em>avant</em> la signature du bon de commande, auprès du concessionnaire. Faites-la d’abord, puis achetez, puis déposez le dossier métropolitain.</p>
+<h2 id="cumul">Cumul et particularités franciliennes</h2>
+<p>L’aide métropolitaine se cumule avec la prime d’État. En revanche, deux dispositifs franciliens ont disparu :</p>
+<ul>
+<li><strong>l’aide à l’achat de la Région Île-de-France</strong>, supprimée le 2 mars 2025 ;</li>
+<li><strong>la surprime « zone à faibles émissions » de 1 000 €</strong>, supprimée avec la prime à la conversion le 2 décembre 2024.</li>
+</ul>
+<p>Subsiste en revanche la <strong>prime « non-casse » de la Région Île-de-France</strong>, jusqu’à 6 000 €, si vous faites transformer votre voiture thermique en électrique au lieu d’en acheter une autre.</p>
+<h2 id="exemple">Exemple de calcul</h2>
+<p>Un couple parisien avec un enfant (2,5 parts), 45 000 € de revenu fiscal de référence, soit 18 000 € par part, achète une électrique neuve à 32 000 € et fait détruire sa vieille diesel. Il est sous le plafond de 24 900 € par part et sous celui de 40 000 € : l’aide métropolitaine est ouverte, jusqu’à 6 000 €. Avec la prime d’État de la tranche « autres ménages » (3 300 à 3 314 €), le total peut approcher 9 300 €, soit près de 30 % du prix.</p>
+<h2 id="national">Les aides nationales, accessibles partout</h2>
+<p>Quelle que soit votre commune, vous pouvez prétendre à une aide de l’État, qui <strong>s’ajoute</strong> à l’aide locale :</p>
+<ul>
+<li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a> pour une voiture électrique neuve : 3 300 à 7 700 € selon vos revenus, à demander <strong>avant</strong> le bon de commande ;</li>
+<li><a href="/leasing-social-2026/">leasing social</a> si votre revenu fiscal ne dépasse pas 16 880 € par part et que vous roulez pour travailler : jusqu’à 9 000 € ;</li>
+<li><a href="/aide-voiture-electrique-occasion/">prime occasion</a> depuis le 1<sup>er</sup> septembre 2026, pour une électrique immatriculée entre 2017 et 2023.</li>
+</ul>
+<p>Ces trois aides sont exclusives les unes des autres : <a href="/cumul-aides-voiture-electrique/">voir les règles de cumul</a>.</p>
+<h2 id="communes">Les 149 communes concernées par l’aide</h2>
+<details class="communes"><summary>Voir la liste complète des communes</summary>
+<p>Ablon-sur-Seine · Alfortville · Antony · Arcueil · Argenteuil · Asnières-sur-Seine · Athis-Mons · Aubervilliers · Aulnay-sous-Bois · Bagneux · Bagnolet · Bobigny · Bois-Colombes · Boissy-Saint-Léger · Bondy · Bonneuil-sur-Marne · Boulogne-Billancourt · Bourg-la-Reine · Bry-sur-Marne · Cachan · Champigny-sur-Marne · Charenton-le-Pont · Chaville · Chennevières-sur-Marne · Chevilly-Larue · Choisy-le-Roi · Châtenay-Malabry · Châtillon · Clamart · Clichy · Clichy-sous-Bois · Colombes · Coubron · Courbevoie · Créteil · Drancy · Dugny · Fontenay-aux-Roses · Fontenay-sous-Bois · Fresnes · Gagny · Garches · Gennevilliers · Gentilly · Gournay-sur-Marne · Issy-les-Moulineaux · Ivry-sur-Seine · Joinville-le-Pont · Juvisy-sur-Orge · L'Haÿ-les-Roses · L'Île-Saint-Denis · La Courneuve · La Garenne-Colombes · La Queue-en-Brie · Le Blanc-Mesnil · Le Bourget · Le Kremlin-Bicêtre · Le Perreux-sur-Marne · Le Plessis-Robinson · Le Plessis-Trévise · Le Pré-Saint-Gervais · Le Raincy · Les Lilas · Les Pavillons-sous-Bois · Levallois-Perret · Limeil-Brévannes · Livry-Gargan · Maisons-Alfort · Malakoff · Mandres-les-Roses · Marnes-la-Coquette · Marolles-en-Brie · Meudon · Montfermeil · Montreuil · Montrouge · Morangis · Nanterre · Neuilly-Plaisance · Neuilly-sur-Marne · Neuilly-sur-Seine · Nogent-sur-Marne · Noiseau · Noisy-le-Grand · Noisy-le-Sec · Orly · Ormesson-sur-Marne · Pantin · Paray-Vieille-Poste · Paris 10e Arrondissement · Paris 11e Arrondissement · Paris 12e Arrondissement · Paris 13e Arrondissement · Paris 14e Arrondissement · Paris 15e Arrondissement · Paris 16e Arrondissement · Paris 17e Arrondissement · Paris 18e Arrondissement · Paris 19e Arrondissement · Paris 1er Arrondissement · Paris 20e Arrondissement · Paris 2e Arrondissement · Paris 3e Arrondissement · Paris 4e Arrondissement · Paris 5e Arrondissement · Paris 6e Arrondissement · Paris 7e Arrondissement · Paris 8e Arrondissement · Paris 9e Arrondissement · Puteaux · Périgny · Romainville · Rosny-sous-Bois · Rueil-Malmaison · Rungis · Saint-Cloud · Saint-Denis · Saint-Mandé · Saint-Maur-des-Fossés · Saint-Maurice · Saint-Ouen-sur-Seine · Santeny · Savigny-sur-Orge · Sceaux · Sevran · Stains · Sucy-en-Brie · Suresnes · Sèvres · Thiais · Tremblay-en-France · Valenton · Vanves · Vaucresson · Vaujours · Ville-d'Avray · Villecresnes · Villejuif · Villemomble · Villeneuve-la-Garenne · Villeneuve-le-Roi · Villeneuve-Saint-Georges · Villepinte · Villetaneuse · Villiers-sur-Marne · Vincennes · Viry-Châtillon · Vitry-sur-Seine · Épinay-sur-Seine</p></details>
+<p style="font-size:.9rem;color:#64748b">Source : code officiel géographique de l’INSEE (jeu de données Etalab « découpage administratif »). Le simulateur identifie automatiquement votre intercommunalité à partir de votre code postal.</p>
+<div class="cta"><p class="t">Vos aides à Paris, en quelques secondes</p><p>Le simulateur croise votre code postal, vos revenus et le prix du véhicule, applique les plafonds locaux et vous indique dans quel ordre faire les démarches.</p><a class="btn btn-lg" href="/">Calculer mes aides à Paris</a></div>
+<h2 id="faq">Questions fréquentes</h2><div class="faq"><details><summary>Existe-t-il une aide de la Ville de Paris pour acheter une voiture électrique ?</summary><p>La Ville de Paris ne verse pas d’aide propre à l’achat d’une voiture pour les particuliers : c’est la Métropole du Grand Paris qui porte le dispositif, avec son aide « Métropole roule propre » pouvant atteindre 6 000 €.</p></details><details><summary>Ma commune fait-elle partie du Grand Paris ?</summary><p>La Métropole du Grand Paris regroupe 149 communes : Paris et une grande partie des Hauts-de-Seine, de la Seine-Saint-Denis et du Val-de-Marne, ainsi que quelques communes de l’Essonne et du Val-d’Oise. La liste complète figure sur cette page, et le simulateur le vérifie automatiquement à partir de votre code postal.</p></details><details><summary>La Région Île-de-France aide-t-elle encore à l’achat d’une voiture électrique ?</summary><p>Non, son aide à l’achat pour les particuliers a été supprimée le 2 mars 2025. Elle finance en revanche toujours la transformation d’un véhicule thermique en électrique, avec une prime « non-casse » pouvant atteindre 6 000 €.</p></details><details><summary>Faut-il obligatoirement mettre une voiture à la casse ?</summary><p>Oui pour l’aide du Grand Paris : la destruction définitive d’une ancienne voiture, attestée par un centre de véhicules hors d’usage agréé, est une condition du règlement. Les aides nationales, elles, ne l’exigent plus depuis la fin de la prime à la conversion.</p></details></div>
+<h2 id="sources">Sources officielles</h2><ul class="srcs"><li><a href="https://www.metropolegrandparis.fr/fr/metropole-roule-propre-0" target="_blank" rel="noopener">Métropole roule propre — metropolegrandparis.fr (règlement 2025)</a></li><li><a href="https://www.iledefrance.fr/toutes-les-faq/aides-vehicules-propres-faq" target="_blank" rel="noopener">Fin de l’aide régionale — iledefrance.fr</a></li><li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F39188" target="_blank" rel="noopener">Prime d’État — service-public.fr, fiche F39188</a></li></ul>
+<p class="verif">Dernière vérification des règles de cette page : <strong>7 septembre 2026</strong>. Nous republions cette page à chaque évolution réglementaire — voir <a href="/historique-aides-auto/">l’historique des changements</a> et <a href="/notre-methodologie/">notre méthodologie</a>.</p>
+<nav class="related" aria-label="À lire aussi"><h2>À lire aussi</h2><ul><li><a href="/aides-voiture-electrique/">Toutes les aides près de chez vous</a></li><li><a href="/aides-voiture-electrique-2026/">Les aides nationales 2026</a></li><li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li><li><a href="/cumul-aides-voiture-electrique/">Peut-on cumuler les aides ?</a></li></ul></nav>
+</article></main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Le simulateur</h4>
+        <ul>
+          <li><a href="/">Simulateur d’aides</a></li>
+          <li><a href="/aides-voiture-electrique-2026/">Toutes les aides 2026</a></li>
+          <li><a href="/cumul-aides-voiture-electrique/">Cumuler les aides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Les aides</h4>
+        <ul>
+          <li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li>
+          <li><a href="/leasing-social-2026/">Leasing social 2026</a></li>
+          <li><a href="/aide-voiture-electrique-occasion/">Voiture d’occasion</a></li>
+          <li><a href="/bonus-ecologique-2026/">Bonus écologique</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Près de chez vous</h4>
+        <ul>
+          <li><a href="/aides-voiture-electrique/">Toutes les aides locales</a></li>
+          <li><a href="/aides-voiture-electrique/paris/">Paris et Grand Paris</a></li>
+          <li><a href="/aides-voiture-electrique/lyon/">Lyon</a></li>
+          <li><a href="/aides-voiture-electrique/marseille/">Marseille</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Le site</h4>
+        <ul>
+          <li><a href="/qui-sommes-nous.html">Qui sommes-nous ?</a></li>
+          <li><a href="/notre-methodologie/">Notre méthodologie</a></li>
+          <li><a href="/sources/">Sources officielles</a></li>
+          <li><a href="/historique-aides-auto/">Historique des aides</a></li>
+          <li><a href="/mentions-legales.html">Mentions légales</a></li>
+          <li><a href="#" data-consent-open>Gérer les cookies</a></li>
+          <li><a href="mailto:contact@mes-aides-auto.fr?subject=Mes%20Aides%20Auto%20%E2%80%94%20contact">Nous écrire</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot-legal">© 2026 Mes Aides Auto — Calculateur d’aides à la mobilité propre. Informations à caractère indicatif, sans valeur contractuelle : seule la décision de l’organisme qui verse l’aide fait foi.</p>
+  </div>
+</footer>
+<div id="consent-banner" hidden>
+  <div class="box">
+    <p style="flex:1">Ce site utilise <strong>Google Analytics</strong> pour mesurer son audience, uniquement si vous l’acceptez. Vos données financières (revenu, parts) ne sont jamais transmises. <a href="/mentions-legales.html#cookies">En savoir plus</a></p>
+    <div class="acts">
+      <button type="button" id="consent-accept">Accepter</button>
+      <button type="button" id="consent-refuse">Continuer sans accepter</button>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var b = document.getElementById('consent-banner'); if (!b || !window.MAA_consent) return;
+    function show() { b.hidden = false; } function hide() { b.hidden = true; }
+    if (!MAA_consent.get()) show();
+    document.getElementById('consent-accept').addEventListener('click', function () { MAA_consent.set('granted'); hide(); });
+    document.getElementById('consent-refuse').addEventListener('click', function () { MAA_consent.set('denied'); hide(); });
+    document.querySelectorAll('[data-consent-open]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); MAA_consent.reset(); show(); }); });
+  })();
+</script>
+</body>
+</html>
