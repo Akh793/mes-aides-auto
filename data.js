@@ -10,7 +10,7 @@
    (codes INSEE), ctx.communeMere (commune de rattachement des arrondissements).
    ===================================================================== */
 
-window.META = { version: '0.4.0', lastVerified: '2026-09-07' };
+window.META = { version: '0.5.0', lastVerified: '2026-09-08' };
 
 /* Plafonds de revenu fiscal de référence par part 2026 — tranches 1 à 9 (10 = au-delà)
    Source : service-public.fr F39188 (maj 01/09/2026) */
@@ -131,10 +131,10 @@ window.AIDS = [
     },
   },
   {
-    id: 'cee_vo_occasion', scope: 'national', status: 'active_unverified',
+    id: 'cee_vo_occasion', scope: 'national', status: 'active',
     label: 'Prime d’État « Coup de pouce » — voiture électrique d’occasion', short: 'prime d’État (occasion)',
     exclusiveGroup: 'CEE', roadmap: 'dealer_cee',
-    sourceUrl: 'https://www.mes-allocs.fr/guides/aides-sociales/prime-cee-voiture-electrique-occasion/', sourceLabel: 'mes-allocs.fr (arrêté du 10/08/2026 cité — fiche officielle TRA-EQ-133 à recouper)', lastVerified: '2026-09-07',
+    sourceUrl: 'https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054666103', sourceLabel: 'Arrêté du 10 août 2026 créant la fiche TRA-EQ-133 (Légifrance)', lastVerified: '2026-09-08',
     check(ctx) {
       const reasons = [];
       if (ctx.isNew) reasons.push('Réservée aux voitures d’occasion');
@@ -142,8 +142,9 @@ window.AIDS = [
       if (!ctx.sellerPro) reasons.push('Il faut acheter chez un professionnel habilité');
       if (reasons.length) return R('ineligible', reasons);
       return R('conditional', [], null, null, [
-        'Nouvelle prime depuis le 1er septembre 2026 — son montant n’est pas encore publié : il dépend du fournisseur d’énergie partenaire du vendeur.',
-        'Conditions : voiture immatriculée pour la première fois en France entre 2017 et 2023, batterie en bon état (au moins 80 % de sa capacité, ou au moins 200 km d’autonomie), à garder 3 ans.',
+        'Nouvelle prime en vigueur depuis le 1er septembre 2026 (arrêté du 10 août 2026). Comme pour le neuf, la loi fixe des coefficients et non des euros : le montant dépend du fournisseur d’énergie partenaire du vendeur. Les premiers barèmes publiés par un partenaire se situent autour de 300 à 500 € — à confirmer offre en main.',
+        'Conditions : voiture immatriculée pour la première fois entre le 1er janvier 2017 et le 31 décembre 2023, batterie en bon état (au moins 80 % de sa capacité, ou au moins 200 km d’autonomie), achat chez un professionnel habilité, voiture à garder 3 ans.',
+        'Bonification renforcée si le prix ne dépasse pas 25 000 € et si la voiture pèse moins de 1,8 tonne.',
       ]);
     },
   },
@@ -151,7 +152,7 @@ window.AIDS = [
     id: 'leasing_social_2026', scope: 'national', status: 'active',
     label: 'Leasing social 2026 (voiture électrique en location longue durée)', short: 'leasing social',
     exclusiveGroup: 'CEE', roadmap: 'leasing_social',
-    sourceUrl: 'https://www.avere-france.org/edition-2026-du-leasing-social-tout-ce-quil-faut-savoir/', sourceLabel: 'Avere-France et jechangemavoiture.gouv.fr', lastVerified: '2026-09-07',
+    sourceUrl: 'https://www.primealaconversion.gouv.fr/dboneco/accueil/leasingsocial2026.html', sourceLabel: 'primealaconversion.gouv.fr (téléservice officiel de l’État)', lastVerified: '2026-09-08',
     check(ctx) {
       const reasons = [], notes = [];
       if (!ctx.isNew) reasons.push('Réservé aux voitures neuves');
@@ -164,7 +165,7 @@ window.AIDS = [
       if (ctx.price > 47000) reasons.push(`Le prix (${fmt(ctx.price)}) dépasse le plafond de 47 000 €`);
       if (reasons.length) return R('ineligible', reasons);
       const base = 0.29 * ctx.price;
-      notes.push('L’État prend en charge 29 % du prix de la voiture. Plafond : 6 500 € selon l’Avere, 9 000 € selon le site officiel jechangemavoiture.gouv.fr — les deux sources se contredisent, à confirmer avec le loueur.');
+      notes.push('L’État prend en charge 29 % du prix de la voiture, dans la limite de 6 500 €. Ce plafond est porté à 9 000 € si la voiture ET sa batterie sont fabriquées dans l’Espace économique européen, avec 500 € de plus si le moteur électrique est fabriqué en Europe.');
       notes.push('Loyer de 200 € par mois maximum hors options, au moins 15 000 km par an inclus, voiture de moins de 1,8 tonne, sans apport. 50 000 places.');
       return R('eligible', [], Math.round(Math.min(base, 6500)), Math.round(Math.min(base, 9000)), notes);
     },
@@ -449,7 +450,7 @@ window.ENDED = [
 /* Provenance des données (bloc « D'où viennent ces données ? ») */
 window.SOURCES = [
   { cat: 'Prime d’État « Coup de pouce » voiture électrique', what: 'Règles officielles de la prime (financée par les fournisseurs d’énergie via les certificats d’économies d’énergie) : tranches de revenus 2026 et coefficients selon la situation du ménage.', src: 'service-public.fr (fiche F39188, mise à jour le 01/09/2026), ecologie.gouv.fr, economie.gouv.fr', url: 'https://www.service-public.gouv.fr/particuliers/vosdroits/F39188', note: 'La loi fixe des coefficients, pas des euros. Les montants affichés sont ceux publiés par les fournisseurs partenaires (Hellio au 31/07/2026, chargeguru 2026), d’où une fourchette.' },
-  { cat: 'Leasing social 2026', what: 'Conditions pour en bénéficier, loyer maximum, part prise en charge par l’État (29 % du prix).', src: 'jechangemavoiture.gouv.fr et Avere-France', url: 'https://jechangemavoiture.gouv.fr/jcmv/aide-achat.html', note: 'Les deux sources ne donnent pas le même plafond (6 500 € ou 9 000 €).' },
+  { cat: 'Leasing social 2026', what: 'Conditions pour en bénéficier, loyer maximum, part prise en charge par l’État : 29 % du prix, plafond 6 500 €, porté à 9 000 € pour une voiture et une batterie fabriquées dans l’Espace économique européen (+ 500 € pour un moteur européen).', src: 'primealaconversion.gouv.fr (téléservice officiel) et jechangemavoiture.gouv.fr', url: 'https://www.primealaconversion.gouv.fr/dboneco/accueil/leasingsocial2026.html', note: 'Vérifié le 08/09/2026 sur le téléservice officiel : les montants 6 500 € et 9 000 € ne se contredisent pas, ils correspondent au plafond de droit commun et au plafond majoré.' },
   { cat: 'Aides supprimées', what: 'Bonus écologique (1er juillet 2025), prime à la conversion et surprime zone à faibles émissions (décret 2024-1084 du 2 décembre 2024), crédit d’impôt borne de recharge (31 décembre 2025), aide de la Région Île-de-France (2 mars 2025).', src: 'Décrets et pages officielles', url: 'https://www.quelles-aides.fr/transport-mobilite/aides-transport/prime-conversion/', note: '' },
   { cat: 'Aides locales', what: 'Règlements des métropoles, régions et départements : Grand Paris, Lyon, Occitanie, Strasbourg, Rouen, Seine-Maritime, Toulouse, Aix-Marseille, Grand Annecy, Pays du Mont-Blanc, Bordeaux, Reims, Grenoble (suspendue).', src: 'Sites et règlements des collectivités (lien sur chaque carte)', url: 'https://jechangemavoiture.gouv.fr/jcmv/aide-achat.html', note: 'Territoires vérifiés sans aide : Montpellier, Nice, Saint-Étienne, Toulon, Bouches-du-Rhône, Normandie, Île-de-France.' },
   { cat: 'Communes et territoires', what: '35 493 couples code postal / commune, avec la commune de rattachement, l’intercommunalité, le département et la région.', src: 'Code officiel géographique de l’Institut national de la statistique (INSEE), via le jeu de données public Etalab « découpage administratif » version 6.0.0', url: 'https://www.insee.fr/fr/information/2560452', note: 'Les zones à faibles émissions ne couvrent parfois qu’une partie d’une commune (Lyon, Marseille, Reims) : nous les approximons par la commune entière.' },

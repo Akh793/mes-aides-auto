@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /tools/
 
+# Les moteurs de réponse et assistants sont explicitement autorisés
 User-agent: GPTBot
 Allow: /
 User-agent: ClaudeBot
@@ -8,6 +10,8 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 User-agent: Google-Extended
+Allow: /
+User-agent: OAI-SearchBot
 Allow: /
 
 Sitemap: https://mes-aides-auto.fr/sitemap.xml

@@ -34,8 +34,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="description" content="Mentions légales du site Mes Aides Auto : éditeur, hébergement, données personnelles et cookies.">
 <link rel="canonical" href="https://mes-aides-auto.fr/mentions-legales.html">
 <meta name="robots" content="noindex, follow">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="manifest" href="manifest.json">
+<meta property="og:site_name" content="Mes Aides Auto">
+<meta property="og:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#2548FF">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,600;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -115,14 +121,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <header>
     <div class="flex flex-col md:flex-row items-start justify-between gap-4">
       <div class="max-w-3xl">
-        <a href="index.html" class="inline-block font-poppins font-bold text-2xl tracking-tight text-slate-900 hover:text-[#2548FF] transition">Mes Aides <em class="italic text-[#2548FF]">Auto</em></a>
+        <a href="/" class="inline-block font-poppins font-bold text-2xl tracking-tight text-slate-900 hover:text-[#2548FF] transition">Mes Aides <em class="italic text-[#2548FF]">Auto</em></a>
         <p class="mt-1 text-sm text-slate-500">Calculateur d’aides à la mobilité propre — gratuit, instantané, sans inscription.</p>
       </div>
       <div class="flex flex-row md:flex-col items-center md:items-end gap-2 shrink-0">
-        <a href="index.html" class="rounded-full bg-[#FF6347] text-white text-sm font-semibold px-5 py-2.5 shadow-lg hover:brightness-110 active:scale-[.98] transition">← Retour au simulateur</a>
+        <a href="/" class="rounded-full bg-[#FF6347] text-white text-sm font-semibold px-5 py-2.5 shadow-lg hover:brightness-110 active:scale-[.98] transition">← Retour au simulateur</a>
         <span class="text-xs text-slate-400">Règles à jour au <span class="meta-date">07/09/2026</span></span>
       </div>
     </div>
+    <nav aria-label="Navigation principale" class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-slate-600">
+      <a href="/" class="hover:text-[#2548FF] transition">Simulateur</a>
+      <a href="/aides-voiture-electrique-2026/" class="hover:text-[#2548FF] transition">Toutes les aides 2026</a>
+      <a href="/aides-voiture-electrique/" class="hover:text-[#2548FF] transition">Aides près de chez vous</a>
+      <a href="/notre-methodologie/" class="hover:text-[#2548FF] transition">Méthodologie</a>
+      <a href="/sources/" class="hover:text-[#2548FF] transition">Sources</a>
+    </nav>
   </header>
 
   <!-- ============ CONTENU ============ -->
@@ -184,10 +197,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <footer id="site-footer" class="print-hide border-t border-slate-200 bg-[#F8F9FA] -mx-5 px-5 py-8 rounded-t-3xl">
     <div class="max-w-5xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-5">
       <nav aria-label="Pied de page" class="flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-slate-600">
-        <a href="qui-sommes-nous.html" class="hover:text-[#2548FF] transition">Qui sommes-nous ?</a>
-        <a href="index.html" class="hover:text-[#2548FF] transition">Simulateur instantané</a>
-        <a href="qui-sommes-nous.html#sources" class="hover:text-[#2548FF] transition">Sources officielles &amp; Données</a>
-        <a href="mentions-legales.html" class="hover:text-[#2548FF] transition">Mentions légales</a>
+        <a href="/" class="hover:text-[#2548FF] transition">Simulateur instantané</a>
+        <a href="/aides-voiture-electrique-2026/" class="hover:text-[#2548FF] transition">Aides 2026</a>
+        <a href="/aides-voiture-electrique/" class="hover:text-[#2548FF] transition">Aides près de chez vous</a>
+        <a href="/notre-methodologie/" class="hover:text-[#2548FF] transition">Notre méthodologie</a>
+        <a href="/sources/" class="hover:text-[#2548FF] transition">Sources officielles</a>
+        <a href="/historique-aides-auto/" class="hover:text-[#2548FF] transition">Historique des aides</a>
+        <a href="/qui-sommes-nous.html" class="hover:text-[#2548FF] transition">Qui sommes-nous ?</a>
+        <a href="/mentions-legales.html" class="hover:text-[#2548FF] transition">Mentions légales</a>
         <a href="#" data-consent-open class="hover:text-[#2548FF] transition">Gérer les cookies</a>
         <a href="mailto:contact@mes-aides-auto.fr?subject=Mes%20Aides%20Auto%20%E2%80%94%20contact" class="hover:text-[#2548FF] transition">Nous écrire</a>
       </nav>
@@ -199,7 +216,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- Bandeau de consentement (mesure d'audience) -->
 <div id="consent-banner" hidden class="fixed inset-x-0 bottom-0 z-50 p-4 print-hide">
   <div class="max-w-3xl mx-auto rounded-3xl bg-white shadow-2xl border border-slate-200 p-5 md:p-6 flex flex-col md:flex-row md:items-center gap-4">
-    <p class="text-sm text-slate-700 flex-1">Ce site utilise <strong>Google Analytics</strong> pour mesurer son audience, uniquement si vous l’acceptez. Vos données financières (revenu, parts) ne sont jamais transmises. <a href="mentions-legales.html#cookies" class="underline text-[#2548FF]">En savoir plus</a></p>
+    <p class="text-sm text-slate-700 flex-1">Ce site utilise <strong>Google Analytics</strong> pour mesurer son audience, uniquement si vous l’acceptez. Vos données financières (revenu, parts) ne sont jamais transmises. <a href="/mentions-legales.html#cookies" class="underline text-[#2548FF]">En savoir plus</a></p>
     <div class="flex flex-col items-center gap-2 shrink-0">
       <button type="button" id="consent-accept" class="rounded-full bg-[#2548FF] text-white px-6 py-2.5 text-sm font-semibold shadow-lg hover:brightness-110 active:scale-[.98] transition">Accepter</button>
       <button type="button" id="consent-refuse" class="text-xs text-slate-500 underline underline-offset-4 hover:text-slate-800">Continuer sans accepter</button>

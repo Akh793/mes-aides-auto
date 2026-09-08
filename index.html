@@ -38,6 +38,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://mes-aides-auto.fr/">
 <meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Mes Aides Auto">
+<meta property="og:image" content="https://mes-aides-auto.fr/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Mes Aides Auto — simulateur des aides à l’achat d’une voiture">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mes Aides Auto — Vos aides voiture en 30 secondes">
+<meta name="twitter:description" content="Simulateur gratuit et instantané des aides à l’achat d’une voiture électrique ou peu polluante en France.">
+<meta name="twitter:image" content="https://mes-aides-auto.fr/assets/og-image.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -201,11 +210,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p class="sub mt-4 text-slate-600 text-lg md:text-xl leading-relaxed">Vous achetez une voiture et vous ne comprenez rien à la jungle des aides ? Rentrez votre situation, découvrez votre vrai chèque d’État et recevez votre mode d’emploi.</p>
       </div>
       <div class="flex flex-row md:flex-col items-center md:items-end gap-2 print-hide shrink-0">
-        <a href="qui-sommes-nous.html" class="text-sm font-medium text-slate-500 hover:text-[#2548FF] underline-offset-4 hover:underline">Qui sommes-nous ?</a>
+        <a href="/qui-sommes-nous.html" class="text-sm font-medium text-slate-500 hover:text-[#2548FF] underline-offset-4 hover:underline">Qui sommes-nous ?</a>
         <span class="badge bg-[#FF6347] text-white shadow-lg">Règles à jour au <span class="meta-date ml-1">—</span></span>
         <span id="perf-wrap" class="text-xs text-slate-400">temps de calcul : <span id="perf">—</span></span>
       </div>
     </div>
+    <nav aria-label="Navigation principale" class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-slate-600 print-hide">
+      <a href="/aides-voiture-electrique-2026/" class="hover:text-[#2548FF] transition">Toutes les aides 2026</a>
+      <a href="/aides-voiture-electrique/" class="hover:text-[#2548FF] transition">Aides près de chez vous</a>
+      <a href="/prime-coup-de-pouce-voiture-electrique/" class="hover:text-[#2548FF] transition">Prime « Coup de pouce »</a>
+      <a href="/leasing-social-2026/" class="hover:text-[#2548FF] transition">Leasing social</a>
+      <a href="/aide-voiture-electrique-occasion/" class="hover:text-[#2548FF] transition">Voiture d’occasion</a>
+      <a href="/notre-methodologie/" class="hover:text-[#2548FF] transition">Méthodologie</a>
+    </nav>
   </header>
 
   <!-- ============ BANDE 1 : VOTRE SITUATION ============ -->
@@ -344,14 +361,50 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
+  <!-- ============ BANDE 6 : GUIDES ET TERRITOIRES (maillage interne) ============ -->
+  <section id="bande-guides" class="print-hide">
+    <h2 class="font-poppins font-semibold text-3xl md:text-4xl">Nos <em class="italic text-[#2548FF]">guides</em> sur les aides automobiles</h2>
+    <p class="mt-2 text-sm text-slate-600 max-w-3xl">Le simulateur donne votre montant ; ces guides expliquent chaque dispositif, ses conditions et ses pièges, avec la source officielle et la date de vérification.</p>
+    <div class="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <a href="/aides-voiture-electrique-2026/" class="rounded-3xl bg-white border border-slate-100 shadow-lg p-5 block transition hover:bg-slate-50"><span class="font-poppins font-semibold text-slate-900">Toutes les aides 2026</span><span class="block mt-1 text-sm text-slate-600">Les quatre dispositifs nationaux, les montants par tranche de revenus et les aides locales.</span></a>
+      <a href="/prime-coup-de-pouce-voiture-electrique/" class="rounded-3xl bg-white border border-slate-100 shadow-lg p-5 block transition hover:bg-slate-50"><span class="font-poppins font-semibold text-slate-900">Prime « Coup de pouce »</span><span class="block mt-1 text-sm text-slate-600">3 300 à 7 700 € pour une électrique neuve : conditions et démarche avant le bon de commande.</span></a>
+      <a href="/leasing-social-2026/" class="rounded-3xl bg-white border border-slate-100 shadow-lg p-5 block transition hover:bg-slate-50"><span class="font-poppins font-semibold text-slate-900">Leasing social 2026</span><span class="block mt-1 text-sm text-slate-600">200 € par mois maximum, jusqu’à 9 000 € d’aide : revenus, usage professionnel, véhicules.</span></a>
+      <a href="/aide-voiture-electrique-occasion/" class="rounded-3xl bg-white border border-slate-100 shadow-lg p-5 block transition hover:bg-slate-50"><span class="font-poppins font-semibold text-slate-900">Voiture électrique d’occasion</span><span class="block mt-1 text-sm text-slate-600">La nouvelle prime d’État depuis septembre 2026, et les aides locales souvent plus élevées.</span></a>
+      <a href="/cumul-aides-voiture-electrique/" class="rounded-3xl bg-white border border-slate-100 shadow-lg p-5 block transition hover:bg-slate-50"><span class="font-poppins font-semibold text-slate-900">Cumuler les aides</span><span class="block mt-1 text-sm text-slate-600">Ce qui se cumule, ce qui s’exclut, et les plafonds à 80 % du prix.</span></a>
+      <a href="/bonus-ecologique-2026/" class="rounded-3xl bg-white border border-slate-100 shadow-lg p-5 block transition hover:bg-slate-50"><span class="font-poppins font-semibold text-slate-900">Le bonus écologique</span><span class="block mt-1 text-sm text-slate-600">Supprimé le 1er juillet 2025 : ce qui existe à sa place aujourd’hui.</span></a>
+    </div>
+    <h2 class="font-poppins font-semibold text-3xl md:text-4xl mt-6">Trouvez les aides <em class="italic text-[#FF6347]">près de chez vous</em></h2>
+    <p class="mt-2 text-sm text-slate-600 max-w-3xl">Treize collectivités versent encore une aide à l’achat, et sept territoires vérifiés n’en versent aucune. <a href="/aides-voiture-electrique/" class="underline hover:text-[#2548FF]">Voir la liste complète des territoires</a>.</p>
+    <nav aria-label="Aides par territoire" class="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-slate-600">
+      <a href="/aides-voiture-electrique/paris/" class="hover:text-[#2548FF] transition">Paris</a>
+      <a href="/aides-voiture-electrique/lyon/" class="hover:text-[#2548FF] transition">Lyon</a>
+      <a href="/aides-voiture-electrique/marseille/" class="hover:text-[#2548FF] transition">Marseille</a>
+      <a href="/aides-voiture-electrique/toulouse/" class="hover:text-[#2548FF] transition">Toulouse</a>
+      <a href="/aides-voiture-electrique/strasbourg/" class="hover:text-[#2548FF] transition">Strasbourg</a>
+      <a href="/aides-voiture-electrique/rouen/" class="hover:text-[#2548FF] transition">Rouen</a>
+      <a href="/aides-voiture-electrique/bordeaux/" class="hover:text-[#2548FF] transition">Bordeaux</a>
+      <a href="/aides-voiture-electrique/reims/" class="hover:text-[#2548FF] transition">Reims</a>
+      <a href="/aides-voiture-electrique/grenoble/" class="hover:text-[#2548FF] transition">Grenoble</a>
+      <a href="/aides-voiture-electrique/annecy/" class="hover:text-[#2548FF] transition">Annecy</a>
+      <a href="/aides-voiture-electrique/nice/" class="hover:text-[#2548FF] transition">Nice</a>
+      <a href="/aides-voiture-electrique/montpellier/" class="hover:text-[#2548FF] transition">Montpellier</a>
+      <a href="/aides-voiture-electrique/occitanie/" class="hover:text-[#2548FF] transition">Occitanie</a>
+      <a href="/aides-voiture-electrique/seine-maritime/" class="hover:text-[#2548FF] transition">Seine-Maritime</a>
+    </nav>
+  </section>
+
   <!-- ============ FOOTER ============ -->
   <footer id="site-footer" class="print-hide border-t border-slate-200 bg-[#F8F9FA] -mx-5 px-5 py-8 rounded-t-3xl">
     <div class="max-w-5xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-5">
       <nav aria-label="Pied de page" class="flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-slate-600">
-        <a href="qui-sommes-nous.html" class="hover:text-[#2548FF] transition">Qui sommes-nous ?</a>
-        <a href="index.html" class="hover:text-[#2548FF] transition">Simulateur instantané</a>
-        <a href="qui-sommes-nous.html#sources" class="hover:text-[#2548FF] transition">Sources officielles &amp; Données</a>
-        <a href="mentions-legales.html" class="hover:text-[#2548FF] transition">Mentions légales</a>
+        <a href="/" class="hover:text-[#2548FF] transition">Simulateur instantané</a>
+        <a href="/aides-voiture-electrique-2026/" class="hover:text-[#2548FF] transition">Aides 2026</a>
+        <a href="/aides-voiture-electrique/" class="hover:text-[#2548FF] transition">Aides près de chez vous</a>
+        <a href="/notre-methodologie/" class="hover:text-[#2548FF] transition">Notre méthodologie</a>
+        <a href="/sources/" class="hover:text-[#2548FF] transition">Sources officielles</a>
+        <a href="/historique-aides-auto/" class="hover:text-[#2548FF] transition">Historique des aides</a>
+        <a href="/qui-sommes-nous.html" class="hover:text-[#2548FF] transition">Qui sommes-nous ?</a>
+        <a href="/mentions-legales.html" class="hover:text-[#2548FF] transition">Mentions légales</a>
         <a href="#" data-consent-open class="hover:text-[#2548FF] transition">Gérer les cookies</a>
         <a href="mailto:contact@mes-aides-auto.fr?subject=Mes%20Aides%20Auto%20%E2%80%94%20contact" class="hover:text-[#2548FF] transition">Nous écrire</a>
       </nav>
@@ -363,7 +416,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- Bandeau de consentement (mesure d'audience) -->
 <div id="consent-banner" hidden class="fixed inset-x-0 bottom-0 z-50 p-4 print-hide">
   <div class="max-w-3xl mx-auto rounded-3xl bg-white shadow-2xl border border-slate-200 p-5 md:p-6 flex flex-col md:flex-row md:items-center gap-4">
-    <p class="text-sm text-slate-700 flex-1">Ce site utilise <strong>Google Analytics</strong> pour mesurer son audience, uniquement si vous l’acceptez. Vos données financières (revenu, parts) ne sont jamais transmises. <a href="mentions-legales.html#cookies" class="underline text-[#2548FF]">En savoir plus</a></p>
+    <p class="text-sm text-slate-700 flex-1">Ce site utilise <strong>Google Analytics</strong> pour mesurer son audience, uniquement si vous l’acceptez. Vos données financières (revenu, parts) ne sont jamais transmises. <a href="/mentions-legales.html#cookies" class="underline text-[#2548FF]">En savoir plus</a></p>
     <div class="flex flex-col items-center gap-2 shrink-0">
       <button type="button" id="consent-accept" class="rounded-full bg-[#2548FF] text-white px-6 py-2.5 text-sm font-semibold shadow-lg hover:brightness-110 active:scale-[.98] transition">Accepter</button>
       <button type="button" id="consent-refuse" class="text-xs text-slate-500 underline underline-offset-4 hover:text-slate-800">Continuer sans accepter</button>
