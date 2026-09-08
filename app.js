@@ -1,5 +1,5 @@
 /* =====================================================================
-   app.js — Moteur de calcul temps réel (aucune dépendance réseau) — v0.7
+   app.js — Moteur de calcul temps réel (aucune dépendance réseau) — v0.9 (mode particulier + mode pro)
    ===================================================================== */
 (() => {
   'use strict';
@@ -28,6 +28,14 @@
     sellerPro: true,
     // constantes (filtres retirés de l'UI, valeurs par défaut prudentes)
     financing: 'achat', leaseMonths: 36, euBattery: false, prevLeasing: false, nonImposable: false,
+    // ---- mode professionnel (v0.9) — n'affecte pas le mode particulier ----
+    mode: 'particulier',    // 'particulier' | 'pro'
+    vehicleType: 'vul',     // 'vul' (utilitaire léger) | 'vp' (voiture de société)
+    vulSize: 'small',       // 'small' (< 1,55 t) | 'medium' (1,55–2 t) | 'large' (> 2 t)
+    smallCompany: true,     // moins de 250 salariés
+    euAssembled: true,      // utilitaire assemblé en Europe (liste ADEME)
+    legalForm: 'societe',   // 'societe' (personne morale) | 'nomPropre' (entreprise individuelle, micro-entreprise)
+    qty: 1,                 // nombre de véhicules (mode pro)
   };
 
   /* ---------- Dérivation ---------- */
@@ -42,7 +50,9 @@
       insee: c ? c.insee : null, communeMere: c ? c.communeMere : null,
       epci: c ? c.epci : null, dept: c ? c.dept : null, region: c ? c.region : null,
       rfrPerPart, decile,
-      ready: !!c && Number.isFinite(s.rfr) && s.rfr >= 0 && Number.isFinite(s.price) && s.price > 0,
+      ready: s.mode === 'pro'
+        ? (!!c && Number.isFinite(s.price) && s.price > 0)
+        : (!!c && Number.isFinite(s.rfr) && s.rfr >= 0 && Number.isFinite(s.price) && s.price > 0),
     };
   }
 
@@ -52,7 +62,8 @@
   function evaluate(ctx) {
     const results = [];
     let localRulesMatched = 0;
-    for (const aid of AIDS) {
+    const RULES = ctx.mode === 'pro' ? AIDS_PRO : AIDS;
+    for (const aid of RULES) {
       if (aid.status === 'ended') continue;
       if (aid.territory && !aid.territory(ctx)) continue;
       if (aid.territory) localRulesMatched++;
@@ -77,13 +88,26 @@
       g[0].kept = true;
       for (let i = 1; i < g.length; i++) g[i].alternativeTo = g[0].aid.short;
     }
+    // Mode pro : aides « par véhicule » multipliées par la quantité, dans la limite des plafonds connus
+    if (ctx.mode === 'pro' && ctx.qty > 1) {
+      for (const r of results) {
+        if (!r.aid.perVehicle || r.status === 'ineligible' || (r.min == null && r.max == null)) continue;
+        const n = Math.min(ctx.qty, r.aid.maxVehicles || ctx.qty);
+        if (r.min != null) r.min *= n;
+        if (r.max != null) r.max *= n;
+        let note = `Pour ${n} véhicule${n > 1 ? 's' : ''}`;
+        if (n < ctx.qty) note += ` (plafond : ${r.aid.maxVehicles} véhicules aidés par entreprise)`;
+        if (r.aid.maxTotal) { if (r.min != null) r.min = Math.min(r.min, r.aid.maxTotal); if (r.max != null) r.max = Math.min(r.max, r.aid.maxTotal); note += `, dans la limite de ${euro(r.aid.maxTotal)} par entreprise`; }
+        r.notes.unshift(note + '.');
+      }
+    }
     // Plafond de cumul propre à certaines aides locales (% du prix TTC, toutes aides publiques)
     const kept = results.filter((r) => r.kept);
     const sumMin = (excl) => kept.filter((r) => r !== excl).reduce((a, r) => a + (r.min ?? 0), 0);
     const sumMax = (excl) => kept.filter((r) => r !== excl).reduce((a, r) => a + (r.max ?? r.min ?? 0), 0);
     for (const r of kept) {
       if (!r.aid.totalCapPct || r.min == null) continue;
-      const cap = r.aid.totalCapPct * ctx.price;
+      const cap = r.aid.totalCapPct * ctx.price * (ctx.mode === 'pro' ? Math.min(ctx.qty, r.aid.maxVehicles || ctx.qty) : 1);
       const newMax = Math.max(0, Math.min(r.max ?? r.min, cap - sumMax(r)));
       const newMin = Math.max(0, Math.min(r.min, cap - sumMin(r)));
       if (newMax < (r.max ?? r.min) || newMin < r.min) {
@@ -97,7 +121,7 @@
       min += r.min ?? 0;
       max += r.max ?? r.min ?? 0;
     }
-    const noAid = NO_AID_TERRITORIES.filter((t) => t.match(ctx));
+    const noAid = ctx.mode === 'pro' ? [] : NO_AID_TERRITORIES.filter((t) => t.match(ctx));
     const noLocalData = localRulesMatched === 0 && noAid.length === 0;
     return { results, noAid, noLocalData, total: { min, max, hasUnknown } };
   }
@@ -110,6 +134,7 @@
     eligible:    { cls: 'bg-emerald-100 text-emerald-800', txt: 'Vous y avez droit' },
     conditional: { cls: 'bg-amber-100 text-amber-800',     txt: 'Possible, sous conditions' },
     ineligible:  { cls: 'bg-slate-200 text-slate-600',     txt: 'Pas pour vous' },
+    note:        { cls: 'bg-blue-50 text-[#2548FF]',       txt: 'Bon à savoir' },
   };
   const VERIF_UI = {
     active:            { cls: 'bg-emerald-50 text-emerald-700', txt: '✅ règle vérifiée' },
@@ -119,6 +144,7 @@
   };
 
   function amountLabel(r) {
+    if (r.status === 'note' && r.min == null && r.max == null) return '';
     if (r.min == null && r.max == null) return '<span class="text-slate-500 text-base font-medium">montant pas encore publié</span>';
     if (r.min == null) return `jusqu’à ${euro(r.max)}`;
     if (r.max == null || r.min === r.max) return euro(r.min);
@@ -158,7 +184,7 @@
     if (!keys.length) return '<p class="text-slate-500 text-sm">Aucune démarche à faire : aucune aide ne correspond à votre situation.</p>';
     const li = (a) => a.map((x) => `<li class="flex gap-2"><span class="text-[#FF6347] shrink-0">•</span><span>${esc(x)}</span></li>`).join('');
     const block = (k, i) => {
-      const rm = ROADMAPS[k];
+      const rm = ROADMAPS[k] || ROADMAPS_PRO[k];
       return `
       <article class="rounded-3xl bg-[#F8F9FA] p-5 border border-slate-100 break-inside-avoid">
         <div class="flex items-center gap-3">
@@ -179,7 +205,9 @@
         ${rm.warnings.length ? `<div class="mt-3 rounded-2xl bg-[#FF6347]/10 p-3 text-sm text-[#b8321a]">${rm.warnings.map(esc).join('<br>')}</div>` : ''}
       </article>`;
     };
-    const seller = ctx.sellerPro
+    const seller = ctx.mode === 'pro'
+      ? '<p class="text-sm text-slate-600 mb-3">Vous achetez <strong>au nom de votre entreprise</strong> : la prime d’État se demande au concessionnaire avant la commande ; les aides de votre collectivité se demandent à part, avant ou après l’achat selon le territoire. Les avantages fiscaux se traitent avec votre expert-comptable.</p>'
+      : ctx.sellerPro
       ? '<p class="text-sm text-slate-600 mb-3">Vous achetez chez un <strong>concessionnaire ou un professionnel</strong> : la prime d’État se demande au vendeur avant la commande ; les aides de votre collectivité se demandent ensuite, en ligne.</p>'
       : '<p class="text-sm text-rose-700 mb-3">Vous achetez à un <strong>particulier</strong> : il n’y a pas de prime d’État. Seules les aides de votre collectivité qui l’acceptent restent possibles, et c’est vous qui déposez le dossier après l’achat (acte de vente, carte grise, certificat de destruction si demandé).</p>';
     return seller + `<div class="space-y-4">${keys.map(block).join('')}</div>`;
@@ -196,10 +224,25 @@
     requestAnimationFrame(step);
   }
 
+  function applyModeUI() {
+    const pro = state.mode === 'pro';
+    document.querySelectorAll('[data-mode]').forEach((el) => { el.hidden = el.dataset.mode !== state.mode; });
+    $('cp-label').textContent = pro ? 'Code postal de l’entreprise' : 'Code postal';
+    $('price-label').textContent = pro ? (state.vehicleType === 'vul' ? 'Prix par véhicule (HT)' : 'Prix par véhicule (TTC)') : 'Prix de la voiture (TTC)';
+    $('price-hint').textContent = pro ? (state.vehicleType === 'vul' ? 'TVA récupérable sur un utilitaire' : 'TVA non récupérable sur une voiture') : '';
+    $('sub-legal').hidden = !(pro && state.vehicleType === 'vp');
+    $('price').placeholder = pro ? '35 000' : '32 000';
+    $('sub-vul').hidden = !(pro && state.vehicleType === 'vul');
+    $('sub-eu').hidden = !(pro && state.vehicleType === 'vul' && state.motor === 'ev' && state.isNew);
+    $('bande-situation').classList.toggle('pro', pro);
+    try { history.replaceState(null, '', pro ? '#pro' : location.pathname.split('/').pop() || 'index.html'); } catch (e) {}
+  }
+
   function render() {
     const t0 = performance.now();
     saveState();
     const ctx = derive(state);
+    applyModeUI();
     $('sub-scrap').hidden = !state.scrap;
 
     const ready = ctx.ready;
@@ -213,7 +256,9 @@
     // Récap situation (visible aussi à l'impression)
     $('ctx-commune').textContent = `${ctx.commune.nom} (${ctx.commune.cp})`;
     const tranchesTxt = ctx.decile <= 3 ? 'revenus très modestes' : ctx.decile <= 5 ? 'revenus modestes' : ctx.decile <= 8 ? 'revenus intermédiaires' : 'revenus élevés';
-    $('ctx-recap').textContent = `Vos revenus : revenu fiscal de référence de ${euro(ctx.rfr)} pour ${ctx.parts.toLocaleString('fr-FR')} part${ctx.parts > 1 ? 's' : ''}, soit ${euro(ctx.rfrPerPart)} par part — tranche ${ctx.decile} sur 10 (${tranchesTxt}). Votre projet : voiture ${ctx.isNew ? 'neuve' : 'd’occasion'} ${ctx.motor === 'ev' ? '100 % électrique' : '(autre motorisation)'} à ${euro(ctx.price)}, achetée ${ctx.sellerPro ? 'chez un concessionnaire' : 'à un particulier'}${ctx.scrap ? `, avec mise à la casse d’une ancienne voiture vignette Crit’Air ${ctx.critair === 5 ? '5 ou non classée' : ctx.critair}` : ''}${ctx.grosRouleur ? ', en tant que gros rouleur' : ''}.`;
+    const SIZE_LBL = { small: 'petit utilitaire (moins de 1,55 t)', medium: 'utilitaire moyen (1,55 à 2 t)', large: 'grand utilitaire (plus de 2 t)' };
+    if (ctx.mode === 'pro') $('ctx-recap').textContent = `Votre entreprise : ${ctx.smallCompany ? 'moins de 250 salariés' : '250 salariés ou plus'}${ctx.vehicleType === 'vp' ? (ctx.legalForm === 'nomPropre' ? ', en nom propre (entreprise individuelle)' : ', société') : ''}, située à ${ctx.commune.nom}. Votre projet : ${ctx.qty > 1 ? ctx.qty + ' × ' : ''}${ctx.vehicleType === 'vul' ? SIZE_LBL[ctx.vulSize] : 'voiture de société'} ${ctx.isNew ? 'neuf' : 'd’occasion'} ${ctx.motor === 'ev' ? '100 % électrique' : '(autre motorisation)'} à ${euro(ctx.price)} ${ctx.vehicleType === 'vul' ? 'hors taxes' : 'TTC'} par véhicule${ctx.vehicleType === 'vul' && ctx.motor === 'ev' && ctx.isNew ? (ctx.euAssembled ? ', assemblé en Europe' : ', assemblage en Europe inconnu') : ''}${ctx.scrap ? `, avec mise au rebut d’un ancien véhicule vignette Crit’Air ${ctx.critair === 5 ? '5 ou non classée' : ctx.critair}` : ''}. Les avantages fiscaux sont indiqués à part, sans entrer dans le chèque.`;
+    else $('ctx-recap').textContent = `Vos revenus : revenu fiscal de référence de ${euro(ctx.rfr)} pour ${ctx.parts.toLocaleString('fr-FR')} part${ctx.parts > 1 ? 's' : ''}, soit ${euro(ctx.rfrPerPart)} par part — tranche ${ctx.decile} sur 10 (${tranchesTxt}). Votre projet : voiture ${ctx.isNew ? 'neuve' : 'd’occasion'} ${ctx.motor === 'ev' ? '100 % électrique' : '(autre motorisation)'} à ${euro(ctx.price)}, achetée ${ctx.sellerPro ? 'chez un concessionnaire' : 'à un particulier'}${ctx.scrap ? `, avec mise à la casse d’une ancienne voiture vignette Crit’Air ${ctx.critair === 5 ? '5 ou non classée' : ctx.critair}` : ''}${ctx.grosRouleur ? ', en tant que gros rouleur' : ''}.`;
 
     const totalEl = $('total-amount');
     if (kept.length === 0) totalEl.textContent = '0 €';
@@ -226,7 +271,7 @@
 
     // Transparence code postal
     let info = '';
-    if (noLocalData) info += `<div class="rounded-2xl bg-blue-50 border border-blue-100 p-4 text-sm text-slate-700">ℹ️ Code postal <strong>${esc(ctx.commune.cp)}</strong> (${esc(ctx.commune.nom)}) : les aides nationales sont calculées. Aucune aide supplémentaire de votre ville, métropole, département ou région n’est actuellement répertoriée pour cette commune.</div>`;
+    if (noLocalData) info += `<div class="rounded-2xl bg-blue-50 border border-blue-100 p-4 text-sm text-slate-700">ℹ️ Code postal <strong>${esc(ctx.commune.cp)}</strong> (${esc(ctx.commune.nom)}) : les aides nationales sont calculées. Aucune aide supplémentaire de votre ville, métropole, département ou région n’est actuellement répertoriée pour cette commune${ctx.mode === 'pro' ? ' pour les professionnels (territoires vérifiés : Lyon, Strasbourg, Toulouse, Aix-Marseille, Grand Paris, Grenoble, Rouen)' : ''}.</div>`;
     info += noAid.map((t) => `
       <div class="rounded-2xl bg-slate-50 border border-slate-200 p-4 text-sm">
         <div class="flex flex-wrap items-center gap-2"><span class="badge bg-slate-200 text-slate-600">Vérifié : aucune aide locale</span><span class="badge bg-blue-50 text-[#2548FF]">${esc(t.label)}</span></div>
@@ -235,8 +280,10 @@
       </div>`).join('');
     $('noaid').innerHTML = info;
 
-    const order = { eligible: 0, conditional: 1, ineligible: 2 };
-    const sorted = [...results].sort((a, b) => (a.aid.info - b.aid.info) || (a.hypothetical - b.hypothetical) || (b.kept - a.kept) || (order[a.status] - order[b.status]));
+    const order = { eligible: 0, conditional: 1, note: 2, ineligible: 3 };
+    // Mode pro : les cartes d'information qui ne s'appliquent pas au véhicule choisi ne sont pas affichées (bruit)
+    const shown = ctx.mode === 'pro' ? results.filter((r) => !(r.aid.info && r.status === 'ineligible')) : results;
+    const sorted = [...shown].sort((a, b) => (a.aid.info - b.aid.info) || (a.hypothetical - b.hypothetical) || (b.kept - a.kept) || (order[a.status] - order[b.status]));
     $('cards').innerHTML = sorted.map(aidCard).join('');
     $('roadmap').innerHTML = roadmapHtml(results, ctx);
     $('perf').textContent = `${(performance.now() - t0).toFixed(1)} ms`;
@@ -274,11 +321,11 @@
     trackTimer = setTimeout(() => {
       const consent = window.MAA_consent && window.MAA_consent.get() === 'granted';
       if (!consent) return;
-      const sig = `${state.cp}|${total.max}`;
+      const sig = `${state.mode}|${state.cp}|${total.max}`;
       if (sig === lastTracked) return;           // pas de doublon pour une saisie inchangée
       lastTracked = sig;
       window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ 'event': 'simulation_effectuee', 'code_postal': state.cp, 'montant_max': total.max });
+      window.dataLayer.push({ 'event': 'simulation_effectuee', 'code_postal': state.cp, 'montant_max': total.max, 'mode': state.mode });
     }, 1000);
   }
 
@@ -314,6 +361,8 @@
     if (Number.isFinite(state.price)) $('price').value = state.price;
     $('parts').textContent = (state.parts || 1).toLocaleString('fr-FR');
     $('critair').value = String(state.critair || 3);
+    $('vulSize').value = state.vulSize || 'small';
+    $('qty').textContent = String(state.qty || 1);
   }
 
   /* ---------- Liaison des champs ---------- */
@@ -335,9 +384,15 @@
     };
     seg.addEventListener('click', () => { state[key] = state[key] === cast(a) ? cast(b) : cast(a); sync(); render(); });
     seg.addEventListener('keydown', (e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); seg.click(); } });
+    seg._sync = sync;
     sync();
   });
+  const resyncSegs = () => document.querySelectorAll('[data-seg]').forEach((s) => s._sync && s._sync());
   $('critair').addEventListener('change', (e) => { state.critair = +e.target.value; render(); });
+  $('vulSize').addEventListener('change', (e) => { state.vulSize = e.target.value; render(); });
+  $('qty-minus').addEventListener('click', () => { state.qty = Math.max(1, state.qty - 1); $('qty').textContent = state.qty; render(); });
+  $('qty-plus').addEventListener('click', () => { state.qty = Math.min(20, state.qty + 1); $('qty').textContent = state.qty; render(); });
+  if (location.hash === '#pro') { state.mode = 'pro'; resyncSegs(); }
   $('print-btn').addEventListener('click', () => window.print());
   $('reset-btn').addEventListener('click', () => { clearState(); location.reload(); });
 
@@ -345,7 +400,7 @@
   const d = META.lastVerified.split('-').reverse().join('/');
   document.querySelectorAll('.meta-date').forEach((el) => (el.textContent = d));
   $('ended').innerHTML = ENDED.map((e) => `<li class="flex gap-2 text-sm"><span>${e.unknown ? '❌' : '⛔'}</span><span><strong>${esc(e.label)}</strong> — ${esc(e.detail)} <a class="underline text-slate-400" href="${e.sourceUrl}" target="_blank" rel="noopener">source</a></span></li>`).join('');
-  $('sources').innerHTML = SOURCES.map((s) => `
+  $('sources').innerHTML = SOURCES.concat(window.SOURCES_PRO || []).map((s) => `
     <article class="rounded-3xl bg-white border border-slate-100 p-5">
       <h4 class="font-poppins font-semibold text-slate-900">${esc(s.cat)}</h4>
       <p class="mt-1 text-sm text-slate-600">${esc(s.what)}</p>
@@ -381,6 +436,26 @@
       ['Nice → carte « pas d’aide locale »', { ...base, commune: C('06000', 'Nice') }, (o) => o.noAid.includes('Métropole Nice Côte d’Azur') && o.noLocalData === false],
       ['Bordeaux rebut NC → conditionnel ≤ 6 000', { ...base, commune: C('33000', 'Bordeaux'), scrap: true, critair: 5 }, (o) => o.status.bordeaux === 'conditional' && o.max.bordeaux === 6000],
     ];
+    const basePro = { ...base, mode: 'pro', vehicleType: 'vul', vulSize: 'small', smallCompany: true, euAssembled: true, price: 35000 };
+    cases.push(
+      ['PRO Lyon petit utilitaire neuf assemblé UE, rebut → CEE 2 800–6 160 + Lyon 6 000–7 000', { ...basePro, commune: C('69003', 'Lyon 3e'), scrap: true }, (o) => o.min.pro_cee_vul === 2800 && o.max.pro_cee_vul === 6160 && o.min.pro_lyon === 6000 && o.max.pro_lyon === 7000 && o.kept.includes('pro_lyon')],
+      ['PRO Lyon grande entreprise → Lyon inéligible', { ...basePro, commune: C('69003', 'Lyon 3e'), smallCompany: false }, (o) => o.status.pro_lyon === 'ineligible' && o.kept.includes('pro_cee_vul')],
+      ['PRO assemblage UE inconnu → CEE conditionnelle sans montant', { ...basePro, commune: C('44000', 'Nantes'), euAssembled: false }, (o) => o.status.pro_cee_vul === 'conditional' && o.min.pro_cee_vul === null],
+      ['PRO Nantes → aucune aide locale pro, badge', { ...basePro, commune: C('44000', 'Nantes') }, (o) => o.noLocalData === true && o.noAid.length === 0],
+      ['PRO voiture de société → 570 €, pas de VUL, taxes annuelles info', { ...basePro, commune: C('44000', 'Nantes'), vehicleType: 'vp' }, (o) => o.min.pro_cee_vp === 570 && o.status.pro_cee_vul === 'ineligible' && o.status.pro_taxes_annuelles === 'note'],
+      ['PRO grand utilitaire → suramortissement info, petit → non', { ...basePro, commune: C('44000', 'Nantes'), vulSize: 'large' }, (o) => o.status.pro_suramortissement === 'note' && o.max.pro_cee_vul === 9900],
+      ['PRO Strasbourg VUL rebut, prix 20 000 → 4 000–6 000 puis cap 80 %', { ...basePro, commune: C('67000', 'Strasbourg'), scrap: true, price: 20000 }, (o) => o.kept.includes('pro_strasbourg') && o.max.pro_strasbourg <= 16000 - 6160],
+      ['PRO Toulouse grand VUL occasion rebut CA3 → 4 200 (6 000 × 0,7)', { ...basePro, commune: C('31000', 'Toulouse'), vulSize: 'large', isNew: false, scrap: true, critair: 3 }, (o) => o.min.pro_toulouse === 4200 && o.status.pro_cee_vul === 'ineligible'],
+      ['PRO Marseille PME rebut → AMP ≤ 5 000 conditionnel', { ...basePro, commune: C('13001', 'Marseille 1er'), scrap: true }, (o) => o.status.pro_amp === 'conditional' && o.max.pro_amp === 5000],
+      ['PRO Paris → carte Grand Paris non confirmé, hors total', { ...basePro, commune: C('75011', 'Paris 11e') }, (o) => o.status.pro_mgp === 'note' && !o.kept.includes('pro_mgp') && o.noLocalData === false],
+      ['PRO Grenoble → suspendu', { ...basePro, commune: C('38000', 'Grenoble') }, (o) => o.status.pro_grenoble === 'ineligible'],
+      ['PRO 4 utilitaires Lyon → CEE ×4, Lyon ×4 (≤ 6)', { ...basePro, commune: C('69003', 'Lyon 3e'), scrap: true, qty: 4 }, (o) => o.min.pro_cee_vul === 11200 && o.max.pro_lyon === 28000],
+      ['PRO 5 utilitaires Toulouse → 3 véhicules max et 20 000 € max', { ...basePro, commune: C('31000', 'Toulouse'), vulSize: 'large', scrap: true, critair: 3, qty: 5 }, (o) => o.max.pro_toulouse === 18000],
+      ['PRO voiture en nom propre → prime particulier 3 620–6 180', { ...basePro, commune: C('44000', 'Nantes'), vehicleType: 'vp', legalForm: 'nomPropre' }, (o) => o.min.pro_cee_vp === 3620 && o.max.pro_cee_vp === 6180],
+      ['PRO TVA utilitaire 35 000 → 7 000 € info ; voiture → TVA non récupérable', { ...basePro, commune: C('44000', 'Nantes') }, (o) => o.min.pro_tva === 7000 && o.status.pro_amortissement === 'ineligible'],
+      ['PRO voiture 40 000 → amortissement plafonné (info), AEN info, Advenir non', { ...basePro, commune: C('44000', 'Nantes'), vehicleType: 'vp', price: 40000 }, (o) => o.status.pro_amortissement === 'note' && o.status.pro_aen === 'note' && o.status.pro_advenir === 'note' && o.status.pro_tva === 'ineligible'],
+      ['PARTICULIER inchangé après ajout du mode pro (Lyon)', { ...base, commune: C('69003', 'Lyon 3e'), rfr: 15000, scrap: true }, (o) => o.kept.includes('cee_vp_neuf') && o.kept.includes('lyon_metropole') && !('pro_lyon' in o.status)],
+    );
     let ok = 0;
     for (const [name, s, assert] of cases) {
       const { results, noAid, noLocalData } = evaluate(derive(s));

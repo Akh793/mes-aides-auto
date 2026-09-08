@@ -1,0 +1,301 @@
+/* =====================================================================
+   data-pro.js — Règles du MODE PROFESSIONNEL (entreprises, artisans,
+   auto-entrepreneurs, professions libérales, associations)
+   Vérification des sources : 07/09/2026 — v0.9
+   Ne modifie rien au mode particulier : jeu de règles séparé (AIDS_PRO),
+   modes d'emploi séparés (ROADMAPS_PRO), mêmes helpers R / fmt / tranche.
+   Contexte pro (ctx) : mode='pro', vehicleType 'vul'|'vp', vulSize
+   'small'|'medium'|'large', priceHT, smallCompany (< 250 salariés),
+   euAssembled, isNew, motor, scrap, critair, epci / dept / region / communeMere.
+   ===================================================================== */
+
+window.META_PRO = { lastVerified: '2026-09-08' };
+
+/* Fourchettes constatées de la prime d'État utilitaire (fiche TRA-EQ-114 bonifiée
+   pour les utilitaires assemblés en Europe, opérations engagées du 01/06/2026 au
+   30/06/2029). Montants publiés : Renault Pro (septembre 2026) — R4/Kangoo Van
+   6 160 €, Master 9 900 € ; Pelikan 2 800 à 9 700 €. Le gabarit intermédiaire
+   n'a pas de montant publié : on affiche la borne haute connue. */
+window.CEE_VUL_RANGES = {
+  small:  { min: 2800, max: 6160, txt: 'petit utilitaire (type Kangoo, Berlingo, R4 Van) : 2 800 à 6 160 € constatés' },
+  medium: { min: null, max: 9900, txt: 'utilitaire moyen (type Trafic, Vito, Expert) : montant intermédiaire, non publié précisément — jusqu’à 9 900 €' },
+  large:  { min: null, max: 9900, txt: 'grand utilitaire (type Master, Sprinter, Ducato) : jusqu’à 9 900 € constatés' },
+};
+
+window.ROADMAPS_PRO = {
+  pro_cee: {
+    title: 'Chez le concessionnaire : la prime d’État (certificats d’économies d’énergie)',
+    when: 'AVANT de signer le bon de commande ou le contrat de location',
+    steps: [
+      'Demandez au concessionnaire s’il travaille avec un fournisseur d’énergie partenaire et quel montant il propose pour ce modèle : pour un utilitaire, la prime est bien plus élevée si le véhicule est assemblé en Europe et figure sur la liste officielle de l’ADEME.',
+      'Faites la demande avant la signature : une commande déjà signée n’y a plus droit.',
+      'La prime est déduite de la facture ou versée après livraison. Gardez le véhicule (ou le contrat de location) au moins 24 mois.',
+    ],
+    docs: ['Extrait Kbis ou avis de situation SIRENE', 'Devis ou bon de commande au nom de l’entreprise', 'Attestation sur l’honneur fournie par le fournisseur d’énergie partenaire', 'Pour un utilitaire : certificat de conformité (poids) — le concessionnaire s’en charge'],
+    warnings: ['Achat à un particulier ou véhicule d’occasion : pas de prime d’État.', 'Un utilitaire non assemblé en Europe touche une prime très réduite (quelques centaines d’euros).'],
+  },
+  pro_local_before: {
+    title: 'Auprès de la collectivité : dossier AVANT l’achat',
+    when: 'Avant de commander',
+    steps: [
+      'Métropole de Lyon : déposez la demande sur le guichet professionnel de la ZFE avant d’acheter (accord de principe, puis achat).',
+      'Eurométropole de Strasbourg : un rendez-vous conseil à l’Agence du Climat est obligatoire avant l’achat, puis dossier en ligne dans les 6 mois après la facture.',
+      'Faites détruire (ou céder, selon le règlement) l’ancien véhicule dans un centre agréé et transmettez les justificatifs.',
+    ],
+    docs: ['Kbis ou SIRENE, attestation d’effectif (moins de 250 salariés)', 'Devis puis facture au nom de l’entreprise', 'Carte grise de l’ancien véhicule et certificat de destruction ou de cession', 'Justificatif de domiciliation dans le territoire', 'RIB de l’entreprise'],
+    warnings: ['Une demande déposée après l’achat est refusée à Lyon et à Strasbourg.'],
+  },
+  pro_local_after: {
+    title: 'Auprès de la collectivité : remboursement APRÈS l’achat',
+    when: 'Dans le délai du règlement (le plus souvent 6 mois après la facture)',
+    steps: [
+      'Achetez le véhicule chez un professionnel, puis faites détruire l’ancien véhicule dans un centre agréé quand le règlement l’exige (Toulouse : ancien véhicule Crit’Air 3 ou plus ancien, détenu depuis au moins 1 an).',
+      'Déposez le dossier sur le site de la collectivité (Toulouse : démarches en ligne de la Métropole ; Aix-Marseille : subvention.ampmetropole.fr).',
+      'Vous recevez l’aide par virement après examen.',
+    ],
+    docs: ['Kbis ou SIRENE, attestation d’effectif', 'Facture au nom de l’entreprise', 'Carte grise du nouveau véhicule', 'Certificat de destruction de l’ancien véhicule', 'RIB de l’entreprise'],
+    warnings: ['Plafonds par entreprise : Toulouse 3 véhicules ou 20 000 € au total.'],
+  },
+};
+
+const SIZE_TXT = { small: 'petit utilitaire (moins de 1,55 t)', medium: 'utilitaire moyen (1,55 à 2 t)', large: 'grand utilitaire (plus de 2 t)' };
+
+window.AIDS_PRO = [
+  /* ================= NATIONAL ================= */
+  {
+    id: 'pro_cee_vul', scope: 'national', status: 'active', perVehicle: true,
+    label: 'Prime d’État pour utilitaire électrique (certificats d’économies d’énergie, bonifiée)', short: 'prime d’État utilitaire',
+    roadmap: 'pro_cee',
+    sourceUrl: 'https://www.ecologie.gouv.fr/politiques-publiques/bonifications-vehicules-electriques', sourceLabel: 'ecologie.gouv.fr — bonifications véhicules électriques (27/05/2026) ; montants Renault Pro et Pelikan (09/2026)', lastVerified: '2026-09-07',
+    check(ctx) {
+      const reasons = [], notes = [];
+      if (ctx.vehicleType !== 'vul') reasons.push('Réservée aux utilitaires légers (pour une voiture de société, voir la carte suivante)');
+      if (!ctx.isNew) reasons.push('Réservée aux véhicules neufs');
+      if (ctx.motor !== 'ev') reasons.push('Réservée aux utilitaires 100 % électriques');
+      if (reasons.length) return R('ineligible', reasons);
+      if (!ctx.euAssembled) {
+        return R('conditional', [], null, null, [
+          'Sans assemblage en Europe (ou si vous ne savez pas), la prime existe mais n’est pas bonifiée : quelques centaines d’euros seulement. Demandez au concessionnaire si le modèle figure sur la liste officielle de l’ADEME : c’est ce qui déclenche la bonification.',
+          'Avec la bonification : ' + CEE_VUL_RANGES[ctx.vulSize].txt + '.',
+        ]);
+      }
+      const rg = CEE_VUL_RANGES[ctx.vulSize];
+      notes.push(`Votre gabarit : ${SIZE_TXT[ctx.vulSize]} — ${rg.txt}. Plus le véhicule est lourd, plus la bonification est forte (coefficient 3, 6 ou 7).`);
+      notes.push('Conditions : véhicule neuf assemblé en Europe et présent sur la liste officielle de l’ADEME, achat ou location d’au moins 24 mois, à garder 24 mois. Opérations engagées entre le 1er juin 2026 et le 30 juin 2029.');
+      notes.push('Le montant exact dépend du fournisseur d’énergie partenaire du concessionnaire : nous affichons les montants publiés.');
+      return R('eligible', [], rg.min, rg.max, notes);
+    },
+  },
+  {
+    id: 'pro_cee_vp', scope: 'national', status: 'active_unverified', perVehicle: true,
+    label: 'Prime d’État pour voiture de société électrique (certificats d’économies d’énergie)', short: 'prime d’État voiture de société',
+    roadmap: 'pro_cee',
+    sourceUrl: 'https://professionnels.renault.fr/certificats-economies-energie-cee.html', sourceLabel: 'Renault Pro (barème septembre 2026) — la prime « Coup de pouce » bonifiée est réservée aux ménages', lastVerified: '2026-09-07',
+    check(ctx) {
+      const reasons = [];
+      if (ctx.vehicleType !== 'vp') reasons.push('Concerne les voitures de société (pour un utilitaire, voir la carte précédente)');
+      if (!ctx.isNew) reasons.push('Réservée aux véhicules neufs');
+      if (ctx.motor !== 'ev') reasons.push('Réservée aux voitures 100 % électriques');
+      if (reasons.length) return R('ineligible', reasons);
+      if (ctx.legalForm === 'nomPropre') {
+        return R('conditional', [], 3620, 6180, [
+          'Vous achetez en votre nom propre (entreprise individuelle, micro-entreprise) : vous êtes une personne physique. Vous touchez donc la prime « Coup de pouce » des particuliers, qui dépend de vos revenus : 3 620 à 6 180 € constatés chez Renault (jusqu’à 8 240 € avec batterie fabriquée en Europe).',
+          'Vous pouvez aussi prétendre au leasing social (revenu fiscal de 16 880 € par part au maximum, plus de 8 000 km par an pour votre activité). Pour le détail selon vos revenus, basculez sur le mode Particulier.',
+        ]);
+      }
+      return R('conditional', [], 570, 570, [
+        'Pour une société (personne morale), la prime n’est pas bonifiée : environ 570 € constatés (1 150 € en Corse). La prime « Coup de pouce » de plusieurs milliers d’euros est réservée aux personnes physiques.',
+        'Exceptions depuis le 1er septembre 2026 : taxis (3 650 à 5 470 €) et services d’aide à domicile — demandez au concessionnaire.',
+      ]);
+    },
+  },
+  {
+    id: 'pro_suramortissement', scope: 'national', status: 'active', info: true,
+    label: 'Avantage fiscal : déduction exceptionnelle (suramortissement)', short: 'suramortissement',
+    sourceUrl: 'https://bofip.impots.gouv.fr/bofip/10079-PGP.html/identifiant=BOI-BIC-BASE-100-20-20250730', sourceLabel: 'BOFiP BOI-BIC-BASE-100-20 (30/07/2025), article 39 decies A du CGI', lastVerified: '2026-09-07',
+    check(ctx) {
+      if (!ctx.isNew) return R('ineligible', ['Véhicules neufs uniquement']);
+      if (ctx.motor !== 'ev') return R('ineligible', ['Électrique ou hydrogène uniquement (autres énergies : GNV, B100… avec d’autres taux)']);
+      if (ctx.vehicleType !== 'vul' || ctx.vulSize !== 'large') return R('ineligible', ['Réservé aux véhicules de 2,6 tonnes et plus (grands utilitaires 2,6–3,5 t, camions) — rien en dessous']);
+      return R('note', [], null, null, [
+        'Vous pouvez déduire de votre résultat imposable, en plus de l’amortissement normal, 40 % du surcoût du véhicule électrique par rapport à un thermique équivalent (véhicules de 2,6 à 3,5 t ; 115 % de 3,5 à 16 t), dans la limite de 30 % du coût éligible. Valable pour les véhicules acquis jusqu’au 31 décembre 2030.',
+        'Ce n’est pas un chèque : l’économie réelle dépend de votre taux d’imposition. À voir avec votre expert-comptable.',
+      ]);
+    },
+  },
+  {
+    id: 'pro_taxes_annuelles', scope: 'national', status: 'active', info: true,
+    label: 'Avantage fiscal : aucune taxe annuelle sur les véhicules de société', short: 'taxes annuelles',
+    sourceUrl: 'https://bofip.impots.gouv.fr/bofip/13954-PGP.html/identifiant=BOI-AIS-MOB-10-30-20-20250528', sourceLabel: 'BOFiP BOI-AIS-MOB-10-30-20 (28/05/2025)', lastVerified: '2026-09-07',
+    check(ctx) {
+      if (ctx.motor !== 'ev') return R('ineligible', ['Exonération réservée aux véhicules 100 % électriques ou à hydrogène']);
+      if (ctx.vehicleType !== 'vp') return R('ineligible', ['Les taxes annuelles ne concernent que les voitures de société (pas les utilitaires)']);
+      return R('note', [], null, null, ['Une voiture de société électrique est exonérée des deux taxes annuelles (taxe sur les émissions de CO₂ et taxe sur les polluants atmosphériques, ex-TVS). Économie de plusieurs centaines à plusieurs milliers d’euros par an selon le modèle thermique évité.']);
+    },
+  },
+
+  {
+    id: 'pro_tva', scope: 'national', status: 'active', info: true,
+    label: 'TVA sur l’achat : récupérable sur un utilitaire, pas sur une voiture', short: 'TVA',
+    sourceUrl: 'https://bofip.impots.gouv.fr/bofip/1192-PGP.html/identifiant=BOI-TVA-DED-30-30-20-20250702', sourceLabel: 'BOFiP BOI-TVA-DED-30-30-20 (02/07/2025) et BOI-TVA-DED-30-30-70', lastVerified: '2026-09-08',
+    check(ctx) {
+      if (ctx.vehicleType === 'vul') {
+        const tva = Math.round(0.2 * ctx.price);
+        return R('note', [], tva, tva, [
+          `Utilitaire (catégorie N1, carte grise « CTTE ») : la TVA de 20 % est intégralement récupérable si votre entreprise est assujettie, soit ${fmt(tva)} par véhicule sur ce prix hors taxes. Ce n’est pas une aide, mais c’est souvent la première différence avec un particulier.`,
+          'Condition : véhicule conçu pour les marchandises (pas plus de deux rangées de sièges). La TVA sur l’électricité de recharge est aussi récupérable à 100 %.',
+        ]);
+      }
+      return R('ineligible', ['Voiture de tourisme : TVA non récupérable, à l’achat comme en location longue durée. Exceptions : taxis, VTC, auto-écoles, loueurs. La TVA sur l’électricité de recharge reste récupérable.']);
+    },
+  },
+  {
+    id: 'pro_amortissement', scope: 'national', status: 'active', info: true,
+    label: 'Avantage fiscal : amortissement déductible jusqu’à 30 000 € pour une voiture électrique', short: 'plafond d’amortissement',
+    sourceUrl: 'https://bofip.impots.gouv.fr/bofip/4582-PGP.html/identifiant=BOI-BIC-AMT-20-40-50-20191218', sourceLabel: 'BOFiP BOI-BIC-AMT-20-40-50 et notice 2033 (millésime 2026), article 39-4 du CGI', lastVerified: '2026-09-08',
+    check(ctx) {
+      if (ctx.vehicleType !== 'vp') return R('ineligible', ['Ne concerne que les voitures de tourisme (les utilitaires s’amortissent sans plafond)']);
+      if (ctx.motor !== 'ev') return R('ineligible', ['Plafond de 30 000 € réservé aux voitures émettant moins de 20 g de CO₂ par km ; hybride rechargeable : 20 300 € ; thermique : 18 300 € (9 900 € au-delà de 160 g)']);
+      const over = Math.max(0, ctx.price - 30000);
+      return R('note', [], null, null, [
+        `Vous pouvez déduire l’amortissement de la voiture jusqu’à 30 000 € (contre 18 300 € pour une thermique classique, 9 900 € pour une voiture très émettrice)${over > 0 ? ` ; sur ce prix, ${fmt(over)} resteront non déductibles` : ' : sur ce prix, l’amortissement est intégralement déductible'}. La même limite s’applique à la part « amortissement » des loyers de location longue durée.`,
+      ]);
+    },
+  },
+  {
+    id: 'pro_aen', scope: 'national', status: 'active', info: true,
+    label: 'Avantage fiscal : avantage en nature réduit pour le salarié qui utilise la voiture', short: 'avantage en nature',
+    sourceUrl: 'https://www.urssaf.fr/accueil/outils-documentation/taux-baremes/avantages-en-nature.html', sourceLabel: 'Urssaf — barème des avantages en nature 2026 ; arrêté du 25/02/2025', lastVerified: '2026-09-08',
+    check(ctx) {
+      if (ctx.vehicleType !== 'vp') return R('ineligible', ['Ne concerne que les voitures de société utilisées aussi à titre privé par un salarié ou un dirigeant']);
+      if (ctx.legalForm === 'nomPropre') return R('ineligible', ['Sans salarié ni société, il n’y a pas d’avantage en nature à déclarer']);
+      if (ctx.motor !== 'ev') return R('ineligible', ['Abattement réservé aux voitures 100 % électriques respectant le score environnemental']);
+      return R('note', [], null, null, [
+        'Si la voiture est aussi utilisée à titre privé, l’avantage en nature déclaré pour le salarié (ou le dirigeant) est réduit de 70 %, dans la limite de 4 641,60 € par an en 2026 (voitures mises à disposition depuis le 1er février 2025, score environnemental requis). L’électricité payée par l’entreprise n’est pas comptée, et une borne au travail utilisée à titre privé n’est pas un avantage en nature jusqu’au 31 décembre 2027.',
+        'Régime annoncé jusqu’au 31 décembre 2027 (date confirmée seulement par des sources secondaires).',
+      ]);
+    },
+  },
+  {
+    id: 'pro_retrofit_vul', scope: 'national', status: 'active', info: true,
+    label: 'Autre option : transformer un utilitaire thermique en électrique (prime au rétrofit)', short: 'rétrofit utilitaire',
+    sourceUrl: 'https://entreprendre.service-public.gouv.fr/vosdroits/F38407', sourceLabel: 'entreprendre.service-public.fr F38407 (vérifié le 04/09/2026), barème ASP', lastVerified: '2026-09-08',
+    check(ctx) {
+      if (ctx.vehicleType !== 'vul') return R('ineligible', ['Concerne les camionnettes (pas les voitures de société pour une entreprise)']);
+      return R('note', [], null, 8000, [
+        'Plutôt que d’acheter : faire transformer une camionnette d’au moins 5 ans en électrique. L’État prend 40 % du coût de la transformation, plafonné à 4 000 € (petite camionnette), 6 000 € (moyenne) ou 8 000 € (grande). Sans limite de nombre. Installateur habilité obligatoire, demande dans les 6 mois après la facture, véhicule à garder 1 an et 6 000 km.',
+      ]);
+    },
+  },
+  {
+    id: 'pro_advenir', scope: 'national', status: 'active', info: true,
+    label: 'Bornes de recharge en entreprise : plus d’aide Advenir pour les véhicules légers', short: 'bornes',
+    sourceUrl: 'https://advenir.mobi/primes-et-montants-daides/', sourceLabel: 'advenir.mobi — grille au 01/04/2026 ; pages « flottes et salariés » (fermée depuis 2023) et « professionnels de l’automobile » (fermée depuis 2026)', lastVerified: '2026-09-08',
+    check() {
+      return R('note', [], null, null, ['Le programme Advenir ne finance plus les bornes pour flottes ou salariés (véhicules légers) depuis le 1er janvier 2023 ; seuls les poids lourds, les immeubles collectifs et la voirie restent aidés. Il reste la TVA récupérable sur la borne et l’électricité.']);
+    },
+  },
+
+  /* ================= LOCAL — VÉRIFIÉ ================= */
+  {
+    id: 'pro_lyon', scope: 'epci', territoryLabel: 'Métropole de Lyon', status: 'active', perVehicle: true, maxVehicles: 6,
+    label: 'Aide de la Métropole de Lyon aux professionnels (zone à faibles émissions)', short: 'aide de Lyon (pro)', roadmap: 'pro_local_before',
+    sourceUrl: 'https://zfe.grandlyon.com/professionnel/', sourceLabel: 'zfe.grandlyon.com — règlement 2025/2026 (depuis le 14/02/2025)', lastVerified: '2026-09-07',
+    platform: 'guichet professionnel de la ZFE du Grand Lyon — AVANT l’achat',
+    territory: (ctx) => ctx.epci === EPCI.LYON,
+    check(ctx) {
+      const reasons = [], notes = [];
+      if (!ctx.smallCompany) reasons.push('Réservée aux entreprises et associations de moins de 250 salariés');
+      if (ctx.vehicleType !== 'vul') reasons.push('Réservée aux utilitaires (pas d’aide pour une voiture de société)');
+      if (ctx.motor !== 'ev') reasons.push('Utilitaire électrique (ou hydrogène) uniquement');
+      if (reasons.length) return R('ineligible', reasons);
+      const base = 5000, bonus = ctx.scrap ? 1000 : 0;
+      notes.push(`5 000 € par utilitaire de moins de 3,5 t${ctx.scrap ? ', plus 1 000 € pour la mise au rebut de l’ancien véhicule' : ' (1 000 € de plus si vous mettez un ancien véhicule au rebut)'} ; 1 000 € supplémentaires possibles avec le « contrat vert » de la Métropole.`);
+      notes.push('Entreprise domiciliée dans la Métropole, code d’activité éligible ; de 1 à 6 véhicules selon l’effectif et la situation en zone à faibles émissions. Dossier à déposer avant l’achat.');
+      return R('eligible', [], base + bonus, base + bonus + 1000, notes);
+    },
+  },
+  {
+    id: 'pro_strasbourg', scope: 'epci', territoryLabel: 'Eurométropole de Strasbourg', status: 'active', perVehicle: true,
+    label: 'Aide à la conversion pour les professionnels (Strasbourg)', short: 'aide de Strasbourg (pro)', roadmap: 'pro_local_before', totalCapPct: 0.8,
+    sourceUrl: 'https://www.strasbourg.eu/zfe-professionnels', sourceLabel: 'strasbourg.eu/zfe-professionnels (règlement en vigueur, non daté)', lastVerified: '2026-09-07',
+    platform: 'Agence du Climat (rendez-vous obligatoire avant l’achat), puis dossier en ligne sous 6 mois',
+    territory: (ctx) => ctx.epci === EPCI.STRASBOURG,
+    check(ctx) {
+      const reasons = [], notes = [];
+      if (!ctx.smallCompany) reasons.push('Réservée aux entreprises de moins de 250 salariés (chiffre d’affaires inférieur à 50 M€)');
+      if (!ctx.scrap) reasons.push('Il faut mettre au rebut un ancien véhicule interdit dans la zone à faibles émissions');
+      if (ctx.motor !== 'ev') reasons.push('Véhicule électrique uniquement');
+      if (reasons.length) return R('ineligible', reasons);
+      if (ctx.vehicleType === 'vp') { notes.push('Voiture : 1 500 €. Le total des aides publiques est plafonné entre 40 et 80 % du prix.'); return R('eligible', [], 1500, 1500, notes); }
+      notes.push('Petit utilitaire de moins de 3,5 t : 4 000 à 6 000 € selon la situation de l’entreprise. Total des aides publiques plafonné entre 40 et 80 % du prix.');
+      notes.push('Entreprise domiciliée dans l’Eurométropole ; rendez-vous conseil à l’Agence du Climat obligatoire avant l’achat. Nombre de véhicules aidés par entreprise : non publié.');
+      return R('eligible', [], 4000, 6000, notes);
+    },
+  },
+  {
+    id: 'pro_toulouse', scope: 'epci', territoryLabel: 'Toulouse Métropole', status: 'active_unverified', perVehicle: true, maxVehicles: 3, maxTotal: 20000,
+    label: 'Prime « véhicule + propre » pour les professionnels (Toulouse)', short: 'prime de Toulouse (pro)', roadmap: 'pro_local_after',
+    sourceUrl: 'https://les-aides.fr/aide/WWQf3w/toulouse-metropole/prime-vehicule-propre.html', sourceLabel: 'les-aides.fr (mis à jour le 16/04/2026) — page officielle de la démarche non consultable par robot', lastVerified: '2026-09-07',
+    platform: 'démarches en ligne de Toulouse Métropole, après l’achat',
+    territory: (ctx) => ctx.epci === EPCI.TOULOUSE,
+    check(ctx) {
+      const reasons = [], notes = [];
+      if (!ctx.smallCompany) reasons.push('Réservée aux entreprises et associations de moins de 250 salariés');
+      if (!ctx.scrap) reasons.push('Il faut faire détruire un ancien véhicule vignette Crit’Air 3, 4, 5 ou non classée, détenu depuis au moins 1 an');
+      else if (ctx.critair < 3) reasons.push('L’ancien véhicule doit avoir une vignette Crit’Air 3 ou plus ancienne');
+      if (reasons.length) return R('ineligible', reasons);
+      let amt = (ctx.vehicleType === 'vul' && ctx.vulSize === 'large') ? 6000 : 4000;
+      if (!ctx.isNew) amt = Math.round(amt * 0.7);
+      amt = Math.min(amt, Math.round(0.4 * ctx.price));
+      notes.push(`${ctx.vehicleType === 'vul' && ctx.vulSize === 'large' ? 'Utilitaire de 2,5 à 3,5 t : 6 000 €' : 'Voiture ou petit utilitaire de moins de 2,5 t : 4 000 €'} pour un véhicule neuf${ctx.isNew ? '' : ' ; environ 30 % de moins pour une occasion'} ; limité à 40 % du prix. Motorisations acceptées : électrique, hybride, hydrogène, gaz (vignette Crit’Air 0 ou 1).`);
+      notes.push('Entreprise située dans l’une des 37 communes de la Métropole ; 3 véhicules ou 20 000 € maximum par entreprise.');
+      return R('conditional', [], amt, amt, notes);
+    },
+  },
+  {
+    id: 'pro_amp', scope: 'epci', territoryLabel: 'Aix-Marseille-Provence', status: 'active_unverified', perVehicle: true,
+    label: 'Aide au changement de véhicule pour les entreprises (Aix-Marseille-Provence)', short: 'aide d’Aix-Marseille (pro)', roadmap: 'pro_local_after',
+    sourceUrl: 'https://ampmetropole.fr/mobilite-transports/roulez-vers-un-avenir-plus-vert-la-metropole-vous-aide-a-changer-de-vehicule/', sourceLabel: 'ampmetropole.fr (page modifiée le 05/09/2025) et fiche Infogreffe (31/08/2025)', lastVerified: '2026-09-07',
+    platform: 'subvention.ampmetropole.fr, après l’achat',
+    territory: (ctx) => ctx.epci === EPCI.AMP,
+    check(ctx) {
+      const reasons = [], notes = [];
+      if (!ctx.smallCompany) reasons.push('Réservée aux PME et aux associations (utilité publique ou économie sociale et solidaire)');
+      if (!ctx.scrap) reasons.push('Il faut mettre au rebut un ancien véhicule interdit dans la zone à faibles émissions');
+      if (reasons.length) return R('ineligible', reasons);
+      notes.push('Jusqu’à 5 000 € par véhicule pour remplacer un véhicule mis au rebut. Barème détaillé non publié sur la page officielle : montant à confirmer avec la Métropole.');
+      return R('conditional', [], null, 5000, notes);
+    },
+  },
+
+  /* ================= LOCAL — NON CONFIRMÉ / SUSPENDU (info) ================= */
+  {
+    id: 'pro_mgp', scope: 'epci', territoryLabel: 'Métropole du Grand Paris', status: 'unknown', info: true,
+    label: 'Grand Paris : aide aux professionnels non confirmée', short: 'Grand Paris (pro)',
+    sourceUrl: 'https://www.metropolegrandparis.fr/fr/metropole-roule-propre-0', sourceLabel: 'metropolegrandparis.fr — la page « Métropole roule propre » ne mentionne que les particuliers', lastVerified: '2026-09-07',
+    territory: (ctx) => ctx.epci === EPCI.MGP,
+    check() { return R('note', [], null, null, ['La page officielle du Grand Paris ne décrit d’aide que pour les particuliers et renvoie les professionnels vers un programme partenaire. Des sites secondaires évoquent 6 000 € pour les PME sans que nous ayons pu le confirmer : renseignez-vous auprès de la Métropole avant de compter dessus.']); },
+  },
+  {
+    id: 'pro_grenoble', scope: 'epci', territoryLabel: 'Grenoble-Alpes Métropole', status: 'suspended', info: true,
+    label: 'Grenoble : aide au renouvellement suspendue', short: 'Grenoble (pro)',
+    sourceUrl: 'https://zfe.grenoblealpesmetropole.fr/684-aides-et-parcours.htm', sourceLabel: 'zfe.grenoblealpesmetropole.fr — « actuellement suspendu depuis le 26/09/2025 »', lastVerified: '2026-09-07',
+    territory: (ctx) => ctx.epci === EPCI.GRENOBLE,
+    check() { return R('ineligible', ['Aide suspendue depuis le 26 septembre 2025 pour les particuliers comme pour les associations, sans date de reprise annoncée']); },
+  },
+  {
+    id: 'pro_rouen', scope: 'epci', territoryLabel: 'Métropole Rouen Normandie', status: 'active_unverified', info: true,
+    label: 'Rouen : aide aux professionnels à confirmer', short: 'Rouen (pro)',
+    sourceUrl: 'https://zfe.metropole-rouen-normandie.fr/aides-et-alternatives/quelles-sont-les-aides', sourceLabel: 'zfe.metropole-rouen-normandie.fr — le formulaire de demande était fermé le 07/09/2026', lastVerified: '2026-09-07',
+    territory: (ctx) => ctx.epci === EPCI.ROUEN,
+    check() { return R('note', [], null, 5000, ['La Métropole cite les utilitaires parmi les véhicules éligibles (plafond général 5 000 €), mais son formulaire de demande affichait « fermé » lors de notre vérification. Appelez la Métropole avant d’acheter.']); },
+  },
+];
+
+/* Provenance des données spécifique au mode pro (ajoutée au bloc « D'où viennent ces données ? ») */
+window.SOURCES_PRO = [
+  { cat: 'Mode professionnel — prime d’État utilitaires', what: 'Fiche TRA-EQ-114 (certificats d’économies d’énergie, personnes morales) et sa bonification pour les utilitaires assemblés en Europe (coefficients 3, 6 ou 7 selon le poids), du 1er juin 2026 au 30 juin 2029. Montants en euros : barèmes publiés par les constructeurs et opérateurs.', src: 'ecologie.gouv.fr (27/05/2026), arrêté du 18/05/2026, liste ADEME des utilitaires éligibles, Renault Pro et Pelikan (09/2026)', url: 'https://www.ecologie.gouv.fr/politiques-publiques/bonifications-vehicules-electriques', note: 'Le gabarit intermédiaire (1,55 à 2 t) n’a pas de montant publié : borne haute affichée.' },
+  { cat: 'Mode professionnel — fiscalité', what: 'TVA récupérable sur les utilitaires et l’électricité, non récupérable sur les voitures ; plafond d’amortissement 30 000 € (électrique) ; avantage en nature réduit de 70 % ; déduction exceptionnelle (suramortissement) des véhicules de 2,6 t et plus jusqu’au 31/12/2030 ; exonération des taxes annuelles sur les voitures de société électriques.', src: 'BOFiP BOI-TVA-DED-30-30-20 (02/07/2025), BOI-BIC-AMT-20-40-50, BOI-BIC-BASE-100-20 (30/07/2025), BOI-AIS-MOB-10-30-20 (28/05/2025) ; Urssaf barème 2026', url: 'https://bofip.impots.gouv.fr/bofip/1192-PGP.html/identifiant=BOI-TVA-DED-30-30-20-20250702', note: 'Avantages fiscaux affichés à titre d’information, non comptés dans le chèque. Fin du régime d’avantage en nature (31/12/2027) confirmée seulement par des sources secondaires.' },
+  { cat: 'Mode professionnel — aides locales', what: 'Règlements professionnels de la Métropole de Lyon, de l’Eurométropole de Strasbourg, de Toulouse Métropole et d’Aix-Marseille-Provence ; statut vérifié pour le Grand Paris (non confirmé), Grenoble (suspendue) et Rouen (formulaire fermé).', src: 'zfe.grandlyon.com/professionnel, strasbourg.eu/zfe-professionnels, les-aides.fr (Toulouse, 16/04/2026), ampmetropole.fr', url: 'https://zfe.grandlyon.com/professionnel/', note: 'Toulouse et Aix-Marseille : barèmes lus sur des pages secondaires, à confirmer.' },
+];
