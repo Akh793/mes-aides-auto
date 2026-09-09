@@ -12,6 +12,10 @@
 @font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url(/assets/fonts/poppins-700.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:'Poppins';font-style:italic;font-weight:600;font-display:swap;src:url(/assets/fonts/poppins-600-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:'Poppins';font-style:italic;font-weight:700;font-display:swap;src:url(/assets/fonts/poppins-700-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+#filters summary::-webkit-details-marker{display:none}
+#filters[open] summary .ml-auto::after{content:" ▴"}
+#filters:not([open]) summary .ml-auto::after{content:" ▾"}
+#filters[open]{border-color:#2548FF}
 </style>
 <!-- Consentement (Consent Mode v2) — doit précéder GTM. Aucun cookie de mesure tant que l'utilisateur n'a pas accepté (bandeau). -->
 <script>
@@ -163,7 +167,9 @@ w.MAA_loadGTM=load;})(window,document,'script','dataLayer','GTM-P2DNNBXT');</scr
   :root { --blue:#2548FF; --coral:#FF6347; }
   body { font-family: Inter, system-ui, sans-serif; background:#fff; color:#0f172a; }
   .font-poppins { font-family: Poppins, Inter, sans-serif; }
-  .badge { display:inline-flex; align-items:center; padding:.2rem .6rem; border-radius:9999px; font-size:.72rem; font-weight:600; letter-spacing:.01em; }
+  .badge { display:inline-flex; align-items:center; padding:.2rem .6rem; border-radius:9999px; font-size:.72rem; font-weight:600; letter-spacing:.01em; white-space:nowrap; max-width:100%; }
+  /* Étiquettes longues (mentions de cumul) : elles doivent pouvoir revenir à la ligne. */
+  .badge-wrap { white-space:normal; text-align:left; line-height:1.35; padding-top:.3rem; padding-bottom:.3rem; }
   .field { width:100%; border-radius:1rem; border:1.5px solid #e2e8f0; background:#fff; padding:.8rem 1rem; font-size:1rem; transition: border-color .15s, box-shadow .15s; }
   .field:focus { outline:none; border-color:var(--blue); box-shadow:0 0 0 4px rgba(37,72,255,.12); }
   .seg { display:grid; grid-template-columns:1fr 1fr; position:relative; background:#eef1f5; border-radius:9999px; padding:4px; cursor:pointer; user-select:none; }
@@ -180,6 +186,25 @@ w.MAA_loadGTM=load;})(window,document,'script','dataLayer','GTM-P2DNNBXT');</scr
   .stepper button:active { transform: scale(.92); }
   details summary { cursor:pointer; list-style:none; }
   details summary::-webkit-details-marker { display:none; }
+  /* Étiquettes des 4 familles — mêmes valeurs que assets/maa.css, pour que le
+     code visuel soit identique dans l'outil et dans les pages éditoriales.
+     Écrites en CSS explicite : le Tailwind embarqué est un sous-ensemble figé,
+     les classes arbitraires (bg-[#e8ecff]) n'y existent pas. */
+  .lb-pay  { background:#e8ecff; color:#1e3ac9; }
+  .lb-when { background:#fff1ee; color:#b3341c; font-weight:700; }
+  .lb-who  { background:#f1f5f9; color:#475569; font-weight:500; }
+  /* En-tête de carte : le titre et le montant se superposent en colonne sur
+     mobile, côte à côte dès qu'il y a la place. */
+  .card-head { margin-top:.5rem; display:flex; flex-direction:column; gap:.1rem; }
+  @media (min-width:30rem) { .card-head { flex-direction:row; align-items:flex-start; justify-content:space-between; gap:.75rem; } }
+  /* Un total en fourchette ne doit pas se couper en deux sur un petit écran. */
+  @media (max-width:26rem) { #total-amount { font-size:2.25rem; } }
+  /* Titre de bande : deux éléments flex seulement (la pastille et le texte),
+     sinon le <em> devient un élément flex autonome et part à droite sur mobile. */
+  h1,h2,h3 { text-wrap:balance; }
+  .step-h { display:flex; align-items:flex-start; gap:.75rem; line-height:1.15; }
+  .step-h > span:last-child { min-width:0; }
+  @media (min-width:640px) { .step-h { align-items:center; } }
   .step-num { width:2.5rem; height:2.5rem; border-radius:9999px; background:var(--blue); color:#fff; font-weight:700; display:inline-grid; place-items:center; font-size:1.05rem; flex-shrink:0; }
   /* Cartes de la feuille de route sur deux colonnes en large écran (le JS produit un conteneur .space-y-4) */
   @media (min-width: 768px) {
@@ -227,7 +252,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div class="flex flex-row md:flex-col items-center md:items-end gap-2 print-hide shrink-0">
         <a href="/qui-sommes-nous.html" class="text-sm font-medium text-slate-500 hover:text-[#2548FF] underline-offset-4 hover:underline">Qui sommes-nous ?</a>
-        <span class="badge bg-[#FF6347] text-white shadow-lg">Règles à jour au <span class="meta-date ml-1">—</span></span>
+        <span class="badge badge-wrap bg-[#FF6347] text-white shadow-lg">Règles à jour au <span class="meta-date ml-1">—</span></span>
         <span id="perf-wrap" class="text-xs text-slate-400">temps de calcul : <span id="perf">—</span></span>
       </div>
     </div>
@@ -244,13 +269,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- ============ BANDE 1 : VOTRE SITUATION ============ -->
   <section id="bande-situation" class="rounded-3xl bg-[#F8F9FA] shadow-lg p-6 md:p-8 border border-slate-100">
     <div class="flex flex-wrap items-center justify-between gap-4">
-      <h2 class="font-poppins font-semibold text-3xl md:text-4xl flex items-center gap-3"><span class="step-num">1</span> Votre <em class="italic text-[#2548FF]">situation</em></h2>
-      <div class="flex items-center gap-4">
+      <h2 class="font-poppins font-semibold text-3xl md:text-4xl step-h"><span class="step-num">1</span><span>Votre <em class="italic text-[#2548FF]">situation</em></span></h2>
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
         <div class="seg seg-mode w-64" role="switch" tabindex="0" data-seg="mode,particulier,pro" aria-label="Particulier ou professionnel"><div class="knob"></div><span class="opt">Particulier</span><span class="opt">Professionnel</span></div>
         <button type="button" id="reset-btn" class="text-xs font-medium text-slate-400 hover:text-[#FF6347] underline underline-offset-4">Effacer mes réponses</button>
       </div>
     </div>
-    <p data-mode="pro" hidden class="mt-3 text-sm text-slate-600">Mode professionnel : entreprises, artisans, auto-entrepreneurs, professions libérales, associations. Aucune donnée fiscale demandée. Les avantages fiscaux (déduction exceptionnelle, taxes annuelles) sont indiqués à part et ne comptent pas dans le chèque.</p>
+    <p data-mode="pro" hidden class="mt-3 text-sm text-slate-600">Entreprises, artisans, auto-entrepreneurs, professions libérales, associations. Aucune donnée fiscale demandée : les avantages fiscaux sont affichés à part, hors du chèque.</p>
 
     <!-- Ligne 1 : les quatre champs -->
     <div class="mt-6 grid gap-4 md:grid-cols-4">
@@ -291,9 +316,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
-    <!-- Ligne 2 : véhicule + 4 filtres -->
-    <p class="mt-6 text-sm font-semibold text-slate-700">Précisez votre projet <span class="text-slate-400 font-normal">(ces réglages changent le montant)</span></p>
-    <div class="mt-3 grid gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
+    <!-- Ligne 2 : véhicule + filtres, repliés — l'état reste lisible dans le résumé -->
+    <details id="filters" class="mt-6 rounded-2xl border border-slate-200 bg-white px-4 py-3">
+    <summary class="cursor-pointer list-none flex flex-wrap items-baseline gap-x-2 gap-y-1">
+      <span class="text-sm font-semibold text-slate-700">Précisez votre projet</span>
+      <span id="filters-summary" class="text-xs text-slate-500">Neuve · 100 % électrique · sans casse · concessionnaire</span>
+      <span class="ml-auto text-xs font-semibold text-[#2548FF]">modifier</span>
+    </summary>
+    <div class="mt-4 grid gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
       <div>
         <label class="text-xs font-medium text-slate-500">Véhicule</label>
         <div class="seg mt-1" role="switch" tabindex="0" data-seg="isNew,true,false"><div class="knob"></div><span class="opt">Neuve</span><span class="opt">D’occasion</span></div>
@@ -323,7 +353,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div id="sub-legal" data-mode="pro" hidden>
         <label class="text-xs font-medium text-slate-500">Vous achetez</label>
         <div class="seg mt-1" role="switch" tabindex="0" data-seg="legalForm,societe,nomPropre"><div class="knob"></div><span class="opt">Via une société</span><span class="opt">En nom propre</span></div>
-        <p class="text-[11px] text-slate-400 mt-1 leading-tight">En nom propre (entreprise individuelle, micro-entreprise) : vous êtes une personne physique, la prime des particuliers s’applique</p>
+        <p class="text-[11px] text-slate-400 mt-1 leading-tight">En nom propre : c’est la prime des particuliers qui s’applique</p>
       </div>
       <div data-mode="pro" hidden>
         <label class="text-xs font-medium text-slate-500">Nombre de véhicules</label>
@@ -332,28 +362,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span id="qty" class="font-semibold">1</span>
           <button id="qty-plus" type="button" aria-label="plus">+</button>
         </div>
-        <p class="text-[11px] text-slate-400 mt-1 leading-tight">Les aides par véhicule sont multipliées, dans la limite des plafonds connus</p>
+        <p class="text-[11px] text-slate-400 mt-1 leading-tight">Multiplié par véhicule, dans la limite des plafonds</p>
       </div>
       <div id="sub-eu" data-mode="pro" hidden>
         <label class="text-xs font-medium text-slate-500">Assemblé en Europe ?</label>
         <div class="seg mt-1" role="switch" tabindex="0" data-seg="euAssembled,true,false"><div class="knob"></div><span class="opt">Oui</span><span class="opt">Non ou inconnu</span></div>
-        <p class="text-[11px] text-slate-400 mt-1 leading-tight">C’est ce qui déclenche la prime d’État bonifiée (liste officielle de l’ADEME)</p>
+        <p class="text-[11px] text-slate-400 mt-1 leading-tight">Déclenche la prime d’État bonifiée</p>
       </div>
       <div data-mode="particulier">
         <label class="text-xs font-medium text-slate-500">Votre usage</label>
         <div class="seg mt-1" role="switch" tabindex="0" data-seg="grosRouleur,false,true"><div class="knob"></div><span class="opt">Usage courant</span><span class="opt">Gros rouleur</span></div>
-        <p class="text-[11px] text-slate-400 mt-1 leading-tight">Gros rouleur = plus de 10 km entre votre domicile et votre travail, ou au moins 12 000 km par an avec votre voiture pour le travail</p>
+        <p class="text-[11px] text-slate-400 mt-1 leading-tight">Plus de 10 km domicile-travail, ou 12 000 km par an</p>
       </div>
       <div data-mode="particulier">
         <label class="text-xs font-medium text-slate-500">Vendeur</label>
         <div class="seg mt-1" role="switch" tabindex="0" data-seg="sellerPro,true,false"><div class="knob"></div><span class="opt">Concessionnaire</span><span class="opt">Particulier</span></div>
       </div>
     </div>
+    </details>
   </section>
 
   <!-- ============ BANDE 2 : TOTAL ESTIMÉ & DÉTAIL ============ -->
   <section id="bande-resultats">
-    <h2 class="font-poppins font-semibold text-3xl md:text-4xl flex items-center gap-3"><span class="step-num">2</span> Votre chèque estimé et le <em class="italic text-[#2548FF]">détail</em></h2>
+    <h2 class="font-poppins font-semibold text-3xl md:text-4xl step-h"><span class="step-num">2</span><span>Votre chèque estimé et le <em class="italic text-[#2548FF]">détail</em></span></h2>
 
     <div id="empty" class="mt-5 rounded-3xl bg-[#F8F9FA] border border-dashed border-slate-200 p-10 text-center">
       <p class="font-poppins font-semibold text-xl text-slate-700">Commencez par votre <em class="italic text-[#2548FF]">code postal</em></p>
@@ -380,7 +411,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- ============ BANDE 3 : FEUILLE DE ROUTE ============ -->
   <section id="bande-route">
     <div class="flex flex-wrap items-center justify-between gap-4">
-      <h2 class="font-poppins font-semibold text-3xl md:text-4xl flex items-center gap-3"><span class="step-num">3</span> Votre mode <em class="italic text-[#FF6347]">d’emploi</em></h2>
+      <h2 class="font-poppins font-semibold text-3xl md:text-4xl step-h"><span class="step-num">3</span><span>Votre mode <em class="italic text-[#FF6347]">d’emploi</em></span></h2>
       <button id="print-btn" type="button" class="rounded-full bg-[#FF6347] text-white text-sm md:text-base font-semibold px-6 py-3 shadow-lg hover:brightness-110 active:scale-[.98] transition">🖨️ Imprimer ou enregistrer ma fiche</button>
     </div>
     <div id="roadmap-empty" class="mt-5 rounded-3xl bg-[#F8F9FA] border border-dashed border-slate-200 p-10 text-center">

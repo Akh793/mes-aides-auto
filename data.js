@@ -104,7 +104,7 @@ const CRITAIR_TXT = (n) => (n === 5 ? '5 ou non classée' : String(n));
 window.AIDS = [
   /* ================= NATIONAL ================= */
   {
-    id: 'cee_vp_neuf', scope: 'national', status: 'active',
+    id: 'cee_vp_neuf', scope: 'national', status: 'active', tags: ['neuve','particulier'],
     label: 'Prime d’État « Coup de pouce » — voiture électrique neuve', short: 'prime d’État (neuf)',
     exclusiveGroup: 'CEE', roadmap: 'dealer_cee',
     sourceUrl: 'https://www.service-public.gouv.fr/particuliers/vosdroits/F39188', sourceLabel: 'service-public.fr (fiche F39188)', lastVerified: '2026-09-01',
@@ -131,7 +131,7 @@ window.AIDS = [
     },
   },
   {
-    id: 'cee_vo_occasion', scope: 'national', status: 'active',
+    id: 'cee_vo_occasion', scope: 'national', status: 'active', tags: ['occasion','particulier'],
     label: 'Prime d’État « Coup de pouce » — voiture électrique d’occasion', short: 'prime d’État (occasion)',
     exclusiveGroup: 'CEE', roadmap: 'dealer_cee',
     sourceUrl: 'https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054666103', sourceLabel: 'Arrêté du 10 août 2026 créant la fiche TRA-EQ-133 (Légifrance)', lastVerified: '2026-09-08',
@@ -149,7 +149,7 @@ window.AIDS = [
     },
   },
   {
-    id: 'leasing_social_2026', scope: 'national', status: 'active',
+    id: 'leasing_social_2026', scope: 'national', status: 'active', tags: ['location','neuve','revenus'],
     label: 'Leasing social 2026 (voiture électrique en location longue durée)', short: 'leasing social',
     exclusiveGroup: 'CEE', roadmap: 'leasing_social',
     sourceUrl: 'https://www.primealaconversion.gouv.fr/dboneco/accueil/leasingsocial2026.html', sourceLabel: 'primealaconversion.gouv.fr (téléservice officiel de l’État)', lastVerified: '2026-09-08',
@@ -173,7 +173,7 @@ window.AIDS = [
 
   /* ================= LOCAL — VÉRIFIÉ ================= */
   {
-    id: 'mgp_roule_propre', scope: 'epci', territoryLabel: 'Métropole du Grand Paris', status: 'active_unverified',
+    id: 'mgp_roule_propre', scope: 'epci', territoryLabel: 'Métropole du Grand Paris', status: 'active_unverified', tags: ['casse','revenus','neuve'],
     label: 'Aide « Métropole roule propre » (Grand Paris)', short: 'aide du Grand Paris', roadmap: 'local_after',
     sourceUrl: 'https://www.metropolegrandparis.fr/fr/metropole-roule-propre-0', sourceLabel: 'metropolegrandparis.fr (règlement 2025 — reconduction en 2026 non confirmée)', lastVerified: '2026-09-07',
     platform: 'guichet en ligne « Métropole roule propre »',
@@ -191,7 +191,7 @@ window.AIDS = [
     },
   },
   {
-    id: 'lyon_metropole', scope: 'epci', territoryLabel: 'Métropole de Lyon', status: 'active',
+    id: 'lyon_metropole', scope: 'epci', territoryLabel: 'Métropole de Lyon', status: 'active', tags: ['zfe','cession','revenus'],
     label: 'Aide de la Métropole de Lyon (zone à faibles émissions)', short: 'aide de la Métropole de Lyon', roadmap: 'local_before',
     sourceUrl: 'https://www.grandlyon.com/mes-services-au-quotidien/se-deplacer/les-aides-pour-lachat-dun-vehicule-moins-polluant', sourceLabel: 'grandlyon.com (page mise à jour le 20/02/2026)', lastVerified: '2026-09-07',
     platform: 'demarches.toodego.com — AVANT l’achat',
@@ -209,7 +209,7 @@ window.AIDS = [
     },
   },
   {
-    id: 'occitanie_ecocheque', scope: 'region', territoryLabel: 'Région Occitanie', status: 'active',
+    id: 'occitanie_ecocheque', scope: 'region', territoryLabel: 'Région Occitanie', status: 'active', tags: ['occasion','revenus'],
     label: 'Éco-chèque mobilité de la Région Occitanie (électrique d’occasion)', short: 'éco-chèque Occitanie', roadmap: 'local_after',
     sourceUrl: 'https://www.laregion.fr/Eco-cheque-mobilite-voiture-electrique-ou-hybride', sourceLabel: 'laregion.fr (page mise à jour le 23/07/2026)', lastVerified: '2026-09-07',
     platform: 'site « Mes Aides en Ligne » de la Région, dans les 6 mois après l’achat',
@@ -229,7 +229,7 @@ window.AIDS = [
     },
   },
   {
-    id: 'strasbourg', scope: 'epci', territoryLabel: 'Eurométropole de Strasbourg', status: 'active',
+    id: 'strasbourg', scope: 'epci', territoryLabel: 'Eurométropole de Strasbourg', status: 'active', tags: ['cession','revenus','particulier'],
     label: 'Aide à la conversion de l’Eurométropole de Strasbourg', short: 'aide de Strasbourg', roadmap: 'local_after', totalCapPct: 0.8,
     sourceUrl: 'https://www.strasbourg.eu/aides-conversion', sourceLabel: 'strasbourg.eu — règlement en vigueur depuis le 01/01/2025', lastVerified: '2026-09-07',
     platform: 'aides.strasbourg.eu, au plus tard 6 mois après l’achat',
@@ -249,7 +249,7 @@ window.AIDS = [
     },
   },
   {
-    id: 'rouen', scope: 'epci', territoryLabel: 'Métropole Rouen Normandie', status: 'active',
+    id: 'rouen', scope: 'epci', territoryLabel: 'Métropole Rouen Normandie', status: 'active', tags: ['casse','revenus'],
     label: 'Aide à l’achat d’une voiture peu polluante (Métropole de Rouen)', short: 'aide de Rouen', roadmap: 'local_after', totalCapPct: 0.8,
     sourceUrl: 'https://zfe.metropole-rouen-normandie.fr/sites/default/files/2025-10/B2025_0429_annexe.pdf', sourceLabel: 'règlement du 29/09/2025 — valable jusqu’au 30/06/2027 (facture avant le 31/12/2026)', lastVerified: '2026-09-07',
     platform: 'demarches.metropole-rouen-normandie.fr, dans les 6 mois après la facture',
@@ -271,7 +271,7 @@ window.AIDS = [
     },
   },
   {
-    id: 'seine_maritime', scope: 'dept', territoryLabel: 'Département de la Seine-Maritime', status: 'active_unverified',
+    id: 'seine_maritime', scope: 'dept', territoryLabel: 'Département de la Seine-Maritime', status: 'active_unverified', tags: ['casse','revenus'],
     label: 'Subvention du Département de la Seine-Maritime (hors Métropole de Rouen)', short: 'aide du Département 76', roadmap: 'local_after', totalCapPct: 0.8,
     sourceUrl: 'https://www.seinemaritime.fr/mon-cadre-de-vie/routes-bacs/subvention-zfe-m.html', sourceLabel: 'seinemaritime.fr — règlement du 20/03/2023, barème 2026 non consultable', lastVerified: '2026-09-07',
     platform: 'seinemaritime.fr, dans les 6 mois après la facture',
@@ -288,7 +288,7 @@ window.AIDS = [
     },
   },
   {
-    id: 'toulouse', scope: 'epci', territoryLabel: 'Toulouse Métropole', status: 'active',
+    id: 'toulouse', scope: 'epci', territoryLabel: 'Toulouse Métropole', status: 'active', tags: ['casse','revenus','particulier'],
     label: 'Prime « véhicule + propre » de Toulouse Métropole', short: 'prime de Toulouse', roadmap: 'local_after',
     sourceUrl: 'https://metropole.toulouse.fr/demarches/demander-la-prime-vehicule-propre', sourceLabel: 'metropole.toulouse.fr (démarche mise à jour le 16/09/2025, actualité du 08/06/2026)', lastVerified: '2026-09-07',
     platform: 'demarches-tm.eservices.toulouse-metropole.fr, après l’achat (facture et certificat de destruction)',
@@ -307,7 +307,7 @@ window.AIDS = [
     },
   },
   {
-    id: 'amp_marseille', scope: 'epci', territoryLabel: 'Aix-Marseille-Provence (zone à faibles émissions de Marseille)', status: 'active',
+    id: 'amp_marseille', scope: 'epci', territoryLabel: 'Aix-Marseille-Provence (zone à faibles émissions de Marseille)', status: 'active', tags: ['casse','zfe','revenus'],
     label: 'Aide de la Métropole Aix-Marseille-Provence — habitants de la zone à faibles émissions de Marseille', short: 'aide de Marseille', roadmap: 'local_after',
     sourceUrl: 'https://ampmetropole.fr/wp-content/uploads/2024/11/96120_Annexe-1-2-particulier-1.pdf', sourceLabel: 'règlement de la Métropole (annexe particuliers) — aides ouvertes jusqu’au 31/10/2027', lastVerified: '2026-09-07',
     platform: 'subvention.ampmetropole.fr, dans les 6 mois après l’achat',
@@ -331,7 +331,7 @@ window.AIDS = [
     },
   },
   {
-    id: 'grand_annecy', scope: 'epci', territoryLabel: 'Grand Annecy', status: 'active',
+    id: 'grand_annecy', scope: 'epci', territoryLabel: 'Grand Annecy', status: 'active', tags: ['casse','revenus','neuve'],
     label: 'Aide au renouvellement de voiture du Grand Annecy', short: 'aide du Grand Annecy', roadmap: 'local_before', totalCapPct: 1.0,
     sourceUrl: 'https://www.grandannecy.fr/zfem/aides-et-conseils-en-mobilite', sourceLabel: 'grandannecy.fr — règlement du 13/02/2025 (page mise à jour le 20/02/2025)', lastVerified: '2026-09-07',
     platform: 'grandannecy.fr — dossier AVANT la commande',
@@ -350,7 +350,7 @@ window.AIDS = [
     },
   },
   {
-    id: 'ccpmb', scope: 'epci', territoryLabel: 'Communauté de communes Pays du Mont-Blanc', status: 'active_unverified',
+    id: 'ccpmb', scope: 'epci', territoryLabel: 'Communauté de communes Pays du Mont-Blanc', status: 'active_unverified', tags: ['revenus','neuve'],
     label: 'Fonds Air Véhicules du Pays du Mont-Blanc (particuliers)', short: 'aide du Pays du Mont-Blanc', roadmap: 'local_after',
     sourceUrl: 'https://www.ccpmb.fr/', sourceLabel: 'ccpmb.fr — règlement de février 2026 (site inaccessible lors de la vérification, détails via sources secondaires)', lastVerified: '2026-09-07',
     platform: 'ccpmb.fr, après l’achat (facture et carte grise)',
@@ -368,7 +368,7 @@ window.AIDS = [
     },
   },
   {
-    id: 'bordeaux', scope: 'epci', territoryLabel: 'Bordeaux Métropole', status: 'active_unverified',
+    id: 'bordeaux', scope: 'epci', territoryLabel: 'Bordeaux Métropole', status: 'active_unverified', tags: ['casse','neuve'],
     label: 'Aide de Bordeaux Métropole (zone à faibles émissions)', short: 'aide de Bordeaux', roadmap: 'local_after',
     sourceUrl: 'https://sedeplacer.bordeaux-metropole.fr/en-voiture/zfe-ce-quil-faut-savoir', sourceLabel: 'sedeplacer.bordeaux-metropole.fr — barème non publié sur la page consultée', lastVerified: '2026-09-07',
     platform: 'mesdemarches.bordeaux-metropole.fr (ouvert depuis le 1er janvier 2025)',
@@ -384,7 +384,7 @@ window.AIDS = [
     },
   },
   {
-    id: 'grand_reims', scope: 'epci', territoryLabel: 'Grand Reims (zone à faibles émissions)', status: 'active_unverified',
+    id: 'grand_reims', scope: 'epci', territoryLabel: 'Grand Reims (zone à faibles émissions)', status: 'active_unverified', tags: ['casse','zfe'],
     label: 'Aide au changement de voiture du Grand Reims', short: 'aide de Reims', roadmap: 'local_after',
     sourceUrl: 'https://www.grandreims.fr/', sourceLabel: 'grandreims.fr et reims.fr (pages inaccessibles lors de la vérification) — sources secondaires contradictoires, 2026', lastVerified: '2026-09-07',
     platform: 'Grand Reims ou Ville de Reims (à confirmer)',
@@ -400,7 +400,7 @@ window.AIDS = [
     },
   },
   {
-    id: 'grenoble', scope: 'epci', territoryLabel: 'Grenoble-Alpes Métropole', status: 'suspended',
+    id: 'grenoble', scope: 'epci', territoryLabel: 'Grenoble-Alpes Métropole', status: 'suspended', tags: [],
     label: 'Aide au renouvellement de voiture de Grenoble-Alpes Métropole', short: 'aide de Grenoble', roadmap: 'local_after', totalCapPct: null,
     sourceUrl: 'https://zfe.grenoblealpesmetropole.fr/684-aides-et-parcours.htm', sourceLabel: 'zfe.grenoblealpesmetropole.fr — « actuellement suspendu depuis le 26/09/2025 »', lastVerified: '2026-09-07',
     platform: 'zfe.grenoblealpesmetropole.fr (entretien mobilité préalable)',
@@ -415,7 +415,7 @@ window.AIDS = [
 
   /* ================= INFO (hors total) ================= */
   {
-    id: 'retrofit', scope: 'national', status: 'active', info: true,
+    id: 'retrofit', scope: 'national', status: 'active', tags: ['retrofit','revenus'], info: true,
     label: 'Transformer sa voiture thermique en électrique (prime au rétrofit)', short: 'rétrofit',
     sourceUrl: 'https://jechangemavoiture.gouv.fr/jcmv/aide-achat.html', sourceLabel: 'jechangemavoiture.gouv.fr', lastVerified: '2026-09-07',
     check(ctx) {

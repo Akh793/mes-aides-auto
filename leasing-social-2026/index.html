@@ -79,7 +79,8 @@ background:#fff;line-height:1.65;font-size:1rem}
 img{max-width:100%;height:auto;display:block}
 a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
 a:hover{color:var(--coral)}
-h1,h2,h3,h4{font-family:Poppins,Inter,sans-serif;color:var(--ink);line-height:1.2;font-weight:600}
+h1,h2,h3,h4{font-family:Poppins,Inter,sans-serif;color:var(--ink);line-height:1.2;font-weight:600;
+text-wrap:balance}
 h1{font-size:2.1rem;font-weight:700;letter-spacing:-.02em}
 h2{font-size:1.55rem;margin-top:2.6rem}
 h3{font-size:1.15rem;margin-top:1.8rem}
@@ -93,7 +94,7 @@ em.hi-c{font-style:italic;color:var(--coral)}
 .prose{max-width:47rem}
 /* ---------- en-tête ---------- */
 .site-header{border-bottom:1px solid var(--line);background:#fff;position:relative;z-index:30}
-.site-header .bar{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1.5rem;padding:1rem 0}
+.site-header .bar{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1.5rem;padding-block:1rem}
 .brand{font-family:Poppins,sans-serif;font-weight:700;font-size:1.35rem;color:var(--ink);
 text-decoration:none;letter-spacing:-.02em;margin-right:auto}
 .brand em{font-style:italic;color:var(--blue)}
@@ -108,7 +109,7 @@ transition:filter .15s,transform .15s}
 .btn-blue{background:var(--blue)}
 .btn-lg{font-size:1rem;padding:.85rem 1.6rem}
 /* ---------- fil d'Ariane ---------- */
-.crumb{font-size:.8rem;color:var(--muted);padding:1.25rem 0 0}
+.crumb{font-size:.8rem;color:var(--muted);padding-block:1.25rem 0}
 .crumb ol{display:flex;flex-wrap:wrap;gap:.4rem;list-style:none;padding:0;margin:0}
 .crumb li::after{content:"›";margin-left:.4rem;color:#cbd5e1}
 .crumb li:last-child::after{content:""}
@@ -117,7 +118,7 @@ transition:filter .15s,transform .15s}
 /* ---------- contenu ---------- */
 main{padding-bottom:3rem}
 .hero{padding:1rem 0 .5rem}
-.lede{font-size:1.15rem;color:var(--body);margin-top:1rem}
+.lede{font-size:1.15rem;color:var(--body);margin-top:1rem;text-wrap:pretty}
 .answer{background:var(--soft);border:1px solid var(--line);border-left:4px solid var(--blue);
 border-radius:1rem;padding:1.1rem 1.25rem;margin-top:1.5rem}
 .answer p{margin-top:.5rem}
@@ -145,7 +146,8 @@ th,td{text-align:left;padding:.7rem .9rem;border-bottom:1px solid var(--line);ve
 th{background:var(--soft);font-family:Poppins,sans-serif;font-weight:600;color:var(--ink);font-size:.85rem}
 tbody tr:last-child td{border-bottom:0}
 td.num{white-space:nowrap;font-weight:600;color:var(--ink)}
-.badge{display:inline-block;padding:.15rem .6rem;border-radius:9999px;font-size:.72rem;font-weight:600}
+.badge{display:inline-flex;align-items:center;padding:.15rem .6rem;border-radius:9999px;
+font-size:.72rem;font-weight:600;white-space:nowrap;vertical-align:middle}
 .badge-ok{background:var(--okbg);color:var(--ok)}
 .badge-warn{background:var(--warnbg);color:var(--warn)}
 .badge-stop{background:var(--stopbg);color:var(--stop)}
@@ -202,6 +204,80 @@ font:600 .9rem Inter,sans-serif;cursor:pointer}
 .prose{margin-inline:auto}
 .crumb ol{max-width:47rem;margin-inline:auto}
 @media(min-width:64rem){.prose .table-wrap{margin-inline:-2.5rem}}
+/* ==========================================================================
+   v1.1 — page structurée : étiquettes, zones, carte d'identité, sommaire.
+   Règle : jamais la couleur seule, chaque étiquette porte son texte.
+   ========================================================================== */
+.lbbar{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.9rem}
+.lb{display:inline-block;padding:.2rem .65rem;border-radius:9999px;font-size:.74rem;
+font-weight:600;line-height:1.5;border:1px solid transparent;white-space:nowrap}
+.lb-pay{background:#e8ecff;border-color:#c3ccff;color:#1e3ac9}
+.lb-when{background:#fff1ee;border-color:#ffc0b2;color:#b3341c;font-weight:700}
+.lb-rule-ok{background:var(--okbg);border-color:#a7f3d0;color:var(--ok)}
+.lb-rule-warn{background:var(--warnbg);border-color:#fde68a;color:var(--warn)}
+.lb-rule-stop{background:var(--stopbg);border-color:#fecdd3;color:var(--stop)}
+.lb-rule-none{background:var(--soft);border-color:var(--line);color:var(--muted)}
+.lb-who{background:#f1f5f9;border-color:var(--line);color:#475569;font-weight:500}
+/* ---------- zones typées : le squelette rendu visible ---------- */
+h2.z{border-top:1px solid var(--line);padding-top:1.5rem;margin-top:2.6rem}
+.zk{display:block;font-family:Inter,sans-serif;font-size:.7rem;font-weight:700;
+letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+.z-montant>.zk,.z-demarche>.zk,.z-national>.zk{color:#1e3ac9}
+.z-piege>.zk{color:#b3341c}
+.z-droits>.zk{color:var(--ok)}
+/* ---------- carte d'identité ---------- */
+.idcard{display:grid;gap:.75rem;margin-top:1rem}
+.idc-i{background:#fff;border:1px solid var(--line);border-radius:1rem;padding:.8rem 1rem}
+/* La hauteur minimale n'a de sens qu'en colonnes côte à côte (alignement + CLS). */
+@media(min-width:40rem){.idcard{grid-template-columns:repeat(3,1fr)}.idc-i{min-height:5.4rem}}
+.idc-i dt{font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.idc-i dd{margin:.3rem 0 0;font-family:Poppins,sans-serif;font-weight:600;
+color:var(--ink);font-size:1rem;line-height:1.35}
+.idc-i:first-child dd{color:var(--blue);font-size:1.3rem}
+/* ---------- éligibilité ✓ / ✗ ---------- */
+.crit-box{margin-top:1.25rem;border:1px solid var(--line);border-radius:1rem;padding:1rem 1.15rem}
+.crit-t{font-family:Poppins,sans-serif;font-weight:600;color:var(--ink);margin:0;font-size:1rem}
+.crit{list-style:none;padding:0;margin-top:.6rem;font-size:.95rem}
+.crit li{display:flex;gap:.6rem;margin-top:.4rem}
+.crit li>span{flex:0 0 1.1rem;font-weight:700;text-align:center}
+.c-ok>span{color:var(--ok)}
+.c-stop>span{color:var(--stop)}
+.c-time>span{color:#b3341c}
+.c-info>span{color:var(--muted)}
+/* ---------- repères de lecture ---------- */
+.pmeta{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem;margin-top:1.1rem;font-size:.8rem;color:var(--muted)}
+.pmeta span::before{content:"·";margin-right:.6rem;color:#cbd5e1}
+.pmeta span:first-child::before{content:"";margin:0}
+/* ---------- sommaire ancré ---------- */
+.toc{margin-top:1.5rem;background:var(--soft);border:1px solid var(--line);border-radius:1rem;padding:1.1rem 1.25rem}
+.toc-t{font-family:Poppins,sans-serif;font-weight:600;color:var(--ink);margin:0;font-size:.95rem}
+.toc ol{list-style:none;padding:0;margin-top:.6rem;display:grid;gap:.3rem}
+@media(min-width:40rem){.toc ol{grid-template-columns:1fr 1fr}}
+.toc li{margin:0;font-size:.92rem}
+.toc li::before{content:"";display:inline-block;width:.5rem;height:.5rem;border-radius:9999px;
+background:#cbd5e1;margin-right:.55rem;vertical-align:middle}
+.toc .t-montant::before,.toc .t-demarche::before,.toc .t-national::before{background:var(--blue)}
+.toc .t-piege::before{background:var(--coral)}
+.toc .t-droits::before{background:var(--ok)}
+.toc a{text-decoration:none}
+.toc a:hover{text-decoration:underline}
+.lblegend{margin-top:.9rem;font-size:.85rem}
+.lblegend summary{cursor:pointer;color:var(--muted);font-weight:600}
+.lblegend dl{margin-top:.6rem;display:grid;gap:.45rem}
+.lblegend dt{margin-top:.4rem}
+.lblegend dd{margin:.15rem 0 0;color:var(--body)}
+/* ---------- rappel du simulateur à mi-page ---------- */
+.cta-mini{padding:1.15rem 1.35rem;text-align:left;margin-top:2rem}
+.cta-mini .t{font-size:1.1rem}
+.cta-mini p+p{font-size:.92rem;margin-top:.3rem}
+.cta-mini .btn{margin-top:.9rem}
+@media print{.toc,.cta-mini{display:none!important}}
+/* ---------- garde-fous mobile : aucun débordement horizontal ---------- */
+.prose{overflow-wrap:break-word}
+.srcs a,.lblegend a{overflow-wrap:anywhere}
+.idc-i dd{overflow-wrap:break-word;hyphens:auto}
+.lbbar .lb{max-width:100%}
+@media(max-width:24rem){.lb{font-size:.7rem;padding:.18rem .55rem}}
 </style>
 <script type="application/ld+json">
 {
@@ -299,6 +375,24 @@ font:600 .9rem Inter,sans-serif;cursor:pointer}
         "name": "Mes Aides Auto",
         "url": "https://mes-aides-auto.fr/"
       }
+    },
+    {
+      "@type": "MonetaryGrant",
+      "name": "Leasing social 2026",
+      "description": "Location longue durée de trois ans minimum, sous condition de revenu fiscal de 16 880 € par part.",
+      "funder": {
+        "@type": "GovernmentOrganization",
+        "name": "État"
+      },
+      "amount": {
+        "@type": "MonetaryAmount",
+        "currency": "EUR",
+        "maxValue": 9000
+      },
+      "eligibleRegion": {
+        "@type": "AdministrativeArea",
+        "name": "France"
+      }
     }
   ]
 }
@@ -318,15 +412,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </header>
 <nav class="crumb wrap" aria-label="Fil d’Ariane"><ol><li><a href="/">Accueil</a></li><li><a href="/aides-voiture-electrique-2026/">Aides voiture électrique 2026</a></li><li>Leasing social 2026</li></ol></nav>
 <main class="wrap"><article class="prose">
-<div class="hero"><h1>Leasing social 2026 : conditions, revenus et véhicules éligibles</h1></div>
+<div class="hero"><h1>Leasing social 2026 : conditions, revenus et véhicules éligibles</h1><div class="lbbar"><span class="lb lb-pay">État</span><span class="lb lb-when">Avant la signature</span><span class="lb lb-rule lb-rule-ok">Règle vérifiée</span><span class="lb lb-who">Location</span><span class="lb lb-who">Voiture neuve</span></div></div>
 <p class="lede">Louer une voiture électrique neuve pour 200 € par mois au maximum, sans apport : c’est la promesse du leasing social, réservé aux actifs modestes qui roulent pour travailler. Campagne ouverte depuis le 16 juillet 2026, 50 000 places.</p>
-
 <div class="answer">
 <p><strong>L’essentiel.</strong> L’État prend en charge <strong>29 % du prix de la voiture, dans la limite de 6 500 €</strong>. Ce plafond est porté à <strong>9 000 € lorsque le véhicule et sa batterie sont fabriqués dans l’Espace économique européen</strong>, et une surprime de 500 € s’ajoute si le moteur électrique est produit en Europe. Conditions d’accès : revenu fiscal de référence de <strong>16 880 € par part au maximum</strong> et usage professionnel du véhicule.</p>
 </div>
+<dl class="idcard"><div class="idc-i"><dt>Montant</dt><dd>jusqu’à 9 000 €</dd></div><div class="idc-i"><dt>Condition qui élimine</dt><dd>Revenu supérieur à 16 880 € par part</dd></div><div class="idc-i"><dt>Quand demander</dt><dd>Avant la signature</dd></div></dl>
+<div class="crit-box"><p class="crit-t">Vous y avez droit si</p><ul class="crit"><li class="c-ok"><span aria-hidden="true">✓</span>Revenu fiscal de référence de 16 880 € par part au maximum</li><li class="c-ok"><span aria-hidden="true">✓</span>Utiliser sa voiture pour aller travailler</li><li class="c-ok"><span aria-hidden="true">✓</span>Location longue durée de trois ans au minimum</li><li class="c-stop"><span aria-hidden="true">✗</span>Pas de cumul avec la prime « Coup de pouce » : il faut choisir</li></ul></div>
+<p class="pmeta"><span>Lecture 4 min</span><span>Règles vérifiées le 8 septembre 2026</span></p>
+<nav class="toc" aria-label="Sommaire de la page"><p class="toc-t">Ce que vous trouverez sur cette page</p><ol><li class="t-droits"><a href="#droits">Qui peut en bénéficier ? Revenu fiscal de 16 880 € par part au maximum</a></li><li class="t-montant"><a href="#montants">Quel loyer et quelle durée ? Trois ans au minimum</a></li><li class="t-cumul"><a href="#cumul">Leasing social ou prime « Coup de pouce » ? Les deux ne se cumulent pas</a></li><li class="t-demarche"><a href="#demarches">Comment faire la demande ?</a></li><li class="t-faq"><a href="#faq">Questions fréquentes</a></li><li class="t-preuves"><a href="#sources">D’où viennent ces informations ?</a></li></ol><details class="lblegend"><summary>Comment lire les étiquettes de cette page</summary><dl><dt><span class="lb lb-pay">État</span><span class="lb lb-pay">Métropole</span></dt><dd>Qui verse l’aide : État, métropole, région ou département. Une aide d’État et une aide locale se cumulent presque toujours.</dd><dt><span class="lb lb-when">Avant l’achat</span></dt><dd>À quel moment déposer le dossier. C’est la première cause de refus : une demande déposée trop tard est perdue.</dd><dt><span class="lb lb-rule lb-rule-ok">Règle vérifiée</span><span class="lb lb-rule lb-rule-warn">À confirmer</span></dt><dd>Ce que vaut notre information : règle lue dans un texte officiel à jour, ou règle dont la reconduction n’est pas confirmée.</dd><dt><span class="lb lb-who">Voiture neuve</span><span class="lb lb-who">Casse obligatoire</span></dt><dd>À qui et à quel véhicule l’aide s’adresse.</dd></dl><p><a href="/notre-methodologie/">La légende complète et notre méthode</a></p></details></nav>
 <p class="note note-ok"><strong>Correction d’une confusion fréquente.</strong> De nombreux sites présentent « 6 500 € » et « 9 000 € » comme deux chiffres contradictoires. Ce n’en sont pas : 6 500 € est le plafond de droit commun, 9 000 € le plafond majoré pour un véhicule et une batterie fabriqués dans l’Espace économique européen. Source : le téléservice officiel primealaconversion.gouv.fr.</p>
 
-<h2>Qui peut en bénéficier ?</h2>
+<h2 id="droits" class="z z-droits"><span class="zk">Vos droits</span>Qui peut en bénéficier ? Revenu fiscal de 16 880 € par part au maximum</h2>
 <ul>
 <li><strong>Revenu fiscal de référence par part inférieur ou égal à 16 880 €</strong> (avis d’imposition N-2), soit les cinq premières tranches de revenus sur dix.</li>
 <li><strong>Être actif</strong> et utiliser sa voiture pour travailler : plus de 10 km entre le domicile et le travail, <em>ou</em> plus de 8 000 km par an à titre professionnel.</li>
@@ -334,7 +431,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <li>Résider en France métropolitaine, dans les départements et régions d’outre-mer ou à Saint-Pierre-et-Miquelon.</li>
 </ul>
 
-<h2>Les conditions du contrat</h2>
+<h2 id="montants" class="z z-montant"><span class="zk">Le montant</span>Quel loyer et quelle durée ? Trois ans au minimum</h2>
 <div class="table-wrap">
 <table>
 <thead><tr><th>Critère</th><th>Règle 2026</th></tr></thead>
@@ -351,7 +448,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 <p class="note note-warn">Le nombre de places restantes n’est pas publié en temps réel. Une éligibilité théorique ne garantit donc pas l’obtention du contrat : les dossiers sont traités dans l’ordre d’arrivée, jusqu’à épuisement de l’enveloppe.</p>
 
-<h2>Leasing social ou prime « Coup de pouce » : lequel choisir ?</h2>
+<div class="cta cta-mini"><p class="t">Et pour votre situation ?</p><p>Le simulateur applique ces règles à votre code postal, vos revenus et le prix du véhicule.</p><a class="btn" href="/">Calculer mes aides</a></div>
+<h2 id="cumul" class="z z-cumul"><span class="zk">Le cumul</span>Leasing social ou prime « Coup de pouce » ? Les deux ne se cumulent pas</h2>
 <p>Les deux dispositifs sont <strong>exclusifs l’un de l’autre</strong>. La comparaison dépend surtout de votre projet :</p>
 <div class="table-wrap">
 <table>
@@ -367,7 +465,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 <p>Le simulateur affiche systématiquement le leasing social comme <em>alternative</em> lorsque vous y êtes éligible, même si vous avez indiqué vouloir acheter : c’est souvent l’option la plus avantageuse pour un ménage modeste qui roule beaucoup.</p>
 
-<h2>Comment faire la demande</h2>
+<h2 id="demarches" class="z z-demarche"><span class="zk">La démarche</span>Comment faire la demande ?</h2>
 <ol>
 <li>Vérifiez votre éligibilité et choisissez un modèle sur le site officiel du leasing social.</li>
 <li>Contactez un loueur ou un concessionnaire référencé : l’aide de l’État est directement intégrée au contrat, vous n’avancez rien.</li>
@@ -380,8 +478,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <li>attestation de l’employeur (trajet de plus de 10 km) ou déclaration sur l’honneur des kilomètres parcourus pour le travail (plus de 8 000 km par an).</li>
 </ul>
 <div class="cta"><p class="t">Êtes-vous éligible au leasing social ?</p><p>Le simulateur vérifie vos revenus par part, votre usage professionnel et compare automatiquement le leasing social avec la prime d’État.</p><a class="btn btn-lg" href="/">Lancer le simulateur</a></div>
-<h2 id="faq">Questions fréquentes</h2><div class="faq"><details><summary>Quel revenu maximum pour le leasing social 2026 ?</summary><p>Le revenu fiscal de référence par part ne doit pas dépasser 16 880 €, d’après l’avis d’imposition N-2. Pour un couple avec deux enfants (3 parts), cela correspond à un revenu fiscal de référence d’environ 50 640 €.</p></details><details><summary>Peut-on bénéficier du leasing social sans être salarié ?</summary><p>Le dispositif vise les actifs. Un travailleur indépendant qui utilise son véhicule personnel pour son activité et parcourt plus de 8 000 km par an à ce titre peut donc y prétendre, en le justifiant par une déclaration sur l’honneur. En revanche, une personne sans activité professionnelle n’y est pas éligible.</p></details><details><summary>Le leasing social est-il cumulable avec l’aide de ma métropole ?</summary><p>Oui dans la plupart des cas : les aides locales se cumulent avec les aides nationales. Deux exceptions repérées dans les règlements : la Métropole de Rouen exclut explicitement le cumul avec le leasing social, et la Métropole Aix-Marseille-Provence exclut toute location longue durée.</p></details><details><summary>Que se passe-t-il si les 50 000 places sont épuisées ?</summary><p>La campagne se ferme. Il reste alors la prime « Coup de pouce » pour un achat ou une location classique d’au moins 24 mois, ainsi que les aides de votre collectivité. Le simulateur les calcule dans tous les cas.</p></details><details><summary>Le loyer de 200 € comprend-il l’assurance et l’entretien ?</summary><p>Non. Le plafond de 200 € par mois porte sur le loyer du véhicule hors services annexes. L’assurance, l’entretien ou une éventuelle extension de kilométrage sont facturés en plus par le loueur.</p></details></div>
-<h2 id="sources">Sources officielles</h2><ul class="srcs"><li><a href="https://www.primealaconversion.gouv.fr/dboneco/accueil/leasingsocial2026.html" target="_blank" rel="noopener">Aide au leasing social 2026 — primealaconversion.gouv.fr (téléservice officiel)</a></li><li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F39280" target="_blank" rel="noopener">Leasing social — service-public.fr, fiche F39280</a></li><li><a href="https://www.ecologie.gouv.fr/" target="_blank" rel="noopener">Liste des véhicules éligibles — ecologie.gouv.fr</a></li><li><a href="https://jechangemavoiture.gouv.fr/jcmv/aide-achat.html" target="_blank" rel="noopener">jechangemavoiture.gouv.fr</a></li></ul>
+<h2 id="faq" class="z z-faq"><span class="zk">Les questions</span>Questions fréquentes</h2><div class="faq"><details><summary>Quel revenu maximum pour le leasing social 2026 ?</summary><p>Le revenu fiscal de référence par part ne doit pas dépasser 16 880 €, d’après l’avis d’imposition N-2. Pour un couple avec deux enfants (3 parts), cela correspond à un revenu fiscal de référence d’environ 50 640 €.</p></details><details><summary>Peut-on bénéficier du leasing social sans être salarié ?</summary><p>Le dispositif vise les actifs. Un travailleur indépendant qui utilise son véhicule personnel pour son activité et parcourt plus de 8 000 km par an à ce titre peut donc y prétendre, en le justifiant par une déclaration sur l’honneur. En revanche, une personne sans activité professionnelle n’y est pas éligible.</p></details><details><summary>Le leasing social est-il cumulable avec l’aide de ma métropole ?</summary><p>Oui dans la plupart des cas : les aides locales se cumulent avec les aides nationales. Deux exceptions repérées dans les règlements : la Métropole de Rouen exclut explicitement le cumul avec le leasing social, et la Métropole Aix-Marseille-Provence exclut toute location longue durée.</p></details><details><summary>Que se passe-t-il si les 50 000 places sont épuisées ?</summary><p>La campagne se ferme. Il reste alors la prime « Coup de pouce » pour un achat ou une location classique d’au moins 24 mois, ainsi que les aides de votre collectivité. Le simulateur les calcule dans tous les cas.</p></details><details><summary>Le loyer de 200 € comprend-il l’assurance et l’entretien ?</summary><p>Non. Le plafond de 200 € par mois porte sur le loyer du véhicule hors services annexes. L’assurance, l’entretien ou une éventuelle extension de kilométrage sont facturés en plus par le loueur.</p></details></div>
+<h2 id="sources" class="z z-preuves"><span class="zk">Les preuves</span>D’où viennent ces informations ?</h2><ul class="srcs"><li><a href="https://www.primealaconversion.gouv.fr/dboneco/accueil/leasingsocial2026.html" target="_blank" rel="noopener">Aide au leasing social 2026 — primealaconversion.gouv.fr (téléservice officiel)</a></li><li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F39280" target="_blank" rel="noopener">Leasing social — service-public.fr, fiche F39280</a></li><li><a href="https://www.ecologie.gouv.fr/" target="_blank" rel="noopener">Liste des véhicules éligibles — ecologie.gouv.fr</a></li><li><a href="https://jechangemavoiture.gouv.fr/jcmv/aide-achat.html" target="_blank" rel="noopener">jechangemavoiture.gouv.fr</a></li></ul>
 <p class="verif">Dernière vérification des règles de cette page : <strong>8 septembre 2026</strong>. Nous republions cette page à chaque évolution réglementaire — voir <a href="/historique-aides-auto/">l’historique des changements</a> et <a href="/notre-methodologie/">notre méthodologie</a>.</p>
 <nav class="related" aria-label="À lire aussi"><h2>À lire aussi</h2><ul><li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce » voiture électrique</a></li><li><a href="/aides-voiture-electrique-2026/">Toutes les aides voiture électrique 2026</a></li><li><a href="/cumul-aides-voiture-electrique/">Peut-on cumuler plusieurs aides ?</a></li><li><a href="/aides-voiture-electrique/">Les aides près de chez vous</a></li></ul></nav>
 </article></main>

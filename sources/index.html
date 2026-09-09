@@ -79,7 +79,8 @@ background:#fff;line-height:1.65;font-size:1rem}
 img{max-width:100%;height:auto;display:block}
 a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
 a:hover{color:var(--coral)}
-h1,h2,h3,h4{font-family:Poppins,Inter,sans-serif;color:var(--ink);line-height:1.2;font-weight:600}
+h1,h2,h3,h4{font-family:Poppins,Inter,sans-serif;color:var(--ink);line-height:1.2;font-weight:600;
+text-wrap:balance}
 h1{font-size:2.1rem;font-weight:700;letter-spacing:-.02em}
 h2{font-size:1.55rem;margin-top:2.6rem}
 h3{font-size:1.15rem;margin-top:1.8rem}
@@ -93,7 +94,7 @@ em.hi-c{font-style:italic;color:var(--coral)}
 .prose{max-width:47rem}
 /* ---------- en-tête ---------- */
 .site-header{border-bottom:1px solid var(--line);background:#fff;position:relative;z-index:30}
-.site-header .bar{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1.5rem;padding:1rem 0}
+.site-header .bar{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1.5rem;padding-block:1rem}
 .brand{font-family:Poppins,sans-serif;font-weight:700;font-size:1.35rem;color:var(--ink);
 text-decoration:none;letter-spacing:-.02em;margin-right:auto}
 .brand em{font-style:italic;color:var(--blue)}
@@ -108,7 +109,7 @@ transition:filter .15s,transform .15s}
 .btn-blue{background:var(--blue)}
 .btn-lg{font-size:1rem;padding:.85rem 1.6rem}
 /* ---------- fil d'Ariane ---------- */
-.crumb{font-size:.8rem;color:var(--muted);padding:1.25rem 0 0}
+.crumb{font-size:.8rem;color:var(--muted);padding-block:1.25rem 0}
 .crumb ol{display:flex;flex-wrap:wrap;gap:.4rem;list-style:none;padding:0;margin:0}
 .crumb li::after{content:"›";margin-left:.4rem;color:#cbd5e1}
 .crumb li:last-child::after{content:""}
@@ -117,7 +118,7 @@ transition:filter .15s,transform .15s}
 /* ---------- contenu ---------- */
 main{padding-bottom:3rem}
 .hero{padding:1rem 0 .5rem}
-.lede{font-size:1.15rem;color:var(--body);margin-top:1rem}
+.lede{font-size:1.15rem;color:var(--body);margin-top:1rem;text-wrap:pretty}
 .answer{background:var(--soft);border:1px solid var(--line);border-left:4px solid var(--blue);
 border-radius:1rem;padding:1.1rem 1.25rem;margin-top:1.5rem}
 .answer p{margin-top:.5rem}
@@ -145,7 +146,8 @@ th,td{text-align:left;padding:.7rem .9rem;border-bottom:1px solid var(--line);ve
 th{background:var(--soft);font-family:Poppins,sans-serif;font-weight:600;color:var(--ink);font-size:.85rem}
 tbody tr:last-child td{border-bottom:0}
 td.num{white-space:nowrap;font-weight:600;color:var(--ink)}
-.badge{display:inline-block;padding:.15rem .6rem;border-radius:9999px;font-size:.72rem;font-weight:600}
+.badge{display:inline-flex;align-items:center;padding:.15rem .6rem;border-radius:9999px;
+font-size:.72rem;font-weight:600;white-space:nowrap;vertical-align:middle}
 .badge-ok{background:var(--okbg);color:var(--ok)}
 .badge-warn{background:var(--warnbg);color:var(--warn)}
 .badge-stop{background:var(--stopbg);color:var(--stop)}
@@ -202,6 +204,80 @@ font:600 .9rem Inter,sans-serif;cursor:pointer}
 .prose{margin-inline:auto}
 .crumb ol{max-width:47rem;margin-inline:auto}
 @media(min-width:64rem){.prose .table-wrap{margin-inline:-2.5rem}}
+/* ==========================================================================
+   v1.1 — page structurée : étiquettes, zones, carte d'identité, sommaire.
+   Règle : jamais la couleur seule, chaque étiquette porte son texte.
+   ========================================================================== */
+.lbbar{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.9rem}
+.lb{display:inline-block;padding:.2rem .65rem;border-radius:9999px;font-size:.74rem;
+font-weight:600;line-height:1.5;border:1px solid transparent;white-space:nowrap}
+.lb-pay{background:#e8ecff;border-color:#c3ccff;color:#1e3ac9}
+.lb-when{background:#fff1ee;border-color:#ffc0b2;color:#b3341c;font-weight:700}
+.lb-rule-ok{background:var(--okbg);border-color:#a7f3d0;color:var(--ok)}
+.lb-rule-warn{background:var(--warnbg);border-color:#fde68a;color:var(--warn)}
+.lb-rule-stop{background:var(--stopbg);border-color:#fecdd3;color:var(--stop)}
+.lb-rule-none{background:var(--soft);border-color:var(--line);color:var(--muted)}
+.lb-who{background:#f1f5f9;border-color:var(--line);color:#475569;font-weight:500}
+/* ---------- zones typées : le squelette rendu visible ---------- */
+h2.z{border-top:1px solid var(--line);padding-top:1.5rem;margin-top:2.6rem}
+.zk{display:block;font-family:Inter,sans-serif;font-size:.7rem;font-weight:700;
+letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+.z-montant>.zk,.z-demarche>.zk,.z-national>.zk{color:#1e3ac9}
+.z-piege>.zk{color:#b3341c}
+.z-droits>.zk{color:var(--ok)}
+/* ---------- carte d'identité ---------- */
+.idcard{display:grid;gap:.75rem;margin-top:1rem}
+.idc-i{background:#fff;border:1px solid var(--line);border-radius:1rem;padding:.8rem 1rem}
+/* La hauteur minimale n'a de sens qu'en colonnes côte à côte (alignement + CLS). */
+@media(min-width:40rem){.idcard{grid-template-columns:repeat(3,1fr)}.idc-i{min-height:5.4rem}}
+.idc-i dt{font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.idc-i dd{margin:.3rem 0 0;font-family:Poppins,sans-serif;font-weight:600;
+color:var(--ink);font-size:1rem;line-height:1.35}
+.idc-i:first-child dd{color:var(--blue);font-size:1.3rem}
+/* ---------- éligibilité ✓ / ✗ ---------- */
+.crit-box{margin-top:1.25rem;border:1px solid var(--line);border-radius:1rem;padding:1rem 1.15rem}
+.crit-t{font-family:Poppins,sans-serif;font-weight:600;color:var(--ink);margin:0;font-size:1rem}
+.crit{list-style:none;padding:0;margin-top:.6rem;font-size:.95rem}
+.crit li{display:flex;gap:.6rem;margin-top:.4rem}
+.crit li>span{flex:0 0 1.1rem;font-weight:700;text-align:center}
+.c-ok>span{color:var(--ok)}
+.c-stop>span{color:var(--stop)}
+.c-time>span{color:#b3341c}
+.c-info>span{color:var(--muted)}
+/* ---------- repères de lecture ---------- */
+.pmeta{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem;margin-top:1.1rem;font-size:.8rem;color:var(--muted)}
+.pmeta span::before{content:"·";margin-right:.6rem;color:#cbd5e1}
+.pmeta span:first-child::before{content:"";margin:0}
+/* ---------- sommaire ancré ---------- */
+.toc{margin-top:1.5rem;background:var(--soft);border:1px solid var(--line);border-radius:1rem;padding:1.1rem 1.25rem}
+.toc-t{font-family:Poppins,sans-serif;font-weight:600;color:var(--ink);margin:0;font-size:.95rem}
+.toc ol{list-style:none;padding:0;margin-top:.6rem;display:grid;gap:.3rem}
+@media(min-width:40rem){.toc ol{grid-template-columns:1fr 1fr}}
+.toc li{margin:0;font-size:.92rem}
+.toc li::before{content:"";display:inline-block;width:.5rem;height:.5rem;border-radius:9999px;
+background:#cbd5e1;margin-right:.55rem;vertical-align:middle}
+.toc .t-montant::before,.toc .t-demarche::before,.toc .t-national::before{background:var(--blue)}
+.toc .t-piege::before{background:var(--coral)}
+.toc .t-droits::before{background:var(--ok)}
+.toc a{text-decoration:none}
+.toc a:hover{text-decoration:underline}
+.lblegend{margin-top:.9rem;font-size:.85rem}
+.lblegend summary{cursor:pointer;color:var(--muted);font-weight:600}
+.lblegend dl{margin-top:.6rem;display:grid;gap:.45rem}
+.lblegend dt{margin-top:.4rem}
+.lblegend dd{margin:.15rem 0 0;color:var(--body)}
+/* ---------- rappel du simulateur à mi-page ---------- */
+.cta-mini{padding:1.15rem 1.35rem;text-align:left;margin-top:2rem}
+.cta-mini .t{font-size:1.1rem}
+.cta-mini p+p{font-size:.92rem;margin-top:.3rem}
+.cta-mini .btn{margin-top:.9rem}
+@media print{.toc,.cta-mini{display:none!important}}
+/* ---------- garde-fous mobile : aucun débordement horizontal ---------- */
+.prose{overflow-wrap:break-word}
+.srcs a,.lblegend a{overflow-wrap:anywhere}
+.idc-i dd{overflow-wrap:break-word;hyphens:auto}
+.lbbar .lb{max-width:100%}
+@media(max-width:24rem){.lb{font-size:.7rem;padding:.18rem .55rem}}
 </style>
 <script type="application/ld+json">
 {
@@ -298,26 +374,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <main class="wrap"><article class="prose">
 <div class="hero"><h1>Les sources de chaque règle du simulateur</h1></div>
 <p class="lede">Un simulateur d’aides ne vaut que par ses sources. Voici les nôtres, dispositif par dispositif, avec la date de dernière vérification.</p>
-
 <div class="answer">
 <p>Chaque règle utilisée par le simulateur cite le texte ou la page officielle dont elle est issue, et la date à laquelle nous l’avons vérifiée. Ce tableau est produit automatiquement à partir de la base de règles du simulateur : il ne peut donc pas diverger de ce que l’outil calcule.</p>
 </div>
 
-<h2>Dispositifs nationaux</h2>
+
+<p class="pmeta"><span>Lecture 4 min</span><span>Règles vérifiées le 8 septembre 2026</span></p>
+<nav class="toc" aria-label="Sommaire de la page"><p class="toc-t">Ce que vous trouverez sur cette page</p><ol><li class="t-x"><a href="#dispositifs-nationaux">Dispositifs nationaux</a></li><li class="t-x"><a href="#aides-des-collectivites">Aides des collectivités</a></li><li class="t-x"><a href="#territoires-verifies-sans-aide">Territoires vérifiés sans aide</a></li><li class="t-x"><a href="#donnees-geographiques">Données géographiques</a></li><li class="t-faq"><a href="#faq">Questions fréquentes</a></li><li class="t-preuves"><a href="#sources">D’où viennent ces informations ?</a></li></ol><details class="lblegend"><summary>Comment lire les étiquettes de cette page</summary><dl><dt><span class="lb lb-pay">État</span><span class="lb lb-pay">Métropole</span></dt><dd>Qui verse l’aide : État, métropole, région ou département. Une aide d’État et une aide locale se cumulent presque toujours.</dd><dt><span class="lb lb-when">Avant l’achat</span></dt><dd>À quel moment déposer le dossier. C’est la première cause de refus : une demande déposée trop tard est perdue.</dd><dt><span class="lb lb-rule lb-rule-ok">Règle vérifiée</span><span class="lb lb-rule lb-rule-warn">À confirmer</span></dt><dd>Ce que vaut notre information : règle lue dans un texte officiel à jour, ou règle dont la reconduction n’est pas confirmée.</dd><dt><span class="lb lb-who">Voiture neuve</span><span class="lb lb-who">Casse obligatoire</span></dt><dd>À qui et à quel véhicule l’aide s’adresse.</dd></dl><p><a href="/notre-methodologie/">La légende complète et notre méthode</a></p></details></nav>
+<h2 id="dispositifs-nationaux" class="z">Dispositifs nationaux</h2>
 <div class="table-wrap"><table><thead><tr><th>Dispositif</th><th>Statut</th><th>Source citée</th><th>Vérifié le</th></tr></thead><tbody><tr><td><strong>Prime d’État « Coup de pouce » — voiture électrique neuve</strong></td><td><span class="badge badge-ok">règle vérifiée</span></td><td><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F39188" target="_blank" rel="noopener">service-public.fr (fiche F39188)</a></td><td class="num">01/09/2026</td></tr><tr><td><strong>Prime d’État « Coup de pouce » — voiture électrique d’occasion</strong></td><td><span class="badge badge-ok">règle vérifiée</span></td><td><a href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054666103" target="_blank" rel="noopener">Arrêté du 10 août 2026 créant la fiche TRA-EQ-133 (Légifrance)</a></td><td class="num">08/09/2026</td></tr><tr><td><strong>Leasing social 2026 (voiture électrique en location longue durée)</strong></td><td><span class="badge badge-ok">règle vérifiée</span></td><td><a href="https://www.primealaconversion.gouv.fr/dboneco/accueil/leasingsocial2026.html" target="_blank" rel="noopener">primealaconversion.gouv.fr (téléservice officiel de l’État)</a></td><td class="num">08/09/2026</td></tr><tr><td><strong>Transformer sa voiture thermique en électrique (prime au rétrofit)</strong></td><td><span class="badge badge-ok">règle vérifiée</span></td><td><a href="https://jechangemavoiture.gouv.fr/jcmv/aide-achat.html" target="_blank" rel="noopener">jechangemavoiture.gouv.fr</a></td><td class="num">07/09/2026</td></tr></tbody></table></div>
-<h2>Aides des collectivités</h2>
+<h2 id="aides-des-collectivites" class="z">Aides des collectivités</h2>
 <p>Chaque règlement local est cité avec son lien direct. Lorsque la page officielle était inaccessible ou le barème non publié à la date de vérification, la règle porte la mention « à confirmer » et le simulateur l’affiche comme telle plutôt que d’avancer un montant.</p>
 <div class="table-wrap"><table><thead><tr><th>Dispositif</th><th>Statut</th><th>Source citée</th><th>Vérifié le</th></tr></thead><tbody><tr><td><strong>Aide « Métropole roule propre » (Grand Paris)</strong><br><span style="color:#64748b;font-weight:400">Métropole du Grand Paris</span></td><td><span class="badge badge-warn">à confirmer</span></td><td><a href="https://www.metropolegrandparis.fr/fr/metropole-roule-propre-0" target="_blank" rel="noopener">metropolegrandparis.fr (règlement 2025 — reconduction en 2026 non confirmée)</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Aide de la Métropole de Lyon (zone à faibles émissions)</strong><br><span style="color:#64748b;font-weight:400">Métropole de Lyon</span></td><td><span class="badge badge-ok">règle vérifiée</span></td><td><a href="https://www.grandlyon.com/mes-services-au-quotidien/se-deplacer/les-aides-pour-lachat-dun-vehicule-moins-polluant" target="_blank" rel="noopener">grandlyon.com (page mise à jour le 20/02/2026)</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Éco-chèque mobilité de la Région Occitanie (électrique d’occasion)</strong><br><span style="color:#64748b;font-weight:400">Région Occitanie</span></td><td><span class="badge badge-ok">règle vérifiée</span></td><td><a href="https://www.laregion.fr/Eco-cheque-mobilite-voiture-electrique-ou-hybride" target="_blank" rel="noopener">laregion.fr (page mise à jour le 23/07/2026)</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Aide à la conversion de l’Eurométropole de Strasbourg</strong><br><span style="color:#64748b;font-weight:400">Eurométropole de Strasbourg</span></td><td><span class="badge badge-ok">règle vérifiée</span></td><td><a href="https://www.strasbourg.eu/aides-conversion" target="_blank" rel="noopener">strasbourg.eu — règlement en vigueur depuis le 01/01/2025</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Aide à l’achat d’une voiture peu polluante (Métropole de Rouen)</strong><br><span style="color:#64748b;font-weight:400">Métropole Rouen Normandie</span></td><td><span class="badge badge-ok">règle vérifiée</span></td><td><a href="https://zfe.metropole-rouen-normandie.fr/sites/default/files/2025-10/B2025_0429_annexe.pdf" target="_blank" rel="noopener">règlement du 29/09/2025 — valable jusqu’au 30/06/2027 (facture avant le 31/12/2026)</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Subvention du Département de la Seine-Maritime (hors Métropole de Rouen)</strong><br><span style="color:#64748b;font-weight:400">Département de la Seine-Maritime</span></td><td><span class="badge badge-warn">à confirmer</span></td><td><a href="https://www.seinemaritime.fr/mon-cadre-de-vie/routes-bacs/subvention-zfe-m.html" target="_blank" rel="noopener">seinemaritime.fr — règlement du 20/03/2023, barème 2026 non consultable</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Prime « véhicule + propre » de Toulouse Métropole</strong><br><span style="color:#64748b;font-weight:400">Toulouse Métropole</span></td><td><span class="badge badge-ok">règle vérifiée</span></td><td><a href="https://metropole.toulouse.fr/demarches/demander-la-prime-vehicule-propre" target="_blank" rel="noopener">metropole.toulouse.fr (démarche mise à jour le 16/09/2025, actualité du 08/06/2026)</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Aide de la Métropole Aix-Marseille-Provence — habitants de la zone à faibles émissions de Marseille</strong><br><span style="color:#64748b;font-weight:400">Aix-Marseille-Provence (zone à faibles émissions de Marseille)</span></td><td><span class="badge badge-ok">règle vérifiée</span></td><td><a href="https://ampmetropole.fr/wp-content/uploads/2024/11/96120_Annexe-1-2-particulier-1.pdf" target="_blank" rel="noopener">règlement de la Métropole (annexe particuliers) — aides ouvertes jusqu’au 31/10/2027</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Aide au renouvellement de voiture du Grand Annecy</strong><br><span style="color:#64748b;font-weight:400">Grand Annecy</span></td><td><span class="badge badge-ok">règle vérifiée</span></td><td><a href="https://www.grandannecy.fr/zfem/aides-et-conseils-en-mobilite" target="_blank" rel="noopener">grandannecy.fr — règlement du 13/02/2025 (page mise à jour le 20/02/2025)</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Fonds Air Véhicules du Pays du Mont-Blanc (particuliers)</strong><br><span style="color:#64748b;font-weight:400">Communauté de communes Pays du Mont-Blanc</span></td><td><span class="badge badge-warn">à confirmer</span></td><td><a href="https://www.ccpmb.fr/" target="_blank" rel="noopener">ccpmb.fr — règlement de février 2026 (site inaccessible lors de la vérification, détails via sources secondaires)</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Aide de Bordeaux Métropole (zone à faibles émissions)</strong><br><span style="color:#64748b;font-weight:400">Bordeaux Métropole</span></td><td><span class="badge badge-warn">à confirmer</span></td><td><a href="https://sedeplacer.bordeaux-metropole.fr/en-voiture/zfe-ce-quil-faut-savoir" target="_blank" rel="noopener">sedeplacer.bordeaux-metropole.fr — barème non publié sur la page consultée</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Aide au changement de voiture du Grand Reims</strong><br><span style="color:#64748b;font-weight:400">Grand Reims (zone à faibles émissions)</span></td><td><span class="badge badge-warn">à confirmer</span></td><td><a href="https://www.grandreims.fr/" target="_blank" rel="noopener">grandreims.fr et reims.fr (pages inaccessibles lors de la vérification) — sources secondaires contradictoires, 2026</a></td><td class="num">07/09/2026</td></tr><tr><td><strong>Aide au renouvellement de voiture de Grenoble-Alpes Métropole</strong><br><span style="color:#64748b;font-weight:400">Grenoble-Alpes Métropole</span></td><td><span class="badge badge-stop">aide suspendue</span></td><td><a href="https://zfe.grenoblealpesmetropole.fr/684-aides-et-parcours.htm" target="_blank" rel="noopener">zfe.grenoblealpesmetropole.fr — « actuellement suspendu depuis le 26/09/2025 »</a></td><td class="num">07/09/2026</td></tr></tbody></table></div>
-<h2>Territoires vérifiés sans aide</h2>
+<h2 id="territoires-verifies-sans-aide" class="z">Territoires vérifiés sans aide</h2>
 <p>Une réponse négative a autant de valeur qu’un montant, à condition d’être sourcée. Nous avons vérifié et documenté l’absence d’aide à l’achat pour les particuliers sur : Montpellier Méditerranée Métropole, Métropole Nice Côte d’Azur, Saint-Étienne Métropole, Métropole Toulon-Provence-Méditerranée, le Département des Bouches-du-Rhône (hors zone à faibles émissions de Marseille), la Région Normandie et la Région Île-de-France.</p>
 <p>Plusieurs fiches gouvernementales encore en ligne mentionnent des aides supprimées depuis (Nice en 2023, Normandie, Bouches-du-Rhône). Nous documentons ces écarts plutôt que de les recopier.</p>
 
-<h2>Données géographiques</h2>
+<h2 id="donnees-geographiques" class="z">Données géographiques</h2>
 <p>Les 35 493 couples code postal / commune, avec commune de rattachement, intercommunalité, département et région, proviennent du <strong>code officiel géographique de l’INSEE</strong>, via le jeu de données public Etalab « découpage administratif » version 6.0.0. Toutes les règles territoriales s’appuient sur le code SIREN officiel de l’intercommunalité, et non sur des listes de communes saisies à la main.</p>
 <p class="note note-warn">Limite assumée : les zones à faibles émissions ne couvrent parfois qu’une partie d’une commune (Lyon, Marseille, Reims). Nous les approximons à la commune entière et l’indiquons sur chaque résultat concerné.</p>
 
-<h2 id="faq">Questions fréquentes</h2><div class="faq"><details><summary>Que signifie la mention « à confirmer » ?</summary><p>Elle indique que la règle est appliquée par le simulateur mais que la page officielle était inaccessible, non datée ou incomplète lors de la vérification. Le montant affiché repose alors sur des sources secondaires concordantes, et nous le signalons au lieu de le présenter comme certain.</p></details><details><summary>À quelle fréquence les sources sont-elles revérifiées ?</summary><p>Chaque règle porte sa date de vérification. Nous reprenons en priorité celles dont la date dépasse 90 jours, ainsi que toutes celles concernées par un changement réglementaire annoncé.</p></details><details><summary>Puis-je réutiliser ces données ?</summary><p>Les règlements et textes cités sont des documents publics. Pour toute réutilisation de notre base consolidée ou toute demande de journaliste, écrivez à contact@mes-aides-auto.fr.</p></details></div>
-<h2 id="sources">Sources officielles</h2><ul class="srcs"><li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F39188" target="_blank" rel="noopener">Service-public.fr</a></li><li><a href="https://jechangemavoiture.gouv.fr/jcmv/aide-achat.html" target="_blank" rel="noopener">jechangemavoiture.gouv.fr</a></li><li><a href="https://www.primealaconversion.gouv.fr/" target="_blank" rel="noopener">primealaconversion.gouv.fr</a></li><li><a href="https://www.legifrance.gouv.fr/" target="_blank" rel="noopener">Légifrance</a></li><li><a href="https://www.insee.fr/fr/information/2560452" target="_blank" rel="noopener">Code officiel géographique — INSEE</a></li></ul>
+<h2 id="faq" class="z z-faq"><span class="zk">Les questions</span>Questions fréquentes</h2><div class="faq"><details><summary>Que signifie la mention « à confirmer » ?</summary><p>Elle indique que la règle est appliquée par le simulateur mais que la page officielle était inaccessible, non datée ou incomplète lors de la vérification. Le montant affiché repose alors sur des sources secondaires concordantes, et nous le signalons au lieu de le présenter comme certain.</p></details><details><summary>À quelle fréquence les sources sont-elles revérifiées ?</summary><p>Chaque règle porte sa date de vérification. Nous reprenons en priorité celles dont la date dépasse 90 jours, ainsi que toutes celles concernées par un changement réglementaire annoncé.</p></details><details><summary>Puis-je réutiliser ces données ?</summary><p>Les règlements et textes cités sont des documents publics. Pour toute réutilisation de notre base consolidée ou toute demande de journaliste, écrivez à contact@mes-aides-auto.fr.</p></details></div>
+<h2 id="sources" class="z z-preuves"><span class="zk">Les preuves</span>D’où viennent ces informations ?</h2><ul class="srcs"><li><a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F39188" target="_blank" rel="noopener">Service-public.fr</a></li><li><a href="https://jechangemavoiture.gouv.fr/jcmv/aide-achat.html" target="_blank" rel="noopener">jechangemavoiture.gouv.fr</a></li><li><a href="https://www.primealaconversion.gouv.fr/" target="_blank" rel="noopener">primealaconversion.gouv.fr</a></li><li><a href="https://www.legifrance.gouv.fr/" target="_blank" rel="noopener">Légifrance</a></li><li><a href="https://www.insee.fr/fr/information/2560452" target="_blank" rel="noopener">Code officiel géographique — INSEE</a></li></ul>
 <p class="verif">Dernière vérification des règles de cette page : <strong>8 septembre 2026</strong>. Nous republions cette page à chaque évolution réglementaire — voir <a href="/historique-aides-auto/">l’historique des changements</a> et <a href="/notre-methodologie/">notre méthodologie</a>.</p>
 <nav class="related" aria-label="À lire aussi"><h2>À lire aussi</h2><ul><li><a href="/notre-methodologie/">Notre méthodologie</a></li><li><a href="/historique-aides-auto/">Historique des changements</a></li><li><a href="/aides-voiture-electrique-2026/">Toutes les aides 2026</a></li></ul></nav>
 </article></main>

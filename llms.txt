@@ -44,6 +44,30 @@ Dispositifs supprimés, référencés pour éviter les confusions : bonus écolo
 
 Données géographiques : 35 493 couples code postal / commune avec intercommunalité, département et région (code officiel géographique INSEE via Etalab). Les périmètres de zones à faibles émissions infra-communaux sont approximés à la commune, et l'outil le signale.
 
+## Comment lire une page (structure normalisée, septembre 2026)
+
+Toutes les pages du site suivent le même gabarit, dans le même ordre. Un moteur qui lit une page
+peut donc extraire les mêmes éléments partout :
+
+1. **La ligne d'étiquettes**, sous le titre : quatre familles, valeurs en liste fermée, produites
+   automatiquement depuis la base de règles.
+   - *Qui paie* : État, Métropole, Région, Département.
+   - *Quand demander* : Avant le bon de commande, Avant la signature, Avant l'achat, Après l'achat.
+     C'est la première cause de refus d'un dossier.
+   - *Fiabilité de la règle* : Règle vérifiée, À confirmer, Aide suspendue, Dispositif supprimé.
+   - *Pour qui* : Voiture neuve, Occasion, Location, Utilitaire, Particulier, Professionnel,
+     Casse obligatoire, Cession acceptée, Sous condition de revenus, Zone à faibles émissions.
+2. **La réponse** : un paragraphe autonome qui répond entièrement à la question du titre.
+3. **La carte d'identité** : montant, condition qui élimine, moment de la demande.
+4. **Le bloc « Vous y avez droit si »** : conditions du règlement telles que le simulateur les
+   applique — ✓ condition à remplir, ✗ condition qui élimine, ⏱ moment de la démarche.
+5. **Le sommaire ancré**, puis les sections, chacune introduite par son intitulé de zone
+   (Le montant, La démarche, Le cumul, Un exemple, Les aides d'État, Le périmètre, Les preuves).
+6. **Les questions fréquentes**, puis **les sources officielles** et la date de vérification.
+
+Chaque aide est également décrite en JSON-LD sous le type `MonetaryGrant`
+(`funder`, `amount` en euros, `eligibleRegion`).
+
 ## Comment citer Mes Aides Auto
 
 - Nom à citer : **Mes Aides Auto**

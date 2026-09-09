@@ -6,10 +6,14 @@ une règle propre (aide en vigueur, aide suspendue, ou suppression documentée).
 Aucune page n'est générée pour une commune sans donnée spécifique — c'est le
 simulateur qui répond dans ce cas.
 """
+import os, re, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import labels
+
 V = "2026-09-07"          # date de vérification des règlements locaux
 VN = "2026-09-08"         # date de vérification des règles nationales
 
-NAT_BLOCK = """<h2 id="national">Les aides nationales, accessibles partout</h2>
+NAT_BLOCK = """<h2 id="national">Et les aides de l’État ? De 3 300 à 7 700 €, partout en France</h2>
 <p>Quelle que soit votre commune, vous pouvez prétendre à une aide de l’État, qui <strong>s’ajoute</strong> à l’aide locale :</p>
 <ul>
 <li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a> pour une voiture électrique neuve : 3 300 à 7 700 € selon vos revenus, à demander <strong>avant</strong> le bon de commande ;</li>
@@ -40,10 +44,10 @@ T = []
 T.append(dict(
     slug="paris", city="Paris", epci="200054781", indexable=True,
     title="Aide voiture électrique Paris 2026 : jusqu’à 6 000 €",
-    desc="L’aide « Métropole roule propre » atteint 6 000 € dans les 149 communes du Grand Paris, sous condition de revenus et de mise au rebut.",
+    desc="L’aide « Métropole roule propre » atteint 6 000 € dans les 131 communes du Grand Paris, sous condition de revenus et de mise au rebut.",
     h1="Quelles aides pour acheter une voiture électrique à Paris en 2026 ?",
     lede="Paris relève de la Métropole du Grand Paris, qui verse l’aide locale la plus élevée de France : jusqu’à 6 000 €. La Région Île-de-France, elle, n’aide plus l’achat depuis mars 2025.",
-    answer="""<p><strong>Oui, jusqu’à 6 000 €.</strong> L’aide « Métropole roule propre » du Grand Paris s’adresse aux habitants des <strong>149 communes</strong> de la métropole, dont Paris. Conditions : revenu fiscal de référence de <strong>24 900 € par part au maximum</strong>, <strong>mise au rebut définitive d’une ancienne voiture</strong>, et prix du véhicule inférieur à <strong>40 000 €</strong>. Elle se cumule avec la prime d’État.</p>""",
+    answer="""<p><strong>Oui, jusqu’à 6 000 €.</strong> L’aide « Métropole roule propre » du Grand Paris s’adresse aux habitants des <strong>131 communes</strong> de la métropole, dont Paris. Conditions : revenu fiscal de référence de <strong>24 900 € par part au maximum</strong>, <strong>mise au rebut définitive d’une ancienne voiture</strong>, et prix du véhicule inférieur à <strong>40 000 €</strong>. Elle se cumule avec la prime d’État.</p>""",
     detail="""<h2 id="montants">Les montants de l’aide « Métropole roule propre »</h2>
 """ + table(["Véhicule acheté", "Montant maximal", "Précision"], [
         ['<td>Voiture <strong>100 % électrique</strong>, neuve ou d’occasion</td>', '<td class="num">jusqu’à 6 000 €</td>', '<td>+ 1 000 € si elle est assemblée dans un pays d’Europe à l’électricité peu carbonée</td>'],
@@ -52,7 +56,7 @@ T.append(dict(
 <p class="note note-warn">« Jusqu’à » : le montant exact dépend de votre niveau de revenus, selon un barème que la Métropole détaille sur son guichet en ligne. Nous affichons donc un plafond, pas un montant garanti. Par ailleurs, le règlement consulté est celui de 2025 : <strong>sa reconduction en 2026 n’est pas confirmée noir sur blanc</strong> sur la page officielle. Vérifiez l’ouverture du guichet avant de vous engager.</p>
 <h3>Les conditions à remplir</h3>
 <ul>
-<li>Résider dans l’une des 149 communes de la Métropole du Grand Paris ;</li>
+<li>Résider dans l’une des 131 communes de la Métropole du Grand Paris ;</li>
 <li>revenu fiscal de référence <strong>inférieur ou égal à 24 900 € par part</strong> ;</li>
 <li><strong>faire détruire définitivement une ancienne voiture</strong> — la vente ne suffit pas, contrairement à Lyon ou Strasbourg ;</li>
 <li>prix d’achat <strong>inférieur à 40 000 €</strong>, un plafond plus bas que celui de la prime d’État (47 000 €) : c’est souvent lui qui bloque un dossier ;</li>
@@ -73,7 +77,7 @@ T.append(dict(
     faq=[("Existe-t-il une aide de la Ville de Paris pour acheter une voiture électrique ?",
           "La Ville de Paris ne verse pas d’aide propre à l’achat d’une voiture pour les particuliers : c’est la Métropole du Grand Paris qui porte le dispositif, avec son aide « Métropole roule propre » pouvant atteindre 6 000 €."),
          ("Ma commune fait-elle partie du Grand Paris ?",
-          "La Métropole du Grand Paris regroupe 149 communes : Paris et une grande partie des Hauts-de-Seine, de la Seine-Saint-Denis et du Val-de-Marne, ainsi que quelques communes de l’Essonne et du Val-d’Oise. La liste complète figure sur cette page, et le simulateur le vérifie automatiquement à partir de votre code postal."),
+          "La Métropole du Grand Paris regroupe 131 communes : Paris et une grande partie des Hauts-de-Seine, de la Seine-Saint-Denis et du Val-de-Marne, ainsi que quelques communes de l’Essonne et du Val-d’Oise. La liste complète figure sur cette page, et le simulateur le vérifie automatiquement à partir de votre code postal."),
          ("La Région Île-de-France aide-t-elle encore à l’achat d’une voiture électrique ?",
           "Non, son aide à l’achat pour les particuliers a été supprimée le 2 mars 2025. Elle finance en revanche toujours la transformation d’un véhicule thermique en électrique, avec une prime « non-casse » pouvant atteindre 6 000 €."),
          ("Faut-il obligatoirement mettre une voiture à la casse ?",
@@ -641,21 +645,230 @@ T.append(dict(
 # ---------------------------------------------------------------------------
 # Assemblage
 # ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# v1.1 — Signalétique par territoire.
+# Les valeurs proviennent de data.js (scope / roadmap / status, plafonds lus
+# dans les messages du moteur) et du tableau HUB_ROWS. Rien n'est inventé ici :
+# si une règle change dans data.js, cette table doit être reprise avec elle.
+# ---------------------------------------------------------------------------
+M = {}
+
+M["paris"] = dict(
+    coll="la Métropole du Grand Paris", scope="epci", roadmap="local_after",
+    status="active_unverified", montant="jusqu’à 6 000 €",
+    cond="Mise au rebut obligatoire, prix &lt; 40 000 €",
+    tags=["casse", "revenus", "neuve"], cumul="oui, avec la prime d’État",
+    crit=[("ok", "Habiter l’une des 131 communes du Grand Paris"),
+          ("ok", "Revenu fiscal de référence de 24 900 € par part au maximum"),
+          ("stop", "Faire détruire définitivement une ancienne voiture : la vente ne suffit pas"),
+          ("stop", "Prix du véhicule inférieur à 40 000 €"),
+          ("time", "Dossier à déposer après l’achat")])
+
+M["lyon"] = dict(
+    coll="la Métropole de Lyon", scope="epci", roadmap="local_before",
+    status="active", montant="500 à 3 000 €",
+    cond="Crit’Air 2, 3 ou 4 à céder",
+    tags=["zfe", "cession", "revenus"], cumul="oui, sans plafond global",
+    crit=[("ok", "Habiter ou travailler dans la zone à faibles émissions de la Métropole"),
+          ("ok", "Revenu fiscal de référence inférieur à 26 200 € par part"),
+          ("ok", "Se séparer d’une voiture Crit’Air 2, 3 ou 4 : destruction, vente ou transformation"),
+          ("time", "Dossier à déposer avant l’achat, sur demarches.toodego.com")])
+
+M["marseille"] = dict(
+    coll="Aix-Marseille-Provence", scope="epci", roadmap="local_after",
+    status="active", montant="jusqu’à 5 000 €",
+    cond="Crit’Air 4, 5 ou non classée à détruire",
+    tags=["casse", "zfe", "revenus"], cumul="oui, mais la location est exclue",
+    crit=[("ok", "Habiter la zone à faibles émissions de Marseille"),
+          ("ok", "Revenu fiscal de référence de 24 900 € par part au maximum"),
+          ("ok", "Voiture 100 % électrique ou à hydrogène : les hybrides sont exclues"),
+          ("stop", "Faire détruire une voiture Crit’Air 4, 5 ou non classée"),
+          ("stop", "Location longue durée ou avec option d’achat exclue")])
+
+M["toulouse"] = dict(
+    coll="Toulouse Métropole", scope="epci", roadmap="local_after",
+    status="active", montant="2 000 à 5 000 €",
+    cond="Crit’Air 3 ou plus ancienne à détruire",
+    tags=["casse", "revenus", "particulier"], cumul="oui, avec la prime d’État",
+    crit=[("ok", "Revenu fiscal de référence inférieur à 35 052 € par part"),
+          ("ok", "Achat à un particulier accepté, contrairement à la plupart des territoires"),
+          ("stop", "Faire détruire une voiture Crit’Air 3, 4, 5 ou non classée, possédée depuis un an"),
+          ("time", "Dossier à déposer après l’achat")])
+
+M["strasbourg"] = dict(
+    coll="l’Eurométropole de Strasbourg", scope="epci", roadmap="local_after",
+    status="active", montant="2 000 à 4 000 €",
+    cond="Cession suffisante, total plafonné à 80 % du prix",
+    tags=["cession", "revenus", "particulier"], cumul="oui, dans la limite de 80 % du prix",
+    crit=[("ok", "Revenu fiscal de référence inférieur à 26 200 € par part"),
+          ("ok", "Vendre ou faire détruire une voiture Crit’Air 2 ou plus ancienne, possédée depuis un an"),
+          ("ok", "Achat à un particulier accepté"),
+          ("stop", "Total des aides publiques plafonné à 80 % du prix"),
+          ("time", "Dossier à déposer après l’achat")])
+
+M["rouen"] = dict(
+    coll="la Métropole Rouen Normandie", scope="epci", roadmap="local_after",
+    status="active", montant="2 000 à 5 000 €",
+    cond="+ 25 % en zone à faibles émissions",
+    tags=["casse", "revenus"], cumul="oui, sauf avec le leasing social",
+    crit=[("ok", "Revenu fiscal de référence de 22 000 € par part au maximum"),
+          ("ok", "Majoration de 25 % si vous habitez la zone à faibles émissions"),
+          ("stop", "Faire détruire un diesel d’avant 2011 ou une essence d’avant 2006"),
+          ("stop", "Achat chez un professionnel obligatoire"),
+          ("stop", "Pas de cumul avec le leasing social")])
+
+M["bordeaux"] = dict(
+    coll="Bordeaux Métropole", scope="epci", roadmap="local_after",
+    status="active_unverified", montant="jusqu’à 6 000 €",
+    cond="Barème non publié",
+    tags=["casse", "neuve"], cumul="oui, avec la prime d’État",
+    crit=[("ok", "Vendre ou faire détruire une voiture non classée"),
+          ("ok", "En neuf : électrique uniquement — la vignette Crit’Air 1 n’est acceptée qu’en occasion"),
+          ("stop", "Barème non publié : le montant est à confirmer au guichet"),
+          ("time", "Dossier à déposer après l’achat")])
+
+M["reims"] = dict(
+    coll="le Grand Reims", scope="epci", roadmap="local_after",
+    status="active_unverified", montant="2 000 à 6 000 €",
+    cond="Sources contradictoires",
+    tags=["casse", "zfe"], cumul="oui, avec la prime d’État",
+    crit=[("ok", "Faire détruire une voiture Crit’Air 3, 4, 5 ou non classée"),
+          ("stop", "Les sources publiques se contredisent : montant à confirmer auprès du Grand Reims"),
+          ("time", "Dossier à déposer après l’achat")])
+
+M["annecy"] = dict(
+    coll="le Grand Annecy", scope="epci", roadmap="local_before",
+    status="active", montant="3 000 €",
+    cond="Véhicule non classé à détruire",
+    tags=["casse", "revenus", "neuve"], cumul="oui, avec la prime d’État",
+    crit=[("ok", "Revenu fiscal de référence inférieur à 16 300 € par part"),
+          ("ok", "En neuf : électrique ou hydrogène uniquement"),
+          ("stop", "Faire détruire une voiture non classée, trop ancienne pour une vignette Crit’Air"),
+          ("stop", "En location : contrat d’au moins 24 mois"),
+          ("time", "Dossier à déposer avant la commande")])
+
+M["pays-du-mont-blanc"] = dict(
+    coll="la communauté de communes Pays du Mont-Blanc", scope="epci", roadmap="local_after",
+    status="active_unverified", montant="4 000 à 4 500 €",
+    cond="40 % du prix au maximum",
+    tags=["revenus", "neuve"], cumul="oui, avec la prime d’État",
+    crit=[("ok", "Revenu fiscal de référence inférieur à 31 200 € par part"),
+          ("ok", "Électrique, hydrogène ou gaz : les hybrides sont exclues"),
+          ("stop", "Prix du véhicule inférieur à 45 000 €"),
+          ("stop", "Location longue durée exclue"),
+          ("time", "Dossier à déposer après l’achat")])
+
+M["occitanie"] = dict(
+    coll="la Région Occitanie", scope="region", roadmap="local_after",
+    status="active", montant="jusqu’à 1 600 €",
+    cond="Occasion électrique uniquement",
+    tags=["occasion", "revenus"], cumul="oui, avec la prime d’État",
+    crit=[("ok", "Voiture d’occasion 100 % électrique, immatriculée depuis au moins douze mois"),
+          ("ok", "Ménage non imposable"),
+          ("stop", "Achat chez un professionnel agréé situé en Occitanie"),
+          ("stop", "Prix du véhicule inférieur à 30 000 €"),
+          ("time", "Dossier à déposer après l’achat")])
+
+M["seine-maritime"] = dict(
+    coll="le Département de la Seine-Maritime", scope="dept", roadmap="local_after",
+    status="active_unverified", montant="2 000 à 4 000 €",
+    cond="Hors Métropole Rouen Normandie",
+    tags=["casse", "revenus"], cumul="oui, avec la prime d’État",
+    crit=[("ok", "Revenu fiscal de référence de 21 000 € par part au maximum"),
+          ("ok", "Habiter le département hors Métropole Rouen Normandie"),
+          ("stop", "Faire détruire un diesel d’avant 2011 ou une essence d’avant 2006"),
+          ("time", "Dossier à déposer après l’achat")])
+
+M["grenoble"] = dict(
+    coll="Grenoble-Alpes Métropole", scope="epci", roadmap=None,
+    status="suspended", montant="aide suspendue",
+    cond="Suspendue depuis le 26 septembre 2025",
+    tags=[], cumul=None, keep_h2=True,
+    crit=[("stop", "Dispositif suspendu depuis le 26 septembre 2025 : aucune nouvelle demande n’est acceptée"),
+          ("info", "Les aides de l’État, elles, restent accessibles aux habitants de la métropole")])
+
+_NO_AID = {
+    "nice": ("la Métropole Nice Côte d’Azur", "Aide supprimée le 30 juin 2023"),
+    "montpellier": ("Montpellier Méditerranée Métropole", "Aucune aide voiture ; éco-chèque régional accessible"),
+    "saint-etienne": ("Saint-Étienne Métropole", "Fonds air véhicule réservé aux utilitaires légers"),
+    "toulon": ("la Métropole Toulon-Provence-Méditerranée", "Aucune aide à l’achat d’une voiture"),
+}
+for _s, (_c, _situ) in _NO_AID.items():
+    M[_s] = dict(coll=_c, scope="epci", roadmap=None, status="none",
+                 montant="Aucune aide locale", cond=_situ, tags=[], cumul=None, keep_h2=True,
+                 crit=[("stop", _situ),
+                       ("info", "Les aides de l’État restent accessibles : de 3 300 à 7 700 € pour une voiture neuve")])
+
+QUAND_COURT = {"local_before": "avant l’achat", "local_after": "après l’achat", None: "—"}
+
+
+def _strip_h2(html):
+    """Retire le H2 d'ouverture d'un bloc : il est régénéré sous forme de question."""
+    return re.sub(r"(?is)^\s*<h2[^>]*>.*?</h2>\s*", "", html or "")
+
+
+def _strip_conditions(html):
+    """Supprime la liste « Les conditions à remplir » : elle est désormais rendue
+    en tête de page par le bloc d'éligibilité ✓/✗, la répéter allongeait la page
+    sans rien apporter."""
+    return re.sub(r"(?is)<h3>\s*Les conditions à remplir\s*</h3>\s*<ul>.*?</ul>\s*", "", html or "")
+
+
+def _h2(hid, text):
+    return '<h2 id="%s">%s</h2>\n' % (hid, text)
+
+
+def head_blocks(t):
+    """Étiquettes, carte d'identité et bloc d'éligibilité d'une page territoire."""
+    m = M.get(t["slug"])
+    if not m:
+        return "", "", ""
+    bar = labels.bar(scope=m["scope"], roadmap=m["roadmap"], status=m["status"], tags=m["tags"])
+    card = labels.id_card([
+        ("Montant", m["montant"]),
+        ("Condition qui élimine", m["cond"]),
+        ("Quand demander", labels.QUAND.get(m["roadmap"], "Sans objet")),
+    ])
+    crit_title = ("Vous y avez droit si" if m["status"] in ("active", "active_unverified")
+                  else "Ce qu’il faut savoir")
+    crit = labels.criteres(m["crit"], crit_title)
+    return bar, card, crit
+
+
+def grants(t):
+    m = M.get(t["slug"])
+    if not m or m["status"] not in ("active", "active_unverified"):
+        return []
+    vals = [int(re.sub(r"\D", "", n)) for n in re.findall(r"\d[\d\s  ]*", m["montant"])]
+    g = dict(name="Aide à l’achat d’une voiture électrique — %s" % re.sub(r"^(la |le |l’|les )", "", m["coll"]).strip(),
+             desc=m["cond"].replace("&lt;", "moins de").replace("&gt;", "plus de"), funder=m["coll"].strip(), area=t["city"])
+    if len(vals) == 2:
+        g["min"], g["max"] = vals[0], vals[1]
+    elif len(vals) == 1:
+        g["max"] = vals[0]
+    return [g]
+
+
+def _n(v):
+    """Séparateur de milliers à la française (espace insécable fine)."""
+    return format(int(v), ",d").replace(",", "\u202f")
+
+
 def communes_block(t, by_epci, by_region, by_dept):
     """Liste des communes couvertes — donnée unique par page, tirée du COG INSEE."""
     if t.get("commune_note") == "marseille":
-        return ("""<h2 id="communes">Les communes couvertes</h2>
+        return ("""<h2 id="communes">Ma commune est-elle concernée ?</h2>
 <p>L’aide vise la <strong>zone à faibles émissions de Marseille</strong> : les 16 arrondissements de la commune de Marseille (codes postaux 13001 à 13016) en font partie, le périmètre exact restant infra-communal. Les 106 autres communes de la Métropole Aix-Marseille-Provence — Aix-en-Provence, Aubagne, Martigues, Vitrolles, Istres, Salon-de-Provence… — <strong>ne sont pas concernées</strong> par cette aide.</p>""")
     if t.get("kind") == "region":
         depts = sorted(set(d for d in by_dept if any(i in by_region.get("76", set()) for i in list(by_dept[d])[:1])))
         n = len(by_region.get("76", set()))
-        return ("""<h2 id="communes">Qui est concerné en Occitanie</h2>
-<p>L’éco-chèque s’applique à l’ensemble des <strong>%d communes de la région Occitanie</strong>, soit les 13 départements : Ariège, Aude, Aveyron, Gard, Haute-Garonne, Gers, Hérault, Lot, Lozère, Hautes-Pyrénées, Pyrénées-Orientales, Tarn et Tarn-et-Garonne.</p>""" % n)
+        return ("""<h2 id="communes">Ma commune est-elle concernée ? Les %s communes d’Occitanie</h2>
+<p>L’éco-chèque s’applique à l’ensemble des <strong>%s communes de la région Occitanie</strong>, soit les 13 départements : Ariège, Aude, Aveyron, Gard, Haute-Garonne, Gers, Hérault, Lot, Lozère, Hautes-Pyrénées, Pyrénées-Orientales, Tarn et Tarn-et-Garonne.</p>""" % (_n(n), _n(n)))
     if t.get("kind") == "dept":
         n_dept = len(by_dept.get("76", set()))
         n_mrn = len(by_epci.get("200023414", {}))
-        return ("""<h2 id="communes">Qui est concerné en Seine-Maritime</h2>
-<p>Le département compte <strong>%d communes</strong>. L’aide départementale vise celles qui ne font <em>pas</em> partie des <strong>%d communes de la Métropole Rouen Normandie</strong> : pour ces dernières, c’est <a href="/aides-voiture-electrique/rouen/">l’aide métropolitaine</a> qui s’applique.</p>""" % (n_dept, n_mrn))
+        return ("""<h2 id="communes">Ma commune est-elle concernée ? Hors Métropole de Rouen</h2>
+<p>Le département compte <strong>%s communes</strong>. L’aide départementale vise celles qui ne font <em>pas</em> partie des <strong>%s communes de la Métropole Rouen Normandie</strong> : pour ces dernières, c’est <a href="/aides-voiture-electrique/rouen/">l’aide métropolitaine</a> qui s’applique.</p>""" % (_n(n_dept), _n(n_mrn)))
     epci = t.get("epci")
     if not epci:
         return ""
@@ -663,30 +876,53 @@ def communes_block(t, by_epci, by_region, by_dept):
     if not communes:
         return ""
     label = "concernées par l’aide" if not t.get("no_aid") else "de cette intercommunalité"
-    return ("""<h2 id="communes">Les %d communes %s</h2>
-<details class="communes"><summary>Voir la liste complète des communes</summary>
+    return ("""<h2 id="communes">Ma commune est-elle concernée ?</h2>
+<details class="communes"><summary>Voir la liste des %s communes %s</summary>
 <p>%s</p></details>
 <p style="font-size:.9rem;color:#64748b">Source : code officiel géographique de l’INSEE (jeu de données Etalab « découpage administratif »). Le simulateur identifie automatiquement votre intercommunalité à partir de votre code postal.</p>"""
-            % (len(communes), label, " · ".join(communes)))
+            % (_n(len(communes)), label, " · ".join(communes)))
 
 
 def build_page(t, geo):
     by_epci, by_region, by_dept = geo
     city = t["city"]
+    m = M.get(t["slug"], {})
+    keep = m.get("keep_h2", False) or not m
     parts = ['<div class="answer">%s</div>' % t["answer"]]
+
+    # Titres réécrits en question + chiffre. Les territoires au dispositif
+    # atypique (aide suspendue, aucune aide) gardent leur titre d'origine.
+    titres = {
+        "detail": ("montants", "Combien verse %s ? %s" % (m.get("coll", ""), m.get("montant", ""))),
+        "demarche": ("demarches", "Quand et comment déposer le dossier ? %s"
+                     % QUAND_COURT.get(m.get("roadmap"), "").capitalize()),
+        "cumul": ("cumul", "Se cumule-t-elle avec la prime d’État ? %s"
+                  % (m.get("cumul") or "").capitalize()),
+        "exemple": ("exemple", "Combien au total, sur un cas concret ?"),
+    }
     for key in ("detail", "demarche", "cumul", "exemple"):
-        if t.get(key):
+        if not t.get(key):
+            continue
+        if keep:
             parts.append(t[key])
+        else:
+            hid, txt = titres[key]
+            blk = _strip_h2(t[key])
+            if key == "detail":
+                blk = _strip_conditions(blk)
+            parts.append(_h2(hid, txt) + blk)
     parts.append(NAT_BLOCK)
     parts.append(communes_block(t, by_epci, by_region, by_dept))
     parts.append(cta(city))
     crumbs = [("Accueil", "/"), ("Aides près de chez vous", "/aides-voiture-electrique/"),
               (city[0].upper() + city[1:], "/aides-voiture-electrique/%s/" % t["slug"])]
+    bar, card, crit = head_blocks(t)
     return dict(
         slug="aides-voiture-electrique/" + t["slug"],
         nav_active="/aides-voiture-electrique/",
         title=t["title"], desc=t["desc"], h1=t["h1"], og_title=t["h1"],
         crumbs=crumbs, lede=t["lede"], body="\n".join(p for p in parts if p),
+        labels=bar, idcard=card, criteres=crit, grants=grants(t),
         faq=t.get("faq"), sources=t.get("sources"), verified=V,
         related=[("Toutes les aides près de chez vous", "/aides-voiture-electrique/"),
                  ("Les aides nationales 2026", "/aides-voiture-electrique-2026/"),
@@ -717,12 +953,16 @@ NO_AID_ROWS = [("nice", "Métropole Nice Côte d’Azur", "Aide supprimée le 30
 
 
 def hub_page():
-    badge = {"ok": '<span class="badge badge-ok">en vigueur</span>',
-             "warn": '<span class="badge badge-warn">à confirmer</span>',
-             "stop": '<span class="badge badge-stop">suspendue</span>'}
+    badge = {"ok": labels.fiabilite("active"),
+             "warn": labels.fiabilite("active_unverified"),
+             "stop": labels.fiabilite("suspended")}
     rows = "".join(
-        '<tr><td><a href="/aides-voiture-electrique/%s/">%s</a></td><td class="num">%s</td><td>%s</td><td>%s</td></tr>'
-        % (s, n, m, c, badge[st]) for s, n, m, c, st in HUB_ROWS)
+        '<tr><td><a href="/aides-voiture-electrique/%s/">%s</a>%s</td>'
+        '<td class="num">%s</td><td>%s</td><td>%s</td></tr>'
+        % (s, n, '<div class="lbbar">%s%s</div>' % (
+            labels.payeur(M.get(s, {}).get("scope")),
+            labels.quand(M.get(s, {}).get("roadmap"))),
+           m, c, badge[st]) for s, n, m, c, st in HUB_ROWS)
     norows = "".join(
         '<tr><td><a href="/aides-voiture-electrique/%s/">%s</a></td><td>%s</td></tr>' % r for r in NO_AID_ROWS)
     body = """
@@ -764,6 +1004,17 @@ def hub_page():
         crumbs=[("Accueil", "/"), ("Aides près de chez vous", "/aides-voiture-electrique/")],
         lede="Métropoles, régions, départements : voici les treize territoires français qui versent encore une aide à l’achat, les sept qui n’en versent plus, et ce que cela change pour vous.",
         verified=V, body=body,
+        labels=labels.bar(scope="epci", status="active", tags=["particulier"]),
+        idcard=labels.id_card([
+            ("Territoires qui versent une aide", "13"),
+            ("Territoires vérifiés sans aide", "7"),
+            ("Communes couvertes par le simulateur", "35 493"),
+        ]),
+        criteres=labels.criteres([
+            ("ok", "Votre territoire figure dans le tableau ci-dessous : l’aide locale s’ajoute à celle de l’État"),
+            ("ok", "Votre territoire n’y figure pas : vous gardez l’intégralité des aides nationales, de 3 300 à 7 700 €"),
+            ("time", "Le moment du dépôt change selon les territoires : avant l’achat à Lyon et au Grand Annecy, après ailleurs"),
+        ], "Comment vous situer en dix secondes"),
         faq=[("Quelles villes aident encore à acheter une voiture électrique en 2026 ?",
               "Treize collectivités : Grand Paris, Métropole de Lyon, Marseille (zone à faibles émissions), Toulouse, Strasbourg, Rouen, Bordeaux, Reims, Grand Annecy, Pays du Mont-Blanc, Seine-Maritime, Région Occitanie, et Grenoble dont l’aide est suspendue depuis septembre 2025."),
              ("Les aides locales se cumulent-elles avec la prime d’État ?",

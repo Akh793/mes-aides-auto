@@ -2,6 +2,10 @@
 """Contenu éditorial des pages nationales. Les chiffres proviennent de data.js
 et des sources officielles citées en bas de chaque page."""
 
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import labels
+
 V = "2026-09-08"
 CTA_STD = ('<div class="cta"><p class="t">Le montant dépend de vos revenus, de votre commune et de la voiture</p>'
            '<p>Quatre informations suffisent : code postal, revenu fiscal de référence, nombre de parts, prix du véhicule. '
@@ -29,7 +33,7 @@ HUB = dict(
 <p><strong>La réponse courte.</strong> Pour une voiture électrique <strong>neuve</strong>, l’aide principale est la <a href="/prime-coup-de-pouce-voiture-electrique/">prime d’État « Coup de pouce »</a> : de l’ordre de <strong>3 300 € à 7 700 €</strong> selon vos revenus et l’origine européenne du véhicule. Si vous utilisez votre voiture pour aller travailler et que votre revenu fiscal ne dépasse pas 16 880 € par part, le <a href="/leasing-social-2026/">leasing social</a> peut être plus avantageux — mais les deux ne se cumulent pas. Pour une <strong>occasion</strong>, une <a href="/aide-voiture-electrique-occasion/">nouvelle prime</a> existe depuis le 1<sup>er</sup> septembre 2026. À cela s’ajoutent les <a href="/aides-voiture-electrique/">aides de votre collectivité</a>, qui, elles, se cumulent avec l’aide de l’État.</p>
 </div>
 
-<h2>Les quatre dispositifs nationaux en 2026</h2>
+<h2 id="montants">Quelles aides existent encore en 2026 ? Quatre dispositifs</h2>
 <div class="table-wrap">
 <table>
 <caption class="sr-only">Aides nationales à l’achat d’une voiture électrique en 2026</caption>
@@ -44,7 +48,7 @@ HUB = dict(
 </div>
 <p class="note note-warn"><strong>Un point à comprendre avant tout le reste.</strong> La prime « Coup de pouce » et le leasing social ne sont pas financés par le budget de l’État mais par les fournisseurs d’énergie, dans le cadre des certificats d’économies d’énergie. La réglementation fixe des <em>coefficients</em>, pas des euros : le montant réel dépend du fournisseur partenaire de votre vendeur. C’est pourquoi nous affichons des fourchettes et non un chiffre unique — et pourquoi il faut toujours demander son offre au concessionnaire avant de signer.</p>
 
-<h2>Combien selon vos revenus ?</h2>
+<h2 id="bareme">Combien selon vos revenus ? De 3 300 à 7 700 €</h2>
 <p>Toutes les aides nationales se calculent sur le <strong>revenu fiscal de référence par part</strong> : vous prenez la ligne « revenu fiscal de référence » de votre dernier avis d’imposition et vous la divisez par votre nombre de parts. Ce résultat vous place dans une tranche de 1 à 10.</p>
 <div class="table-wrap">
 <table>
@@ -59,16 +63,16 @@ HUB = dict(
 </div>
 <p>Les seuils 2026 de revenu fiscal par part sont : 1 970 € (tranche 1), 7 640 €, 11 250 €, 14 130 €, 16 880 €, 19 600 €, 22 770 €, 27 310 €, 35 880 € (tranche 9), puis au-delà pour la tranche 10.</p>
 
-<h2>Les aides de votre collectivité s’ajoutent</h2>
+<h2 id="locales">Votre collectivité ajoute-t-elle quelque chose ? Treize le font</h2>
 <p>Treize collectivités versent encore une aide à l’achat aux particuliers : Grand Paris, Métropole de Lyon, Aix-Marseille-Provence, Toulouse, Strasbourg, Rouen, Bordeaux, Reims, Grand Annecy, Pays du Mont-Blanc, Seine-Maritime, Région Occitanie, et Grenoble (aide suspendue). Elles se cumulent avec la prime d’État, mais imposent souvent leurs propres conditions : mise à la casse d’une ancienne voiture, plafond de revenus, dossier à déposer avant ou après l’achat.</p>
 <div class="grid grid-3">
-<a class="tile" href="/aides-voiture-electrique/paris/"><b>Paris et Grand Paris</b><span>jusqu’à 6 000 €, 149 communes</span></a>
+<a class="tile" href="/aides-voiture-electrique/paris/"><b>Paris et Grand Paris</b><span>jusqu’à 6 000 €, 131 communes</span></a>
 <a class="tile" href="/aides-voiture-electrique/lyon/"><b>Lyon</b><span>500 à 3 000 €, dossier avant l’achat</span></a>
 <a class="tile" href="/aides-voiture-electrique/toulouse/"><b>Toulouse</b><span>jusqu’à 5 000 €, achat entre particuliers accepté</span></a>
 </div>
 <p><a href="/aides-voiture-electrique/">Voir toutes les aides locales, territoire par territoire →</a></p>
 
-<h2>Ce qui n’existe plus en 2026</h2>
+<h2 id="supprimees">Qu’est-ce qui a disparu ? Le bonus, la prime à la conversion, le crédit d’impôt borne</h2>
 <ul>
 <li><strong>Le bonus écologique</strong> a été supprimé le 1<sup>er</sup> juillet 2025 et remplacé par la prime « Coup de pouce ». <a href="/bonus-ecologique-2026/">Ce qu’il faut savoir si vous cherchiez le bonus</a>.</li>
 <li><strong>La prime à la conversion</strong> et sa surprime « zone à faibles émissions » de 1 000 € ont disparu le 2 décembre 2024.</li>
@@ -76,7 +80,7 @@ HUB = dict(
 <li><strong>Le prêt à taux zéro mobilité</strong> était une expérimentation prévue jusqu’à fin 2025 ; aucune prolongation n’a été trouvée.</li>
 </ul>
 
-<h2>Peut-on tout cumuler ?</h2>
+<h2 id="cumul">Peut-on tout cumuler ? Une seule aide d’État, plus les aides locales</h2>
 <p>Non. La règle est simple à retenir : <strong>une seule aide d’État</strong> (prime neuf, prime occasion ou leasing social — jamais deux), à laquelle <strong>s’ajoutent les aides locales</strong>, chacune avec son plafond. Certaines collectivités limitent en plus le total de toutes les aides publiques à 80 % du prix de la voiture. <a href="/cumul-aides-voiture-electrique/">Le détail des cumuls possibles, aide par aide →</a></p>
 """ + CTA_STD,
     faq=[
@@ -117,11 +121,11 @@ CDP = dict(
 <p><strong>L’essentiel.</strong> La prime « Coup de pouce véhicules particuliers électriques » finance l’achat ou la location longue durée d’une <strong>voiture électrique neuve de 47 000 € au maximum</strong>. Son montant va d’environ <strong>3 300 € à 7 700 €</strong> selon votre revenu fiscal par part et selon que la voiture et sa batterie sont fabriquées en Europe. Point capital : <strong>la demande doit être faite avant la signature du bon de commande</strong>. Une commande déjà signée n’y donne plus droit.</p>
 </div>
 
-<h2>Qu’est-ce que cette prime, exactement ?</h2>
+<h2 id="definition">Qu’est-ce que cette prime, exactement ? Un dispositif payé par les fournisseurs d’énergie</h2>
 <p>Elle ne relève pas d’un budget public mais du dispositif des <strong>certificats d’économies d’énergie</strong> : la loi oblige les fournisseurs d’énergie à financer des actions qui réduisent la consommation, et l’achat d’une voiture électrique en fait partie. Concrètement, un fournisseur partenaire de votre concessionnaire verse la prime, le plus souvent en déduction directe sur la facture.</p>
 <p>La conséquence pratique est déroutante : <strong>la réglementation ne fixe pas un montant en euros</strong>, mais des coefficients. Le montant réel dépend de l’offre commerciale du fournisseur partenaire de votre vendeur, et deux concessionnaires voisins peuvent proposer des montants différents pour la même voiture et le même acheteur. D’où la règle à retenir : demandez son offre chiffrée au vendeur, par écrit, avant de vous engager.</p>
 
-<h2>Quel montant selon vos revenus ?</h2>
+<h2 id="montants">Quel montant selon vos revenus ? De 3 300 à 7 700 €</h2>
 <p>Le calcul se fait sur votre <strong>revenu fiscal de référence divisé par votre nombre de parts</strong>, tel qu’il figure sur votre dernier avis d’imposition. Les fourchettes ci-dessous correspondent aux offres publiées par les fournisseurs partenaires (barème Hellio du 31 juillet 2026, mis à jour le 24 août 2026, et chargeguru 2026).</p>
 <div class="table-wrap">
 <table>
@@ -136,7 +140,7 @@ CDP = dict(
 </div>
 <p>Le volet « gros rouleurs » vise les ménages aux revenus intermédiaires qui parcourent <strong>au moins 12 000 km par an à titre professionnel</strong> avec leur voiture personnelle. Il faut s’engager avant le 1<sup>er</sup> janvier 2027 et pouvoir le justifier (attestation de l’employeur ou justificatif de kilométrage).</p>
 
-<h2>Qui peut en bénéficier ?</h2>
+<h2 id="droits">Qui peut en bénéficier ? Tous les ménages, avec un montant dégressif</h2>
 <ul>
 <li>Vous êtes un <strong>particulier</strong>, quelle que soit votre tranche de revenus — le montant varie, mais personne n’en est exclu par ses revenus.</li>
 <li>Vous achetez ou louez une <strong>voiture particulière 100 % électrique neuve</strong>. Les hybrides, même rechargeables, sont exclues.</li>
@@ -146,7 +150,7 @@ CDP = dict(
 <li>Vous vous engagez à <strong>garder la voiture au moins 2 ans</strong>, ou à signer une location d’au moins 24 mois.</li>
 </ul>
 
-<h2>Comment la demander, étape par étape</h2>
+<h2 id="demarches">Comment la demander ? Avant de signer le bon de commande</h2>
 <ol>
 <li>Avant toute chose, demandez au concessionnaire ou au loueur <strong>avec quel fournisseur d’énergie il travaille</strong> et quel montant il vous propose.</li>
 <li>Faites établir la demande de prime <strong>avant de signer le bon de commande</strong>. C’est l’erreur la plus fréquente et elle est irrattrapable.</li>
@@ -162,7 +166,7 @@ CDP = dict(
 <li>si vous êtes gros rouleur : attestation de l’employeur ou justificatif d’au moins 12 000 km par an pour le travail.</li>
 </ul>
 
-<h2>Cumuls : ce qui est possible et ce qui ne l’est pas</h2>
+<h2 id="cumul">Se cumule-t-elle avec les autres aides ? Oui avec les aides locales, non avec le leasing social</h2>
 <p class="note note-stop"><strong>Non cumulable</strong> avec le <a href="/leasing-social-2026/">leasing social</a> ni avec la <a href="/aide-voiture-electrique-occasion/">prime occasion</a> : ces trois aides relèvent de la même enveloppe et vous ne pouvez en obtenir qu’une seule.</p>
 <p class="note note-ok"><strong>Cumulable</strong> avec les aides de votre région, de votre département ou de votre métropole. Un ménage modeste lyonnais peut ainsi additionner la prime d’État et l’aide de la Métropole de Lyon. <a href="/cumul-aides-voiture-electrique/">Voir le tableau complet des cumuls</a>.</p>
 """ + cta("Quel montant dans votre cas ?", "Le simulateur applique votre tranche de revenus, votre commune et les règles de cumul, et vous dit dans quel ordre faire les démarches."),
@@ -204,7 +208,7 @@ LEASING = dict(
 </div>
 <p class="note note-ok"><strong>Correction d’une confusion fréquente.</strong> De nombreux sites présentent « 6 500 € » et « 9 000 € » comme deux chiffres contradictoires. Ce n’en sont pas : 6 500 € est le plafond de droit commun, 9 000 € le plafond majoré pour un véhicule et une batterie fabriqués dans l’Espace économique européen. Source : le téléservice officiel primealaconversion.gouv.fr.</p>
 
-<h2>Qui peut en bénéficier ?</h2>
+<h2 id="droits">Qui peut en bénéficier ? Revenu fiscal de 16 880 € par part au maximum</h2>
 <ul>
 <li><strong>Revenu fiscal de référence par part inférieur ou égal à 16 880 €</strong> (avis d’imposition N-2), soit les cinq premières tranches de revenus sur dix.</li>
 <li><strong>Être actif</strong> et utiliser sa voiture pour travailler : plus de 10 km entre le domicile et le travail, <em>ou</em> plus de 8 000 km par an à titre professionnel.</li>
@@ -212,7 +216,7 @@ LEASING = dict(
 <li>Résider en France métropolitaine, dans les départements et régions d’outre-mer ou à Saint-Pierre-et-Miquelon.</li>
 </ul>
 
-<h2>Les conditions du contrat</h2>
+<h2 id="montants">Quel loyer et quelle durée ? Trois ans au minimum</h2>
 <div class="table-wrap">
 <table>
 <thead><tr><th>Critère</th><th>Règle 2026</th></tr></thead>
@@ -229,7 +233,7 @@ LEASING = dict(
 </div>
 <p class="note note-warn">Le nombre de places restantes n’est pas publié en temps réel. Une éligibilité théorique ne garantit donc pas l’obtention du contrat : les dossiers sont traités dans l’ordre d’arrivée, jusqu’à épuisement de l’enveloppe.</p>
 
-<h2>Leasing social ou prime « Coup de pouce » : lequel choisir ?</h2>
+<h2 id="cumul">Leasing social ou prime « Coup de pouce » ? Les deux ne se cumulent pas</h2>
 <p>Les deux dispositifs sont <strong>exclusifs l’un de l’autre</strong>. La comparaison dépend surtout de votre projet :</p>
 <div class="table-wrap">
 <table>
@@ -245,7 +249,7 @@ LEASING = dict(
 </div>
 <p>Le simulateur affiche systématiquement le leasing social comme <em>alternative</em> lorsque vous y êtes éligible, même si vous avez indiqué vouloir acheter : c’est souvent l’option la plus avantageuse pour un ménage modeste qui roule beaucoup.</p>
 
-<h2>Comment faire la demande</h2>
+<h2 id="demarches">Comment faire la demande ?</h2>
 <ol>
 <li>Vérifiez votre éligibilité et choisissez un modèle sur le site officiel du leasing social.</li>
 <li>Contactez un loueur ou un concessionnaire référencé : l’aide de l’État est directement intégrée au contrat, vous n’avancez rien.</li>
@@ -299,10 +303,10 @@ BONUS = dict(
 <p><strong>Non, le bonus écologique n’existe plus.</strong> Il a été supprimé le <strong>1<sup>er</sup> juillet 2025</strong>. Pour une voiture électrique neuve, il est remplacé par la <a href="/prime-coup-de-pouce-voiture-electrique/">prime d’État « Coup de pouce »</a>, financée par les fournisseurs d’énergie : de <strong>3 300 € à 7 700 €</strong> selon vos revenus. La <strong>prime à la conversion</strong> a elle aussi disparu, le 2 décembre 2024.</p>
 </div>
 
-<h2>Ce qui existait avant</h2>
+<h2 id="definition">Que valait le bonus écologique avant sa suppression ?</h2>
 <p>Jusqu’au 30 juin 2025, le bonus écologique était une aide directe de l’État, versée sur un barème public unique : le même montant pour tout le monde à situation identique, quel que soit le vendeur. C’est ce qui explique que la formule reste dans les mémoires et dans les moteurs de recherche.</p>
 
-<h2>Ce qui a changé</h2>
+<h2 id="supprimees">Qu’est-ce qui a changé ? Le bonus a été remplacé le 1<sup>er</sup> juillet 2025</h2>
 <p>La logique de financement a été inversée. L’aide ne vient plus du budget de l’État mais des <strong>certificats d’économies d’énergie</strong> : les fournisseurs d’énergie sont tenus par la loi de financer des actions d’économie d’énergie, et l’achat d’une voiture électrique en fait désormais partie. Trois conséquences très concrètes pour vous :</p>
 <ul>
 <li><strong>Le montant n’est plus garanti à l’euro près</strong> : la réglementation fixe des coefficients, pas des euros. Deux concessionnaires peuvent proposer deux montants différents.</li>
@@ -310,7 +314,7 @@ BONUS = dict(
 <li><strong>Elle doit être demandée avant la signature du bon de commande.</strong> C’est la principale cause de refus.</li>
 </ul>
 
-<h2>Le tableau des dispositifs supprimés</h2>
+<h2 id="piege">Quels dispositifs ont disparu, et à quelle date ?</h2>
 <div class="table-wrap">
 <table>
 <thead><tr><th>Dispositif</th><th>Statut</th><th>Ce qui le remplace</th></tr></thead>
@@ -325,7 +329,7 @@ BONUS = dict(
 </table>
 </div>
 
-<h2>À quoi avez-vous droit aujourd’hui ?</h2>
+<h2 id="droits">À quoi avez-vous droit aujourd’hui ? À la prime « Coup de pouce », de 3 300 à 7 700 €</h2>
 <div class="grid grid-2">
 <a class="tile" href="/prime-coup-de-pouce-voiture-electrique/"><b>Voiture électrique neuve</b><span>Prime d’État « Coup de pouce » : 3 300 à 7 700 € selon vos revenus</span></a>
 <a class="tile" href="/leasing-social-2026/"><b>Vous roulez pour travailler, revenus modestes</b><span>Leasing social : jusqu’à 9 000 € d’aide, loyer 200 €/mois maximum</span></a>
@@ -368,7 +372,7 @@ OCCASION = dict(
 </div>
 <p class="note note-warn"><strong>Sur le montant, nous préférons dire ce que nous savons.</strong> Comme pour le neuf, la réglementation raisonne en coefficients et non en euros : le montant dépend du fournisseur d’énergie partenaire du vendeur. Les premiers barèmes publiés par un opérateur partenaire (Hellio, mis à jour le 24 août 2026) situent l’aide autour de <strong>300 à 500 €</strong> pour les ménages précaires et modestes ⚠️ — un ordre de grandeur bien inférieur à la prime du neuf, à confirmer offre en main. Nous mettrons cette page à jour dès que des barèmes plus larges seront publiés.</p>
 
-<h2>Les conditions de la prime d’État occasion</h2>
+<h2 id="droits">Qui a droit à la prime occasion ? Une électrique immatriculée entre 2017 et 2023</h2>
 <div class="table-wrap">
 <table>
 <thead><tr><th>Critère</th><th>Règle</th></tr></thead>
@@ -384,7 +388,7 @@ OCCASION = dict(
 </table>
 </div>
 
-<h2>Les aides locales sont souvent plus intéressantes</h2>
+<h2 id="locales">Les aides locales font-elles mieux ? Souvent oui</h2>
 <p>Sur l’occasion, ce sont les collectivités qui portent l’essentiel de l’effort. Quelques exemples tirés des règlements en vigueur :</p>
 <div class="table-wrap">
 <table>
@@ -400,10 +404,10 @@ OCCASION = dict(
 </div>
 <p>Un ménage non imposable de Toulouse achetant une électrique d’occasion à 15 000 € peut ainsi additionner l’éco-chèque régional et la prime métropolitaine — le simulateur applique automatiquement les règles de cumul et les plafonds.</p>
 
-<h2>Acheter à un particulier : ce que vous perdez</h2>
+<h2 id="piege">Acheter à un particulier : ce que vous perdez</h2>
 <p>C’est le point le plus mal compris de l’occasion électrique. Un achat entre particuliers vous prive de <strong>toute prime d’État</strong> et de l’éco-chèque d’Occitanie, qui exige un professionnel agréé. Restent quelques aides locales qui l’acceptent explicitement — Toulouse et Strasbourg notamment — à condition de déposer le dossier vous-même, avec l’acte de vente (formulaire Cerfa 15776), la carte grise et, le cas échéant, le certificat de destruction de l’ancienne voiture.</p>
 
-<h2>Les vérifications à faire avant d’acheter</h2>
+<h2 id="demarches">Que vérifier avant d’acheter ?</h2>
 <ul>
 <li><strong>L’état de santé de la batterie</strong> : demandez un certificat de contrôle. C’est la condition qui décide de l’aide, et le principal risque financier d’une occasion électrique.</li>
 <li><strong>La date de première immatriculation</strong> : hors de la fenêtre 2017-2023, pas de prime d’État.</li>
@@ -447,7 +451,7 @@ CUMUL = dict(
 <p><strong>La règle en une phrase.</strong> Vous ne pouvez obtenir qu’<strong>une seule aide nationale</strong> — prime « Coup de pouce » neuf, prime occasion ou leasing social — mais elle <strong>se cumule avec les aides de votre région, de votre département et de votre métropole</strong>. Certaines collectivités plafonnent ensuite le total de toutes les aides publiques à un pourcentage du prix de la voiture.</p>
 </div>
 
-<h2>Le tableau des cumuls</h2>
+<h2 id="montants">Quelles aides se cumulent, aide par aide ?</h2>
 <div class="table-wrap">
 <table>
 <thead><tr><th>Aide A</th><th>Aide B</th><th>Cumul</th><th>Conditions</th></tr></thead>
@@ -465,7 +469,7 @@ CUMUL = dict(
 </table>
 </div>
 
-<h2>Les plafonds qui rabotent le total</h2>
+<h2 id="cumul">Quels plafonds rabotent le total ? Jusqu’à 80 % du prix</h2>
 <p>Trois collectivités appliquent un plafond global : <strong>le total de toutes les aides publiques ne peut pas dépasser un pourcentage du prix</strong> de la voiture. Si ce plafond est atteint, c’est l’aide locale qui est réduite, jamais l’aide d’État.</p>
 <div class="table-wrap">
 <table>
@@ -481,7 +485,7 @@ CUMUL = dict(
 </div>
 <p><strong>Exemple concret.</strong> Une voiture d’occasion à 10 000 € achetée par un ménage rouennais de la tranche la plus modeste : 4 000 € d’aide métropolitaine + la prime d’État. Le plafond de 80 % limite le total à 8 000 € : l’aide de la Métropole est écrêtée en conséquence. Le simulateur effectue ce calcul automatiquement et affiche la mention « montant réduit ».</p>
 
-<h2>Trois pièges de cumul à connaître</h2>
+<h2 id="piege">Trois pièges de cumul à connaître</h2>
 <ul>
 <li><strong>L’ordre des démarches.</strong> À Lyon et au Grand Annecy, le dossier local doit être déposé <em>avant</em> l’achat ; la prime d’État aussi doit être demandée avant le bon de commande. Une seule signature prématurée fait tomber les deux.</li>
 <li><strong>Le vendeur.</strong> Acheter à un particulier supprime toute prime d’État et l’éco-chèque d’Occitanie, mais reste compatible avec Toulouse et Strasbourg.</li>
@@ -620,13 +624,13 @@ METHODO = dict(
 <p>Le simulateur fournit une <strong>estimation</strong> établie à partir des informations que vous renseignez et des règles connues à la date de vérification indiquée. <strong>L’éligibilité définitive dépend toujours de l’organisme qui attribue l’aide.</strong></p>
 </div>
 
-<h2>1. Comment les règles sont collectées</h2>
+<h2 id="collecte">Comment les règles sont-elles collectées ?</h2>
 <p>Chaque dispositif est saisi à partir de sa <strong>source officielle</strong> : texte publié au Journal officiel, fiche service-public.fr, portail de l’État, ou règlement d’attribution voté par la collectivité. Lorsqu’une source officielle existe, nous ne construisons jamais une règle sur une source secondaire. Lorsqu’elle n’existe pas ou n’est pas accessible, la règle est marquée « à confirmer » et l’outil l’affiche comme telle.</p>
 
-<h2>2. Comment elles sont vérifiées et datées</h2>
+<h2 id="verification">Comment sont-elles vérifiées et datées ?</h2>
 <p>Chaque règle porte trois attributs : un <strong>statut</strong> (vérifiée, à confirmer, suspendue, terminée), un <strong>lien vers sa source</strong> et une <strong>date de dernière vérification</strong>. Ces trois éléments sont affichés sur chaque carte de résultat. Une règle sans date est une règle sans valeur : c’est le principe de base de ce site.</p>
 
-<h2>3. Comment le calcul est fait</h2>
+<h2 id="calcul">Comment le calcul est-il fait ?</h2>
 <ul>
 <li>Votre <strong>revenu fiscal de référence est divisé par votre nombre de parts</strong>, puis situé dans les tranches officielles 2026 (de 1 970 € à 35 880 € par part).</li>
 <li>Votre <strong>code postal est converti en commune</strong>, puis en intercommunalité, département et région, à partir du code officiel géographique de l’INSEE. Les règles locales s’appliquent sur le code SIREN de l’intercommunalité, jamais sur une liste de villes écrite à la main.</li>
@@ -636,10 +640,10 @@ METHODO = dict(
 </ul>
 <p>Le calcul s’exécute <strong>entièrement dans votre navigateur</strong>, en 1 à 3 millisecondes. Aucune donnée fiscale n’est envoyée à un serveur, ni enregistrée : vos réponses restent sur votre appareil, et vous pouvez les effacer d’un clic.</p>
 
-<h2>4. Pourquoi certains montants sont affichés en fourchette</h2>
+<h2 id="fourchette">Pourquoi certains montants sont-ils affichés en fourchette ?</h2>
 <p>La prime « Coup de pouce » et le leasing social sont financés par les certificats d’économies d’énergie. La réglementation fixe des <strong>coefficients en kilowattheures cumac</strong>, que chaque fournisseur d’énergie convertit en offre commerciale. Il n’existe donc pas de montant légal unique. Nous affichons la fourchette des offres publiées par les partenaires, en citant leur date. Afficher un chiffre unique serait plus confortable, mais faux.</p>
 
-<h2>5. Ce que le simulateur ne peut pas savoir</h2>
+<h2 id="limites">Ce que le simulateur ne peut pas savoir</h2>
 <ul>
 <li><strong>Le périmètre exact des zones à faibles émissions.</strong> À Lyon, Marseille ou Reims, la zone ne couvre qu’une partie de la commune. Nous approximons à la commune entière et le signalons.</li>
 <li><strong>Les enveloppes restantes.</strong> Le leasing social compte 50 000 places, l’éco-chèque d’Occitanie 5 000 aides : ces compteurs ne sont pas publiés en temps réel.</li>
@@ -648,7 +652,7 @@ METHODO = dict(
 <li><strong>Votre situation fiscale fine</strong> (imposable ou non), que certaines aides exigent et que nous signalons comme condition à vérifier sur votre avis d’imposition.</li>
 </ul>
 
-<h2>6. Comment les changements réglementaires sont traités</h2>
+<h2 id="maj">Comment les changements réglementaires sont-ils traités ?</h2>
 <ol>
 <li>Identification du changement (veille sur les sources officielles) ;</li>
 <li>vérification sur le texte ou le règlement lui-même ;</li>
@@ -658,7 +662,7 @@ METHODO = dict(
 </ol>
 <p>Les anciennes pages ne sont pas supprimées : une aide disparue reste documentée, parce que la question « existe-t-elle encore ? » est légitime et mérite une réponse datée.</p>
 
-<h2>7. Signaler une erreur</h2>
+<h2 id="erreur">Comment signaler une erreur ?</h2>
 <p>Si vous constatez un écart entre une règle affichée et le règlement en vigueur — en particulier si vous travaillez dans une collectivité — écrivez à <a href="mailto:contact@mes-aides-auto.fr">contact@mes-aides-auto.fr</a> avec le lien du texte. Les corrections sont traitées en priorité et consignées dans l’historique.</p>
 """ + cta("Voir la méthode à l’œuvre", "Chaque résultat affiche sa source, sa date de vérification et la raison exacte d’un refus."),
     faq=[("Mes données fiscales sont-elles envoyées quelque part ?",
@@ -688,7 +692,7 @@ HISTORIQUE = dict(
     lede="Les aides changent vite, et les contenus périmés circulent longtemps. Ce journal daté recense les évolutions que nous avons vérifiées, du plus récent au plus ancien.",
     verified=V,
     body="""
-<h2>2026</h2>
+<h2 id="a2026">Ce qui a changé en 2026</h2>
 <div class="card card-soft">
 <h3>1<sup>er</sup> septembre 2026 — création de la prime pour les voitures électriques d’occasion</h3>
 <p>L’arrêté du 10 août 2026 crée la fiche standardisée TRA-EQ-133 « Achat ou location d’une voiture particulière électrique d’occasion ». Premières conditions : immatriculation initiale entre 2017 et 2023, batterie ayant conservé plus de 80 % de sa capacité, achat chez un professionnel, conservation trois ans. <a href="/aide-voiture-electrique-occasion/">Détail de la prime occasion</a></p>
@@ -702,7 +706,7 @@ HISTORIQUE = dict(
 <p>5 000 aides disponibles entre juillet 2026 et juin 2027 pour l’achat d’une voiture électrique d’occasion par un ménage non imposable : 30 % du prix, dans la limite de 1 600 €. <a href="/aides-voiture-electrique/occitanie/">Éco-chèque Occitanie</a></p>
 </div>
 
-<h2>2025</h2>
+<h2 id="a2025">Ce qui a changé en 2025</h2>
 <div class="card card-soft">
 <h3>26 septembre 2025 — suspension de l’aide de Grenoble-Alpes Métropole</h3>
 <p>Le dispositif est suspendu sans date de reprise annoncée. Le simulateur l’affiche comme suspendu et l’exclut du total, en rappelant le barème qui s’appliquerait en cas de reprise. <a href="/aides-voiture-electrique/grenoble/">Situation à Grenoble</a></p>
@@ -724,13 +728,13 @@ HISTORIQUE = dict(
 <p>Le crédit d’impôt de 500 € n’est pas reconduit par la loi de finances 2026. L’expérimentation du prêt à taux zéro mobilité arrive également à échéance, sans prolongation trouvée.</p>
 </div>
 
-<h2>2024</h2>
+<h2 id="a2024">Ce qui a changé en 2024</h2>
 <div class="card card-soft">
 <h3>2 décembre 2024 — suppression de la prime à la conversion et de la surprime ZFE</h3>
 <p>Le décret 2024-1084 met fin à la prime à la conversion et à sa surprime « zone à faibles émissions » de 1 000 €. Mettre une ancienne voiture à la casse ne donne plus droit à aucune aide nationale — mais reste exigé par la plupart des règlements locaux.</p>
 </div>
 
-<h2>Comment nous tenons ce journal</h2>
+<h2 id="journal">Comment nous tenons ce journal</h2>
 <p>Chaque entrée correspond à un changement vérifié sur sa source officielle, avec mise à jour simultanée du moteur de calcul et des pages concernées. Les pages relatives à des dispositifs supprimés sont conservées : elles répondent à une question réelle. Voir <a href="/notre-methodologie/">notre méthodologie</a> et <a href="/sources/">nos sources</a>.</p>
 """ + cta("Vos aides, à jour", "Le simulateur applique les règles en vigueur aujourd’hui, chacune datée et sourcée."),
     faq=[("Où voir la date de mise à jour d’une règle précise ?",
@@ -748,5 +752,148 @@ HISTORIQUE = dict(
 )
 
 
+
+
+# ---------------------------------------------------------------------------
+# v1.1 — Signalétique des pages nationales.
+# Mêmes quatre familles que les pages territoires : une étiquette veut dire la
+# même chose partout. Les valeurs suivent data.js (scope / roadmap / status).
+# ---------------------------------------------------------------------------
+HEAD = {
+    "aides-voiture-electrique-2026": (
+        labels.bar(scope="national", status="active", tags=["particulier", "neuve", "occasion"]),
+        labels.id_card([("Aides nationales en vigueur", "4"),
+                        ("Montant de la principale", "3 300 à 7 700 €"),
+                        ("Territoires qui ajoutent une aide", "13")]),
+        labels.criteres([
+            ("ok", "Voiture 100 % électrique neuve : prime « Coup de pouce », de 3 300 à 7 700 €"),
+            ("ok", "Revenu fiscal de 16 880 € par part au maximum et usage professionnel : leasing social, jusqu’à 9 000 €"),
+            ("ok", "Électrique d’occasion immatriculée entre 2017 et 2023 : prime occasion"),
+            ("stop", "Une seule aide d’État à la fois : les trois sont exclusives les unes des autres"),
+            ("time", "La prime d’État se demande avant la signature du bon de commande"),
+        ], "Quelle aide est pour vous")),
+
+    "prime-coup-de-pouce-voiture-electrique": (
+        labels.bar(scope="national", roadmap="dealer_cee", status="active", tags=["neuve", "particulier"]),
+        labels.id_card([("Montant", "3 300 à 7 700 €"),
+                        ("Condition qui élimine", "Prix supérieur à 47 000 €"),
+                        ("Quand demander", "Avant le bon de commande")]),
+        labels.criteres([
+            ("ok", "Voiture 100 % électrique neuve, prix inférieur ou égal à 47 000 €"),
+            ("ok", "Achat chez un professionnel partenaire d’un fournisseur d’énergie"),
+            ("ok", "Montant majoré si le véhicule et la batterie sont assemblés en Europe"),
+            ("stop", "Véhicule à conserver deux ans"),
+            ("time", "Demande à faire avant la signature du bon de commande, jamais après"),
+        ])),
+
+    "leasing-social-2026": (
+        labels.bar(scope="national", roadmap="leasing_social", status="active", tags=["location", "neuve", "revenus"]),
+        labels.id_card([("Montant", "jusqu’à 9 000 €"),
+                        ("Condition qui élimine", "Revenu supérieur à 16 880 € par part"),
+                        ("Quand demander", "Avant la signature")]),
+        labels.criteres([
+            ("ok", "Revenu fiscal de référence de 16 880 € par part au maximum"),
+            ("ok", "Utiliser sa voiture pour aller travailler"),
+            ("ok", "Location longue durée de trois ans au minimum"),
+            ("stop", "Pas de cumul avec la prime « Coup de pouce » : il faut choisir"),
+        ])),
+
+    "bonus-ecologique-2026": (
+        labels.bar(scope="national", status="ended", tags=["neuve"]),
+        labels.id_card([("Montant aujourd’hui", "0 €"),
+                        ("Supprimé le", "1<sup>er</sup> juillet 2025"),
+                        ("Ce qui l’a remplacé", "Prime « Coup de pouce »")]),
+        labels.criteres([
+            ("stop", "Le bonus écologique n’existe plus depuis le 1<sup>er</sup> juillet 2025"),
+            ("stop", "La prime à la conversion a disparu le 2 décembre 2024"),
+            ("ok", "La prime « Coup de pouce » l’a remplacé : de 3 300 à 7 700 € selon vos revenus"),
+        ], "Ce qu’il faut savoir")),
+
+    "aide-voiture-electrique-occasion": (
+        labels.bar(scope="national", roadmap="dealer_cee", status="active_unverified", tags=["occasion", "particulier"]),
+        labels.id_card([("Montant", "environ 300 à 500 €"),
+                        ("Condition qui élimine", "Immatriculation hors 2017-2023"),
+                        ("Quand demander", "Avant le bon de commande")]),
+        labels.criteres([
+            ("ok", "Voiture électrique d’occasion, première immatriculation entre 2017 et 2023"),
+            ("ok", "Achat chez un professionnel, batterie en bon état"),
+            ("stop", "Véhicule à conserver trois ans"),
+            ("stop", "Montant encore à confirmer : le barème définitif n’est pas publié"),
+        ])),
+
+    "cumul-aides-voiture-electrique": (
+        labels.bar(scope="national", status="active", tags=["particulier"]),
+        labels.id_card([("Deux aides d’État ensemble", "Jamais"),
+                        ("Aide d’État + aide locale", "Cumul possible"),
+                        ("Plafond local fréquent", "80 % du prix")]),
+        labels.criteres([
+            ("ok", "Une aide d’État, à laquelle s’ajoutent les aides de votre collectivité"),
+            ("stop", "Jamais deux aides d’État : prime neuf, prime occasion et leasing social sont exclusifs"),
+            ("time", "Chaque aide a son propre moment de dépôt — c’est là que les dossiers tombent"),
+        ], "La règle en trois lignes")),
+}
+
+# Une aide nationale = un MonetaryGrant. Aucun rich result Google sur ce type :
+# l'objectif est la citation par les moteurs conversationnels.
+GRANTS = {
+    "aides-voiture-electrique-2026": [
+        dict(name="Prime « Coup de pouce » voiture électrique", funder="État",
+             desc="Aide à l’achat d’une voiture électrique neuve, financée par les certificats d’économies d’énergie.",
+             min=3300, max=7700, area="France", url="https://mes-aides-auto.fr/prime-coup-de-pouce-voiture-electrique/"),
+        dict(name="Leasing social 2026", funder="État",
+             desc="Location longue durée d’une voiture électrique pour les ménages modestes qui roulent pour travailler.",
+             max=9000, area="France", url="https://mes-aides-auto.fr/leasing-social-2026/"),
+        dict(name="Prime d’État pour une voiture électrique d’occasion", funder="État",
+             desc="Aide à l’achat d’une électrique d’occasion immatriculée entre 2017 et 2023.",
+             min=300, max=500, area="France", url="https://mes-aides-auto.fr/aide-voiture-electrique-occasion/"),
+        dict(name="Prime au rétrofit", funder="État",
+             desc="Aide à la transformation d’une voiture thermique en électrique.",
+             max=5000, area="France"),
+    ],
+    "prime-coup-de-pouce-voiture-electrique": [
+        dict(name="Prime « Coup de pouce » voiture électrique", funder="État",
+             desc="Aide à l’achat d’une voiture électrique neuve de 47 000 € au maximum, à demander avant le bon de commande.",
+             min=3300, max=7700, area="France")],
+    "leasing-social-2026": [
+        dict(name="Leasing social 2026", funder="État",
+             desc="Location longue durée de trois ans minimum, sous condition de revenu fiscal de 16 880 € par part.",
+             max=9000, area="France")],
+    "aide-voiture-electrique-occasion": [
+        dict(name="Prime d’État pour une voiture électrique d’occasion", funder="État",
+             desc="Première immatriculation entre 2017 et 2023, achat chez un professionnel, véhicule conservé trois ans.",
+             min=300, max=500, area="France")],
+}
+
+LEGENDE_METHODO = """
+<h2 id="legende">Que veulent dire les étiquettes de couleur ?</h2>
+<p>Chaque page porte des étiquettes qui répondent, sans lecture, aux quatre questions
+qui reviennent toujours. Elles sont produites automatiquement à partir de notre base de
+règles : une étiquette veut donc dire exactement la même chose sur toutes les pages du site.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Famille</th><th>Étiquettes</th><th>Ce qu’elle vous dit</th></tr></thead>
+<tbody>
+<tr><td>Qui paie</td><td>%s</td><td>L’échelon qui verse l’aide. Une aide d’État et une aide locale se cumulent presque toujours.</td></tr>
+<tr><td>Quand demander</td><td>%s</td><td>Le moment du dépôt du dossier. C’est la première cause de refus : une demande déposée trop tard est perdue.</td></tr>
+<tr><td>Fiabilité de la règle</td><td>%s</td><td>Ce que vaut notre information : règle lue dans un texte officiel à jour, règle dont la reconduction n’est pas confirmée, ou dispositif arrêté.</td></tr>
+<tr><td>Pour qui</td><td>%s</td><td>Le type de véhicule et de bénéficiaire visés, et les conditions structurantes.</td></tr>
+</tbody></table></div>
+<p>Le bloc <strong>« Vous y avez droit si »</strong> en haut de chaque page reprend les conditions
+du règlement telles que le simulateur les applique : ✓ une condition à remplir, ✗ une condition
+qui élimine un dossier, ⏱ le moment de la démarche.</p>
+""" % (
+    labels.payeur("national") + labels.payeur("epci") + labels.payeur("region") + labels.payeur("dept"),
+    labels.quand("dealer_cee") + labels.quand("local_before") + labels.quand("local_after"),
+    labels.fiabilite("active") + labels.fiabilite("active_unverified") + labels.fiabilite("suspended") + labels.fiabilite("ended"),
+    labels.profils(["neuve", "occasion", "casse"], 3),
+)
+
 def pages():
-    return [HUB, CDP, LEASING, BONUS, OCCASION, CUMUL, METHODO, _sources_page(), HISTORIQUE]
+    METHODO["body"] = METHODO["body"] + LEGENDE_METHODO
+    ps = [HUB, CDP, LEASING, BONUS, OCCASION, CUMUL, METHODO, _sources_page(), HISTORIQUE]
+    for pg in ps:
+        h = HEAD.get(pg["slug"])
+        if h:
+            pg["labels"], pg["idcard"], pg["criteres"] = h
+        if GRANTS.get(pg["slug"]):
+            pg["grants"] = GRANTS[pg["slug"]]
+    return ps

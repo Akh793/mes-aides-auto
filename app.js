@@ -190,6 +190,24 @@
     unknown:           { cls: 'bg-slate-100 text-slate-600',    txt: '❌ incertaine' },
   };
 
+  // v1.1 — mêmes familles d'étiquettes que les pages éditoriales, pour que le
+  // lecteur retrouve le même code visuel dans l'outil et dans les guides.
+  const PAY_UI  = { national: 'État', epci: 'Métropole', region: 'Région', dept: 'Département' };
+  const WHEN_UI = { dealer_cee: 'Avant le bon de commande', leasing_social: 'Avant la signature',
+                    local_before: 'Avant l’achat', local_after: 'Après l’achat' };
+  const TAG_UI  = { neuve: 'Voiture neuve', occasion: 'Occasion', location: 'Location',
+                    utilitaire: 'Utilitaire', retrofit: 'Transformation en électrique',
+                    particulier: 'Particulier', pro: 'Professionnel', casse: 'Casse obligatoire',
+                    cession: 'Cession acceptée', revenus: 'Sous condition de revenus',
+                    zfe: 'Zone à faibles émissions' };
+  // une seule étiquette « pour qui », la plus discriminante
+  const TAG_ORDER = ['casse', 'cession', 'zfe', 'revenus', 'occasion', 'location', 'retrofit', 'neuve'];
+  function mainTag(aid) {
+    const t = aid.tags || [];
+    for (const k of TAG_ORDER) if (t.includes(k)) return TAG_UI[k];
+    return '';
+  }
+
   function amountLabel(r) {
     if (r.status === 'note' && r.min == null && r.max == null) return '';
     if (r.min == null && r.max == null) return '<span class="text-slate-500 text-base font-medium">montant pas encore publié</span>';
@@ -207,12 +225,15 @@
       <div class="flex flex-wrap items-center gap-2">
         <span class="badge ${st.cls}">${st.txt}</span>
         <span class="badge ${vf.cls}">${vf.txt}</span>
-        ${r.aid.territoryLabel ? `<span class="badge bg-blue-50 text-[#2548FF]">${esc(r.aid.territoryLabel)}</span>` : ''}
+        ${r.aid.territoryLabel ? `<span class="badge badge-wrap bg-blue-50 text-[#2548FF]">${esc(r.aid.territoryLabel)}</span>`
+          : (PAY_UI[r.aid.scope] ? `<span class="badge lb-pay">${PAY_UI[r.aid.scope]}</span>` : '')}
+        ${WHEN_UI[r.aid.roadmap] && r.status !== 'ineligible' ? `<span class="badge lb-when">${WHEN_UI[r.aid.roadmap]}</span>` : ''}
+        ${mainTag(r.aid) ? `<span class="badge lb-who">${mainTag(r.aid)}</span>` : ''}
         ${r.aid.info ? '<span class="badge bg-slate-100 text-slate-600">non comptée dans le total</span>' : ''}
-        ${r.hypothetical ? '<span class="badge bg-[#FF6347]/10 text-[#FF6347]">autre option : en location longue durée (3 ans minimum) — non comptée dans le total</span>' : ''}
-        ${r.alternativeTo ? `<span class="badge bg-[#FF6347]/10 text-[#FF6347]">ne se cumule pas avec : ${esc(r.alternativeTo)}</span>` : ''}
+        ${r.hypothetical ? '<span class="badge badge-wrap bg-[#FF6347]/10 text-[#FF6347]">autre option : en location longue durée (3 ans minimum) — non comptée dans le total</span>' : ''}
+        ${r.alternativeTo ? `<span class="badge badge-wrap bg-[#FF6347]/10 text-[#FF6347]">ne se cumule pas avec : ${esc(r.alternativeTo)}</span>` : ''}
       </div>
-      <div class="flex items-start justify-between gap-3 mt-2">
+      <div class="card-head">
         <h3 class="font-poppins font-semibold text-base leading-snug text-slate-900">${esc(r.aid.label)}</h3>
         <div class="font-poppins font-bold text-xl ${r.status === 'ineligible' ? 'text-slate-400' : 'text-[#2548FF]'} whitespace-nowrap">${r.status === 'ineligible' ? '—' : amountLabel(r)}</div>
       </div>
@@ -271,6 +292,24 @@
     requestAnimationFrame(step);
   }
 
+  // Résumé des réglages repliés : l'état reste visible sans ouvrir le bloc.
+  function updateFiltersSummary() {
+    const el = $('filters-summary');
+    if (!el) return;
+    const bits = [];
+    bits.push(state.isNew ? 'Neuve' : 'D’occasion');
+    bits.push(state.motor === 'ev' ? '100 % électrique' : 'Hybride ou autre');
+    bits.push(state.scrap ? 'avec mise à la casse' : 'sans casse');
+    if (state.mode === 'pro') {
+      if (state.vehicleType === 'vul') bits.push({ small: 'petit utilitaire', medium: 'utilitaire moyen', large: 'grand utilitaire' }[state.vulSize]);
+      if (Number(state.qty) > 1) bits.push(state.qty + ' véhicules');
+    } else {
+      if (state.grosRouleur) bits.push('gros rouleur');
+      bits.push(state.sellerPro ? 'concessionnaire' : 'vendeur particulier');
+    }
+    el.textContent = bits.join(' · ');
+  }
+
   function applyModeUI() {
     const pro = state.mode === 'pro';
     document.querySelectorAll('[data-mode]').forEach((el) => { el.hidden = el.dataset.mode !== state.mode; });
@@ -282,6 +321,7 @@
     $('sub-vul').hidden = !(pro && state.vehicleType === 'vul');
     $('sub-eu').hidden = !(pro && state.vehicleType === 'vul' && state.motor === 'ev' && state.isNew);
     $('bande-situation').classList.toggle('pro', pro);
+    updateFiltersSummary();
     try { history.replaceState(null, '', pro ? '#pro' : location.pathname.split('/').pop() || 'index.html'); } catch (e) {}
   }
 
@@ -321,7 +361,7 @@
     if (noLocalData) info += `<div class="rounded-2xl bg-blue-50 border border-blue-100 p-4 text-sm text-slate-700">ℹ️ Code postal <strong>${esc(ctx.commune.cp)}</strong> (${esc(ctx.commune.nom)}) : les aides nationales sont calculées. Aucune aide supplémentaire de votre ville, métropole, département ou région n’est actuellement répertoriée pour cette commune${ctx.mode === 'pro' ? ' pour les professionnels (territoires vérifiés : Lyon, Strasbourg, Toulouse, Aix-Marseille, Grand Paris, Grenoble, Rouen)' : ''}.</div>`;
     info += noAid.map((t) => `
       <div class="rounded-2xl bg-slate-50 border border-slate-200 p-4 text-sm">
-        <div class="flex flex-wrap items-center gap-2"><span class="badge bg-slate-200 text-slate-600">Vérifié : aucune aide locale</span><span class="badge bg-blue-50 text-[#2548FF]">${esc(t.label)}</span></div>
+        <div class="flex flex-wrap items-center gap-2"><span class="badge bg-slate-200 text-slate-600">Vérifié : aucune aide locale</span><span class="badge badge-wrap bg-blue-50 text-[#2548FF]">${esc(t.label)}</span></div>
         <p class="mt-2 text-slate-600">${esc(t.detail)}</p>
         <a class="mt-1 inline-block text-xs underline text-slate-400 hover:text-[#2548FF]" href="${t.sourceUrl}" target="_blank" rel="noopener">${esc(t.sourceLabel)}</a>
       </div>`).join('');

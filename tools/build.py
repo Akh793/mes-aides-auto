@@ -12,6 +12,9 @@ Sortie :  <slug>/index.html pour chaque page + les sitemaps.
 """
 import json, os, re, sys, datetime
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import labels
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "tools"))
 BASE = "https://mes-aides-auto.fr"
@@ -189,7 +192,7 @@ def sources_html(sources):
     if not sources:
         return ""
     lis = "".join('<li><a href="%s" target="_blank" rel="noopener">%s</a></li>' % (u, l) for l, u in sources)
-    return '<h2 id="sources">Sources officielles</h2><ul class="srcs">%s</ul>' % lis
+    return '<h2 id="sources">D’où viennent ces informations ?</h2><ul class="srcs">%s</ul>' % lis
 
 
 def related_html(related):
@@ -204,6 +207,126 @@ def fr_date(iso):
     mois = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août",
             "septembre", "octobre", "novembre", "décembre"][int(m) - 1]
     return "%d %s %s" % (int(d), mois, y)
+
+
+# --------------------------------------------------------------------------
+# Zones typées : le squelette de la page, rendu visible sans lecture.
+# La zone est déduite de l'identifiant du H2 — donc jamais saisie à la main.
+# --------------------------------------------------------------------------
+ZONES = {
+    "droits": ("Vos droits", "droits"),
+    "montants": ("Le montant", "montant"),
+    "bareme": ("Le montant", "montant"),
+    "piege": ("Le piège", "piege"),
+    "demarches": ("La démarche", "demarche"),
+    "cumul": ("Le cumul", "cumul"),
+    "exemple": ("Un exemple", "exemple"),
+    "national": ("Les aides d’État", "national"),
+    "locales": ("Les aides locales", "national"),
+    "communes": ("Le périmètre", "perimetre"),
+    "liste": ("La liste", "montant"),
+    "sans-aide": ("Les territoires sans aide", "piege"),
+    "methode": ("Comment lire", "perimetre"),
+    "ailleurs": ("Et ailleurs", "perimetre"),
+    "supprimees": ("Ce qui n’existe plus", "piege"),
+    "definition": ("La définition", "perimetre"),
+    "collecte": ("La méthode", "perimetre"),
+    "verification": ("La méthode", "perimetre"),
+    "calcul": ("La méthode", "perimetre"),
+    "fourchette": ("La méthode", "perimetre"),
+    "limites": ("Les limites", "piege"),
+    "maj": ("La mise à jour", "perimetre"),
+    "erreur": ("Nous écrire", "perimetre"),
+    "legende": ("La légende", "perimetre"),
+    "a2026": ("Le journal", "perimetre"),
+    "a2025": ("Le journal", "perimetre"),
+    "a2024": ("Le journal", "perimetre"),
+    "journal": ("La méthode", "perimetre"),
+    "faq": ("Les questions", "faq"),
+    "sources": ("Les preuves", "preuves"),
+}
+
+_SLUG_RE = re.compile(r"[^a-z0-9]+")
+
+
+def _slug(txt):
+    txt = re.sub(r"<[^>]+>", "", txt)
+    txt = (txt.replace("é", "e").replace("è", "e").replace("ê", "e").replace("à", "a")
+              .replace("ç", "c").replace("û", "u").replace("ù", "u").replace("ô", "o")
+              .replace("î", "i").replace("’", " "))
+    return _SLUG_RE.sub("-", txt.lower()).strip("-")[:40] or "section"
+
+
+CTA_MINI = ('<div class="cta cta-mini"><p class="t">Et pour votre situation ?</p>'
+            '<p>Le simulateur applique ces règles à votre code postal, vos revenus et le prix du véhicule.</p>'
+            '<a class="btn" href="/">Calculer mes aides</a></div>')
+
+
+def decorate(html):
+    """Ajoute l'intitulé de zone sur chaque H2, garantit les identifiants,
+    insère le rappel du simulateur à mi-page, et renvoie le sommaire."""
+    toc, seen = [], set()
+
+    def one(m):
+        attrs, inner = m.group(1), m.group(2)
+        mid = re.search(r'id="([^"]*)"', attrs)
+        hid = mid.group(1) if mid else _slug(inner)
+        base, n = hid, 2
+        while hid in seen:
+            hid, n = "%s-%d" % (base, n), n + 1
+        seen.add(hid)
+        kicker, zone = ZONES.get(hid, ("", ""))
+        attrs = re.sub(r'\s*id="[^"]*"', "", attrs)
+        cls = ' class="z%s"' % (" z-" + zone if zone else "")
+        head = '<span class="zk">%s</span>' % kicker if kicker else ""
+        toc.append((hid, re.sub(r"<[^>]+>", "", inner).strip(), zone))
+        return '<h2 id="%s"%s%s>%s%s</h2>' % (hid, cls, attrs, head, inner)
+
+    out = re.sub(r"(?is)<h2([^>]*)>(.*?)</h2>", one, html)
+
+    # rappel du simulateur à mi-page, une seule fois, avant le cumul (ou les aides d'État)
+    for anchor in ("cumul", "national", "demarches"):
+        tag = '<h2 id="%s"' % anchor
+        if tag in out and "cta-mini" not in out:
+            out = out.replace(tag, CTA_MINI + "\n" + tag, 1)
+            break
+    return out, toc
+
+
+def toc_html(toc):
+    if len(toc) < 3:
+        return ""
+    lis = "".join('<li class="t-%s"><a href="#%s">%s</a></li>' % (z or "x", i, t) for i, t, z in toc)
+    return ('<nav class="toc" aria-label="Sommaire de la page">'
+            '<p class="toc-t">Ce que vous trouverez sur cette page</p>'
+            '<ol>%s</ol>%s</nav>' % (lis, labels.LEGEND))
+
+
+def reading_time(html):
+    n = len(re.sub(r"<[^>]+>", " ", html).split())
+    return max(1, round(n / 220))
+
+
+def grants_ld(grants):
+    """Une aide = un MonetaryGrant. Aucun rich result Google sur ce type :
+    l'objectif est la citation par les moteurs conversationnels."""
+    out = []
+    for g in grants or []:
+        node = {"@type": "MonetaryGrant", "name": g["name"],
+                "description": g.get("desc", ""),
+                "funder": {"@type": "GovernmentOrganization", "name": g["funder"]}}
+        if g.get("min") is not None or g.get("max") is not None:
+            node["amount"] = {"@type": "MonetaryAmount", "currency": "EUR"}
+            if g.get("min") is not None:
+                node["amount"]["minValue"] = g["min"]
+            if g.get("max") is not None:
+                node["amount"]["maxValue"] = g["max"]
+        if g.get("area"):
+            node["eligibleRegion"] = {"@type": "AdministrativeArea", "name": g["area"]}
+        if g.get("url"):
+            node["url"] = g["url"]
+        out.append(node)
+    return out
 
 
 def render(page):
@@ -225,17 +348,30 @@ def render(page):
         "publisher": {"@type": "Organization", "name": "Mes Aides Auto", "url": BASE + "/"},
         "isPartOf": {"@type": "WebSite", "name": "Mes Aides Auto", "url": BASE + "/"},
     })
+    graph += grants_ld(page.get("grants"))
     graph += page.get("ld_extra", [])
     ld = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False, indent=2)
+
+    article = "\n".join(x for x in (page["body"], faq_html(page.get("faq")),
+                                     sources_html(page.get("sources"))) if x)
+    m = re.match(r'(?s)\s*(<div class="answer">.*?</div>)\s*', article)
+    answer, rest = (m.group(1), article[m.end():]) if m else ("", article)
+    rest, toc = decorate(rest)
+    meta = ('<p class="pmeta"><span>Lecture %d min</span>'
+            '<span>Règles vérifiées le %s</span></p>'
+            % (reading_time(article), fr_date(page.get("verified", TODAY))))
 
     body = [
         crumb_html(page["crumbs"]),
         '<main class="wrap"><article class="prose">',
-        '<div class="hero"><h1>%s</h1></div>' % page["h1"],
+        '<div class="hero"><h1>%s</h1>%s</div>' % (page["h1"], page.get("labels", "")),
         '<p class="lede">%s</p>' % page["lede"],
-        page["body"],
-        faq_html(page.get("faq")),
-        sources_html(page.get("sources")),
+        answer,
+        page.get("idcard", ""),
+        page.get("criteres", ""),
+        meta,
+        toc_html(toc),
+        rest,
         '<p class="verif">Dernière vérification des règles de cette page : <strong>%s</strong>. '
         'Nous republions cette page à chaque évolution réglementaire — voir '
         '<a href="/historique-aides-auto/">l’historique des changements</a> et '
@@ -294,26 +430,55 @@ def write(page):
     out_dir = os.path.join(ROOT, page["slug"])
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, "index.html")
+    html = render(page)
     with open(path, "w", encoding="utf-8") as f:
-        f.write(render(page))
-    return path, len(render(page).encode("utf-8"))
+        f.write(html)
+    return path, len(html.encode("utf-8"))
 
 
 # --------------------------------------------------------------------------
 # Lecture des données du moteur (data.js) et des communes (communes.js)
 # --------------------------------------------------------------------------
+_ARR_RE = re.compile(r"\s+\d+(?:er|e)\s+Arrondissement$", re.I)
+
+
 def load_communes():
+    """communes.js est au format compact v2 depuis la refonte de performance :
+    `cp|insee|nom|insee_commune_mere (vide si == insee)|code_epci`, le département
+    étant déduit du code INSEE et la région du département (table COMMUNES_REG).
+    Le lecteur attendait encore sept champs : il ne gardait donc aucune commune,
+    ce qui faisait disparaître le bloc « Ma commune est-elle concernée ? »."""
     src = open(os.path.join(ROOT, "communes.js"), encoding="utf-8").read()
-    raw = src[src.index('"') + 1:src.rindex('"')].replace("\\n", "\n")
+
+    def js_string(var):
+        i = src.find("window." + var)
+        if i < 0:
+            return ""
+        a = src.index('"', i) + 1
+        b = src.index('";', a)
+        return src[a:b].replace("\\n", "\n")
+
+    reg_table = {}
+    for pair in js_string("COMMUNES_REG").split(","):
+        if ":" in pair:
+            d, r = pair.split(":", 1)
+            reg_table[d] = r
+
     by_epci, by_region, by_dept = {}, {}, {}
-    for line in raw.split("\n"):
-        p = line.split("|")
-        if len(p) < 7:
+    for line in js_string("COMMUNES_RAW").split("\n"):
+        f = line.split("|")
+        if len(f) < 5:
             continue
-        cp, insee, nom, mere, epci, dept, reg = p[:7]
-        by_epci.setdefault(epci, {})[insee] = (nom, cp)
-        by_region.setdefault(reg, set()).add(insee)
-        by_dept.setdefault(dept, set()).add(insee)
+        cp, insee, nom, mere, epci = f[0], f[1], f[2], f[3], f[4]
+        dept = insee[:3] if insee[:2] in ("97", "98") else insee[:2]
+        reg = reg_table.get(dept, "")
+        # Les arrondissements de Paris, Lyon et Marseille sont rattachés à leur
+        # commune mère : la liste affiche « Lyon », pas « Lyon 1er… Lyon 9e ».
+        key = mere or insee
+        label = _ARR_RE.sub("", nom) if mere else nom
+        by_epci.setdefault(epci, {}).setdefault(key, (label, cp))
+        by_region.setdefault(reg, set()).add(key)
+        by_dept.setdefault(dept, set()).add(key)
     return by_epci, by_region, by_dept
 
 
