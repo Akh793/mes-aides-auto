@@ -4,17 +4,64 @@
 (() => {
   'use strict';
 
-  /* ---------- Index communes (construit une fois au chargement) ---------- */
+  /* ---------- Index communes ----------
+     Construit hors du chemin critique, EN TRANCHES : le parsing du fichier communes
+     bloquait le premier rendu (FCP/LCP) ; construit d'un bloc après le rendu, il créait
+     une tâche longue (TBT). On le découpe donc en lots courts exécutés quand le
+     navigateur est inactif, en rendant la main entre chaque lot.
+     Un appel à cpIndex() avant la fin termine le travail restant de façon synchrone,
+     donc l'API reste identique et aucun appelant n'a besoin d'attendre.
+     Format compact v2 : cp|insee|nom|commune_mere (vide si == insee)|epci
+     — dept déduit de l'insee, region déduite du dept (table window.COMMUNES_REG). */
   const BY_CP = new Map();
-  (function buildIndex() {
-    const t0 = performance.now();
-    for (const line of window.COMMUNES_RAW.split('\n')) {
-      const [cp, insee, nom, communeMere, epci, dept, region] = line.split('|');
-      let arr = BY_CP.get(cp);
-      if (!arr) BY_CP.set(cp, (arr = []));
-      arr.push({ cp, insee, nom, communeMere, epci, dept, region });
+  const cpIdx = { done: false, cur: 0, raw: null, reg: null, t: 0 };
+
+  function cpIndexStep(budgetMs) {
+    if (cpIdx.done) return true;
+    if (cpIdx.raw === null) {
+      cpIdx.t = performance.now();
+      cpIdx.raw = window.COMMUNES_RAW || '';
+      cpIdx.reg = Object.create(null);
+      for (const pair of (window.COMMUNES_REG || '').split(',')) {
+        const i = pair.indexOf(':');
+        if (i > 0) cpIdx.reg[pair.slice(0, i)] = pair.slice(i + 1);
+      }
     }
-    console.info(`[index] ${BY_CP.size} codes postaux indexés en ${(performance.now() - t0).toFixed(1)} ms`);
+    const raw = cpIdx.raw, REG = cpIdx.reg, n = raw.length, t0 = performance.now();
+    let cur = cpIdx.cur;
+    while (cur < n) {
+      for (let k = 0; k < 1500 && cur < n; k++) {
+        let nl = raw.indexOf('\n', cur);
+        if (nl < 0) nl = n;
+        const line = raw.slice(cur, nl);
+        cur = nl + 1;
+        if (!line) continue;
+        const f = line.split('|');
+        const insee = f[1], p2 = insee.slice(0, 2);
+        const dept = (p2 === '97' || p2 === '98') ? insee.slice(0, 3) : p2;
+        let arr = BY_CP.get(f[0]);
+        if (!arr) BY_CP.set(f[0], (arr = []));
+        arr.push({ cp: f[0], insee: insee, nom: f[2], communeMere: f[3] || insee,
+                   epci: f[4], dept: dept, region: REG[dept] || '' });
+      }
+      if (cur < n && performance.now() - t0 >= budgetMs) { cpIdx.cur = cur; return false; }
+    }
+    cpIdx.cur = cur; cpIdx.done = true; cpIdx.raw = null;
+    console.info(`[index] ${BY_CP.size} codes postaux indexés en ${(performance.now() - cpIdx.t).toFixed(1)} ms`);
+    return true;
+  }
+
+  /* Accès synchrone : termine le reliquat si le pré-chauffage n'a pas fini. */
+  function cpIndex() { if (!cpIdx.done) cpIndexStep(Infinity); return BY_CP; }
+
+  (function scheduleCpIndex() {
+    const run = (deadline) => {
+      const budget = deadline && typeof deadline.timeRemaining === 'function'
+        ? Math.max(6, deadline.timeRemaining() - 2) : 12;
+      if (!cpIndexStep(budget)) scheduleCpIndex();
+    };
+    if (typeof requestIdleCallback === 'function') requestIdleCallback(run, { timeout: 1000 });
+    else setTimeout(() => run(null), 60);
   })();
 
   /* ---------- État ---------- */
@@ -303,7 +350,7 @@
       for (const k of Object.keys(state)) if (k in s && k !== 'commune') state[k] = s[k];
       state.commune = null;
       if (s.commune && s.commune.cp && s.commune.insee) {
-        const c = (BY_CP.get(s.commune.cp) || []).find((x) => x.insee === s.commune.insee);
+        const c = (cpIndex().get(s.commune.cp) || []).find((x) => x.insee === s.commune.insee);
         if (c) state.commune = c;
       }
       return true;
@@ -340,7 +387,7 @@
     const v = cpInput.value.replace(/\D/g, '').slice(0, 5);
     cpInput.value = v; state.cp = v; state.commune = null;
     if (v.length === 5) {
-      const list = BY_CP.get(v) || [];
+      const list = cpIndex().get(v) || [];
       if (list.length === 1) { state.commune = list[0]; dd.hidden = true; $('commune-name').textContent = list[0].nom; }
       else { $('commune-name').textContent = list.length ? 'Choisissez votre commune ↓' : 'Code postal inconnu'; showCommunes(list); }
     } else { dd.hidden = true; $('commune-name').textContent = ''; }
@@ -412,7 +459,7 @@
   /* ---------- Tests console (window.runTests()) ---------- */
   window.runTests = function () {
     const base = { cp: '', commune: null, rfr: 20000, parts: 1, price: 30000, isNew: true, motor: 'ev', scrap: false, critair: 3, grosRouleur: false, sellerPro: true, financing: 'achat', leaseMonths: 36, euBattery: false, prevLeasing: false, nonImposable: false };
-    const C = (cp, nom) => { const l = BY_CP.get(cp) || []; const c = l.find((x) => x.nom.startsWith(nom)); if (!c) throw new Error('commune test introuvable ' + cp + ' ' + nom); return c; };
+    const C = (cp, nom) => { const l = cpIndex().get(cp) || []; const c = l.find((x) => x.nom.startsWith(nom)); if (!c) throw new Error('commune test introuvable ' + cp + ' ' + nom); return c; };
     const cases = [
       ['Lyon 3e, modeste, neuf, rebut CA3', { ...base, commune: C('69003', 'Lyon 3e'), rfr: 15000, scrap: true }, (o) => o.kept.includes('cee_vp_neuf') && o.kept.includes('lyon_metropole')],
       ['Lyon sans rebut → Lyon inéligible', { ...base, commune: C('69003', 'Lyon 3e'), rfr: 15000 }, (o) => o.status.lyon_metropole === 'ineligible'],

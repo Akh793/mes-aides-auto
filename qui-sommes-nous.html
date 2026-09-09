@@ -3,6 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/inter-var.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/poppins-700.woff2">
+<style>/* Polices auto-hebergees (sous-ensemble latin) : zero requete tierce, zero blocage du rendu */
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 600;font-display:swap;src:url(/assets/fonts/inter-var.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(/assets/fonts/poppins-500.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(/assets/fonts/poppins-600.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url(/assets/fonts/poppins-700.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Poppins';font-style:italic;font-weight:600;font-display:swap;src:url(/assets/fonts/poppins-600-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Poppins';font-style:italic;font-weight:700;font-display:swap;src:url(/assets/fonts/poppins-700-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+</style>
 <!-- Consentement (Consent Mode v2) — doit précéder GTM. Aucun cookie de mesure tant que l'utilisateur n'a pas accepté (bandeau). -->
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -23,12 +33,18 @@
     if (choice) apply(choice);
   })();
 </script>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-P2DNNBXT');</script>
+<!-- Google Tag Manager — injection differee : hors du chemin critique (LCP/TBT).
+     Part au premier geste de l'internaute, sinon 1,5 s apres l'evenement load. -->
+<script>(function(w,d,s,l,i){var done=false;
+function load(){if(done)return;done=true;w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);}
+var ev=['pointerdown','keydown','touchstart','scroll'];
+function go(){ev.forEach(function(e){removeEventListener(e,go,{capture:true});});load();}
+ev.forEach(function(e){addEventListener(e,go,{capture:true,passive:true,once:true});});
+if(d.readyState==='complete')setTimeout(load,1500);
+else addEventListener('load',function(){setTimeout(load,1500);},{once:true});
+w.MAA_loadGTM=load;})(window,document,'script','dataLayer','GTM-P2DNNBXT');</script>
 <!-- End Google Tag Manager -->
 <title>Qui sommes-nous ? — Mes Aides Auto, le calculateur d’aides à l’achat d’une voiture propre</title>
 <meta name="description" content="Pourquoi nous avons créé Mes Aides Auto : un calculateur gratuit, instantané et sans collecte de données personnelles pour comprendre la prime d’État « Coup de pouce », le leasing social 2026, les aides des zones à faibles émissions et des collectivités. Sources officielles service-public.fr, ADEME, Légifrance.">
@@ -46,8 +62,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#2548FF">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,600;1,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

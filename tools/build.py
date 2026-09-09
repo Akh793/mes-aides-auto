@@ -22,6 +22,21 @@ GTM_ID = "GTM-P2DNNBXT"
 # Blocs communs (consentement + GTM : copie conforme de index.html, pour que
 # la mesure d'audience fonctionne à l'identique sur toutes les pages)
 # --------------------------------------------------------------------------
+FONTS_HEAD = """<link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/inter-var.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/poppins-700.woff2">
+<style>/* Polices auto-hebergees (sous-ensemble latin) : zero requete tierce, zero blocage du rendu */
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 600;font-display:swap;src:url(/assets/fonts/inter-var.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(/assets/fonts/poppins-500.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(/assets/fonts/poppins-600.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url(/assets/fonts/poppins-700.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Poppins';font-style:italic;font-weight:600;font-display:swap;src:url(/assets/fonts/poppins-600-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Poppins';font-style:italic;font-weight:700;font-display:swap;src:url(/assets/fonts/poppins-700-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+</style>"""
+
+MAA_CSS_INLINE = "<style>/* assets/maa.css inline */\n" + open(
+    __import__("pathlib").Path(__file__).resolve().parent.parent / "assets" / "maa.css", encoding="utf-8"
+).read() + "</style>"
+
 CONSENT_GTM = """<!-- Consentement (Consent Mode v2) — doit précéder GTM. Aucun cookie de mesure tant que l'utilisateur n'a pas accepté (bandeau). -->
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -42,12 +57,18 @@ CONSENT_GTM = """<!-- Consentement (Consent Mode v2) — doit précéder GTM. Au
     if (choice) apply(choice);
   })();
 </script>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','__GTM__');</script>
+<!-- Google Tag Manager — injection differee : hors du chemin critique (LCP/TBT).
+     Part au premier geste de l'internaute, sinon 1,5 s apres l'evenement load. -->
+<script>(function(w,d,s,l,i){var done=false;
+function load(){if(done)return;done=true;w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);}
+var ev=['pointerdown','keydown','touchstart','scroll'];
+function go(){ev.forEach(function(e){removeEventListener(e,go,{capture:true});});load();}
+ev.forEach(function(e){addEventListener(e,go,{capture:true,passive:true,once:true});});
+if(d.readyState==='complete')setTimeout(load,1500);
+else addEventListener('load',function(){setTimeout(load,1500);},{once:true});
+w.MAA_loadGTM=load;})(window,document,'script','dataLayer','GTM-P2DNNBXT');</script>
 <!-- End Google Tag Manager -->""".replace("__GTM__", GTM_ID)
 
 GTM_NOSCRIPT = ('<!-- Google Tag Manager (noscript) -->\n<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=%s"\n'
@@ -228,6 +249,7 @@ def render(page):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+{fonts}
 {consent}
 <title>{title}</title>
 <meta name="description" content="{desc}">
@@ -248,10 +270,7 @@ def render(page):
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#2548FF">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/maa.css">
+{maacss}
 <script type="application/ld+json">
 {ld}
 </script>
@@ -264,7 +283,7 @@ def render(page):
 {banner}
 </body>
 </html>
-""".format(consent=CONSENT_GTM, title=page["title"], desc=page["desc"], url=url, base=BASE,
+""".format(fonts=FONTS_HEAD, maacss=MAA_CSS_INLINE, consent=CONSENT_GTM, title=page["title"], desc=page["desc"], url=url, base=BASE,
            ogtitle=page.get("og_title", page["h1"]), ld=ld, noscript=GTM_NOSCRIPT,
            header=header(page.get("nav_active", "")), body="\n".join(body),
            footer=FOOTER, banner=CONSENT_BANNER)
