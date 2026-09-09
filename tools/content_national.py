@@ -54,10 +54,10 @@ HUB = dict(
 <table>
 <thead><tr><th>Votre situation</th><th>Revenu fiscal par part</th><th>Prime « Coup de pouce » (voiture neuve)</th></tr></thead>
 <tbody>
-<tr><td>Revenus très modestes (tranches 1 à 3)</td><td>jusqu’à 11 250 €</td><td class="num">5 082 – 5 700 €<br><span style="font-weight:400;color:#64748b">6 776 – 7 700 € si véhicule et batterie européens</span></td></tr>
-<tr><td>Revenus modestes (tranches 4 et 5)</td><td>11 250 à 16 880 €</td><td class="num">4 700 – 5 524 €<br><span style="font-weight:400;color:#64748b">5 900 – 7 365 € si véhicule et batterie européens</span></td></tr>
-<tr><td>Revenus intermédiaires, gros rouleur (tranches 6 à 8, au moins 12 000 km/an pour le travail)</td><td>16 880 à 27 310 €</td><td class="num">4 700 – 5 524 €<br><span style="font-weight:400;color:#64748b">7 365 – 7 700 € si véhicule et batterie européens</span></td></tr>
-<tr><td>Autres ménages</td><td>au-delà</td><td class="num">3 300 – 3 314 €<br><span style="font-weight:400;color:#64748b">4 419 – 4 700 € si véhicule et batterie européens</span></td></tr>
+<tr><td>Revenus très modestes (tranches 1 à 3)</td><td>jusqu’à 11 250 €</td><td class="num">5 082 – 5 700 €<br><span class="sub-num">6 776 – 7 700 € si véhicule et batterie européens</span></td></tr>
+<tr><td>Revenus modestes (tranches 4 et 5)</td><td>11 250 à 16 880 €</td><td class="num">4 700 – 5 524 €<br><span class="sub-num">5 900 – 7 365 € si véhicule et batterie européens</span></td></tr>
+<tr><td>Revenus intermédiaires, gros rouleur (tranches 6 à 8, au moins 12 000 km/an pour le travail)</td><td>16 880 à 27 310 €</td><td class="num">4 700 – 5 524 €<br><span class="sub-num">7 365 – 7 700 € si véhicule et batterie européens</span></td></tr>
+<tr><td>Autres ménages</td><td>au-delà</td><td class="num">3 300 – 3 314 €<br><span class="sub-num">4 419 – 4 700 € si véhicule et batterie européens</span></td></tr>
 </tbody>
 </table>
 </div>
@@ -556,7 +556,7 @@ def sources_table():
             continue
         row = ("<tr><td><strong>%s</strong>%s</td><td>%s</td><td><a href=\"%s\" target=\"_blank\" rel=\"noopener\">%s</a></td>"
                "<td class=\"num\">%s</td></tr>") % (
-            a["label"], ('<br><span style="color:#64748b;font-weight:400">%s</span>' % a["territory"]) if a["territory"] else "",
+            a["label"], ('<br><span class="sub-num">%s</span>' % a["territory"]) if a["territory"] else "",
             STATUS_BADGE.get(a["status"], ""), a["url"], a["src"] or a["url"],
             "/".join(reversed(a["verified"].split("-"))) if a["verified"] else "—")
         (rows_nat if a["scope"] == "national" else rows_loc).append(row)

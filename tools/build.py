@@ -98,6 +98,143 @@ CONSENT_BANNER = """<div id="consent-banner" hidden>
   })();
 </script>"""
 
+# --------------------------------------------------------------------------
+# Thème clair / sombre. Le script est volontairement inline et placé avant le
+# rendu : il applique le choix mémorisé sans provoquer d'éclair blanc.
+# `color-scheme` empêche par ailleurs Chrome Android d'assombrir la page tout
+# seul, ce qui cassait la charte.
+# --------------------------------------------------------------------------
+THEME_HEAD = """<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#10141b" media="(prefers-color-scheme: dark)">
+<script>(function(){try{var t=localStorage.getItem('maa_theme');
+if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>"""
+
+THEME_BTN = """<button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false" aria-label="Passer en mode sombre" title="Mode sombre">
+<svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+<svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+</button>"""
+
+THEME_JS = """<script>
+(function () {
+  var bs = [].slice.call(document.querySelectorAll('.theme-toggle')); if (!bs.length) return;
+  var mq = window.matchMedia('(prefers-color-scheme: dark)');
+  function current() {
+    var a = document.documentElement.getAttribute('data-theme');
+    return a === 'dark' || a === 'light' ? a : (mq.matches ? 'dark' : 'light');
+  }
+  function sync() {
+    var dark = current() === 'dark';
+    var t = dark ? 'Repasser en mode clair' : 'Passer en mode sombre';
+    bs.forEach(function (b) {
+      b.setAttribute('aria-pressed', dark ? 'true' : 'false');
+      b.setAttribute('aria-label', t); b.setAttribute('title', t);
+    });
+  }
+  bs.forEach(function (b) { b.addEventListener('click', function () {
+    var next = current() === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem('maa_theme', next); } catch (e) {}
+    sync();
+    if (window.dataLayer) window.dataLayer.push({ event: 'theme_switch', theme: next });
+  }); });
+  mq.addEventListener && mq.addEventListener('change', sync);
+  sync();
+})();
+</script>"""
+
+# --------------------------------------------------------------------------
+# Barre flottante : invisible en haut de page, elle apparaît au défilement.
+# Son intérêt n'est pas décoratif — elle redonne accès au sommaire de la page
+# et au reste du site sans remonter, ce qui manquait cruellement sur mobile.
+# Le sommaire du panneau est construit en JS à partir du <nav class="toc">
+# déjà présent : aucun balisage dupliqué, aucun octet de contenu en double.
+# --------------------------------------------------------------------------
+TOPBAR = """<div class="tb-scrim" id="tb-scrim"></div>
+<div class="topbar" id="topbar">
+  <div class="wrap tb-in">
+    <a class="tb-brand" href="/">Mes Aides <em>Auto</em></a>
+    <button type="button" class="tb-btn" id="tb-menu" aria-expanded="false" aria-controls="tb-panel">Naviguer<span class="chev" aria-hidden="true"></span></button>
+    __TOGGLE__
+    <a class="btn tb-cta" href="/">Calculer mes aides</a>
+  </div>
+  <div class="tb-prog" aria-hidden="true"><i></i></div>
+</div>
+<nav class="tb-panel" id="tb-panel" aria-label="Navigation rapide">
+  <div class="wrap">
+    <a class="btn btn-lg tb-cta-m" href="/">Calculer mes aides</a>
+    <div id="tb-sections"></div>
+    <p class="tb-h">Le site</p>
+    <ul>
+      <li><a href="/">Simulateur d’aides</a></li>
+      <li><a href="/aides-voiture-electrique-2026/">Toutes les aides 2026</a></li>
+      <li><a href="/aides-voiture-electrique/">Aides près de chez vous</a></li>
+      <li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li>
+      <li><a href="/leasing-social-2026/">Leasing social 2026</a></li>
+      <li><a href="/aide-voiture-electrique-occasion/">Voiture d’occasion</a></li>
+      <li><a href="/cumul-aides-voiture-electrique/">Cumuler les aides</a></li>
+      <li><a href="/notre-methodologie/">Notre méthodologie</a></li>
+    </ul>
+  </div>
+</nav>"""
+
+TOPBAR_JS = """<script>
+(function () {
+  var bar = document.getElementById('topbar'); if (!bar) return;
+  var panel = document.getElementById('tb-panel'), scrim = document.getElementById('tb-scrim'),
+      btn = document.getElementById('tb-menu'), prog = bar.querySelector('.tb-prog i'),
+      host = document.getElementById('tb-sections'), open = false, SHOW = 220;
+
+  // Sommaire du panneau : repris du sommaire de la page, sinon des bandes numerotees.
+  var items = [].map.call(document.querySelectorAll('.toc ol li a'), function (a) {
+    return { href: a.getAttribute('href'), text: a.textContent.trim(),
+             zone: (a.parentNode.className || '').replace('t-', 'z-') };
+  });
+  // Le H2 n'est pas toujours enfant direct de la bande : on part des bandes.
+  if (!items.length) items = [].map.call(document.querySelectorAll('section[id]'), function (sec) {
+    var h = sec.querySelector('h2'); if (!h) return null;
+    return { href: '#' + sec.id, text: h.textContent.replace(/^[\\s0-9]+/, '').trim(), zone: '' };
+  }).filter(Boolean);
+  if (host && items.length > 2) host.innerHTML = '<p class="tb-h">Sur cette page</p><ul>' +
+    items.map(function (i) { return '<li><a class="' + i.zone + '" href="' + i.href +
+      '"><span class="dot"></span>' + i.text + '</a></li>'; }).join('') + '</ul>';
+
+  function mark() {
+    if (!host) return;
+    var best = null, y = window.pageYOffset + 96;
+    [].forEach.call(host.querySelectorAll('a'), function (a) {
+      a.classList.remove('tb-cur');
+      var t = document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+      if (t && t.getBoundingClientRect().top + window.pageYOffset <= y) best = a;
+    });
+    if (best) best.classList.add('tb-cur');
+  }
+  function setOpen(v) {
+    open = v; panel.classList.toggle('on', v); scrim.classList.toggle('on', v);
+    btn.setAttribute('aria-expanded', v ? 'true' : 'false'); if (v) mark();
+  }
+  btn.addEventListener('click', function () { setOpen(!open); });
+  scrim.addEventListener('click', function () { setOpen(false); });
+  panel.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('a')) setOpen(false); });
+  window.addEventListener('keydown', function (e) { if (e.key === 'Escape' && open) { setOpen(false); btn.focus(); } });
+
+  var tick = false;
+  function frame() {
+    tick = false;
+    var y = window.pageYOffset, d = document.documentElement,
+        h = (d.scrollHeight || 0) - window.innerHeight;
+    if (prog) prog.style.transform = 'scaleX(' + (h > 0 ? Math.min(1, y / h) : 0) + ')';
+    var on = y > SHOW;
+    bar.classList.toggle('on', on);
+    if (!on && open) setOpen(false);
+  }
+  window.addEventListener('scroll', function () {
+    if (!tick) { tick = true; requestAnimationFrame(frame); }
+  }, { passive: true });
+  frame();
+})();
+</script>"""
+
 NAV = [("/", "Simulateur"), ("/aides-voiture-electrique-2026/", "Aides 2026"),
        ("/aides-voiture-electrique/", "Aides près de chez moi"), ("/notre-methodologie/", "Méthodologie")]
 
@@ -155,9 +292,10 @@ def header(active=""):
   <div class="wrap bar">
     <a class="brand" href="/">Mes Aides <em>Auto</em></a>
     <nav class="site-nav" aria-label="Navigation principale">%s</nav>
+    %s
     <a class="btn" href="/">Calculer mes aides</a>
   </div>
-</header>""" % links
+</header>""" % (links, THEME_BTN)
 
 
 def crumb_html(crumbs):
@@ -385,6 +523,7 @@ def render(page):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+{theme}
 {fonts}
 {consent}
 <title>{title}</title>
@@ -405,7 +544,6 @@ def render(page):
 <meta name="twitter:image" content="{base}/assets/og-image.png">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#2548FF">
 {maacss}
 <script type="application/ld+json">
 {ld}
@@ -413,16 +551,19 @@ def render(page):
 </head>
 <body>
 {noscript}
+{topbar}
 {header}
 {body}
 {footer}
 {banner}
+{themejs}
+{topbarjs}
 </body>
 </html>
-""".format(fonts=FONTS_HEAD, maacss=MAA_CSS_INLINE, consent=CONSENT_GTM, title=page["title"], desc=page["desc"], url=url, base=BASE,
-           ogtitle=page.get("og_title", page["h1"]), ld=ld, noscript=GTM_NOSCRIPT,
+""".format(theme=THEME_HEAD, fonts=FONTS_HEAD, maacss=MAA_CSS_INLINE, consent=CONSENT_GTM, title=page["title"], desc=page["desc"], url=url, base=BASE,
+           ogtitle=page.get("og_title", page["h1"]), ld=ld, noscript=GTM_NOSCRIPT, topbar=TOPBAR.replace("__TOGGLE__", THEME_BTN.replace('id="theme-toggle"', '')),
            header=header(page.get("nav_active", "")), body="\n".join(body),
-           footer=FOOTER, banner=CONSENT_BANNER)
+           footer=FOOTER, banner=CONSENT_BANNER, themejs=THEME_JS, topbarjs=TOPBAR_JS)
     return html
 
 

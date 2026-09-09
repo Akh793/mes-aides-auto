@@ -3,6 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#10141b" media="(prefers-color-scheme: dark)">
+<script>(function(){try{var t=localStorage.getItem('maa_theme');
+if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/inter-var.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/poppins-700.woff2">
 <style>/* Polices auto-hebergees (sous-ensemble latin) : zero requete tierce, zero blocage du rendu */
@@ -64,18 +69,17 @@ w.MAA_loadGTM=load;})(window,document,'script','dataLayer','GTM-P2DNNBXT');</scr
 <meta name="twitter:image" content="https://mes-aides-auto.fr/assets/og-image.png">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#2548FF">
 <style>/* assets/maa.css inline */
 /* Mes Aides Auto — feuille de style des pages éditoriales (hors simulateur).
    Écrite à la main, sans framework : ~8 Ko, une seule requête, mise en cache
    sur toutes les pages. Le simulateur (index.html) garde son CSS inline. */
 :root{--blue:#2548FF;--coral:#FF6347;--ink:#0f172a;--body:#334155;--muted:#64748b;
 --line:#e2e8f0;--soft:#F8F9FA;--ok:#047857;--okbg:#ecfdf5;--warn:#b45309;--warnbg:#fffbeb;
---stop:#be123c;--stopbg:#fff1f2;--radius:1.5rem;--shadow:0 10px 15px -3px rgba(15,23,42,.08),0 4px 6px -4px rgba(15,23,42,.06)}
+--stop:#be123c;--stopbg:#fff1f2;--card:#ffffff;--page:#ffffff;--dot:#cbd5e1;--pay-bg:#e8ecff;--pay-bd:#c3ccff;--pay-fg:#1e3ac9;--when-bg:#fff1ee;--when-bd:#ffc0b2;--when-fg:#b3341c;--who-bg:#f1f5f9;--who-bd:#e2e8f0;--who-fg:#475569;--okbd:#a7f3d0;--warnbd:#fde68a;--stopbd:#fecdd3;--zk-blue:#1e3ac9;--zk-coral:#b3341c;--cta-bg:#2548FF;--radius:1.5rem;--shadow:0 10px 15px -3px rgba(15,23,42,.08),0 4px 6px -4px rgba(15,23,42,.06)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--body);
-background:#fff;line-height:1.65;font-size:1rem}
+background:var(--page);line-height:1.65;font-size:1rem}
 img{max-width:100%;height:auto;display:block}
 a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
 a:hover{color:var(--coral)}
@@ -93,7 +97,7 @@ em.hi-c{font-style:italic;color:var(--coral)}
 .wrap{max-width:64rem;margin:0 auto;padding:0 1.25rem}
 .prose{max-width:47rem}
 /* ---------- en-tête ---------- */
-.site-header{border-bottom:1px solid var(--line);background:#fff;position:relative;z-index:30}
+.site-header{border-bottom:1px solid var(--line);background:var(--page);position:relative;z-index:30}
 .site-header .bar{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1.5rem;padding-block:1rem}
 .brand{font-family:Poppins,sans-serif;font-weight:700;font-size:1.35rem;color:var(--ink);
 text-decoration:none;letter-spacing:-.02em;margin-right:auto}
@@ -124,11 +128,11 @@ border-radius:1rem;padding:1.1rem 1.25rem;margin-top:1.5rem}
 .answer p{margin-top:.5rem}
 .answer p:first-child{margin-top:0}
 .note{border-radius:1rem;padding:1rem 1.15rem;margin-top:1.25rem;font-size:.95rem}
-.note-ok{background:var(--okbg);border:1px solid #a7f3d0;color:#065f46}
-.note-warn{background:var(--warnbg);border:1px solid #fde68a;color:#92400e}
-.note-stop{background:var(--stopbg);border:1px solid #fecdd3;color:#9f1239}
+.note-ok{background:var(--okbg);border:1px solid var(--okbd);color:var(--ok)}
+.note-warn{background:var(--warnbg);border:1px solid var(--warnbd);color:var(--warn)}
+.note-stop{background:var(--stopbg);border:1px solid var(--stopbd);color:var(--stop)}
 .note strong{color:inherit}
-.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
 box-shadow:var(--shadow);padding:1.5rem;margin-top:1.25rem}
 .card-soft{background:var(--soft);box-shadow:none}
 .grid{display:grid;gap:1rem;margin-top:1.25rem}
@@ -152,7 +156,7 @@ font-size:.72rem;font-weight:600;white-space:nowrap;vertical-align:middle}
 .badge-warn{background:var(--warnbg);color:var(--warn)}
 .badge-stop{background:var(--stopbg);color:var(--stop)}
 /* ---------- FAQ ---------- */
-.faq details{border:1px solid var(--line);border-radius:1rem;padding:.9rem 1.15rem;margin-top:.75rem;background:#fff}
+.faq details{border:1px solid var(--line);border-radius:1rem;padding:.9rem 1.15rem;margin-top:.75rem;background:var(--card)}
 .faq details[open]{border-color:var(--blue)}
 .faq summary{cursor:pointer;font-family:Poppins,sans-serif;font-weight:600;color:var(--ink);
 list-style:none;display:flex;justify-content:space-between;gap:1rem}
@@ -161,7 +165,7 @@ list-style:none;display:flex;justify-content:space-between;gap:1rem}
 .faq details[open] summary::after{content:"–"}
 .faq p{font-size:.95rem}
 /* ---------- CTA ---------- */
-.cta{background:var(--blue);color:#fff;border-radius:var(--radius);padding:1.75rem;margin-top:2rem;text-align:center}
+.cta{background:var(--cta-bg);color:#fff;border-radius:var(--radius);padding:1.75rem;margin-top:2rem;text-align:center}
 .cta p{color:rgba(255,255,255,.88)}
 .cta .t{font-family:Poppins,sans-serif;font-weight:600;font-size:1.35rem;color:#fff;margin:0}
 .cta .btn{margin-top:1rem}
@@ -188,7 +192,7 @@ list-style:none;display:flex;justify-content:space-between;gap:1rem}
 .foot-legal{margin-top:2rem;padding-top:1.25rem;border-top:1px solid var(--line);font-size:.78rem;color:var(--muted)}
 /* ---------- bandeau de consentement ---------- */
 #consent-banner{position:fixed;inset-inline:0;bottom:0;z-index:50;padding:1rem}
-#consent-banner .box{max-width:48rem;margin:0 auto;background:#fff;border:1px solid var(--line);
+#consent-banner .box{max-width:48rem;margin:0 auto;background:var(--card);border:1px solid var(--line);
 border-radius:var(--radius);box-shadow:0 25px 50px -12px rgba(15,23,42,.25);padding:1.25rem;
 display:flex;flex-direction:column;gap:1rem;font-size:.9rem}
 @media(min-width:48rem){#consent-banner .box{flex-direction:row;align-items:center}}
@@ -211,23 +215,23 @@ font:600 .9rem Inter,sans-serif;cursor:pointer}
 .lbbar{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.9rem}
 .lb{display:inline-block;padding:.2rem .65rem;border-radius:9999px;font-size:.74rem;
 font-weight:600;line-height:1.5;border:1px solid transparent;white-space:nowrap}
-.lb-pay{background:#e8ecff;border-color:#c3ccff;color:#1e3ac9}
-.lb-when{background:#fff1ee;border-color:#ffc0b2;color:#b3341c;font-weight:700}
+.lb-pay{background:var(--pay-bg);border-color:var(--pay-bd);color:var(--pay-fg)}
+.lb-when{background:var(--when-bg);border-color:var(--when-bd);color:var(--when-fg);font-weight:700}
 .lb-rule-ok{background:var(--okbg);border-color:#a7f3d0;color:var(--ok)}
 .lb-rule-warn{background:var(--warnbg);border-color:#fde68a;color:var(--warn)}
 .lb-rule-stop{background:var(--stopbg);border-color:#fecdd3;color:var(--stop)}
 .lb-rule-none{background:var(--soft);border-color:var(--line);color:var(--muted)}
-.lb-who{background:#f1f5f9;border-color:var(--line);color:#475569;font-weight:500}
+.lb-who{background:var(--who-bg);border-color:var(--who-bd);color:var(--who-fg);font-weight:500}
 /* ---------- zones typées : le squelette rendu visible ---------- */
 h2.z{border-top:1px solid var(--line);padding-top:1.5rem;margin-top:2.6rem}
 .zk{display:block;font-family:Inter,sans-serif;font-size:.7rem;font-weight:700;
 letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
-.z-montant>.zk,.z-demarche>.zk,.z-national>.zk{color:#1e3ac9}
-.z-piege>.zk{color:#b3341c}
+.z-montant>.zk,.z-demarche>.zk,.z-national>.zk{color:var(--zk-blue)}
+.z-piege>.zk{color:var(--zk-coral)}
 .z-droits>.zk{color:var(--ok)}
 /* ---------- carte d'identité ---------- */
 .idcard{display:grid;gap:.75rem;margin-top:1rem}
-.idc-i{background:#fff;border:1px solid var(--line);border-radius:1rem;padding:.8rem 1rem}
+.idc-i{background:var(--card);border:1px solid var(--line);border-radius:1rem;padding:.8rem 1rem}
 /* La hauteur minimale n'a de sens qu'en colonnes côte à côte (alignement + CLS). */
 @media(min-width:40rem){.idcard{grid-template-columns:repeat(3,1fr)}.idc-i{min-height:5.4rem}}
 .idc-i dt{font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
@@ -235,14 +239,14 @@ letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:.
 color:var(--ink);font-size:1rem;line-height:1.35}
 .idc-i:first-child dd{color:var(--blue);font-size:1.3rem}
 /* ---------- éligibilité ✓ / ✗ ---------- */
-.crit-box{margin-top:1.25rem;border:1px solid var(--line);border-radius:1rem;padding:1rem 1.15rem}
+.crit-box{margin-top:1.25rem;border:1px solid var(--line);border-radius:1rem;padding:1rem 1.15rem;background:var(--card)}
 .crit-t{font-family:Poppins,sans-serif;font-weight:600;color:var(--ink);margin:0;font-size:1rem}
 .crit{list-style:none;padding:0;margin-top:.6rem;font-size:.95rem}
 .crit li{display:flex;gap:.6rem;margin-top:.4rem}
 .crit li>span{flex:0 0 1.1rem;font-weight:700;text-align:center}
 .c-ok>span{color:var(--ok)}
 .c-stop>span{color:var(--stop)}
-.c-time>span{color:#b3341c}
+.c-time>span{color:var(--zk-coral)}
 .c-info>span{color:var(--muted)}
 /* ---------- repères de lecture ---------- */
 .pmeta{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem;margin-top:1.1rem;font-size:.8rem;color:var(--muted)}
@@ -255,7 +259,7 @@ color:var(--ink);font-size:1rem;line-height:1.35}
 @media(min-width:40rem){.toc ol{grid-template-columns:1fr 1fr}}
 .toc li{margin:0;font-size:.92rem}
 .toc li::before{content:"";display:inline-block;width:.5rem;height:.5rem;border-radius:9999px;
-background:#cbd5e1;margin-right:.55rem;vertical-align:middle}
+background:var(--dot);margin-right:.55rem;vertical-align:middle}
 .toc .t-montant::before,.toc .t-demarche::before,.toc .t-national::before{background:var(--blue)}
 .toc .t-piege::before{background:var(--coral)}
 .toc .t-droits::before{background:var(--ok)}
@@ -278,6 +282,113 @@ background:#cbd5e1;margin-right:.55rem;vertical-align:middle}
 .idc-i dd{overflow-wrap:break-word;hyphens:auto}
 .lbbar .lb{max-width:100%}
 @media(max-width:24rem){.lb{font-size:.7rem;padding:.18rem .55rem}}
+/* ==========================================================================
+   v1.3 — Thème sombre.
+   Deux raisons : le confort de lecture, et surtout empêcher l'assombrissement
+   automatique de Chrome sur Android, qui inversait les couleurs de la page
+   sans respecter la charte. `color-scheme` déclare que le site gère lui-même
+   les deux thèmes : le navigateur cesse alors de bricoler les couleurs.
+   ========================================================================== */
+:root{color-scheme:light}
+.sub-num{font-weight:400;color:var(--muted)}
+.src-note{font-size:.9rem;color:var(--muted)}
+/* Bouton de bascule — discret, 2,25 rem, dans la barre d'en-tête */
+.theme-toggle{width:2.25rem;height:2.25rem;flex:0 0 auto;display:inline-grid;place-items:center;
+border-radius:9999px;border:1px solid var(--line);background:transparent;color:var(--muted);
+cursor:pointer;padding:0;transition:color .15s,border-color .15s,background-color .15s}
+.theme-toggle:hover{color:var(--blue);border-color:var(--blue)}
+.theme-toggle:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.theme-toggle svg{width:1.05rem;height:1.05rem;display:block}
+.theme-toggle .i-moon{display:block}
+.theme-toggle .i-sun{display:none}
+:root[data-theme="dark"] .theme-toggle .i-moon{display:none}
+:root[data-theme="dark"] .theme-toggle .i-sun{display:block}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .theme-toggle .i-moon{display:none}
+:root:not([data-theme="light"]) .theme-toggle .i-sun{display:block}}
+
+/* -------- Palette sombre : uniquement des variables, aucune règle dupliquée -------- */
+:root[data-theme="dark"]{color-scheme:dark;
+--blue:#8fa6ff;--coral:#ff7f66;--ink:#e8ecf4;--body:#c3cbd8;--muted:#93a0b1;
+--line:#2a323d;--soft:#191d25;--card:#171c24;--page:#10141b;--dot:#3a4453;
+--ok:#7fe0ad;--okbg:#10281f;--okbd:#1c5340;--warn:#f5c451;--warnbg:#2a2210;--warnbd:#5b4715;
+--stop:#ffa0b1;--stopbg:#2c161c;--stopbd:#5c2733;
+--pay-bg:#1b2545;--pay-bd:#31407a;--pay-fg:#adc0ff;
+--when-bg:#32191a;--when-bd:#5e2b25;--when-fg:#ff9d86;
+--who-bg:#1e232c;--who-bd:#2a323d;--who-fg:#a8b3c2;
+--zk-blue:#8fa6ff;--zk-coral:#ff9d86;--cta-bg:#1e2f8f;
+--shadow:0 10px 15px -3px rgba(0,0,0,.5),0 4px 6px -4px rgba(0,0,0,.4)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;
+--blue:#8fa6ff;--coral:#ff7f66;--ink:#e8ecf4;--body:#c3cbd8;--muted:#93a0b1;
+--line:#2a323d;--soft:#191d25;--card:#171c24;--page:#10141b;--dot:#3a4453;
+--ok:#7fe0ad;--okbg:#10281f;--okbd:#1c5340;--warn:#f5c451;--warnbg:#2a2210;--warnbd:#5b4715;
+--stop:#ffa0b1;--stopbg:#2c161c;--stopbd:#5c2733;
+--pay-bg:#1b2545;--pay-bd:#31407a;--pay-fg:#adc0ff;
+--when-bg:#32191a;--when-bd:#5e2b25;--when-fg:#ff9d86;
+--who-bg:#1e232c;--who-bd:#2a323d;--who-fg:#a8b3c2;
+--zk-blue:#8fa6ff;--zk-coral:#ff9d86;--cta-bg:#1e2f8f;
+--shadow:0 10px 15px -3px rgba(0,0,0,.5),0 4px 6px -4px rgba(0,0,0,.4)}}
+:root[data-theme="dark"] img{filter:brightness(.92)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) img{filter:brightness(.92)}}
+@media print{.theme-toggle{display:none!important}}
+/* ==========================================================================
+   v1.4 — Barre de navigation flottante.
+   Invisible en haut de page, elle apparaît au défilement, se retire quand on
+   descend et revient dès qu'on remonte. Elle rouvre le sommaire de la page
+   n'importe où dans la lecture : c'est ce qui manquait sur mobile.
+   ========================================================================== */
+html{scroll-padding-top:4.5rem}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:60;background:var(--page);
+background:color-mix(in srgb,var(--page) 86%,transparent);
+-webkit-backdrop-filter:blur(14px) saturate(1.6);backdrop-filter:blur(14px) saturate(1.6);
+border-bottom:1px solid var(--line);transform:translateY(-102%);
+transition:transform .28s cubic-bezier(.2,.8,.2,1);will-change:transform}
+.topbar.on{transform:translateY(0)}
+.tb-in{display:flex;align-items:center;gap:.55rem;height:3.5rem}
+.tb-brand{font-family:Poppins,sans-serif;font-weight:700;font-size:1rem;color:var(--ink);
+text-decoration:none;letter-spacing:-.02em;margin-right:auto;white-space:nowrap}
+.tb-brand em{font-style:italic;color:var(--blue)}
+.tb-btn{display:inline-flex;align-items:center;gap:.4rem;height:2.25rem;padding:0 .85rem;
+border-radius:9999px;border:1px solid var(--line);background:transparent;color:var(--body);
+font:600 .82rem Inter,system-ui,sans-serif;cursor:pointer;white-space:nowrap}
+.tb-btn:hover{color:var(--blue);border-color:var(--blue)}
+.tb-btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.tb-btn .chev{width:.6rem;height:.6rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;
+transform:rotate(45deg) translate(-1px,-1px);transition:transform .2s}
+.tb-btn[aria-expanded="true"] .chev{transform:rotate(225deg) translate(-1px,-1px)}
+.topbar .theme-toggle{width:2.25rem;height:2.25rem}
+.tb-cta{font-size:.82rem;padding:.52rem 1rem;box-shadow:none}
+@media(max-width:27rem){.tb-cta{display:none}}
+.tb-prog{position:absolute;left:0;right:0;bottom:-1px;height:2px;overflow:hidden}
+.tb-prog i{display:block;height:100%;width:100%;transform:scaleX(0);transform-origin:0 50%;
+background:linear-gradient(90deg,var(--blue),var(--coral))}
+.tb-scrim{position:fixed;inset:0;z-index:58;background:rgba(2,6,23,.4);opacity:0;visibility:hidden;
+pointer-events:none;transition:opacity .18s ease,visibility 0s linear .18s}
+.tb-scrim.on{opacity:1;visibility:visible;pointer-events:auto;transition-delay:0s}
+.tb-panel{position:fixed;top:3.5rem;left:0;right:0;z-index:59;background:var(--card);
+border-bottom:1px solid var(--line);box-shadow:var(--shadow);
+max-height:calc(100vh - 3.5rem);max-height:calc(100dvh - 3.5rem);overflow:auto;
+opacity:0;visibility:hidden;transform:translateY(-.5rem);pointer-events:none;
+transition:opacity .18s ease,transform .18s ease,visibility 0s linear .18s}
+.tb-panel.on{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto;transition-delay:0s,0s,0s}
+.tb-panel .wrap{padding-top:.9rem;padding-bottom:1.4rem}
+.tb-h{font-size:.7rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+color:var(--muted);margin:.9rem 0 .35rem}
+.tb-panel ul{list-style:none;padding:0;margin:0;display:grid;gap:.1rem}
+@media(min-width:40rem){.tb-panel ul{grid-template-columns:1fr 1fr}}
+.tb-panel li{margin:0}
+.tb-panel a{display:block;padding:.55rem .65rem;border-radius:.7rem;text-decoration:none;
+color:var(--body);font-size:.93rem;line-height:1.35}
+.tb-panel a:hover{background:var(--soft);color:var(--blue)}
+.tb-panel a.tb-cur{color:var(--blue);font-weight:600;background:var(--soft)}
+.tb-panel a .dot{display:inline-block;width:.45rem;height:.45rem;border-radius:9999px;
+background:var(--dot);margin-right:.5rem;vertical-align:middle}
+.tb-panel a.z-montant .dot,.tb-panel a.z-demarche .dot,.tb-panel a.z-national .dot{background:var(--blue)}
+.tb-panel a.z-piege .dot{background:var(--coral)}
+.tb-panel a.z-droits .dot{background:var(--ok)}
+.tb-panel a.tb-cta-m{display:block;text-align:center;margin:.2rem 0 .4rem;color:#fff;padding:.85rem 1.6rem}
+@media(min-width:27rem){.tb-panel a.tb-cta-m{display:none}}
+@media(prefers-reduced-motion:reduce){.topbar,.tb-panel,.tb-scrim{transition:none}}
+@media print{.topbar,.tb-panel,.tb-scrim{display:none!important}}
 </style>
 <script type="application/ld+json">
 {
@@ -371,10 +482,44 @@ background:#cbd5e1;margin-right:.55rem;vertical-align:middle}
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P2DNNBXT"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+<div class="tb-scrim" id="tb-scrim"></div>
+<div class="topbar" id="topbar">
+  <div class="wrap tb-in">
+    <a class="tb-brand" href="/">Mes Aides <em>Auto</em></a>
+    <button type="button" class="tb-btn" id="tb-menu" aria-expanded="false" aria-controls="tb-panel">Naviguer<span class="chev" aria-hidden="true"></span></button>
+    <button type="button" class="theme-toggle"  aria-pressed="false" aria-label="Passer en mode sombre" title="Mode sombre">
+<svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+<svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+</button>
+    <a class="btn tb-cta" href="/">Calculer mes aides</a>
+  </div>
+  <div class="tb-prog" aria-hidden="true"><i></i></div>
+</div>
+<nav class="tb-panel" id="tb-panel" aria-label="Navigation rapide">
+  <div class="wrap">
+    <a class="btn btn-lg tb-cta-m" href="/">Calculer mes aides</a>
+    <div id="tb-sections"></div>
+    <p class="tb-h">Le site</p>
+    <ul>
+      <li><a href="/">Simulateur d’aides</a></li>
+      <li><a href="/aides-voiture-electrique-2026/">Toutes les aides 2026</a></li>
+      <li><a href="/aides-voiture-electrique/">Aides près de chez vous</a></li>
+      <li><a href="/prime-coup-de-pouce-voiture-electrique/">Prime « Coup de pouce »</a></li>
+      <li><a href="/leasing-social-2026/">Leasing social 2026</a></li>
+      <li><a href="/aide-voiture-electrique-occasion/">Voiture d’occasion</a></li>
+      <li><a href="/cumul-aides-voiture-electrique/">Cumuler les aides</a></li>
+      <li><a href="/notre-methodologie/">Notre méthodologie</a></li>
+    </ul>
+  </div>
+</nav>
 <header class="site-header">
   <div class="wrap bar">
     <a class="brand" href="/">Mes Aides <em>Auto</em></a>
     <nav class="site-nav" aria-label="Navigation principale"><a href="/">Simulateur</a><a href="/aides-voiture-electrique-2026/">Aides 2026</a><a href="/aides-voiture-electrique/">Aides près de chez moi</a><a href="/notre-methodologie/" aria-current="page">Méthodologie</a></nav>
+    <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false" aria-label="Passer en mode sombre" title="Mode sombre">
+<svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+<svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+</button>
     <a class="btn" href="/">Calculer mes aides</a>
   </div>
 </header>
@@ -514,6 +659,89 @@ qui élimine un dossier, ⏱ le moment de la démarche.</p>
     document.getElementById('consent-refuse').addEventListener('click', function () { MAA_consent.set('denied'); hide(); });
     document.querySelectorAll('[data-consent-open]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); MAA_consent.reset(); show(); }); });
   })();
+</script>
+<script>
+(function () {
+  var bs = [].slice.call(document.querySelectorAll('.theme-toggle')); if (!bs.length) return;
+  var mq = window.matchMedia('(prefers-color-scheme: dark)');
+  function current() {
+    var a = document.documentElement.getAttribute('data-theme');
+    return a === 'dark' || a === 'light' ? a : (mq.matches ? 'dark' : 'light');
+  }
+  function sync() {
+    var dark = current() === 'dark';
+    var t = dark ? 'Repasser en mode clair' : 'Passer en mode sombre';
+    bs.forEach(function (b) {
+      b.setAttribute('aria-pressed', dark ? 'true' : 'false');
+      b.setAttribute('aria-label', t); b.setAttribute('title', t);
+    });
+  }
+  bs.forEach(function (b) { b.addEventListener('click', function () {
+    var next = current() === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem('maa_theme', next); } catch (e) {}
+    sync();
+    if (window.dataLayer) window.dataLayer.push({ event: 'theme_switch', theme: next });
+  }); });
+  mq.addEventListener && mq.addEventListener('change', sync);
+  sync();
+})();
+</script>
+<script>
+(function () {
+  var bar = document.getElementById('topbar'); if (!bar) return;
+  var panel = document.getElementById('tb-panel'), scrim = document.getElementById('tb-scrim'),
+      btn = document.getElementById('tb-menu'), prog = bar.querySelector('.tb-prog i'),
+      host = document.getElementById('tb-sections'), open = false, SHOW = 220;
+
+  // Sommaire du panneau : repris du sommaire de la page, sinon des bandes numerotees.
+  var items = [].map.call(document.querySelectorAll('.toc ol li a'), function (a) {
+    return { href: a.getAttribute('href'), text: a.textContent.trim(),
+             zone: (a.parentNode.className || '').replace('t-', 'z-') };
+  });
+  // Le H2 n'est pas toujours enfant direct de la bande : on part des bandes.
+  if (!items.length) items = [].map.call(document.querySelectorAll('section[id]'), function (sec) {
+    var h = sec.querySelector('h2'); if (!h) return null;
+    return { href: '#' + sec.id, text: h.textContent.replace(/^[\s0-9]+/, '').trim(), zone: '' };
+  }).filter(Boolean);
+  if (host && items.length > 2) host.innerHTML = '<p class="tb-h">Sur cette page</p><ul>' +
+    items.map(function (i) { return '<li><a class="' + i.zone + '" href="' + i.href +
+      '"><span class="dot"></span>' + i.text + '</a></li>'; }).join('') + '</ul>';
+
+  function mark() {
+    if (!host) return;
+    var best = null, y = window.pageYOffset + 96;
+    [].forEach.call(host.querySelectorAll('a'), function (a) {
+      a.classList.remove('tb-cur');
+      var t = document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
+      if (t && t.getBoundingClientRect().top + window.pageYOffset <= y) best = a;
+    });
+    if (best) best.classList.add('tb-cur');
+  }
+  function setOpen(v) {
+    open = v; panel.classList.toggle('on', v); scrim.classList.toggle('on', v);
+    btn.setAttribute('aria-expanded', v ? 'true' : 'false'); if (v) mark();
+  }
+  btn.addEventListener('click', function () { setOpen(!open); });
+  scrim.addEventListener('click', function () { setOpen(false); });
+  panel.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('a')) setOpen(false); });
+  window.addEventListener('keydown', function (e) { if (e.key === 'Escape' && open) { setOpen(false); btn.focus(); } });
+
+  var tick = false;
+  function frame() {
+    tick = false;
+    var y = window.pageYOffset, d = document.documentElement,
+        h = (d.scrollHeight || 0) - window.innerHeight;
+    if (prog) prog.style.transform = 'scaleX(' + (h > 0 ? Math.min(1, y / h) : 0) + ')';
+    var on = y > SHOW;
+    bar.classList.toggle('on', on);
+    if (!on && open) setOpen(false);
+  }
+  window.addEventListener('scroll', function () {
+    if (!tick) { tick = true; requestAnimationFrame(frame); }
+  }, { passive: true });
+  frame();
+})();
 </script>
 </body>
 </html>

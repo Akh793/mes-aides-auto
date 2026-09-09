@@ -879,7 +879,7 @@ def communes_block(t, by_epci, by_region, by_dept):
     return ("""<h2 id="communes">Ma commune est-elle concernée ?</h2>
 <details class="communes"><summary>Voir la liste des %s communes %s</summary>
 <p>%s</p></details>
-<p style="font-size:.9rem;color:#64748b">Source : code officiel géographique de l’INSEE (jeu de données Etalab « découpage administratif »). Le simulateur identifie automatiquement votre intercommunalité à partir de votre code postal.</p>"""
+<p class="src-note">Source : code officiel géographique de l’INSEE (jeu de données Etalab « découpage administratif »). Le simulateur identifie automatiquement votre intercommunalité à partir de votre code postal.</p>"""
             % (_n(len(communes)), label, " · ".join(communes)))
 
 
