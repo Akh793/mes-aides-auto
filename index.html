@@ -14,9 +14,27 @@ if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)
 @font-face{font-family:'Poppins';font-style:italic;font-weight:600;font-display:swap;src:url(/assets/fonts/poppins-600-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:'Poppins';font-style:italic;font-weight:700;font-display:swap;src:url(/assets/fonts/poppins-700-italic.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 #filters summary::-webkit-details-marker{display:none}
-#filters[open] summary .ml-auto::after{content:" ▴"}
-#filters:not([open]) summary .ml-auto::after{content:" ▾"}
 #filters[open]{border-color:#2548FF}
+/* En-tete du bloc « Precisez votre projet ».
+   Les utilitaires Tailwind gap-x-2 / gap-y-1 / items-baseline ne figurent pas dans le
+   CSS inline genere : le resume se collait au libelle et a « modifier ». Mise en page
+   ecrite explicitement, sur deux lignes, et corps de texte agrandi pour que « modifier »
+   se lise comme une action cliquable. */
+#filters>summary{display:flex;flex-wrap:wrap;align-items:center;
+  column-gap:.75rem;row-gap:.3rem;cursor:pointer;list-style:none;
+  -webkit-tap-highlight-color:transparent}
+#filters .f-title{font-size:.9375rem;font-weight:600;color:#334155;line-height:1.35}
+#filters .f-edit{margin-left:auto;flex-shrink:0;display:inline-flex;align-items:center;gap:.3rem;
+  font-size:.9375rem;font-weight:600;color:#2548FF;
+  text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1.5px;
+  padding:.15rem 0}
+#filters>summary:hover .f-edit,#filters>summary:focus-visible .f-edit{color:#1b36cc}
+#filters[open] .f-edit::after{content:"▴"}
+#filters:not([open]) .f-edit::after{content:"▾"}
+#filters #filters-summary{flex-basis:100%;font-size:.875rem;line-height:1.5;color:#64748b}
+:root[data-theme="dark"] #filters .f-title{color:#e8ecf4}
+:root[data-theme="dark"] #filters #filters-summary{color:#93a0b1}
+:root[data-theme="dark"] #filters .f-edit{color:#7f9bff}
 </style>
 <!-- Consentement (Consent Mode v2) — doit précéder GTM. Aucun cookie de mesure tant que l'utilisateur n'a pas accepté (bandeau). -->
 <script>
@@ -305,6 +323,9 @@ w.MAA_loadGTM=load;})(window,document,'script','dataLayer','GTM-P2DNNBXT');</scr
 :root:not([data-theme="light"]) .stepper button{background:#161a21;border-color:#2a323d;color:#e8ecf4}
 :root:not([data-theme="light"]) #empty{background:#191d25;border-color:#2a323d}
 :root:not([data-theme="light"]) #filters{background:#171c24;border-color:#2a323d}
+:root:not([data-theme="light"]) #filters .f-title{color:#e8ecf4}
+:root:not([data-theme="light"]) #filters #filters-summary{color:#93a0b1}
+:root:not([data-theme="light"]) #filters .f-edit{color:#7f9bff}
 :root:not([data-theme="light"]) .lb-pay{background:#1b2545;color:#adc0ff}
 :root:not([data-theme="light"]) .lb-when{background:#32191a;color:#ff9d86}
 :root:not([data-theme="light"]) .lb-who{background:#1e232c;color:#a8b3c2}
@@ -522,10 +543,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <!-- Ligne 2 : véhicule + filtres, repliés — l'état reste lisible dans le résumé -->
     <details id="filters" class="mt-6 rounded-2xl border border-slate-200 bg-white px-4 py-3">
-    <summary class="cursor-pointer list-none flex flex-wrap items-baseline gap-x-2 gap-y-1">
-      <span class="text-sm font-semibold text-slate-700">Précisez votre projet</span>
-      <span id="filters-summary" class="text-xs text-slate-500">Neuve · 100 % électrique · sans casse · concessionnaire</span>
-      <span class="ml-auto text-xs font-semibold text-[#2548FF]">modifier</span>
+    <summary>
+      <span class="f-title">Précisez votre projet</span>
+      <span class="f-edit">modifier</span>
+      <span id="filters-summary">Neuve · 100 % électrique · sans casse · concessionnaire</span>
     </summary>
     <div class="mt-4 grid gap-x-6 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
       <div>
