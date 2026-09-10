@@ -599,7 +599,7 @@ def _sources_page():
              ("À quelle fréquence les sources sont-elles revérifiées ?",
               "Chaque règle porte sa date de vérification. Nous reprenons en priorité celles dont la date dépasse 90 jours, ainsi que toutes celles concernées par un changement réglementaire annoncé."),
              ("Puis-je réutiliser ces données ?",
-              "Les règlements et textes cités sont des documents publics. Pour toute réutilisation de notre base consolidée ou toute demande de journaliste, écrivez à contact@mes-aides-auto.fr.")],
+              "Les règlements et textes cités sont des documents publics. Pour toute réutilisation de notre base consolidée ou toute demande de journaliste, écrivez-nous depuis la page Mentions légales.")],
         sources=[("Service-public.fr", "https://www.service-public.gouv.fr/particuliers/vosdroits/F39188"),
                  ("jechangemavoiture.gouv.fr", "https://jechangemavoiture.gouv.fr/jcmv/aide-achat.html"),
                  ("primealaconversion.gouv.fr", "https://www.primealaconversion.gouv.fr/"),
@@ -663,7 +663,7 @@ METHODO = dict(
 <p>Les anciennes pages ne sont pas supprimées : une aide disparue reste documentée, parce que la question « existe-t-elle encore ? » est légitime et mérite une réponse datée.</p>
 
 <h2 id="erreur">Comment signaler une erreur ?</h2>
-<p>Si vous constatez un écart entre une règle affichée et le règlement en vigueur — en particulier si vous travaillez dans une collectivité — écrivez à <a href="mailto:contact@mes-aides-auto.fr">contact@mes-aides-auto.fr</a> avec le lien du texte. Les corrections sont traitées en priorité et consignées dans l’historique.</p>
+<p>Si vous constatez un écart entre une règle affichée et le règlement en vigueur — en particulier si vous travaillez dans une collectivité — écrivez à <a href="/mentions-legales.html#editeur">notre adresse de contact</a> avec le lien du texte. Les corrections sont traitées en priorité et consignées dans l’historique.</p>
 """ + cta("Voir la méthode à l’œuvre", "Chaque résultat affiche sa source, sa date de vérification et la raison exacte d’un refus."),
     faq=[("Mes données fiscales sont-elles envoyées quelque part ?",
           "Non. Le calcul est exécuté dans votre navigateur : revenu fiscal, nombre de parts et prix du véhicule ne quittent pas votre appareil et ne sont jamais enregistrés sur un serveur. Seule une mesure d’audience anonyme, soumise à votre accord, enregistre le code postal saisi et le montant maximal estimé."),

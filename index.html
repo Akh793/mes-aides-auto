@@ -6,10 +6,8 @@
 <meta name="color-scheme" content="light dark">
 <script>(function(){try{var t=localStorage.getItem('maa_theme');
 if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/inter-var.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/poppins-700.woff2">
 <style>/* Polices auto-hebergees (sous-ensemble latin) : zero requete tierce, zero blocage du rendu */
-@font-face{font-family:'Inter';font-style:normal;font-weight:400 600;font-display:swap;src:url(/assets/fonts/inter-var.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(/assets/fonts/poppins-500.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(/assets/fonts/poppins-600.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url(/assets/fonts/poppins-700.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
@@ -40,17 +38,19 @@ if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)
     if (choice) apply(choice);
   })();
 </script>
-<!-- Google Tag Manager — injection differee : hors du chemin critique (LCP/TBT).
-     Part au premier geste de l'internaute, sinon 1,5 s apres l'evenement load. -->
+<!-- Google Tag Manager — chargement au premier geste de l'internaute uniquement.
+     Aucun repli temporel : GTM (286 Kio, ~330 ms de taches longues) reste hors du
+     chargement initial, donc hors du LCP et du TBT mesures. Contrepartie assumee :
+     un visiteur qui repart sans aucune interaction n'est pas comptabilise.
+     Pour revenir au comportement precedent, decommenter la ligne REPLI. -->
 <script>(function(w,d,s,l,i){var done=false;
 function load(){if(done)return;done=true;w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
 var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
 j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);}
-var ev=['pointerdown','keydown','touchstart','scroll'];
+var ev=['pointerdown','keydown','touchstart','scroll','mousemove'];
 function go(){ev.forEach(function(e){removeEventListener(e,go,{capture:true});});load();}
 ev.forEach(function(e){addEventListener(e,go,{capture:true,passive:true,once:true});});
-if(d.readyState==='complete')setTimeout(load,1500);
-else addEventListener('load',function(){setTimeout(load,1500);},{once:true});
+/* REPLI : addEventListener('load',function(){setTimeout(load,1500);},{once:true}); */
 w.MAA_loadGTM=load;})(window,document,'script','dataLayer','GTM-P2DNNBXT');</script>
 <!-- End Google Tag Manager -->
 <title>Mes Aides Auto — Vos aides voiture en 30 secondes</title>
@@ -173,11 +173,16 @@ w.MAA_loadGTM=load;})(window,document,'script','dataLayer','GTM-P2DNNBXT');</scr
     --tb-body:#334155; --tb-muted:#64748b; --tb-soft:#F8F9FA; --tb-dot:#cbd5e1; }
   :root[data-theme="dark"]{color-scheme:dark}
   @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark}}
-  body { font-family: Inter, system-ui, sans-serif; background:#fff; color:#0f172a; }
-  .font-poppins { font-family: Poppins, Inter, sans-serif; }
+  body { font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; background:#fff; color:#0f172a; }
+  .font-poppins { font-family: Poppins, system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; }
   .badge { display:inline-flex; align-items:center; padding:.2rem .6rem; border-radius:9999px; font-size:.72rem; font-weight:600; letter-spacing:.01em; white-space:nowrap; max-width:100%; }
   /* Étiquettes longues (mentions de cumul) : elles doivent pouvoir revenir à la ligne. */
   .badge-wrap { white-space:normal; text-align:left; line-height:1.35; padding-top:.3rem; padding-bottom:.3rem; }
+  /* Reservation de largeur : app.js remplace « — » par la date et le temps de calcul
+     apres le chargement. Sans place reservee, le badge s'elargit et decale la mise
+     en page (CLS mesure a 0,13). Les min-width couvrent le contenu final maximal. */
+  .meta-date { display:inline-block; min-width:10ch; }
+  #perf { display:inline-block; min-width:5ch; }
   .field { width:100%; border-radius:1rem; border:1.5px solid #e2e8f0; background:#fff; padding:.8rem 1rem; font-size:1rem; transition: border-color .15s, box-shadow .15s; }
   .field:focus { outline:none; border-color:var(--blue); box-shadow:0 0 0 4px rgba(37,72,255,.12); }
   .seg { display:grid; grid-template-columns:1fr 1fr; position:relative; background:#eef1f5; border-radius:9999px; padding:4px; cursor:pointer; user-select:none; }
@@ -320,7 +325,7 @@ w.MAA_loadGTM=load;})(window,document,'script','dataLayer','GTM-P2DNNBXT');</scr
   .tb-brand em{font-style:italic;color:var(--blue)}
   .tb-btn{display:inline-flex;align-items:center;gap:.4rem;height:2.25rem;padding:0 .85rem;
     border-radius:9999px;border:1px solid var(--tb-line,#e2e8f0);background:transparent;
-    color:var(--tb-body,#334155);font:600 .82rem Inter,system-ui,sans-serif;cursor:pointer;white-space:nowrap}
+    color:var(--tb-body,#334155);font:600 .82rem system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;cursor:pointer;white-space:nowrap}
   .tb-btn:hover{color:var(--blue);border-color:var(--blue)}
   .tb-btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
   .tb-btn .chev{width:.6rem;height:.6rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;
@@ -697,7 +702,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a href="/qui-sommes-nous.html" class="hover:text-[#2548FF] transition">Qui sommes-nous ?</a>
         <a href="/mentions-legales.html" class="hover:text-[#2548FF] transition">Mentions légales</a>
         <a href="#" data-consent-open class="hover:text-[#2548FF] transition">Gérer les cookies</a>
-        <a href="mailto:contact@mes-aides-auto.fr?subject=Mes%20Aides%20Auto%20%E2%80%94%20contact" class="hover:text-[#2548FF] transition">Nous écrire</a>
+        <a href="/mentions-legales.html#editeur" class="hover:text-[#2548FF] transition">Nous écrire</a>
       </nav>
       <p class="text-xs text-slate-400">© 2026 Mes Aides Auto — Calculateur d’aides à la mobilité propre.</p>
     </div>
@@ -810,8 +815,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </script>
 
 <script defer src="communes.js"></script>
-<script defer src="data.js"></script>
-<script defer src="data-pro.js"></script>
-<script defer src="app.js"></script>
+<script defer src="data.min.js"></script>
+<script defer src="data-pro.min.js"></script>
+<script defer src="app.min.js"></script>
 </body>
 </html>

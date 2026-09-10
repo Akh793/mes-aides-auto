@@ -8,10 +8,8 @@
 <meta name="theme-color" content="#10141b" media="(prefers-color-scheme: dark)">
 <script>(function(){try{var t=localStorage.getItem('maa_theme');
 if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/inter-var.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/poppins-700.woff2">
 <style>/* Polices auto-hebergees (sous-ensemble latin) : zero requete tierce, zero blocage du rendu */
-@font-face{font-family:'Inter';font-style:normal;font-weight:400 600;font-display:swap;src:url(/assets/fonts/inter-var.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(/assets/fonts/poppins-500.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(/assets/fonts/poppins-600.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url(/assets/fonts/poppins-700.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
@@ -38,17 +36,19 @@ if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)
     if (choice) apply(choice);
   })();
 </script>
-<!-- Google Tag Manager — injection differee : hors du chemin critique (LCP/TBT).
-     Part au premier geste de l'internaute, sinon 1,5 s apres l'evenement load. -->
+<!-- Google Tag Manager — chargement au premier geste de l'internaute uniquement.
+     Aucun repli temporel : GTM (286 Kio, ~330 ms de taches longues) reste hors du
+     chargement initial, donc hors du LCP et du TBT mesures. Contrepartie assumee :
+     un visiteur qui repart sans aucune interaction n'est pas comptabilise.
+     Pour revenir au comportement precedent, decommenter la ligne REPLI. -->
 <script>(function(w,d,s,l,i){var done=false;
 function load(){if(done)return;done=true;w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
 var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
 j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);}
-var ev=['pointerdown','keydown','touchstart','scroll'];
+var ev=['pointerdown','keydown','touchstart','scroll','mousemove'];
 function go(){ev.forEach(function(e){removeEventListener(e,go,{capture:true});});load();}
 ev.forEach(function(e){addEventListener(e,go,{capture:true,passive:true,once:true});});
-if(d.readyState==='complete')setTimeout(load,1500);
-else addEventListener('load',function(){setTimeout(load,1500);},{once:true});
+/* REPLI : addEventListener('load',function(){setTimeout(load,1500);},{once:true}); */
 w.MAA_loadGTM=load;})(window,document,'script','dataLayer','GTM-P2DNNBXT');</script>
 <!-- End Google Tag Manager -->
 <title>Éco-chèque mobilité Occitanie : jusqu’à 1 600 €</title>
@@ -78,12 +78,12 @@ w.MAA_loadGTM=load;})(window,document,'script','dataLayer','GTM-P2DNNBXT');</scr
 --stop:#be123c;--stopbg:#fff1f2;--card:#ffffff;--page:#ffffff;--dot:#cbd5e1;--pay-bg:#e8ecff;--pay-bd:#c3ccff;--pay-fg:#1e3ac9;--when-bg:#fff1ee;--when-bd:#ffc0b2;--when-fg:#b3341c;--who-bg:#f1f5f9;--who-bd:#e2e8f0;--who-fg:#475569;--okbd:#a7f3d0;--warnbd:#fde68a;--stopbd:#fecdd3;--zk-blue:#1e3ac9;--zk-coral:#b3341c;--cta-bg:#2548FF;--radius:1.5rem;--shadow:0 10px 15px -3px rgba(15,23,42,.08),0 4px 6px -4px rgba(15,23,42,.06)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--body);
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--body);
 background:var(--page);line-height:1.65;font-size:1rem}
 img{max-width:100%;height:auto;display:block}
 a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
 a:hover{color:var(--coral)}
-h1,h2,h3,h4{font-family:Poppins,Inter,sans-serif;color:var(--ink);line-height:1.2;font-weight:600;
+h1,h2,h3,h4{font-family:Poppins,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);line-height:1.2;font-weight:600;
 text-wrap:balance}
 h1{font-size:2.1rem;font-weight:700;letter-spacing:-.02em}
 h2{font-size:1.55rem;margin-top:2.6rem}
@@ -198,7 +198,7 @@ display:flex;flex-direction:column;gap:1rem;font-size:.9rem}
 @media(min-width:48rem){#consent-banner .box{flex-direction:row;align-items:center}}
 #consent-banner .acts{display:flex;flex-direction:column;align-items:center;gap:.5rem;flex-shrink:0}
 #consent-accept{background:var(--blue);color:#fff;border:0;border-radius:9999px;padding:.65rem 1.5rem;
-font:600 .9rem Inter,sans-serif;cursor:pointer}
+font:600 .9rem system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;cursor:pointer}
 #consent-refuse{background:none;border:0;color:var(--muted);font-size:.78rem;text-decoration:underline;cursor:pointer}
 [hidden]{display:none!important}
 @media(max-width:40rem){h1{font-size:1.75rem}h2{font-size:1.35rem}}
@@ -224,7 +224,7 @@ font-weight:600;line-height:1.5;border:1px solid transparent;white-space:nowrap}
 .lb-who{background:var(--who-bg);border-color:var(--who-bd);color:var(--who-fg);font-weight:500}
 /* ---------- zones typées : le squelette rendu visible ---------- */
 h2.z{border-top:1px solid var(--line);padding-top:1.5rem;margin-top:2.6rem}
-.zk{display:block;font-family:Inter,sans-serif;font-size:.7rem;font-weight:700;
+.zk{display:block;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:.7rem;font-weight:700;
 letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
 .z-montant>.zk,.z-demarche>.zk,.z-national>.zk{color:var(--zk-blue)}
 .z-piege>.zk{color:var(--zk-coral)}
@@ -349,7 +349,7 @@ text-decoration:none;letter-spacing:-.02em;margin-right:auto;white-space:nowrap}
 .tb-brand em{font-style:italic;color:var(--blue)}
 .tb-btn{display:inline-flex;align-items:center;gap:.4rem;height:2.25rem;padding:0 .85rem;
 border-radius:9999px;border:1px solid var(--line);background:transparent;color:var(--body);
-font:600 .82rem Inter,system-ui,sans-serif;cursor:pointer;white-space:nowrap}
+font:600 .82rem system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;cursor:pointer;white-space:nowrap}
 .tb-btn:hover{color:var(--blue);border-color:var(--blue)}
 .tb-btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 .tb-btn .chev{width:.6rem;height:.6rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;
@@ -629,7 +629,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li><a href="/historique-aides-auto/">Historique des aides</a></li>
           <li><a href="/mentions-legales.html">Mentions légales</a></li>
           <li><a href="#" data-consent-open>Gérer les cookies</a></li>
-          <li><a href="mailto:contact@mes-aides-auto.fr?subject=Mes%20Aides%20Auto%20%E2%80%94%20contact">Nous écrire</a></li>
+          <li><a href="/mentions-legales.html#editeur">Nous écrire</a></li>
         </ul>
       </div>
     </div>

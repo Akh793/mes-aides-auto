@@ -25,10 +25,8 @@ GTM_ID = "GTM-P2DNNBXT"
 # Blocs communs (consentement + GTM : copie conforme de index.html, pour que
 # la mesure d'audience fonctionne à l'identique sur toutes les pages)
 # --------------------------------------------------------------------------
-FONTS_HEAD = """<link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/inter-var.woff2">
-<link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/poppins-700.woff2">
+FONTS_HEAD = """<link rel="preload" as="font" type="font/woff2" crossorigin href="/assets/fonts/poppins-700.woff2">
 <style>/* Polices auto-hebergees (sous-ensemble latin) : zero requete tierce, zero blocage du rendu */
-@font-face{font-family:'Inter';font-style:normal;font-weight:400 600;font-display:swap;src:url(/assets/fonts/inter-var.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url(/assets/fonts/poppins-500.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url(/assets/fonts/poppins-600.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;src:url(/assets/fonts/poppins-700.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
@@ -60,17 +58,19 @@ CONSENT_GTM = """<!-- Consentement (Consent Mode v2) — doit précéder GTM. Au
     if (choice) apply(choice);
   })();
 </script>
-<!-- Google Tag Manager — injection differee : hors du chemin critique (LCP/TBT).
-     Part au premier geste de l'internaute, sinon 1,5 s apres l'evenement load. -->
+<!-- Google Tag Manager — chargement au premier geste de l'internaute uniquement.
+     Aucun repli temporel : GTM (286 Kio, ~330 ms de taches longues) reste hors du
+     chargement initial, donc hors du LCP et du TBT mesures. Contrepartie assumee :
+     un visiteur qui repart sans aucune interaction n'est pas comptabilise.
+     Pour revenir au comportement precedent, decommenter la ligne REPLI. -->
 <script>(function(w,d,s,l,i){var done=false;
 function load(){if(done)return;done=true;w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
 var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
 j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);}
-var ev=['pointerdown','keydown','touchstart','scroll'];
+var ev=['pointerdown','keydown','touchstart','scroll','mousemove'];
 function go(){ev.forEach(function(e){removeEventListener(e,go,{capture:true});});load();}
 ev.forEach(function(e){addEventListener(e,go,{capture:true,passive:true,once:true});});
-if(d.readyState==='complete')setTimeout(load,1500);
-else addEventListener('load',function(){setTimeout(load,1500);},{once:true});
+/* REPLI : addEventListener('load',function(){setTimeout(load,1500);},{once:true}); */
 w.MAA_loadGTM=load;})(window,document,'script','dataLayer','GTM-P2DNNBXT');</script>
 <!-- End Google Tag Manager -->""".replace("__GTM__", GTM_ID)
 
@@ -276,7 +276,7 @@ FOOTER = """<footer class="site-footer">
           <li><a href="/historique-aides-auto/">Historique des aides</a></li>
           <li><a href="/mentions-legales.html">Mentions légales</a></li>
           <li><a href="#" data-consent-open>Gérer les cookies</a></li>
-          <li><a href="mailto:contact@mes-aides-auto.fr?subject=Mes%20Aides%20Auto%20%E2%80%94%20contact">Nous écrire</a></li>
+          <li><a href="/mentions-legales.html#editeur">Nous écrire</a></li>
         </ul>
       </div>
     </div>
@@ -624,6 +624,8 @@ def load_communes():
 
 
 def sitemaps(pages):
+
+
     """Un index + trois sitemaps thématiques. Seules les URLs canoniques indexables."""
     def urlset(entries):
         body = "".join(
@@ -655,6 +657,38 @@ def sitemaps(pages):
     return len(core), len(guides), len(territoires)
 
 
+
+# --------------------------------------------------------------------------
+# Minification des scripts servis (app / data / data-pro).
+# Les sources restent lisibles ; build.py regenere les .min.js a chaque passage.
+# rjsmin retire commentaires et espaces SANS renommer les identifiants :
+# window.runTests et toute l'API publique restent intacts.
+# communes.js n'est pas minifie (un seul litteral de chaine, aucun gain).
+# --------------------------------------------------------------------------
+JS_A_MINIFIER = ["app.js", "data.js", "data-pro.js"]
+
+
+def minify_js(racine):
+    try:
+        import rjsmin
+    except ImportError:
+        print("  ! rjsmin absent (pip install rjsmin) — .min.js NON regeneres,")
+        print("    index.html sert donc du code potentiellement perime.")
+        return
+    tot_s = tot_m = 0
+    for nom in JS_A_MINIFIER:
+        src = os.path.join(racine, nom)
+        if not os.path.exists(src):
+            print(f"  ! {nom} introuvable"); continue
+        with open(src, encoding="utf-8") as fh: code = fh.read()
+        mini = rjsmin.jsmin(code)
+        with open(os.path.join(racine, nom.replace(".js", ".min.js")), "w", encoding="utf-8") as fh:
+            fh.write(mini)
+        tot_s += len(code.encode()); tot_m += len(mini.encode())
+    if tot_s:
+        print(f"  js minifies : {tot_s/1024:.1f} Ko -> {tot_m/1024:.1f} Ko "
+              f"({100*(1-tot_m/tot_s):.0f} % en moins, avant gzip)")
+
 if __name__ == "__main__":
     import content_national, content_territoires
     pages = content_national.pages() + content_territoires.pages(load_communes())
@@ -666,3 +700,4 @@ if __name__ == "__main__":
     c, g, t = sitemaps(pages)
     print("\n%d pages générées, %.0f Ko au total (moyenne %.1f Ko)" % (len(pages), total / 1024, total / 1024 / len(pages)))
     print("sitemaps : %d pages, %d guides, %d territoires" % (c, g, t))
+    minify_js(ROOT)
