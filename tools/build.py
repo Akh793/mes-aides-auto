@@ -276,7 +276,6 @@ FOOTER = """<footer class="site-footer">
           <li><a href="/historique-aides-auto/">Historique des aides</a></li>
           <li><a href="/mentions-legales.html">Mentions légales</a></li>
           <li><a href="#" data-consent-open>Gérer les cookies</a></li>
-          <li><a href="/mentions-legales.html#editeur">Nous écrire</a></li>
         </ul>
       </div>
     </div>
